@@ -1,0 +1,56 @@
+//실행 안됨.... 에러 찾으세요 !!!
+
+<input type="checkbox" 속성 />
+
+<html>
+  <head>
+    <title>JS_ChcboxOnclick</title>
+    <script lang="javascript">
+      <!--
+          function fun_disp(va){
+              var str1="", str2="", tot
+              if(va.hak1.checked==true)
+              str1=str1+"자료구조"+"\n"
+              if(va.hak2.checked==true)
+              str1=str1+"데이터베이스"+"\n"
+              if(va.hak3.checked==true)
+              str1=str1+"컴퓨터 구조학"+"\n"
+              if(va.hak4.checked==true)
+              str1=str1+"운영체제"+"\n"
+              if(va.chk1.checked==true)
+              str2=str2+"VISUAL BASIC"+"\n"
+              if(va.chk2.checked==true)
+              str2=str2+"ASP"+"\n"
+              if(va.chk3.checked==true)
+              str2=str2+"JSP"+"\n"
+
+              tot="\n"+"< 수강과목 > \n"+str1+"\n"+"<언어>\n"+str2
+              alert(tot)
+          }
+          //-->
+    </script>
+  </head>
+
+  <body>
+    <ol>
+      <h2>수강과목을 선택하세요</h2>
+      <form name="frm1">
+        <ol>
+          <li><input type="checkbox" name="hak1" /> 자료구조</li>
+          <li><input type="checkbox" name="hak2" /> 데이터베이스</li>
+          <li><input type="checkbox" name="hak3" /> 컴퓨터 구조학</li>
+          <li><input type="checkbox" name="hak4" /> 운영체제</li>
+        </ol>
+
+        <h2>공부하고 싶은 언어를 선택하세요</h2>
+        <ol>
+          <li><input type="checkbox" name="chk1" /> VISUAL BASIC</li>
+          <li><input type="checkbox" name="chk2" /> ASP</li>
+          <li><input type="checkbox" name="chk3" /> JSP</li>
+        </ol>
+        <br /><br />
+        <input type="button" value="클릭" onclick="fun_disp(frm1)" />
+      </form>
+    </ol>
+  </body>
+</html>
