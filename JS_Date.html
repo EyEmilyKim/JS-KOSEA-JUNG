@@ -10,7 +10,10 @@
             var yy
 
 
-            yy=today.getYear()+"년"
+            yy=today.getFullYear()+"년"
+//             2022년을 결과로 받으려면 getFullYear를 쳐야한다.            
+//             getYear로 치면 122년으로 나오는데, getYear는 옛날 명령이고 
+//             1900년으로부터 몇년 지났는지를 알려주는 명령이다. 
             yy=yy+(today.getMonth()+1)+"월"
             yy=yy+today.getDate()+"일"
 
