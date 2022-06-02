@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>JS_SelectMultiple</title>
+
+    <script lang="javascript">
+      <!--
+          function fun_disp(a){
+              var str=""
+              for(var i=0; i<a.length; i++){
+                  if(a.options[i].selected){
+                      str=str+a.options[i].value+"\n"
+                  }
+              }
+              document.frm.txtarea.value=str
+          }
+          //-->
+    </script>
+  </head>
+  <body>
+    <h1>관심있는 학과를 모두 선택하세요</h1>
+    <form name="frm">
+      <select name="choice" size="5" multiple>
+        <option value="컴퓨터공학과">컴퓨터공학과</option>
+        <option value="정보통신학과">정보통신학과</option>
+        <option value="전기공학과">전기공학과</option>
+        <option value="전자공학과">전자공학과</option>
+        <option value="기계공학과">기계공학과</option>
+      </select>
+      <input type="button" value="확   인" onclick="fun_disp(frm.choice)" />
+      <p></p>
+      <h1>결과화면</h1>
+      <textarea name="txtarea" cols="20" rows="5"></textarea>
+    </form>
+  </body>
+</html>
