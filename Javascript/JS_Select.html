@@ -1,0 +1,33 @@
+<select name="이름">
+  <option value="속성 값">텍스트</option>
+</select>
+
+<html>
+  <head>
+    <title>JS_Select</title>
+    <script lang="javascript">
+      <!--
+          function fun_disp(a){
+              document.frm.subname.value=a.options[a.selectedIndex].value
+          }
+          //-->
+    </script>
+  </head>
+
+  <body>
+    <h1>자신의 학과를 선택하세요</h1>
+    <form name="frm">
+      <select name="choice" size="1">
+        <option value="컴퓨터공학과">컴퓨터공학과</option>
+        <option value="정보통신학과">정보통신학과</option>
+        <option value="전기공학과">전기공학과</option>
+        <option value="전자공학과">전자공학과</option>
+        <option value="기계공학과">기계공학과</option>
+      </select>
+      <input type="button" value="확   인" onclick="fun_disp(frm.choice)" />
+      <p></p>
+      <h1>결과화면</h1>
+      당신의 학과는 <input type="text" name="subname" size="20" />입니다.
+    </form>
+  </body>
+</html>

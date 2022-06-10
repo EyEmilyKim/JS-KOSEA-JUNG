@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>JS_TextareaOnfocus</title>
+
+    <script lang="javascript">
+      <!--
+          function result(){
+              tot="이름 :"+document.frm.name.value+"\n"
+              tot=tot+"주소 :"+document.frm.addr.value
+              document.frm.area.value=tot
+          }
+          //-->
+    </script>
+  </head>
+  <body>
+    <form name="frm">
+      이름 : <input type="text" name="name" value="" size="20" />
+      <br />
+      주소 : <input type="text" name="addr" value="" size="20" />
+      <br />
+      <textarea
+        name="area"
+        value=""
+        cols="60"
+        rows="10"
+        onfocus="result()"
+      ></textarea>
+   
+  </body>
+</html>
