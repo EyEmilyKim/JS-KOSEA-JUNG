@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>buttonOnClick</title>
+</head>
+<body>
+<script type="text/javascript">
+function sayHello(){
+	alert("안녕하세요? 자바스크립트입니다.");
+}
+function sayAnswer(){
+	var dap = 30 + 40;
+	document.getElementById("answer").innerHTML=dap;
+}
+function hideAnswer(){
+	document.getElementById("answer").innerHTML="";
+}
+</script>
+<input type="button" value="창 띄우기" onClick="sayHello()"/>
+<h1>30 + 40 = <span id="answer"></span></h1>
+<input type="button" value="결과 보기" onClick="sayAnswer()"/>
+<input type="button" value="결과 감추기" onClick="hideAnswer()"/>
+
+<h1 onMouseOver="sayResult()" onMouseOut="hideResult()"> 80 + 30 = <span id="result">?</span></h1>
+<p>결과를 보려면 ? 에 마우스를 올리세요</p>
+<script type="text/javascript">
+function sayResult(){
+	var dap = 80 + 30;
+	document.getElementById("result").innerHTML=dap;
+}
+function hideResult(){
+	document.getElementById("result").innerHTML="?";
+}
+</script>
+</body>
+</html>

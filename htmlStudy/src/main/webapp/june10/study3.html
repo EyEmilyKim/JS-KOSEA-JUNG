@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>openPopup</title>
+</head>
+<body>
+<script type="text/javascript">
+function openSamePopup(){
+	window.open('http://www.naver.com','my_popup','width=500, height=400');
+}
+function openNewPopup(){
+	window.open('http://www.naver.com','','width=500, height=400');
+}
+function openPopup(url){
+	window.open(url,'','width="300" height="200"')
+}
+</script>
+<a href="#" onClick="openSamePopup()">
+창 열기(한번만 열림)</a><br/>
+<a href="#" onClick="openNewPopup()">
+창 열기(매번 다른창 열림)</a><br/>
+<a href="#" onclick="openPopup('popup.html')">
+팝업 페이지 열기</a><br/>
+<a href="#" onClick="openPopup('http://www.google.com')">
+구글 창 열기</a><br/>
+<a href="popup.html">페이지 이동</a><br/>
+</body>
+</html>

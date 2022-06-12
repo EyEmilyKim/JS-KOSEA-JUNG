@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>showMovies</title>
+</head>
+<body>
+<script type="text/javascript">
+function showCurrentMovies(){
+	var html = "<table border='1'><tr><th>장 소</th>";
+	html = html + "<th>영화제목</th></tr>";
+	html = html + "<tr><td>1관</td><td>범죄도시2</td></tr>";
+	html = html + "<tr><td>2관</td><td>쥬라기월드</td></tr>";
+	html = html + "<tr><td>3관</td><td>마녀2</td></tr>";
+	html = html + "<tr><td>4관</td><td>닥터스트레인지</td></tr>";
+	html = html + "</table>";
+	document.getElementById("target").innerHTML=html;
+	}
+function showNextMovies(){
+	var html = "<table border='1'><tr><th>장 소</th>";
+	html = html + "<th>영화제목</th></tr>";
+	html = html + "<tr><td>1관</td><td>운칠기삼</td></tr>";
+	html = html + "<tr><td>2관</td><td>애프터 영</td></tr>";
+	html = html + "<tr><td>3관</td><td>버트 라이트</td></tr>";
+	html = html + "</table>";
+	document.getElementById("target").innerHTML=html;
+}	
+</script>
+<div align="center">
+<h2>영화관에 오신 것을 환영합니다~</h2>
+<p>현재 상영 영화를 검색하시려면, 다음 버튼을 누르세요.</p>
+<input type="button" value="현재 상영작" onClick="showCurrentMovies()"/><br/>
+<p>다음 상영 영화를 검색하시려면, 다음 버튼을 누르세요.</p>
+<input type="button" value="다음 상영작" onClick="showNextMovies()"/><br/><br/>
+<div id="target"><br/>이곳에 출력됩니다.<br/></div>
+</div>
+</body>
+</html>

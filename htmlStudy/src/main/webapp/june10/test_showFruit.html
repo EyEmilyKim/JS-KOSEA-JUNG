@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>showFruit</title>
+</head>
+<body align="center">
+<script type="text/javascript">
+function showFruit(picName){
+	document.getElementById("display").src="img/"+picName+".jpg";
+}
+</script>
+<header>
+<h1>새콤달콤 그묘상회</h1>
+</header>
+<section>
+<table align="center">
+	<tr><td><img alt="" src="img/kiwi.jpg" id="display" width=500 height=400></td></tr>
+	<tr>
+		<td align="center">
+		<a href="#" onClick="showFruit('kiwi')"><img alt="" src="img/kiwi.jpg" width=100 height=100></a>
+		<a href="#" onClick="showFruit('lemon')"><img alt="" src="img/lemon.jpg" width=100 height=100></a>
+		<a href="#" onClick="showFruit('orange')"><img alt="" src="img/orange.jpg" width=100 height=100></a>
+		<a href="#" onClick="showFruit('strawberry')"><img alt="" src="img/strawberry.jpg" width=100 height=100></a>
+		<a href="#" onClick="showFruit('tangerine')"><img alt="" src="img/tangerine.jpg" width=100 height=100></a>
+		</td>
+	</tr>
+</table>
+
+
+</section>
+<footer>
+<br/>
+달달한 주말 보내세요~~~
+<br/>
+<input type="button" value="눌러보세요" onClick="happyWE()">
+<script type="text/javascript">
+function happyWE(){
+	window.open('https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Ff9%2Fdd%2Fc8%2Ff9ddc8f2ae1768cadf941f849187818b.jpg','',width='500' height='500')
+}
+</script>
+<br/>
+</footer>
+</body>
+</html>

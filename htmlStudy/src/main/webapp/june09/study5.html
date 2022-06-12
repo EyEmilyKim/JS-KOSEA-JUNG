@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+var name=prompt("이름을 입력하세요.");
+var addr=prompt("주소를 입력하세요.");
+var phone=prompt("연락처를 입력하세요.");
+var str="당신의 이름은 "+name+", 주소는 "+addr+", 연락처는 "+phone+"입니다.";
+alert("입력한 데이터는 다음과 같습니다."+"\n"+"\n"+str);
+var yesOrNo = confirm("입력한 내용이 맞습니까?");
+alert("당신의 선택은 "+yesOrNo+" 입니다.");
+
+/* 
++연산자 앞,뒤로 숫자가 오면 연산
++연산자 앞 혹은 뒤에 문자열이 오면 문자열이 서로 연결된다.
+5 + 6 ----> 11
+"a" + "b" ---> "ab"
+(숫자랑 문자열이 섞여있으면 앞에 있던 숫자까지 문자열로 취급 돼.)
+1 + "a" ----> "1" + "a" -----> 1a
+"a" + 1 ----> "a" + "1" -----> a1
+(그런데 컴터가 처리하는 순서(우선순위)/문자열로 취급되는 타이밍 조심...)
+1 + 2 + 3 + "a" ----> 6a
+"a" + 1 + 2 + 3 ----> a123
+"a" + 1 + 2 * 3 ----> a16
+"1" + 1 + (1 + 1) --> "112"
+*/
+
+</script>
+</body>
+</html>
