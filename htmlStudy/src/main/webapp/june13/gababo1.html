@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>gababo1_prompt</title>
+<style>
+h2 {border:2px solid blue; padding:30px; font-family: '궁서체','굴림체','고딕체';}
+table {text-align: center;}
+</style>
+</head>
+<body>
+<div align = "center">
+<h2>가위바위보 게임 Ver.1.1</h2>
+<!-- prompt입력을 통한 가위바위보 -->
+<img alt="" src="img/gababo.jpeg" width="400" height="300" id="main"><br/>
+<table>
+	<tr>
+	<td><img alt="" src="img/gababo.jpeg" id="slot1" width="200" height="200"></td>
+	<td><img alt="" src="img/gababo.jpeg" id="slot2" width="200" height="200"></td>
+	</tr>
+	<tr>
+	<td>컴퓨터</td>
+	<td>게이머</td>
+	</tr>
+</table>
+<input type="button" value="가위 바위 보" onClick="doGame()">
+
+<br/><br/><div align="center" id="target"></div>
+</div>
+<script type="text/javascript">
+function doGame(){
+	var gamer = parseInt(prompt("가위, 바위, 보를 선택하세요\n"+"1:가위, 2:바위, 3:보"));
+	var com = parseInt(Math.random()*3+1);
+	
+	var comPic="";
+	var comName="";
+	if(com == 1){ comPic="img/gawi.png"; comName="가위";}
+	if(com == 2){ comPic="img/bawi.jpg"; comName="바위";}
+	if(com == 3){ comPic="img/bo.png"; comName="보";}
+	document.getElementById("slot1").src=comPic;
+	
+	var gamerPic="";
+	var gamerName="";
+	if(gamer == 1){ gamerPic="img/gawi.png"; gamerName="가위";}
+	if(gamer == 2){ gamerPic="img/bawi.jpg"; gamerName="바위";}
+	if(gamer == 3){ gamerPic="img/bo.png"; gamerName="보";}
+	document.getElementById("slot2").src=gamerPic;
+	
+	var winNumber = com%3+1
+	var result = "<h2>";
+	result = result + comName + " VS " + gamerName + "<br/>";
+	if(gamer == com){
+		result = result + "무승부 !!!</h2>";
+	}else if(gamer == winNumber){
+		result = result + "게이머 승 !!!</h2>";
+	}else {
+		result = result + "컴퓨터 승 !!!</h2>";
+	}
+	document.getElementById("target").innerHTML=result;
+}
+</script>
+</body>
+</html>
