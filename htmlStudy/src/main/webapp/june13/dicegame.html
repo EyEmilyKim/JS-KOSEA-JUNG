@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>dicegame</title>
+<style type="text/css">
+h2 {border:1px solid blue;}
+</style>
+</head>
+<body>
+<div align="center">
+<h2>주사위 게임 ver1.0</h2>
+<img alt="" src="img/dice5.png" id="slot1" width="200" height="200">
+<img alt="" src="img/three.png" id="slot2" width="200" height="200"><br/>
+<input type="button" value="주사위 굴리기" onClick="doGame()"/>
+<br/><br/><div align="center" id="target"></div>
+</div>
+
+<script type="text/javascript">
+function doGame(){
+	var gamer = parseInt(Math.random()*6+1);//게이머 난수
+	var com = parseInt(Math.random()*6+1);//컴퓨터 난수
+	var imgName="img/dice"+gamer+".png";//이미지 이름
+	document.getElementById("slot1").src=imgName;
+
+	var comName="";//컴퓨터 이미지 이름을 위한 변수 선언
+	if(com == 1){ comName="img/one.png";}
+	if(com == 2){ comName="img/two.png";}
+	if(com == 3){ comName="img/three.png";}
+	if(com == 4){ comName="img/four.png";}
+	if(com == 5){ comName="img/five.png";}
+	if(com == 6){ comName="img/siz.png";}
+	document.getElementById("slot2").src=comName;
+
+	var result = "<h2>";//게임의 결과가 저장될 변수 선언
+	result = result + gamer + " vs " + com +"<br/>";
+	if(com == gamer){
+		result = result + " 무승부 !!!</h2>";
+	}else if(com > gamer){
+		result = result + "컴퓨터 승 !!!</h2>";
+	}else {
+		result = result + "게이머 승 !!!</h2>";
+	}
+	document.getElementById("target").innerHTML=result;
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>soccer</title>
+<style>
+h2 {border:2px solid blue; padding:30px; font-family: '궁서체','굴림체','고딕체';}
+</style>
+</head>
+<body>
+<div align="center">
+<h2>숭부차기 게임</h2>
+<img alt="" src="img/soccer.jpg" width="400" height="350" id="target">
+<input type="button" value="슈 팅 ~~" onClick="doGame()"/>
+</div>
+<script type="text/javascript">
+function doGame(){
+	var gamer = prompt("슈팅의 방향을 입력하세요\n"+"1:상, 2:하, 3:좌, 4:우, 5:중");
+ 	var com = parseInt(Math.random()*5+1);
+	var gamerInt = parseInt(gamer);
+	var imgName = "";//게임의 결과 이미지 이름용 변수 선언
+	if(gamerInt == com) {//방향이 같으므로 노골
+		imgName = "img/no_goal_sign.jpeg";
+	}else {//방향이 다르므로 골~인
+		imgName = "img/goal_with_net.jpeg";
+	}
+	document.getElementById("target").src=imgName;
+}
+</script>
+</body>
+</html>

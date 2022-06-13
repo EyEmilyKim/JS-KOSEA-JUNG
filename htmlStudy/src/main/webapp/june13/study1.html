@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Math객체</title>
+</head>
+<body>
+<h2>Math객체의 여러가지 함수들</h2>
+<script type="text/javascript">
+var max = Math.max(123,456,789);
+document.write("<h3>최대값 : "+max+"</h3>");
+
+var min = Math.min(123,456,789,12);
+document.write("<h3>최소값 : "+min+"</h3>");
+document.write("<h3>원주율 : "+Math.PI+"</h3>");
+
+var value = 3.141592654;
+document.write("<h3>반올림 : "+Math.round(value)+"</h3>");
+document.write("<h3>올림 : "+Math.ceil(value)+"</h3>");
+document.write("<h3>버림 : "+Math.floor(value)+"</h3>");
+
+value = -3.141592654;
+document.write("<h3>절대값 : "+Math.abs(value)+"</h3>");
+
+var rnd = Math.random(); // 0 <= 범위 < 1.0
+document.write("<h3>난수 : "+rnd+"</h3>");
+
+//주사위 난수를 구한다. (1~6)
+var dice = parseInt(Math.random() * 6 + 1);
+document.write("<h3>주사위 난수 : "+dice+"</h3>");
+
+//parseInt는 실수를 정수로 바꿔주는 함수.
+var 1 = parseInt(3.14)
+</script>
+</body>
+</html>
