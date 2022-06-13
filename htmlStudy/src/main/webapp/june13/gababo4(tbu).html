@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>gababo4_addImg(TBU)</title>
+<style>
+h2 {border:2px solid blue; padding:30px; font-family: '궁서체','굴림체','고딕체';}
+table {text-align: center;}
+</style>
+</head>
+<body>
+<div align = "center">
+<h2>가위바위보 게임 Ver.1.4</h2>
+<img alt="" src="img/gababo.jpeg" width="400" height="300" id="main"><br/>
+<table>
+	<tr>
+	<td><div id="comTd"></div></td>
+	<td><img alt="" src="img/gababo.jpeg" id="slot2" width="200" height="200"></td>
+	</tr>
+	<tr>
+	<td>컴퓨터</td>
+	<td>게이머</td>
+	</tr>
+</table>
+<div id="guide"><h4>가위, 바위, 보를 선택하세요</h4></div>
+<input type="button" value="가위" onClick="doGame(1)">
+<input type="button" value="바위" onClick="doGame(2)">
+<input type="button" value="보" onClick="doGame(3)">
+<br/><br/><div align="center" id="target"></div>
+</div>
+<script type="text/javascript">
+function doGame(gamer){
+	
+	var com = parseInt(Math.random()*3+1);
+	
+	var comPic="";
+	var comName="";
+	if(com == 1){ comPic="img/gawi.png"; comName="가위";}
+	if(com == 2){ comPic="img/bawi.jpg"; comName="바위";}
+	if(com == 3){ comPic="img/bo.png"; comName="보";}
+	document.getElementById("slot1").src=comPic;
+	
+	var gamerPic="";
+	var gamerName="";
+	if(gamer == 1){ gamerPic="img/gawi.png"; gamerName="가위";}
+	if(gamer == 2){ gamerPic="img/bawi.jpg"; gamerName="바위";}
+	if(gamer == 3){ gamerPic="img/bo.png"; gamerName="보";}
+	document.getElementById("slot2").src=gamerPic;
+	
+	//javaspring 함수 내에서 새로 img를 얹으려고 했으나 지식 부족으로 실패... 
+	var XXX = document.createElement("img");
+	img.id = "slot1"; img.width="200"; height="200";
+	var src = document.getElementById("comTd") ;
+	document.body.appendChild(XXX);
+	// 참고_createElement("img"): https://ko.code-paper.com/javascript/examples-how-to-add-image-in-js
+	// 참고_display_img(인자4개)&creatElement(): https://www.delftstack.com/ko/howto/javascript/display-image-with-javascript/
+	
+	var winNumber = com%3+1
+	var result = "<h2>";
+	result = result + comName + " VS " + gamerName + "<br/>";
+	if(gamer == com){
+		result = result + "무승부 !!!</h2>";
+	}else if(gamer == winNumber){
+		result = result + "게이머 승 !!!</h2>";
+	}else {
+		result = result + "컴퓨터 승 !!!</h2>";
+	}
+	document.getElementById("target").innerHTML=result;
+}
+</script>
+</body>
+</html>
