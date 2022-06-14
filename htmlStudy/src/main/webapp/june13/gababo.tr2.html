@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>tr.gababo</title>
+</head>
+<body>
+<div align="center" border="1" border-color="blue">
+<h2>선생님과 만들어본<br/>가위,바위,보 게임 ver1.1</h2>
+함수를 쪼개봅시다 <br/><br/>
+</div>
+<div align="center">
+<img alt="" src="img/gababo.jpeg" width="400" height="300" id="target1">
+<img alt="" src="" id="target2">
+<div id="result"></div>
+<input type="button" value="게임시작" onClick="doGame()"/>
+</div>
+
+<script type="text/javascript">
+function doGame(){//1차로, 게이머가 가위바위보 선택, 입력을 숫자로 제한
+	var gamer = prompt("가위(1), 바위(2), 보(3) 중 하나를 입력하세요.");
+	if(isNaN(gamer)==true){//문자를 입력한 경우
+		alert("반드시 숫자로 입력해야 합니다.");
+	}else {//숫자를 입력한 경우
+		doGababo(gamer);//doGababo함수 호출	
+	}//if의 끝
+}//함수의 끝
+function doGababo(gamer){//2차로, 입력할 숫자 범위 제한
+	var gamerInt = parseInt(gamer);
+	if(gamerInt > 3){
+		alert("1,2,3 중 하나를 입력하세요.");
+	}else if(gamerInt < 1){
+		alart("1,2,3 중 하나를 입력하세요.");
+	}else {
+		doIt(gamerInt);//doIt함수 호출
+	}
+}
+function doIt(gamer){//3차로,컴퓨터 난수 가바보 & findImage함수로 이미지 찾기 
+	var com = parseInt(Math.random()*3 + 1);//1~3 중 난수
+	var gamerImg = findImage(gamer);//findImage함수 호출
+	var comImg = findImage(com);
+	document.getElementById("target1").src = gamerImg;
+	document.getElementById("target2").src = comImg;
+	document.getElementById("target2").width = 400;
+	document.getElementById("target2").height = 300;
+	doResult(gamer,com);//doResult함수 호출
+}
+function doResult(g, c){//5차인데 여따 적음. 승패 결과 출력
+	var html = "<h3>";
+	if(g == c){ html = html + "무승부!</h3>";}
+	else if(g == 1){
+		if(c == 3){ html = html + "게이머 승!</h3>";}
+		else { html = html + "컴퓨터 승!</h3>";}
+	}else if(g == 2){
+		if(c == 1){ html = html + "게이머 승!</h3>";}
+		else { html = html + "컴퓨터 승!</h3>";}
+	}else if(g == 3){
+		if(c == 2){ html = html + "게이머 승!</h3>";}
+		else { html = html + "컴퓨터 승!</h3>";}
+	}
+	document.getElementById("result").innerHTML=html;
+}
+function findImage(num){//4차로, 이미지 이름 지정하기
+	var name = "";
+	if(num == 1){ name="img/gawi.png";}
+	else if(num ==2){ name ="img/bawi.jpg";}
+	else if(num ==3){ name ="img/bo.png";}
+	return name;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>yutGame</title>
+</head>
+<body>
+<div align="center">
+<h2>윷 게임 ver1.0</h2>
+<img alt="" src="img/yut_1.png" id="yut1"><!-- 1:앞 -->
+<img alt="" src="img/yut_0.png" id="yut2"><!-- 0:뒤 -->
+<img alt="" src="img/yut_1.png" id="yut3">
+<img alt="" src="img/yut_0.png" id="yut4">
+<div id="result"></div>
+<input type="button" value="던지기" onClick="doGame()"/>
+</div>
+<script type="text/javascript">
+function doGame(){
+	var rnd1 = parseInt(Math.random()*2);//0~1
+	var rnd2 = parseInt(Math.random()*2);//0~1
+	var rnd3 = parseInt(Math.random()*2);//0~1
+	var rnd4 = parseInt(Math.random()*2);//0~1
+	var yut1Img = findImage(rnd1);
+	var yut2Img = findImage(rnd2);
+	var yut3Img = findImage(rnd3);
+	var yut4Img = findImage(rnd4);
+	document.getElementById("yut1").src = yut1Img;
+	document.getElementById("yut2").src = yut2Img;
+	document.getElementById("yut3").src = yut3Img;
+	document.getElementById("yut4").src = yut4Img;
+	var sum = rnd1 + rnd2 + rnd3 + rnd4;
+	var html = "<h3>";
+	if(sum == 0) {
+		html = html + "윷!!!</h3>";
+	}else if(sum == 1){		html = html + "걸!!!</h3>"; 
+	}else if(sum == 2){		html = html + "개!!!</h3>"; 
+	}else if(sum == 3){		html = html + "도!!!</h3>"; 
+	}else if(sum == 4){		html = html + "모!!!</h3>"; 
+	}
+	document.getElementById("result").innerHTML = html;
+}
+function findImage(num){
+	var image = "";
+	if(num == 0){
+		image = "img/yut_0.png";
+	}else if(num == 1){
+		image = "img/yut_1.png";
+	}
+	return image;
+}
+</script>
+</body>
+</html>
