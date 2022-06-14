@@ -1,63 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>gababo1_prompt</title>
 <style>
-h2 {border:2px solid blue; padding:30px; font-family: '±Ã¼­Ã¼','±¼¸²Ã¼','°íµñÃ¼';}
+h2 {border:2px solid blue; padding:30px; font-family: 'ê¶ì„œì²´','êµ´ë¦¼ì²´','ê³ ë”•ì²´';}
 table {text-align: center;}
 </style>
 </head>
 <body>
 <div align = "center">
-<h2>°¡À§¹ÙÀ§º¸ °ÔÀÓ Ver.1.1</h2>
-<!-- promptÀÔ·ÂÀ» ÅëÇÑ °¡À§¹ÙÀ§º¸ -->
-<img alt="" src="img/gababo.jpeg" width="400" height="300" id="main"><br/>
-<table>
+<h2>ê°€ìœ„ë°”ìœ„ë³´ ê²Œì„ Ver.1.1____prompt ì…ë ¥</h2>
+<!-- promptì…ë ¥ì„ í†µí•œ ê°€ìœ„ë°”ìœ„ë³´ -->
+<table border="0">
 	<tr>
-	<td><img alt="" src="img/gababo.jpeg" id="slot1" width="200" height="200"></td>
-	<td><img alt="" src="img/gababo.jpeg" id="slot2" width="200" height="200"></td>
+	<td><img alt="" src="img/gababo.jpeg" id="slot1" width="400" height="400"></td>
+	<td><img alt="" src="" id="slot2"></td>
 	</tr>
 	<tr>
-	<td>ÄÄÇ»ÅÍ</td>
-	<td>°ÔÀÌ¸Ó</td>
+	<td><div id="labelC"></div></td>
+	<td><div id="labelG"></div></td>
 	</tr>
 </table>
-<input type="button" value="°¡À§ ¹ÙÀ§ º¸" onClick="doGame()">
+<input type="button" value="ê°€ìœ„ ë°”ìœ„ ë³´" onClick="doGame()">
 
 <br/><br/><div align="center" id="target"></div>
 </div>
 <script type="text/javascript">
 function doGame(){
+	var gamer = prompt("ê°€ìœ„, ë°”ìœ„, ë³´ë¥¼ ì„ íƒí•˜ì„¸ìš”\n"+"1:ê°€ìœ„, 2:ë°”ìœ„, 3:ë³´");
+	var gamerInt = parseInt(gamer);
+	if(gamer == ""){
+		alert("ê°’ì„ ì…ë ¥í•˜ì„¸ìš”");	
+	}else if(isNaN(gamer) == 1){
+		alert("ë³´ê¸°ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”");
+	}else if(gamerInt > 3){
+		alert("ë‹¤ìŒì˜ ìˆ«ìì¤‘ í•˜ë‚˜ë¡œ ì…ë ¥í•˜ì„¸ìš”\n"+"1:ê°€ìœ„, 2:ë°”ìœ„, 3:ë³´");
+	}else if(gamerInt < 1){
+		alert("ë‹¤ìŒì˜ ìˆ«ìì¤‘ í•˜ë‚˜ë¡œ ì…ë ¥í•˜ì„¸ìš”\n"+"1:ê°€ìœ„, 2:ë°”ìœ„, 3:ë³´");
+	}else{doGababo(gamerInt);}
+}
+function doGababo(gamerInt){
 	var com = parseInt(Math.random()*3+1);
-	var gamer = parseInt(prompt("°¡À§, ¹ÙÀ§, º¸¸¦ ¼±ÅÃÇÏ¼¼¿ä\n"+"1:°¡À§, 2:¹ÙÀ§, 3:º¸"));
+	var comImg="";
+	var comPick="";
+	if(com == 1){ comImg="img/gawi.png"; comPick="ê°€ìœ„";}
+	if(com == 2){ comImg="img/bawi.jpg"; comPick="ë°”ìœ„";}
+	if(com == 3){ comImg="img/bo.png"; comPick="ë³´";}
+	document.getElementById("slot1").src= comImg;
+	document.getElementById("slot1").width="300";
+	document.getElementById("slot1").height="300";
+	document.getElementById("labelC").innerHTML="ì»´í“¨í„°";
 	
+	var gamerImg="";
+	var gamerPick="";
+	if(gamerInt == 1){ gamerImg="img/gawi.png"; gamerPick="ê°€ìœ„";}
+	if(gamerInt == 2){ gamerImg="img/bawi.jpg"; gamerPick="ë°”ìœ„";}
+	if(gamerInt == 3){ gamerImg="img/bo.png"; gamerPick="ë³´";}
+	document.getElementById("slot2").src= gamerImg;
+	document.getElementById("slot2").width="300";
+	document.getElementById("slot2").height="300";
+	document.getElementById("labelG").innerHTML="í”Œë ˆì´ì–´";
 	
-	var comPic="";
-	var comName="";
-	if(com == 1){ comPic="img/gawi.png"; comName="°¡À§";}
-	if(com == 2){ comPic="img/bawi.jpg"; comName="¹ÙÀ§";}
-	if(com == 3){ comPic="img/bo.png"; comName="º¸";}
-	document.getElementById("slot1").src=comPic;
-	
-	var gamerPic="";
-	var gamerName="";
-	if(gamer == 1){ gamerPic="img/gawi.png"; gamerName="°¡À§";}
-	if(gamer == 2){ gamerPic="img/bawi.jpg"; gamerName="¹ÙÀ§";}
-	if(gamer == 3){ gamerPic="img/bo.png"; gamerName="º¸";}
-	document.getElementById("slot2").src=gamerPic;
-	
-	var winNumber = com%3+1
-	var result = "<h2>";
-	result = result + comName + " VS " + gamerName + "<br/>";
-	if(gamer == com){
-		result = result + "¹«½ÂºÎ !!!</h2>";
-	}else if(gamer == winNumber){
-		result = result + "°ÔÀÌ¸Ó ½Â !!!</h2>";
+	doResult(gamerInt,com);
+}
+function doResult(g,c){
+	var winNumber = com%3+1;
+	var result = "<h2>" + comPick + " VS " + gamerPick + "<br/>";
+	if(g == c){
+		result = result + "ë¬´ìŠ¹ë¶€ !!!</h2>";
+	}else if(g == winNumber){
+		result = result + "í”Œë ˆì´ì–´ ìŠ¹ !!!</h2>";
 	}else {
-		result = result + "ÄÄÇ»ÅÍ ½Â !!!</h2>";
+		result = result + "ì»´í“¨í„° ìŠ¹ !!!</h2>";
 	}
-	document.getElementById("target").innerHTML=result;
+	document.getElementById("target").innerHTML="result";
 }
 </script>
 </body>
