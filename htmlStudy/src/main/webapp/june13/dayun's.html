@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dayun's gababo</title>
+	<style type="text/css">
+		h2 {
+			border : 1px solid blue;
+		}
+		</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function doGame() {
+			var gamer = prompt("가위, 바위, 보를 선택하세요\n"+"1:가위, 2:바위, 3:보");
+			var gamerNumber = isNaN(gamer);
+			var com = parseInt(Math.random() * 3 +1 );
+			
+			if(gamerNumber == true　|| gamer >3){
+				for( ; ; ){
+					alert("제대로 입력하세요");
+					var gamer = prompt("가위, 바위, 보를 선택하세요\n"+"1:가위, 2:바위, 3:보");
+					var gamerNumber = isNaN(gamer);
+						if(gamerNumber == false)
+							{break;}
+				}
+			}
+			var gamerName = "";
+			if(gamer == 1){gamerName = "img/gawi.png";}
+			if(gamer == 2){gamerName = "img/bawi.jpg";}
+			if(gamer == 3){gamerName = "img/bo.png";}
+			document.getElementById("slot1").src = gamerName;
+			
+			
+			var comName = "";
+			if(com == 1){comName = "img/gawi.png";}
+			if(com == 2){comName = "img/bawi.jpg";}
+			if(com == 3){comName = "img/bo.png";}
+			document.getElementById("slot2").src = comName;
+			
+			var result = "<h2>";//게임의 결과가 저장될 변수 선언
+			result = result + gamer + "vs" + com;
+			if(com == 1 && gamer ==3){
+				result = result + "\n 컴퓨터 승!!!</h2>"
+			}else if(com == 3 && gamer ==1){
+				result = result + "\n 게이머 승!!!</h2>"
+			}else if(com == gamer){
+				result = result + "\n무승부!!!!!</h2>"
+			} else if(com > gamer){
+				result = result + "\n컴퓨터 승!!!!!</h2>"
+			} else{
+				result = result + "\n게이머 승!!!!!</h2>"
+			}
+			document.getElementById("target").innerHTML = result;
+		}
+	</script>
+	
+	<div align="center">
+		<h2>가위바위보 ver1.0</h2>
+		<img alt="" src="../img/gawi.png" id="slot1" width="200" height="200">
+		<img alt="" src="../img/bo.png" id="slot2" width="200" height="200"><br/>
+		<input type="button" value="가위!바위!보!" onclick="doGame()"/>
+		<br/><br/>
+		<div align="center" id="target"></div>	
+	</div>
+</body>
+</html>
