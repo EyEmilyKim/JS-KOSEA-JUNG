@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<div id="judge" align="center"></div>
+<div align="center">
+<input type="button" value="judge" onClick="doJudge()"/>
+</div>
+<script type="text/javascript">
+
+function doJudge(){
+	var rnd1 = parseInt(Math.random()*2);//0~1
+	var rnd2 = parseInt(Math.random()*2);//0~1
+	var rnd3 = parseInt(Math.random()*2);//0~1
+	var rnd4 = parseInt(Math.random()*2);//0~1
+	var rnd5 = parseInt(Math.random()*2);//0~1
+	var rnd6 = parseInt(Math.random()*2);//0~1
+	var rnd7 = parseInt(Math.random()*2);//0~1
+	var rnd8 = parseInt(Math.random()*2);//0~1
+	var sumC = rnd1 + rnd2 + rnd3 + rnd4;
+	var sumG = rnd5 + rnd6 + rnd7 + rnd8;
+	
+	var htmlJ = "<h2>";
+	if(sumG == 4) {//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
+		if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";}
+		else { htmlJ = htmlJ + "You Win</h2>";}
+	}else if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";
+	}else if(sumG < sumC){ htmlJ = htmlJ + "You Win</h2>";
+	}else { htmlJ = htmlJ + "You Lose</h2>";
+	}
+	document.getElementById("judge").innerHTML = htmlJ;
+}
+</script>
+</body>
+</html>

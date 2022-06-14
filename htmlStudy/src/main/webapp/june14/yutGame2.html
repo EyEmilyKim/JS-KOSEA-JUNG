@@ -13,26 +13,25 @@
 	<img alt="" src="img/yut_1.png" id="yut1"><!-- 1:앞 -->
 	<img alt="" src="img/yut_0.png" id="yut2"><!-- 0:뒤 -->
 	<img alt="" src="img/yut_1.png" id="yut3">
-	<img alt="" src="img/yut_0.png" id="yut4">
+	<img alt="" src="img/yut_0.png" id="yut4"><br/>
+	<h4>컴퓨터</h4>
 	<div id="resultC"></div>
 </td></tr>
-<tr align="center"><td><h6>컴퓨터</h6></td></tr>
-<tr align="center" height="100"><td>
+<tr align="center" height="200"><td>
 	<input type="button" value="던지기" onClick="doGame()"/>
-	<div id="winLose"></div>
+	<div id="judge"></div>
 </td></tr>
-<tr align="center"><td><h6>플레이어</h6></td></tr>
 <tr align="center"><td>
 	<div id="resultG"></div>
+	<h4>플레이어</h4><br/>
 	<img alt="" src="img/yut_1.png" id="yut5"><!-- 1:앞 -->
 	<img alt="" src="img/yut_0.png" id="yut6"><!-- 0:뒤 -->
 	<img alt="" src="img/yut_1.png" id="yut7">
 	<img alt="" src="img/yut_0.png" id="yut8">
-	
 </td></tr>
 </table>
 </div>
-</table>
+
 <script type="text/javascript">
 function doGame(){
 	var rnd1 = parseInt(Math.random()*2);//0~1
@@ -59,6 +58,7 @@ function doGame(){
 	document.getElementById("yut6").src = yut6Img;
 	document.getElementById("yut7").src = yut7Img;
 	document.getElementById("yut8").src = yut8Img;
+	
 	var sumC = rnd1 + rnd2 + rnd3 + rnd4;
 	var sumG = rnd5 + rnd6 + rnd7 + rnd8;
 	
@@ -81,24 +81,24 @@ function doGame(){
 	}else if(sumG == 4){ htmlG = htmlG + "모!!!</h3>";
 	}
 	document.getElementById("resultG").innerHTML = htmlG;
-	
-	winLose();
-}
-function winLose(){
-	var htmlWL = "<h2>";
-	if(sumG == 4){//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
-		if(sumG == sumC){ htmlWL = htmlWL + "무승부</h2>";
-		}else{ htmlWL = htmlWL + "You Win</h2>"};
-	}else if(sumG ==sumC){ htmlWL = htmlWL + "무승부</h2>;"
-		}
-	}
 
+	doJudge();
+}
+function doJudge(){
+	var htmlJ = "<h2>";
+	if(sumG == 4) {//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
+		if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";}
+		else { htmlJ = htmlJ + "You Win</h2>";}
+	}else if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";
+	}else if(sumG < sumC){ htmlJ = htmlJ + "You Win</h2>";
+	}else { htmlJ = htmlJ + "You Lose</h2>";
+	}
+	document.getElementById("judge").innerHTML = htmlJ;
+}
 function findImage(num){
 	var image = "";
-	if(num == 0){
-		image = "img/yut_0.png";
-	}else if(num == 1){
-		image = "img/yut_1.png";
+	if(num == 0){ image = "img/yut_0.png";
+	}else if(num == 1){image = "img/yut_1.png";
 	}
 	return image;
 }
