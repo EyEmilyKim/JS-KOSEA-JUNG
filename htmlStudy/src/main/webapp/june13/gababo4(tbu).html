@@ -11,7 +11,8 @@ table {text-align: center;}
 <body>
 <div align = "center">
 <h2>가위바위보 게임 Ver.1.4</h2>
-<img alt="" src="img/gababo.jpeg" width="400" height="300" id="main"><br/>
+<img alt="" src="img/gababo.jpeg" width="400" height="300" id="target1">
+<img alt="" src="" id="target2">
 <table>
 	<tr>
 	<td><div id="comTd"></div></td>
@@ -47,14 +48,14 @@ function doGame(gamer){
 	if(gamer == 3){ gamerPic="img/bo.png"; gamerName="보";}
 	document.getElementById("slot2").src=gamerPic;
 	
-	//javaspring 함수 내에서 새로 img를 얹으려고 했으나 지식 부족으로 실패... 
+	/* //javaspring 함수 내에서 새로 img를 얹으려고 했으나 지식 부족으로 실패... 
 	var XXX = document.createElement("img");
 	img.id = "slot1"; img.width="200"; height="200";
 	var src = document.getElementById("comTd") ;
 	document.body.appendChild(XXX);
 	// 참고_createElement("img"): https://ko.code-paper.com/javascript/examples-how-to-add-image-in-js
 	// 참고_display_img(인자4개)&creatElement(): https://www.delftstack.com/ko/howto/javascript/display-image-with-javascript/
-	
+	 */
 	var winNumber = com%3+1
 	var result = "<h2>";
 	result = result + comName + " VS " + gamerName + "<br/>";
