@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>yutGame2</title>
+</head>
+<body>
+<div align="center">
+<h2>둘이 하는<br/>윷 게임 ver1.0</h2>
+
+<table border="1">
+<tr align="center"><td>
+	<img alt="" src="img/yut_1.png" id="yut1"><!-- 1:앞 -->
+	<img alt="" src="img/yut_0.png" id="yut2"><!-- 0:뒤 -->
+	<img alt="" src="img/yut_1.png" id="yut3">
+	<img alt="" src="img/yut_0.png" id="yut4">
+	<div id="resultC"></div>
+</td></tr>
+<tr align="center"><td><h6>컴퓨터</h6></td></tr>
+<tr align="center" height="100"><td>
+	<input type="button" value="던지기" onClick="doGame()"/>
+	<div id="winLose"></div>
+</td></tr>
+<tr align="center"><td><h6>플레이어</h6></td></tr>
+<tr align="center"><td>
+	<div id="resultG"></div>
+	<img alt="" src="img/yut_1.png" id="yut5"><!-- 1:앞 -->
+	<img alt="" src="img/yut_0.png" id="yut6"><!-- 0:뒤 -->
+	<img alt="" src="img/yut_1.png" id="yut7">
+	<img alt="" src="img/yut_0.png" id="yut8">
+	
+</td></tr>
+</table>
+</div>
+</table>
+<script type="text/javascript">
+function doGame(){
+	var rnd1 = parseInt(Math.random()*2);//0~1
+	var rnd2 = parseInt(Math.random()*2);//0~1
+	var rnd3 = parseInt(Math.random()*2);//0~1
+	var rnd4 = parseInt(Math.random()*2);//0~1
+	var rnd5 = parseInt(Math.random()*2);//0~1
+	var rnd6 = parseInt(Math.random()*2);//0~1
+	var rnd7 = parseInt(Math.random()*2);//0~1
+	var rnd8 = parseInt(Math.random()*2);//0~1
+	var yut1Img = findImage(rnd1);
+	var yut2Img = findImage(rnd2);
+	var yut3Img = findImage(rnd3);
+	var yut4Img = findImage(rnd4);
+	var yut5Img = findImage(rnd5);
+	var yut6Img = findImage(rnd6);
+	var yut7Img = findImage(rnd7);
+	var yut8Img = findImage(rnd8);
+	document.getElementById("yut1").src = yut1Img;
+	document.getElementById("yut2").src = yut2Img;
+	document.getElementById("yut3").src = yut3Img;
+	document.getElementById("yut4").src = yut4Img;
+	document.getElementById("yut5").src = yut5Img;
+	document.getElementById("yut6").src = yut6Img;
+	document.getElementById("yut7").src = yut7Img;
+	document.getElementById("yut8").src = yut8Img;
+	var sumC = rnd1 + rnd2 + rnd3 + rnd4;
+	var sumG = rnd5 + rnd6 + rnd7 + rnd8;
+	
+	var htmlC = "<h3>";
+	if(sumC == 0) {
+		htmlC = htmlC + "윷!!!</h3>";
+	}else if(sumC == 1){ htmlC = htmlC + "걸!!!</h3>"; 
+	}else if(sumC == 2){ htmlC = htmlC + "개!!!</h3>"; 
+	}else if(sumC == 3){ htmlC = htmlC + "도!!!</h3>"; 
+	}else if(sumC == 4){ htmlC = htmlC + "모!!!</h3>";
+	}
+	document.getElementById("resultC").innerHTML = htmlC;
+	
+	var htmlG = "<h3>";
+	if(sumG == 0) {
+		htmlG = htmlG + "윷!!!</h3>";
+	}else if(sumG == 1){ htmlG = htmlG + "걸!!!</h3>"; 
+	}else if(sumG == 2){ htmlG = htmlG + "개!!!</h3>"; 
+	}else if(sumG == 3){ htmlG = htmlG + "도!!!</h3>"; 
+	}else if(sumG == 4){ htmlG = htmlG + "모!!!</h3>";
+	}
+	document.getElementById("resultG").innerHTML = htmlG;
+	
+	winLose();
+}
+function winLose(){
+	var htmlWL = "<h2>";
+	if(sumG == 4){//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
+		if(sumG == sumC){ htmlWL = htmlWL + "무승부</h2>";
+		}else{ htmlWL = htmlWL + "You Win</h2>"};
+	}else if(sumG ==sumC){ htmlWL = htmlWL + "무승부</h2>;"
+		}
+	}
+
+function findImage(num){
+	var image = "";
+	if(num == 0){
+		image = "img/yut_0.png";
+	}else if(num == 1){
+		image = "img/yut_1.png";
+	}
+	return image;
+}
+</script>
+</body>
+</html>
