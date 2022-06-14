@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>tr.gababo</title>
+<meta charset="UTF-8">
+<title>gababo.tr</title>
 </head>
 <body>
 <div align="center" border="1" border-color="blue">
-<h2>¼±»ı´Ô°ú ¸¸µé¾îº»<br/>°¡À§,¹ÙÀ§,º¸ °ÔÀÓ ver1.0</h2>
+<h2>ì„ ìƒë‹˜ê³¼ ë§Œë“¤ì–´ë³¸<br/>ê°€ìœ„,ë°”ìœ„,ë³´ ê²Œì„ ver1.0</h2>
 <img alt="" src="img/gababo.jpeg" width="400" height="300" id="target1">
 <img alt="" src="" id="target2">
 <div id="result"></div>
-<input type="button" value="°ÔÀÓ½ÃÀÛ" onClick="doGame()"/>
+<input type="button" value="ê²Œì„ì‹œì‘" onClick="doGame()"/>
 </div>
 
 <script type="text/javascript">
 function doGame(){
-	var gamer = prompt("°¡À§(1), ¹ÙÀ§(2), º¸(3) Áß ÇÏ³ª¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
-	var com = parseInt(Math.random()*3+1);//1~3 Áß ³­¼ö
-	if(isNaN(gamer)==true){//¹®ÀÚ¸¦ ÀÔ·ÂÇÑ °æ¿ì
-		alert("¹İµå½Ã ¼ıÀÚ·Î ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
-	}else {//¼ıÀÚ¸¦ ÀÔ·ÂÇÑ °æ¿ì
+	var gamer = prompt("ê°€ìœ„(1), ë°”ìœ„(2), ë³´(3) ì¤‘ í•˜ë‚˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+	var com = parseInt(Math.random()*3+1);//1~3 ì¤‘ ë‚œìˆ˜
+	if(isNaN(gamer)==true){//ë¬¸ìë¥¼ ì…ë ¥í•œ ê²½ìš°
+		alert("ë°˜ë“œì‹œ ìˆ«ìë¡œ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
+	}else {//ìˆ«ìë¥¼ ì…ë ¥í•œ ê²½ìš°
 		var gamerInt = parseInt(gamer);
 		if(gamerInt > 3){
-			alert("1,2,3 ÁßÀÇ ÇÏ³ª¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+			alert("1,2,3 ì¤‘ì˜ í•˜ë‚˜ë¥¼ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
 		}else if(gamerInt < 1){
-			alert("1,2,3 ÁßÀÇ ÇÏ³ª¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.");
+			alert("1,2,3 ì¤‘ì˜ í•˜ë‚˜ë¥¼ ì…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤.");
 		}else {
 			var gamerImg = ""; var comImg = "";
 			if(gamerInt == 1){
@@ -48,31 +48,31 @@ function doGame(){
 			
 			var html="<h3>"
 			if(gamerInt == com){
-				html = html + "¹«½ÂºÎ!</h3>";
-			}else if(gamerInt == 1){//°ÔÀÌ¸Ó°¡ °¡À§ÀÎ °æ¿ì
+				html = html + "ë¬´ìŠ¹ë¶€!</h3>";
+			}else if(gamerInt == 1){//ê²Œì´ë¨¸ê°€ ê°€ìœ„ì¸ ê²½ìš°
 				if(com == 3){
-					html = html + "°ÔÀÌ¸Ó ½Â !</h3>"
+					html = html + "ê²Œì´ë¨¸ ìŠ¹ !</h3>"
 				}else {
 					html = html + ""
 				}
-			}else if(gamerInt == 2){//°ÔÀÌ¸Ó°¡ ¹ÙÀ§ÀÎ °æ¿ì
+			}else if(gamerInt == 2){//ê²Œì´ë¨¸ê°€ ë°”ìœ„ì¸ ê²½ìš°
 				if(com == 1){
-					html = html + "°ÔÀÌ¸Ó ½Â!</h3>"
+					html = html + "ê²Œì´ë¨¸ ìŠ¹!</h3>"
 				}else {
-					html = html + "ÄÄÇ»ÅÍ ½Â!</h3>"
+					html = html + "ì»´í“¨í„° ìŠ¹!</h3>"
 				}
-			}else if(gamerInt == 3){//°ÔÀÌ¸Ó°¡ º¸ÀÎ °æ¿ì
+			}else if(gamerInt == 3){//ê²Œì´ë¨¸ê°€ ë³´ì¸ ê²½ìš°
 				if(com == 2){
-					html = html + "°ÔÀÌ¸Ó ½Â!</h3>"
+					html = html + "ê²Œì´ë¨¸ ìŠ¹!</h3>"
 				}else {
-					html = html + "ÄÄÇ»ÅÍ ½Â!</h3>"
+					html = html + "ì»´í“¨í„° ìŠ¹!</h3>"
 				}
 			}
 			document.getElementById("result").innerHTML=html;
-		}//ifÀÇ ³¡
-	}//ifÀÇ ³¡
+		}//ifì˜ ë
+	}//ifì˜ ë
 	
-}//ÇÔ¼öÀÇ ³¡
+}//í•¨ìˆ˜ì˜ ë
 
 </script>
 
