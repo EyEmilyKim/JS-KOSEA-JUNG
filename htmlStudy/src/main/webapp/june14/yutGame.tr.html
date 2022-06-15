@@ -2,17 +2,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>yutGame</title>
+<title>yutGame.tr</title>
 </head>
 <body>
 <div align="center">
-<h2>윷 게임 ver1.0</h2>
-<h3>게이머</h3>
+<h2>둘이하는 윷 게임 ver1.0</h2>
+<div><h3>게이머 : </h3></div><div id="resultG"></div>
 <img alt="" src="img/yut_1.png" id="yut1"><!-- 1:앞 -->
 <img alt="" src="img/yut_0.png" id="yut2"><!-- 0:뒤 -->
 <img alt="" src="img/yut_1.png" id="yut3">
 <img alt="" src="img/yut_0.png" id="yut4">
-<h3>컴퓨터</h3>
+<div><h3>컴퓨터 : </h3></div><div id="resultC"></div>
 <img alt="" src="img/yut_1.png" id="com1"><!-- 1:앞 -->
 <img alt="" src="img/yut_0.png" id="com2"><!-- 0:뒤 -->
 <img alt="" src="img/yut_1.png" id="com3">
@@ -73,6 +73,10 @@ function doGame(){
 		html = html + "컴퓨터 승!</h3>";
 	}
 	document.getElementById("result").innerHTML = html;
+	
+}
+function doResult(){
+	
 }
 function findImage(num){
 	var image = "";
