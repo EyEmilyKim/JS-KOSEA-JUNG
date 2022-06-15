@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<div align="center">
+<h2>복 습 2</h2>
+<h3>다음의 버튼을 누르세요.</h3>
+<input type="button" value="O K" onClick="m1()"/><br/>
+<input type="button" value="오케이" onClick="f1()"/><br/>
+<a href="#" onClick="showNumber()">누르세요</a><br/>
+<div id="here"></div>
+</div>
+<script type="text/javascript">
+function showNumber(){
+	var gap = Math.random();
+	//1. 난수의 범위를 곱한다
+	//2. 가장 작은 난수를 더한다.
+	//3. 위의 결과를 정수로 바꾼다.
+	//예제1. 로또 난수(1~45) >범위(난수의 개수):45
+	gap = parseInt(Math.random()*45+1);
+	//예제2. 토익 점수 난수(0~990) >범위:991
+	gap = parseInt(Math.random()*991);
+	//예제3. 시험 점수 난수(0~100) >범위:101
+	gap = parseInt(Math.random()*101);
+	//예제4. 임의의 난수(101~200) >범위:100
+	
+	gap = parseInt(Math.random()*100 + 101);
+	document.getElementById("here").innerHTML = gap;
+}
+
+function f1(){ var sum = f2();
+				document.write("<h2>답:"+sum+"</h2>");}
+function f2(){ return 1 + f3(); }
+function f3(){ return 2 + f4(); }
+function f4(){ return 3; }
+
+function m1(){ m2("나는"); }
+function m2(box){ m3(box, "오늘"); }
+function m3(box1, box2){ m4(box1, box2, "운동장에서");}
+function m4(b1,b2,b3){
+	var result = b1 + b2 + b3 + "뛰었다.";
+	document.write("<h2>" + result + "</h2>");
+}
+</script>
+</body>
+</html>

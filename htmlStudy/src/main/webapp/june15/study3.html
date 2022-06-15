@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+<style type="text/css">
+.btn { width:100px; height:100px; padding:10px; font-size:20px; color:red; }
+</style>
+</head>
+<body>
+<div align="center">
+<h2>행운의 버튼을 찾아라~~</h2>
+<h3>아래의 버튼을 클릭해서 출력되는 숫자만큼 할인을 받으세요~</h3>
+<input type="button" value="선택1" class="btn" onClick="check(1)"/>
+<input type="button" value="선택2" class="btn" onClick="check(2)"/>
+<input type="button" value="선택3" class="btn" onClick="check(3)"/>
+<input type="button" value="선택4" class="btn" onClick="check(4)"/>
+</div>
+<script type="text/javascript">
+var lucky = parseInt(Math.random()*4+1);
+function check(su){
+	if(lucky == su){ 
+		alert("축하합니다! 10% 할인입니다~");
+	}else { 
+		alert("죄송합니다.. 다음 기회를 기대해주세요~");
+	}
+}
+</script>
+</body>
+</html>

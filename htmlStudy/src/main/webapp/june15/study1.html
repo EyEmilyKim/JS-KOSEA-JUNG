@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+<style type="text/css">
+  
+h2 {border:2px solid orange; padding:15px; background-color:lightgreen; }
+p {background-color:lightblue; color:marron; }
+</style>
+</head>
+<body>
+<h2>복 습</h2>
+<p>지금까지 학습한 CSS, HTML, JavaScript 를 복습합니다.
+HTML을 사용해서 페이지의 구조를 잡는다. CSS를 사용해서 페이지에 멋을 부린다. JavaScript를 사용해서 기능을 구현한다.<br/>
+JavaScript는 별도의 영역을 만든 후 작성한다. CSS도 별도의 영역을 만든 후 작성한다.
+<!-- JSP나 Survlet으로 보낼 때 쓰는 버튼-->
+<!-- <input type="submit" value="제목1"/></br> --> 
+<!-- 이미지 넣을 때 쓰는 버튼 -->
+<!-- <button>제목3</button></br> -->
+<!-- JavaScript로 보낼 때 쓰는 버튼-->
+<div id="here"></div>
+<input type="button" value="제목2" onMouseOver="std()"/></br><!-- 함수 호출 -->
+<input type="button" value="제목3" onClick="showName()"/><br/>
+<input type="button" value="제목4" onClick="showName2('김길동')"><br/>
+<input type="button" value="제목5" onClick="showValue()"/><br/>
+</p>
+<script type="text/javascript">
+function one(){ return 1; }
+function two(){ return 2; }
+function showValue(){
+	alert(one()+two());
+}
+function showName2(box){
+	var html = "<table border='1'><tr><td>"+box+"</td></tr></table>";
+	//document.write(html);
+	document.getElementById("here");
+}
+function showName(){
+	document.write("<table border='1'><tr><td>");
+	document.write("홍길동");
+	document.write("</td></tr></table>");	
+}
+function std(){//함수 선언
+	var a = 200; var b = 11.3; var c = "KOREA";
+	alert(a+b+c);
+}
+var a = 100; var b = 3.14; var c = "대한민국";
+var d = a + b + c;//103.14대한민국
+//d에 저장된 값을 HTML로 출력
+document.write("<h3>결과 : "+d+"</h3>");
+//d에 저장된 값을 JavaScript에서 출력
+alert(d);//함수: 괄호를 가지고 있는 명령어
+</script>
+</body>
+</html>
