@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<script type="text/javascript">
+function getMedal(nation){
+	var filename = nation + ".html"
+	window.open(filename,"title","width=350, height=300")
+}
+</script>
+<div align="center">
+<h2>올림픽 메달 집계 ver1.0</h2>
+<table>
+	<tr><td><a href="#" onClick="getMedal('canada')">
+		<img alt="" src="img/canada.png"></a></td>
+		<td><a href="#" onClick="getMedal('japan')">
+		<img alt="" src="img/japan.png"></a></td>
+		<td><a href="#" onClick="getMedal('korea')">
+		<img alt="" src="img/south_korea.png"></a></td>
+		<td><a href="#" onClick="getMedal('china')">
+		<img alt="" src="img/china.png"></a></td>
+		<td><a href="#" onClick="getMedal('usa')">
+		<img alt="" src="img/usa.png"></a></td></tr>
+</table>
+</div>
+</body>
+</html>

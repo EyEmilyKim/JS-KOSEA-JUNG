@@ -1,0 +1,7 @@
+@charset "EUC-KR";
+
+table { border:2px solid blue; }
+tr td { padding:12px; font-size: 13px; }
+.title { background-color: lightblue;
+		 font-size: 30px; }
+.head { background-color: lightblue; }
