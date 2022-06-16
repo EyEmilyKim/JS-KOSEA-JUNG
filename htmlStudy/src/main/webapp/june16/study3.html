@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+</head>
+<body>
+<script type="text/javascript">
+function countUp(){
+	window.setTimeout(one, 500);
+}
+function one(){
+	document.getElementById("display").src="img/1.png";
+	window.setTimeout(two, 500);
+}
+function two(){
+	document.getElementById("display").src="img/2.png";
+	window.setTimeout(three, 500);
+}
+function three(){
+	document.getElementById("display").src="img/3.png";
+}
+
+function doDice(){
+	document.getElementById("dice").src="../june13/img/dice2.png";
+	window.setTimeout(dice2, 500);
+}
+function dice2(){
+	document.getElementById("dice").src="../june13/img/dice3.png";
+	window.setTimeout(dice3, 500);
+}
+function dice3(){
+	document.getElementById("dice").src="../june13/img/dice4.png";
+	window.setTimeout(dice4, 500);
+}
+function dice4(){
+	document.getElementById("dice").src="../june13/img/dice5.png";
+	window.setTimeout(dice5, 500);
+}
+function dice5(){
+	document.getElementById("dice").src="../june13/img/dice6.png";
+}
+
+</script>
+
+<div align="center">
+<h2>카운트 업,다운</h2>
+<img alt="" src="img/0.png" width="300" height="300" id="display"><br/>
+<img alt="" src="../june13/img/dice1.png" id="dice">
+<img alt="" src="../june13/img/one.png" id="dice2"><br/>
+<input type="button" value="카운트 UP" onClick="countUp()"/><br/>
+<input type="button" value="주사위 굴리기" onClick="doDice()"/><br/>
+</div>
+
+</body>
+</html>
