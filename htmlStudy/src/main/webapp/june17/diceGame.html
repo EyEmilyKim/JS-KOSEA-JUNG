@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>diceGame</title>
+<style type="text/css">
+h2 {border:1px solid blue; padding:5px; margin:50px auto; 
+	background-color:lightgreen; font-family:'궁서체';}
+table {font-size:20px; text-align:center; background-color:skyblue;}
+#btn {width: 150px; height:50px; font-size:16px; color:blue;}
+</style>
+</head>
+<body>
+<div align="center">
+<h2>주사위 게임 ver2.0</h2>
+<table>
+	<tr><td><img alt="" id="dice1" src="../june13/img/dice2.png"/></td>
+		<td><img alt="" id="dice2" src="../june13/img/five.png"/></td></tr>
+	<tr><td colspan="2">
+		<input type="button" value="게임 시작" onClick="doGame()" id="btn"/></td></tr>
+	<tr><td colspan="2" id="target">이곳에 결과가 출력됩니다.</td></tr>
+</table>
+</div>
+<script type="text/javascript">
+function doGame(){
+	one();
+}
+function one(){
+	var gamer = parseInt(Math.random()*6+1);//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = parseInt(Math.random()*6+1);//컴퓨터 주사위 난수
+	var cImg = "";//주사위 이미지
+	if(com == 1) { cImg="../june13/img/one.png"; }
+	else if(com == 2) { cImg="../june13/img/two.png"; }
+	else if(com == 3) { cImg="../june13/img/three.png"; }
+	else if(com == 4) { cImg="../june13/img/four.png"; }
+	else if(com == 5) { cImg="../june13/img/five.png"; }
+	else if(com == 6) { cImg="../june13/img/siz.png"; }
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	//window.setTimeout(two,400);
+}
+function two(){
+	window.setTimeout(three,400);
+}
+</script>
+</body>
+</html>
