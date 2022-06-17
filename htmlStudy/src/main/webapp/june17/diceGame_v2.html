@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>diceGame</title>
+<title>diceGame_v2</title>
 <style type="text/css">
 h2 {border:1px solid blue; padding:5px; margin:50px auto; 
 	background-color:lightgreen; font-family:'궁서체';}
@@ -16,6 +16,7 @@ table {font-size:20px; text-align:center; background-color:skyblue;}
 <table>
 	<tr><td><img alt="" id="dice1" src="../june13/img/dice2.png"/></td>
 		<td><img alt="" id="dice2" src="../june13/img/five.png"/></td></tr>
+	<tr><td>플레이어</td><td>컴퓨터</td></tr>
 	<tr><td colspan="2">
 		<input type="button" value="게임 시작" onClick="doGame()" id="btn"/></td></tr>
 	<tr><td colspan="2" id="target">이곳에 결과가 출력됩니다.</td></tr>
@@ -94,8 +95,19 @@ function six(){
 	window.setTimeout(doIt,100);
 }
 function doIt(){
-	
-}
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	var html = "<font color='red'>";
+	if(gamer == com){ html = html+"무 승 부!";}
+	else if(gamer > com){ html = html+"플레이어 승!";}
+	else{ html = html+"컴퓨터 승!";}
+	html = html + "</font>";
+	document.getElementById("target").innerHTML=html;
+} 
 </script>
 </body>
 </html>
