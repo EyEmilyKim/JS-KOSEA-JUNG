@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.box0{
+	background-color:#AF9797;
+	padding:10px;
+}
+.box0 > h1 {
+	text-color: white;
+}
+.main{
+	text-color: #fff;	
+}
+.box1{
+	background-color: white;
+	margin:10px;
+}
+.box2{
+	margin:20px;
+}
