@@ -25,23 +25,76 @@ table {font-size:20px; text-align:center; background-color:skyblue;}
 function doGame(){
 	one();
 }
+function rnd(){//1부터 6중의 난수로 바뀌는 리턴 함수
+	var r = parseInt(Math.random()*6+1);
+	return r;
+}
+function comImage(name){
+	var image = "";
+	if(name == 1) { image="../june13/img/one.png"; }
+	else if(name == 2) { image="../june13/img/two.png"; }
+	else if(name == 3) { image="../june13/img/three.png"; }
+	else if(name == 4) { image="../june13/img/four.png"; }
+	else if(name == 5) { image="../june13/img/five.png"; }
+	else if(name == 6) { image="../june13/img/siz.png"; }
+	return image;
+}
 function one(){
-	var gamer = parseInt(Math.random()*6+1);//게이머 주사위 난수 
+	var gamer = rnd();//게이머 주사위 난수 
 	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
-	var com = parseInt(Math.random()*6+1);//컴퓨터 주사위 난수
-	var cImg = "";//주사위 이미지
-	if(com == 1) { cImg="../june13/img/one.png"; }
-	else if(com == 2) { cImg="../june13/img/two.png"; }
-	else if(com == 3) { cImg="../june13/img/three.png"; }
-	else if(com == 4) { cImg="../june13/img/four.png"; }
-	else if(com == 5) { cImg="../june13/img/five.png"; }
-	else if(com == 6) { cImg="../june13/img/siz.png"; }
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
 	document.getElementById("dice1").src=gImg;//출력
 	document.getElementById("dice2").src=cImg;
-	//window.setTimeout(two,400);
+	window.setTimeout(two,100);
 }
 function two(){
-	window.setTimeout(three,400);
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	window.setTimeout(three,100);
+}
+function three(){
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	window.setTimeout(four,100);
+}
+function four(){
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	window.setTimeout(five,100);
+}
+function five(){
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	window.setTimeout(six,100);
+}
+function six(){
+	var gamer = rnd();//게이머 주사위 난수 
+	var gImg= "../june13/img/dice"+gamer+".png";//주사위 이미지
+	var com = rnd();//컴퓨터 주사위 난수
+	var cImg = comImage(com);//주사위 이미지
+	document.getElementById("dice1").src=gImg;//출력
+	document.getElementById("dice2").src=cImg;
+	window.setTimeout(doIt,100);
+}
+function doIt(){
+	
 }
 </script>
 </body>
