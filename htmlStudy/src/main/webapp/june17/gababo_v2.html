@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>gababo_v2</title>
+<style type="text/css">
+h2 {border:1px solid blue; padding:5px; margin:50px auto; 
+	background-color:lightgreen; font-family:'궁서체';}
+table {font-size:20px; text-align:center; background-color:skyblue;}
+#btn {width: 150px; height:50px; font-size:16px; color:blue;}
+#result {padding:20px;}
+</style>
+</head>
+<body>
+<div align="center">
+<h2>가위,바위,보 게임 ver2.0</h2>
+<table>
+	<tr><td><img alt="" src="../june13/img/gababo.jpeg"
+				width="300" height="200" id="target1"></td>
+		<td><img alt="" src="" id="target2"></td></tr>
+	<tr><td id="gamer"></td><td id="computer"></td></tr>
+	<tr><td colspan="2" align="center"><input type="button" value="게임 시작" 
+			id="btn" onClick="doGame()"/></td></tr>	
+	<tr><td colspan="2" align="center" id="gababo"></td></tr>	
+	<tr><td colspan="2" align="center" id="result"/>이곳에 결과가 출력됩니다.</td></tr>
+</table>
+</div>
+<script type="text/javascript">
+function doGame(){
+	var gamer = prompt("가위(1), 바위(2), 보(3) 중 하나를 선택하세요");
+	
+	if(isNaN(gamer)){//입력한 데이터가 문자인 경우
+		alert("숫자로 입력해야 합니다.");
+	}else{//입력한 데이터가 숫자인 경우
+		var gamerInt = parseInt(gamer);
+		if(gamerInt > 3){
+			alert("3이하 이어야 합니다.");
+		}else if(gamerInt <1){
+		 	alert("1이상 이어야 합니다.");
+		}else{
+			one(gamerInt);
+		}
+	}
+}
+function rnd(){
+	var r = parseInt(Math.random()*3+1);
+	return r;
+}
+function findImage(su){
+	var image="";
+	if(su == 1){ image = "../june13/img/gawi.png";}
+	else if(su == 2){image = "../june13/img/bawi.jpg";}
+	else if(su == 3){image = "../june13/img/bo.png";}
+	return image;
+}
+function one(gamer){
+	var g = rnd();
+	var gImage = findImage(g);
+	var c = rnd();
+	var cImage = findImage(c);
+	document.getElementById("target1").src=gImage;
+	document.getElementById("target2").src=cImage;
+	document.getElementById("target2").width=300;
+	document.getElementById("target2").height=200;
+
+	document.getElementById("gamer").innerHTML="플레이어";
+	document.getElementById("computer").innerHTML="컴퓨터";
+	
+	document.getElementById("gababo").innerHTML="안내면 진거~~~";
+	window.setTimeout(two,500,gamer);//인자 전달법 주의 [X]→(two(gamer),500)
+}
+function two(gamer){
+	var g = rnd();
+	var gImage = findImage(g);
+	var c = rnd();
+	var cImage = findImage(c);
+	document.getElementById("target1").src=gImage;
+	document.getElementById("target2").src=cImage;
+	document.getElementById("target2").width=300;
+	document.getElementById("target2").height=200;
+
+	document.getElementById("gamer").innerHTML="플레이어";
+	document.getElementById("computer").innerHTML="컴퓨터";
+	
+	document.getElementById("gababo").innerHTML="가위~~~";
+	window.setTimeout(three,500,gamer);
+}
+function three(gamer){
+	var g = rnd();
+	var gImage = findImage(g);
+	var c = rnd();
+	var cImage = findImage(c);
+	document.getElementById("target1").src=gImage;
+	document.getElementById("target2").src=cImage;
+	document.getElementById("target2").width=300;
+	document.getElementById("target2").height=200;
+
+	document.getElementById("gamer").innerHTML="플레이어";
+	document.getElementById("computer").innerHTML="컴퓨터";
+	
+	document.getElementById("gababo").innerHTML="바위~~~";
+	window.setTimeout(winner,500,gamer);
+}
+function makeWinner(g,c){
+	var html="<font color='red'>";
+	if(g == c){ html = html + "무 승 무!";}
+	else if(g == 1){//게이머가 가위인 경우
+		if(c == 2){ html = html + "컴퓨터 승!";}
+		else{ html = html + "플레이어 승!";}
+	}
+	else if(g == 2){//게이머가 바위인 경우
+		if(c == 3){ html = html + "컴퓨터 승!";}
+		else{ html = html + "플레이어 승!";}
+	}
+	else if(g == 3){//게이머가 보인 경우
+		if(c == 1){ html = html + "컴퓨터 승!";}
+		else{ html = html + "플레이어 승!";}
+	}
+	html = html + "</font>";
+	return html;
+}
+function winner(gamer){
+	var gImage = findImage(gamer);
+	var c = rnd();
+	var cImage = findImage(c);
+	document.getElementById("target1").src=gImage;
+	document.getElementById("target2").src=cImage;
+	document.getElementById("target2").width=300;
+	document.getElementById("target2").height=200;
+	document.getElementById("gababo").innerHTML="보!";
+	var html = makeWinner(gamer,c);
+	document.getElementById("result").innerHTML=html;
+}
+
+</script>
+</body>
+</html>
