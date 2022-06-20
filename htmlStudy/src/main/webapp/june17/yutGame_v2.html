@@ -33,40 +33,17 @@
 
 <script type="text/javascript">
 function doGame() {
-	one();	
+	one(100);	
 }
 function rnd(){
 	var r = parseInt(Math.random()*2);
 	return r;
 }
-function one() {
-	var c1 = rnd();
-	var c2 = rnd();
-	var c3 = rnd();
-	var c4 = rnd();
-	var g1 = rnd();
-	var g2 = rnd();
-	var g3 = rnd();
-	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
-	document.getElementById("Cyut1").src = cImg1;
-	document.getElementById("Cyut2").src = cImg2;
-	document.getElementById("Cyut3").src = cImg3;
-	document.getElementById("Cyut4").src = cImg4;
-	document.getElementById("Gyut1").src = gImg1;
-	document.getElementById("Gyut2").src = gImg2;
-	document.getElementById("Gyut3").src = gImg3;
-	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(two, 200);
+function makeImg(num){
+	return "../june14/img/yut_"+num+".png"
+	
 }
-function two() {
+function one(time) {
 	var c1 = rnd();
 	var c2 = rnd();
 	var c3 = rnd();
@@ -75,14 +52,14 @@ function two() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -91,9 +68,9 @@ function two() {
 	document.getElementById("Gyut2").src = gImg2;
 	document.getElementById("Gyut3").src = gImg3;
 	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(three, 200);
+	window.setTimeout(two, time, time);
 }
-function three() {
+function two(time) {
 	var c1 = rnd();
 	var c2 = rnd();
 	var c3 = rnd();
@@ -102,14 +79,14 @@ function three() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -118,9 +95,9 @@ function three() {
 	document.getElementById("Gyut2").src = gImg2;
 	document.getElementById("Gyut3").src = gImg3;
 	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(four, 200);
+	window.setTimeout(three, time, time);
 }
-function four() {
+function three(time) {
 	var c1 = rnd();
 	var c2 = rnd();
 	var c3 = rnd();
@@ -129,14 +106,14 @@ function four() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -145,9 +122,9 @@ function four() {
 	document.getElementById("Gyut2").src = gImg2;
 	document.getElementById("Gyut3").src = gImg3;
 	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(five, 200);
+	window.setTimeout(four, time, time);
 }
-function five() {
+function four(time) {
 	var c1 = rnd();
 	var c2 = rnd();
 	var c3 = rnd();
@@ -156,14 +133,14 @@ function five() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -172,9 +149,9 @@ function five() {
 	document.getElementById("Gyut2").src = gImg2;
 	document.getElementById("Gyut3").src = gImg3;
 	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(six, 200);
+	window.setTimeout(five, time, time);
 }
-function six() {
+function five(time) {
 	var c1 = rnd();
 	var c2 = rnd();
 	var c3 = rnd();
@@ -183,14 +160,14 @@ function six() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -199,7 +176,34 @@ function six() {
 	document.getElementById("Gyut2").src = gImg2;
 	document.getElementById("Gyut3").src = gImg3;
 	document.getElementById("Gyut4").src = gImg4;
-	window.setTimeout(doIt, 200);
+	window.setTimeout(six, time, time);
+}
+function six(time) {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(doIt, time);
 }
 function doIt() {
 	var c1 = rnd();
@@ -210,14 +214,14 @@ function doIt() {
 	var g2 = rnd();
 	var g3 = rnd();
 	var g4 = rnd();
-	var cImg1 = "../june14/img/yut_"+c1+".png";
-	var cImg2 = "../june14/img/yut_"+c2+".png";
-	var cImg3 = "../june14/img/yut_"+c3+".png";
-	var cImg4 = "../june14/img/yut_"+c4+".png";
-	var gImg1 = "../june14/img/yut_"+g1+".png";
-	var gImg2 = "../june14/img/yut_"+g2+".png";
-	var gImg3 = "../june14/img/yut_"+g3+".png";
-	var gImg4 = "../june14/img/yut_"+g4+".png";
+	var cImg1 = makeImg(c1);
+	var cImg2 = makeImg(c2);
+	var cImg3 = makeImg(c3);
+	var cImg4 = makeImg(c4);
+	var gImg1 = makeImg(g1);
+	var gImg2 = makeImg(g2);
+	var gImg3 = makeImg(g3);
+	var gImg4 = makeImg(g4);
 	document.getElementById("Cyut1").src = cImg1;
 	document.getElementById("Cyut2").src = cImg2;
 	document.getElementById("Cyut3").src = cImg3;
@@ -234,17 +238,17 @@ function doResult(c,g) {
 	var cResult = "";
 	var gResult = "";
 	
-	if(c=0){cResult="윷"}
-	else if(c=1){cResult="걸"}
-	else if(c=2){cResult="개"}
-	else if(c=3){cResult="도"}
-	else if(c=4){cResult="모"}
+	if(c==0){cResult="윷"}
+	else if(c==1){cResult="걸"}
+	else if(c==2){cResult="개"}
+	else if(c==3){cResult="도"}
+	else if(c==4){cResult="모"}
 	
-	if(g=0){gResult="윷"}
-	else if(g=1){gResult="걸"}
-	else if(g=2){gResult="개"}
-	else if(g=3){gResult="도"}
-	else if(g=4){gResult="모"}
+	if(g==0){gResult="윷"}
+	else if(g==1){gResult="걸"}
+	else if(g==2){gResult="개"}
+	else if(g==3){gResult="도"}
+	else if(g==4){gResult="모"}
 	
 	document.getElementById("computer").innerHTML = "컴퓨터 : " + cResult;
 	document.getElementById("gamer").innerHTML = "플레이어 : " + gResult;
