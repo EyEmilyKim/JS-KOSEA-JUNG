@@ -4,19 +4,256 @@
 <meta charset="UTF-8">
 <title>yutGame_v2</title>
 <!-- yutGame1.0 is in ../june14 -->
+<style type="text/css">
+#main { background-color:skyblue; }
+#btn { width:200px; height:50px; font-size:20px; margin:50px auto;}
+#target { margin-bottom:50px; }
+</style>
 </head>
 <body>
-<div align="center">
+<div align="center" id="main">
 	<div><h2>둘이 하는 윷 게임 ver2.0</h2></div>
-	<div id="gamer"></div>
 	<div>
-		<img alt="" src="" id="yut1">
-		<img alt="" src="" id="yut2">
-		<img alt="" src="" id="yut3">
-		<img alt="" src="" id="yut4">
-
-	
+		<img alt="" src="../june14/img/yut_0.png" id="Cyut1">
+		<img alt="" src="../june14/img/yut_1.png" id="Cyut2">
+		<img alt="" src="../june14/img/yut_0.png" id="Cyut3">
+		<img alt="" src="../june14/img/yut_1.png" id="Cyut4">
+	</div>
+	<div id="computer">컴퓨터</div>
+	<input type="button" value="게임시작" onClick="doGame()" id="btn">
+	<div id="target">이곳에 승패가 나타납니다</div>
+	<div id="gamer">플레이어</div>
+	<div>
+		<img alt="" src="../june14/img/yut_0.png" id="Gyut1">
+		<img alt="" src="../june14/img/yut_1.png" id="Gyut2">
+		<img alt="" src="../june14/img/yut_0.png" id="Gyut3">
+		<img alt="" src="../june14/img/yut_1.png" id="Gyut4">
 	</div>
 </div>
+
+<script type="text/javascript">
+function doGame() {
+	one();	
+}
+function rnd(){
+	var r = parseInt(Math.random()*2);
+	return r;
+}
+function one() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(two, 200);
+}
+function two() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(three, 200);
+}
+function three() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(four, 200);
+}
+function four() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(five, 200);
+}
+function five() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(six, 200);
+}
+function six() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	window.setTimeout(doIt, 200);
+}
+function doIt() {
+	var c1 = rnd();
+	var c2 = rnd();
+	var c3 = rnd();
+	var c4 = rnd();
+	var g1 = rnd();
+	var g2 = rnd();
+	var g3 = rnd();
+	var g4 = rnd();
+	var cImg1 = "../june14/img/yut_"+c1+".png";
+	var cImg2 = "../june14/img/yut_"+c2+".png";
+	var cImg3 = "../june14/img/yut_"+c3+".png";
+	var cImg4 = "../june14/img/yut_"+c4+".png";
+	var gImg1 = "../june14/img/yut_"+g1+".png";
+	var gImg2 = "../june14/img/yut_"+g2+".png";
+	var gImg3 = "../june14/img/yut_"+g3+".png";
+	var gImg4 = "../june14/img/yut_"+g4+".png";
+	document.getElementById("Cyut1").src = cImg1;
+	document.getElementById("Cyut2").src = cImg2;
+	document.getElementById("Cyut3").src = cImg3;
+	document.getElementById("Cyut4").src = cImg4;
+	document.getElementById("Gyut1").src = gImg1;
+	document.getElementById("Gyut2").src = gImg2;
+	document.getElementById("Gyut3").src = gImg3;
+	document.getElementById("Gyut4").src = gImg4;
+	var cSum = c1 + c2 + c3 + c4;
+	var gSum = g1 + g2 + g3 + g4;
+	doResult(cSum, gSum);
+}
+function doResult(c,g) {
+	var cResult = "";
+	var gResult = "";
+	
+	if(c=0){cResult="윷"}
+	else if(c=1){cResult="걸"}
+	else if(c=2){cResult="개"}
+	else if(c=3){cResult="도"}
+	else if(c=4){cResult="모"}
+	
+	if(g=0){gResult="윷"}
+	else if(g=1){gResult="걸"}
+	else if(g=2){gResult="개"}
+	else if(g=3){gResult="도"}
+	else if(g=4){gResult="모"}
+	
+	document.getElementById("computer").innerHTML = "컴퓨터 : " + cResult;
+	document.getElementById("gamer").innerHTML = "플레이어 : " + gResult;
+	doJudge(c,g);
+}
+function doJudge(c,g){
+	var judge = "<h3>";
+	
+}
+</script>
 </body>
 </html>
