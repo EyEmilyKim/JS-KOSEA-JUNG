@@ -63,32 +63,29 @@ function doGame(){
 	var sumG = rnd5 + rnd6 + rnd7 + rnd8;
 	
 	var htmlC = "<h3>";
-	if(sumC == 0) {
-		htmlC = htmlC + "윷!!!</h3>";
-	}else if(sumC == 1){ htmlC = htmlC + "걸!!!</h3>"; 
-	}else if(sumC == 2){ htmlC = htmlC + "개!!!</h3>"; 
-	}else if(sumC == 3){ htmlC = htmlC + "도!!!</h3>"; 
-	}else if(sumC == 4){ htmlC = htmlC + "모!!!</h3>";
-	}
+	if(sumC == 0){ htmlC = htmlC + "윷!!!</h3>"; }
+	else if(sumC == 1){ htmlC = htmlC + "걸!!!</h3>"; }
+	else if(sumC == 2){ htmlC = htmlC + "개!!!</h3>"; }
+	else if(sumC == 3){ htmlC = htmlC + "도!!!</h3>"; }
+	else if(sumC == 4){ htmlC = htmlC + "모!!!</h3>"; }
 	document.getElementById("resultC").innerHTML = htmlC;
 	
 	var htmlG = "<h3>";
-	if(sumG == 0) {
-		htmlG = htmlG + "윷!!!</h3>";
-	}else if(sumG == 1){ htmlG = htmlG + "걸!!!</h3>"; 
-	}else if(sumG == 2){ htmlG = htmlG + "개!!!</h3>"; 
-	}else if(sumG == 3){ htmlG = htmlG + "도!!!</h3>"; 
-	}else if(sumG == 4){ htmlG = htmlG + "모!!!</h3>";
-	}
+	if(sumG == 0){ htmlG = htmlG + "윷!!!</h3>";	}
+	else if(sumG == 1){ htmlG = htmlG + "걸!!!</h3>"; }
+	else if(sumG == 2){ htmlG = htmlG + "개!!!</h3>"; }
+	else if(sumG == 3){ htmlG = htmlG + "도!!!</h3>"; }
+	else if(sumG == 4){ htmlG = htmlG + "모!!!</h3>"; }
 	document.getElementById("resultG").innerHTML = htmlG;
-
-	doJudge();
+	
+	doJudge(sumC, sumG);
 }
-function doJudge(){
+function doJudge(sumC,sumG){
 	var htmlJ = "<h2>";
 	if(sumG == 4) {//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
 		if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";}
-		else { htmlJ = htmlJ + "You Win</h2>";}
+		else { htmlJ = htmlJ + "You Win</h2>"; }
+	}
 	else if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";
 	}else if(sumG < sumC){ htmlJ = htmlJ + "You Win</h2>";
 	}else { htmlJ = htmlJ + "You Lose</h2>";
