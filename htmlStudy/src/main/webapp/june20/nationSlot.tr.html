@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slotGame</title>
+</head>
+<body>
+<div align="center">
+<h2>슬롯 게임에 오신 것을 환영합니다~</h2>
+<h3>숫자 세 개가 모두 일치하면 당첨 !</h3>
+<img alt="" src="../june16/img/canada.png" id="slot1" width="200" height="200">
+<img alt="" src="../june16/img/china.png" id="slot2" width="200" height="200">
+<img alt="" src="../june16/img/germany.png" id="slot3" width="200" height="200">
+<br><div id="result"></div><br>
+<input type="button" value="시 작" onClick="doGame()">
+</div>
+<script type="text/javascript">
+function doGame() {
+	makeSlot1(100);
+}
+function zeroEight(){
+	return parseInt(Math.random()*9);//0~8
+}
+function makeImage(number){
+	var name = "../june16/img/";
+	if(number == 0){ name = name+"canada.png";}
+	else if(number == 1){ name = name+"china.png";}
+	else if(number == 2){ name = name+"germany.png";}
+	else if(number == 3){ name = name+"south_korea.png";}
+	else if(number == 4){ name = name+"japan.png";}
+	else if(number == 5){ name = name+"russia.png";}
+	else if(number == 6){ name = name+"european_union.png";}
+	else if(number == 7){ name = name+"united_kingdom.png";}
+	else if(number == 8){ name = name+"usa.png";}
+	return name;
+}
+function makeSlot1(time){
+	var r1 = zeroEight();//난수1-> 첫번째 이미지
+	var r2 = zeroEight();//난수2-> 두번째 이미지
+	var r3 = zeroEight();//난수3-> 세번째 이미지
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeSlot2,time,time)//마지막time은 makeSlot2로 전달해주는 time
+}
+function makeSlot2(time){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeSlot3,time,time)	
+}
+function makeSlot3(time){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeSlot4,time,time)	
+}
+function makeSlot4(time){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeSlot5,time,time)	
+}
+function makeSlot5(time){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeSlot6,time,time)	
+}
+function makeSlot6(time){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	window.setTimeout(makeWinner,time);
+}
+function makeWinner(){
+	var r1 = zeroEight();
+	var r2 = zeroEight();
+	var r3 = zeroEight();
+	var r1Image = makeImage(r1);
+	var r2Image = makeImage(r2);
+	var r3Image = makeImage(r3);
+	document.getElementById("slot1").src = r1Image;
+	document.getElementById("slot2").src = r2Image;
+	document.getElementById("slot3").src = r3Image;
+	var html = "<font color='red'>";
+	if(r1 == r2){
+		if(r2 == r3){ html = html + "축하합니다~ 빙고 !!!</font>";}
+		else { html = html + "다음 기회에...</font>";}
+	}else { html = html + "다음 기회에...</font>";	}
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
