@@ -89,7 +89,7 @@ function doJudge(){
 	if(sumG == 4) {//Gamer가 모(4) 인 경우, 무승부 빼고 다 이김
 		if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";}
 		else { htmlJ = htmlJ + "You Win</h2>";}
-	}else if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";
+	else if(sumG == sumC){ htmlJ = htmlJ + "Draw</h2>";
 	}else if(sumG < sumC){ htmlJ = htmlJ + "You Win</h2>";
 	}else { htmlJ = htmlJ + "You Lose</h2>";
 	}
