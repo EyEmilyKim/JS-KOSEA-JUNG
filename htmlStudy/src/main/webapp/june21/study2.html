@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+var strr = new String("문자열");
+var str = "http://java.sun.com/INDEX.jsp";
+document.write("문자열 : "+ str +"<br/>"); //http://java.sun.com/INDEX.jsp
+var length = str.length;
+document.write("문자열의 길이 : "+ length +"<br/>"); //29
+var strAt5 = str.charAt(5);
+document.write("여섯번째 문자 : "+ strAt5 +"<br/>"); // /
+var index = str.indexOf("/"); //이 문자의 위치가 앞에서 몇번째인지.
+document.write("문자열에서 /의 위치 : "+ index +"<br/><br/>"); //5
+/////////////////////////////////////
+
+var afterIndex = str.indexOf("/",index+1);//두번째 인자: 찾기 시작할 위치
+document.write("두번째 /의 위치 : "+ afterIndex +"<br/>"); //6
+var lastSlash = str.lastIndexOf("/");//마지막 /가 앞에서 몇번째인지
+document.write("뒤에서 부터 /의 위치 : "+ lastSlash +"<br/>"); //19
+var lastSlash = str.lastIndexOf("a");//마지막 a가 앞에서 몇번째인지
+document.write("*test*뒤에서 부터 /의 위치 : "+ lastSlash +"<br/>"); //10
+var str04 = str.substring(0,4);// 0은 포함 4는 포함하지 않음->첫번째부터 다섯번째 "앞"까지. 0자리에서부터 4개까지 잘라라.
+document.write("첫번째 문자에서 네번째 문자까지 : "+ str04 +"<br/>"); //http
+var str711 = str.substring(7,11);//8번째부터 11개째까지 잘라라
+document.write("8째 문자에서 11번째 문자까지 : "+ str711 +"<br/>"); //java
+var str20 = str.substring(20);//21번째부터 끝까지.
+document.write("21번째 문자에서 끝까지 : "+ str20 +"<br/><br/>"); //INDEX.jsp
+////////////////////////////////////////
+
+var upper = str20.toUpperCase();//대문자로 변환
+document.write("파일이름을 대문자로 : "+ upper +"<br/>"); //INDEX.JSP
+var lower = str20.toLowerCase();//소문자로 변환
+document.write("파일이름을 소문자로 : "+ lower +"<br/>"); //index.jsp
+var start = str.indexOf("://");
+var end = str.indexOf("/",start+3); 
+var domain = str.substring(start+3, end);
+document.write("도메인 이름 : "+ domain +"<br/>"); //java.sun.com
+
+
+</script>
+</body>
+</html>
