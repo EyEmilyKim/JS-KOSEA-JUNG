@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>reload</title>
+</head>
+<body onload="showRand()">
+<script type="text/javascript">
+function showRand(){
+	var html = "";//시작에서 type 문자열로 선택. 뒤에 나오는 숫자도 문자열 취급, +로 나열.
+	html = html + rnd() + rnd() + rnd() + rnd() + rnd();
+	document.getElementById("temp").innerHTML = html;	
+}
+function rnd(){
+	return parseInt(Math.random()*10);
+}
+</script>
+당신의 임시 암호는 <div id="temp"></div>입니다. <br/><br/>
+<input type="button" value="다시 받기" onClick="showRand()"/>
+<input type="button" value="닫기" onClick="window.close()"/>	
+</body>
+</html>
