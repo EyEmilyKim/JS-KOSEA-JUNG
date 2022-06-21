@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>wordStar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fascinate&family=League+Gothic&display=swap" rel="stylesheet">
+<style type="text/css">
+table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
+#result {font-family: "궁서체"; font-size:40px; color:red;}
+</style>
+</head>
+
+<body>
+<div align="center">
+<h2>단어 맞추기 ver1.0</h2>
+<div id="word"></div>
+<form action="" name="frm">
+<h3>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></h3>
+<input type="button" value="결과 보기" onClick="doMatch()"/>
+</form>
+<div id="result"></div>
+</div>
+
+<script type="text/javascript">
+ var word1 = "sentence";
+ var word2 = "statement";
+ var word3 = "seven";
+ var word4 = "continent";
+ var quiz ="";//게임에서 사용할 단어가 저장될 변수 선언
+ var rnd = parseInt(Math.random()*4);//0~3까지의 난수 생성
+ if(rnd == 0) quiz = word1;
+ else if(rnd == 1) quiz = word2;
+ else if(rnd == 2) quiz = word3;
+ else if(rnd == 3) quiz = word4;
+ quiz = quiz.toUpperCase();//대문자로 변환
+ var quizLength = quiz.length;//문자열의 길이 획득
+ var html = "<table border='1'><tr height='100px'>";
+ for(var cnt=0; cnt < quizLength; cnt++){
+	 html = html + "<td width='100px' id='"+cnt+"' ";
+	 html = html + "align='center'>";
+	 html = html + "<input type='button' value='누르세요' ";
+	 html = html + "onClick='doIt("+cnt+")' /></td>";
+ }//반복문
+ html = html + "</tr></table>";
+ document.write(quiz);//임시 표기
+ document.write(quizLength);//임시 표기
+ document.getElementById("word").innerHTML = html;
+ function doIt(col){
+	 document.getElementById(col).innerHTML = 
+		 quiz.substring(col, col+1);
+ }
+ function doMatch(){
+	var guess = document.frm.WORD.value;
+	guess = guess.toUpperCase();//대문자로 바꾼다
+	if(guess == quiz){
+		document.getElementById("result").innerHTML="정답!"	
+	}else {
+		document.getElementById("result").innerHTML="땡~~ 다음 기회에!"
+	}
+ }
+</script>
+</body>
+</html>
