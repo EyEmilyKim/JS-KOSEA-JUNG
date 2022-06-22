@@ -42,8 +42,8 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 	 html = html + "onClick='doIt("+cnt+")' /></td>";
  }//반복문
  html = html + "</tr></table>";
- document.write(quiz);//임시 표기
- document.write(quizLength);//임시 표기
+	 document.write(quiz);//임시 표기
+	 document.write(quizLength);//임시 표기
  document.getElementById("word").innerHTML = html;
  function doIt(col){
 	 document.getElementById(col).innerHTML = 
@@ -53,9 +53,9 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 	var guess = document.frm.WORD.value;
 	guess = guess.toUpperCase();//대문자로 바꾼다
 	if(guess == quiz){
-		document.getElementById("result").innerHTML="정답!"	
+		document.getElementById("result").innerHTML="정답!";	
 	}else {
-		document.getElementById("result").innerHTML="땡~~ 다음 기회에!"
+		document.getElementById("result").innerHTML="땡~~ 다음 기회에!";
 	}
  }
 </script>
