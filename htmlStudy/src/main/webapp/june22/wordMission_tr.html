@@ -15,8 +15,13 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 <h2>단어 맞추기 ver1.0</h2>
 <div id="word"></div>
 <form action="" name="frm">
-<h3>분야(1.나라이름, 2.음식이름, 3.꽃이름) 중 하나를 입력하고 확인 버튼을 누르세요.
-<input type="text" size="3" name="GENRE"/></h3>
+<h3>분야(1.나라이름, 2.음식이름, 3.꽃이름) 중 하나를 선택하고 확인 버튼을 누르세요.
+<select name="GENRE">
+	<option value="1">---선택하세요---</option>
+	<option value="2">나라 이름</option>
+	<option value="3">음식 이름</option>
+	<option value="4">꽃 이름</option>
+</select></h3>
 <input type="button" value="확 인" onClick="doGenre()"/><br/>
 
 <h3>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></h3>
@@ -26,14 +31,18 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 </div>
 
 <script type="text/javascript">
+var quiz ="";//게임에서 사용할 단어가 저장될 변수 선언
 function doGenre(){
-	var choice = document.frm.GENRE.value;
-	// input 값 에러처리 일단 생략하고..
+	var choice = document.frm.GENRE.selectedIndex;
 	var choiceInt = parseInt(choice);
 	var word1 = "";
 	var word2 = "";
 	var word3 = "";
 	var word4 = "";
+	if(choiceInt == 0){//선택하세요를 선택한 경우
+		alert("분야를 선택해야 합니다.");
+		return; //void함수 doGenre()를 종료하는 방법
+	}
 	if(choiceInt == 1){//1.나라이름 맞추기
 		word1="korea";
 		word2="argentina";
@@ -50,7 +59,7 @@ function doGenre(){
 		word3="lilly";
 		word4="sakura";
 	}
-	var quiz ="";//게임에서 사용할 단어가 저장될 변수 선언
+	
 	var rnd = parseInt(Math.random()*4);//0~3까지의 난수 생성
 	if(rnd == 0) quiz = word1;
 	else if(rnd == 1) quiz = word2;
@@ -71,7 +80,6 @@ function doGenre(){
 		document.write(quizLength);//임시 표기 */
 	document.getElementById("word").innerHTML = html;
 }
- 
 function doIt(col){
 	document.getElementById(col).innerHTML = 
 		quiz.substring(col, col+1);
