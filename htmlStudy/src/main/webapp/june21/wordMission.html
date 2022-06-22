@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>wordMission</title>
+<link href="https://fonts.googleapis.com/css2?family=Fascinate&family=League+Gothic&display=swap" rel="stylesheet">
+<style type="text/css">
+table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
+#result {font-family: "궁서체"; font-size:40px; color:red;}
+</style>
 </head>
 <body>
 <div align="center">
@@ -13,7 +18,7 @@
 		<input type="button" value="제출" onClick="doGame()"><br/><br/>
 		</form>
 	<div id="word"></div>
-	<div>연상되는 단어를 입력하세요</div> 
+	<div><br/>연상되는 단어를 입력하세요</div> 
 	<form action="">
 	<input type="text" name="WORD">
 	<input type="button" value="결과보기" onClick="doMatch()"><br/><br/>
@@ -22,6 +27,7 @@
 </div>
 
 <script type="text/javascript">
+
 function doGame(){
 	var word1 = "southkorea";
 	var word2 = "newzealand";
@@ -40,7 +46,7 @@ function doGame(){
 	if(pick==1){R = parseInt(Math.random()*4+1);}//THEME 1일 때 난수 1~4
 	else if(pick==2){R = parseInt(Math.random()*4+5);}//THEME 1일 때 난수 5~8
 	else if(pick==3){R = parseInt(Math.random()*4+9)}//THEME 1일 때 난수 9~12
-	
+
 	var quiz = "";
 	if(R==1){quiz = word1;}
 	else if(R==2){quiz = word2;}
@@ -58,19 +64,20 @@ function doGame(){
 	var html = "<table border='1'><tr height='100'>";
 	var leng = quiz.length;
 	for(var cnt=0 ; cnt < leng ; cnt++) {
-		html = html + "<td align='center' width='100' id='col'>";
+		html = html + "<td align='center' width='100' id='"+cnt+"'>";
 		html = html + "<input type='button' value='CLICK' ";
-		html = html + "onClick='showWord("+cnt+")'/></td>";
+		html = html + "onClick=showWord("+cnt+",'"+quiz+"') /></td>";
 	}
 		html = html + "</tr></table>";
 	document.getElementById("word").innerHTML = html;
+}
+function showWord(t,q){
 	
-
-	
+	document.getElementById(t).innerHTML = q.substring(t,t+1);
 }
 
-
-/* 에러 코드 : function pickWord(){
+/* 에러 코드 : 문자열로 return된 값이 변수명과 연계 안됨.
+	function pickWord(){
 	var pick = document.frm1.THEME.value;
 	var R ="";
 	// THEME 입력 검증 기능 추가하기
