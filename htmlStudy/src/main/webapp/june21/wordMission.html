@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fascinate&family=League+Gothic&display=swap" rel="stylesheet">
 <style type="text/css">
 table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
-#result {font-family: "궁서체"; font-size:40px; color:red;}
+#target {font-family: "궁서체"; font-size:40px; color:red;}
 </style>
 </head>
 <body>
@@ -19,15 +19,15 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 		</form>
 	<div id="word"></div>
 	<div><br/>연상되는 단어를 입력하세요</div> 
-	<form action="">
-	<input type="text" name="WORD">
+	<form action="" name="frm2">
+	<input type="text" name="GUESS">
 	<input type="button" value="결과보기" onClick="doMatch()"><br/><br/>
 	</form>
-	<div>RESULT</div>
+	<div id="target"></div>
 </div>
 
 <script type="text/javascript">
-
+var quiz = "";
 function doGame(){
 	var word1 = "southkorea";
 	var word2 = "newzealand";
@@ -47,7 +47,7 @@ function doGame(){
 	else if(pick==2){R = parseInt(Math.random()*4+5);}//THEME 1일 때 난수 5~8
 	else if(pick==3){R = parseInt(Math.random()*4+9)}//THEME 1일 때 난수 9~12
 
-	var quiz = "";
+
 	if(R==1){quiz = word1;}
 	else if(R==2){quiz = word2;}
 	else if(R==3){quiz = word3;}
@@ -60,6 +60,7 @@ function doGame(){
 	else if(R==10){quiz = word10;}
 	else if(R==11){quiz = word11;}
 	else if(R==12){quiz = word12;}
+	quiz = quiz.toUpperCase();
 	
 	var html = "<table border='1'><tr height='100'>";
 	var leng = quiz.length;
@@ -71,9 +72,16 @@ function doGame(){
 		html = html + "</tr></table>";
 	document.getElementById("word").innerHTML = html;
 }
-function showWord(t,q){
-	
+function showWord(t,q){//2번째 인자 없이 그냥 광역변수 quiz를 사용해도 됨. 
 	document.getElementById(t).innerHTML = q.substring(t,t+1);
+}
+function doMatch(){
+	var guess = document.frm2.GUESS.value;
+	guess = guess.toUpperCase();
+	var result = "";
+	if(guess == quiz){ result = "정답!"; }
+	else{ result = "땡~~ 다음 기회에.."; }
+	document.getElementById("target").innerHTML = result;
 }
 
 /* 에러 코드 : 문자열로 return된 값이 변수명과 연계 안됨.
