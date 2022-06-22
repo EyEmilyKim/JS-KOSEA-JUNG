@@ -28,10 +28,12 @@ table {font-family: 'Fascinate', cursive; font-size:40px; color:blue;}
 <input type="button" value="결과 보기" onClick="doMatch()"/>
 </form>
 <div id="result"></div>
+<img alt="" src="" id="COUNT">
 </div>
 
 <script type="text/javascript">
 var quiz ="";//게임에서 사용할 단어가 저장될 변수 선언
+var flag = false;//정답일 때 true 로 바꾼다.
 function doGenre(){
 	var choice = document.frm.GENRE.selectedIndex;
 	var choiceInt = parseInt(choice);
@@ -79,15 +81,116 @@ function doGenre(){
 		document.write(quiz);//임시 표기
 		document.write(quizLength);//임시 표기 */
 	document.getElementById("word").innerHTML = html;
+	startCountDown();
+}//doGenre()함수의 끝
+function startCountDown(){
+	window.setTimeout(count9,1000);
+}
+function count9(){//숫자9 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/9.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count8,1000);	
+}
+function count8(){//숫자8 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/8.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count7,1000);	
+}
+function count7(){//숫자7 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/7.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count6,1000);	
+}
+function count6(){//숫자6 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/6.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count5,1000);	
+}
+function count5(){//숫자5 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/5.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count4,1000);	
+}
+function count4(){//숫자4 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/4.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count3,1000);	
+}
+function count3(){//숫자3 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/3.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count2,1000);	
+}
+function count2(){//숫자2 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/2.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count1,1000);	
+}
+function count1(){//숫자1 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/1.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	if(flag){
+		alert("You Win!");
+		return;
+	}
+	window.setTimeout(count0,1000);	
+}
+function count0(){//숫자0 이미지를 보여준다. >june16/img
+	document.getElementById("COUNT").src = "../june16/img/0.png";
+	document.getElementById("COUNT").width = "100";
+	document.getElementById("COUNT").height = "100";
+	alert("You Lise!");
 }
 function doIt(col){
 	document.getElementById(col).innerHTML = 
 		quiz.substring(col, col+1);
-}
+}//doIt()함수의 끝
 function doMatch(){
 	var guess = document.frm.WORD.value;
 	guess = guess.toUpperCase();//대문자로 바꾼다
 	if(guess == quiz){
+		flag = true;
 		document.getElementById("result").innerHTML="정답!";	
 	}else {
 		document.getElementById("result").innerHTML="땡~~ 다음 기회에!";
