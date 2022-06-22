@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+</head>
+<body>
+<div id="word">TABLE</div>
+<table border='1'><tr><td><input type='button' value='CLICK' onClick='showWord()'></td></tr></table>;
+<div><input type="button" value="ㅎㅎ" onClick="showQuiz()"></a></div>
+<script type="text/javascript">
+function showQuiz(){
+	var quiz = "tulip";
+	var html = "<table border='1'><tr>";
+	var leng = quiz.length;
+	
+	for(t=0 ; t<leng ; t++){
+		html = html + "<td><input type='button' value='CLICK' onClick='showWord()'></td>"
+	}
+	html = html + "</tr></table>";
+	document.getElementByID("word").innerHTML = html;
+}
+</script>
+</body>
+</html>
