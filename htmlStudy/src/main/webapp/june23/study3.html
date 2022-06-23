@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+</head>
+<body>
+<div id="target"></div>
+<input type="button" value="확인2" onClick="doDo('대한민국')"/>
+<script type="text/javascript">
+var html = "<input type='button' value='확인1'onClick='doIt(\"대한민국\")' />"; 
+document.getElementById("target").innerHTML = html;
+function doIt(data){alert(data);}
+function doDo(data){alert(data);}
+</script>
+</body>
+</html>
