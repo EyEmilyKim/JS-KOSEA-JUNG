@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>tax</title>
+</head>
+<body>
+<form action="" name="frm">
+<h2>세금 계산 CAL-TAX♡</h2>
+<h3><br/>당신의 소득<u>(단위:N만원)</u>을 입력하세요</h3>
+<h4>입력시 반드시 숫자로!</h4>
+<input type="text" name="GAIN">
+<input type="button" value="확인" onClick="calTax()"/>
+<input type="reset" value="취소"/>
+</form><br/>
+<div id="result">이곳에 결과가 출력됩니다</div>
+
+<script type="text/javascript">
+function calTax(){
+	var income = document.frm.GAIN.value;
+	if(isNaN(income)){alert("소득액(단위:N만원)을 숫자로 입력해주세요.");return;}
+	var incomeInt = parseInt(income);
+	var rate = ""; 
+	var tax = "";
+	switch(parseInt(incomeInt/1000)){
+	/* 소득이 2천만원 미만이면 : 소득의 15 % 
+	소득이 4천만원 미만이면 : 소득의 20 % 
+	소득이 6천만원 미만이면 : 소득의 30 % 
+	소득이 8천만원 미만이면 : 소득의 40 % 
+	그 이상이면 : 소득의 55 % */
+	case 0:
+	case 1: rate = 15; tax = incomeInt*rate/100 ; break;
+	case 2: 
+	case 3: rate = 20; tax = incomeInt*rate/100 ;  break;
+	case 4:
+	case 5: rate = 30; tax = incomeInt*rate/100 ;  break;
+	case 6:
+	case 7: rate = 40; tax = incomeInt*rate/100 ;  break;
+	default: rate = 55; tax = incomeInt*rate/100 ;  break;
+	}
+	var html = "당신의 세금은 ";
+	html = html + tax +"만원 입니다.</br>";
+	html = html + "적용된 세율은 " + rate + "%입니다.";
+	document.getElementById("result").innerHTML = html
+}
+</script>
+</body>
+</html>
