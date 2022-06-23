@@ -10,11 +10,26 @@
 <form action="" name="fm">
 원하시는 달을 입력하세요. <input type="text" name="MON" size="2"/><br/>
 	<div id="result">이곳에 출력됩니다.</div>
-	<input type="button" value="확인" onClick="check()"/>
+	<input type="button" value="확인(switch)" onClick="check()"/>
+	<input type="button" value="확인(if)" onClick="check2()"/>
 	<input type="reset" value="취소"/>
 </form>
 </div>
 <script type="text/javascript">
+function check2(){
+	var mon = document.fm.MON.value;
+	var monInt = parseInt(mon);
+	var result = "";
+	// 논리연산자는 왼쪽부터 차례차례 이항연산을 해서 진행하므로 결과적으로 if( )안에 조건식을 여러개 줄 수도 있다. 
+	if(monInt==4 || monInt==6 || monInt==9 || monInt==11){
+		result = "30일";
+	}else if(monInt == 2){
+		result = "28일";
+	}else {
+		result = "31일";
+	}
+	document.getElementById("result").innerHTML=result;
+}
 function check(){
 	var mon = document.fm.MON.value;
 	var monInt = parseInt(mon);
