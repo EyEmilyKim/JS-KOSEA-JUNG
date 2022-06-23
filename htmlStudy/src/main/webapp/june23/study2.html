@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<div align="center">
+<h2>입력한 달의 날짜 수를 출력</h2>
+<form action="" name="fm">
+원하시는 달을 입력하세요. <input type="text" name="MON" size="2"/><br/>
+	<div id="result">이곳에 출력됩니다.</div>
+	<input type="button" value="확인" onClick="check()"/>
+	<input type="reset" value="취소"/>
+</form>
+</div>
+<script type="text/javascript">
+function check(){
+	var mon = document.fm.MON.value;
+	var monInt = parseInt(mon);
+	//1월:31, 2월:28, 3월:31, 4월:30, 5월:31, 6월:30
+	//7월:31, 8월:31, 9월:30, 10월:31, 11월:30, 12월:31
+	//31일- 달(1,3,5,7,8,10,12)
+	//30일- 달(4,6,9,11)
+	//나머지- 달(2)
+	var result = "";
+	switch(monInt){
+	/* 단순하게 모든 달을 나열하면 아래와 같다. 
+	case 1: result="31일"; break;
+	case 2: result="28일"; break;
+	case 3: result="31일"; break;
+	case 4: result="30일"; break;
+	case 5: result="31일"; break;
+	case 6: result="30일"; break;
+	case 7: result="31일"; break;
+	case 8: result="31일"; break;
+	case 9: result="30일"; break;
+	case 10: result="31일"; break;
+	case 11: result="30일"; break;
+	case 12: result="31일"; break;
+	이것을 좀 더 효율적으로 표현하자면 아래처럼 작성 가능.
+	 */
+	case 2: result="28일"; break;
+	case 4: 
+	case 6: 
+	case 9: 
+	case 11: result="30일"; break;
+	default: result="31일"; break;	
+	}
+	document.getElementById("result").innerHTML=result;
+}
+</script>
+</body>
+</html>
