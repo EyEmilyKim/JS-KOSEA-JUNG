@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<h2>두번째 비교문(switch case)</h2>
+<form action="" name="fm">
+<h3>당신의 점수를 입력하세요 <input type="text" name="SCORE" size="2"/></h3>
+	<input type="button" value="확 인" onClick="check()"/>
+	<input type="reset" value="취 소"/>
+	<div id="result">이곳에 결과가 출력됩니다.</div>
+</form>
+<script type="text/javascript">
+
+var jumsu = prompt("당신의 점수를 입력하세요.");
+var jumsuInt = parseInt(jumsu);//100,90,80...
+switch(parseInt(jumsuInt)/10){
+case 10: alert("당신은 A학점 입니다."); break;
+case 9: alert("당신은 A학점 입니다."); break;
+case 8: alert("당신은 B학점 입니다."); break;
+case 7: alert("당신은 C학점 입니다."); break;
+case 6: alert("당신은 D학점 입니다."); break;
+default: alert("당신은 재수강 입니다."); break;
+}
+
+function check(){
+	var score = document.fm.SCORE.value;
+	var scoreInt = parseInt(score);
+	var html ="<font color='red'>";
+	if(score >= 90){ html = "당신은 A학점 입니다.";
+	}else if(score >= 80){ html = html + "당신은 B학점 입니다.";
+	}else if(score >= 70){ html = html + "당신은 C학점 입니다.";
+	}else if(score >= 60){ html = html + "당신은 D학점 입니다.";
+	}else {	html = "당신은 재수강 입니다.";}
+	html = html + "</font>";
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
