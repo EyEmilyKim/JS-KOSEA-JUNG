@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1.me</title>
+</head>
+<body>
+<div align="center">
+<h2>큰 수 찾 기</h2>
+<form action="" name="frm">
+첫번째 수 <input type="text" size="4" name="NUM1"/>,
+두번째 수 <input type="text" size="4" name="NUM2"/>,
+세번째 수 <input type="text" size="4" name="NUM3"/><br/>
+버튼을 누르면 가장 큰 수가 출력됩니다. (단, 서로 다른 수 입력)<br/>
+<input type="button" value="큰 수 찾 기" onClick="findMax()"/>
+<input type="reset" value="취 소"/>
+</form>
+<div id="result"><br/>이곳에 결과가 출력됩니다.</div>
+<script type="text/javascript">
+function findMax(){
+	var n1 = document.frm.NUM1.value;
+	var n2 = document.frm.NUM2.value;
+	var n3 = document.frm.NUM3.value;
+	var np1 = parseInt(n1);
+	var np2 = parseInt(n2);
+	var np3 = parseInt(n3);
+	var MAX = 0;
+	if((np1>np2)&&(np1>np3)){MAX=np1;}
+	else if((np1>np2)&&(np1<np3)&&(np2>np3)){MAX=np2;}
+	else if((np1>np2)&&(np1<np3)&&(np2<np3)){MAX=np3;}
+	else if((np2>np1)&&(np1>np3)){MAX=np2;}
+	else if((np2>np1)&&(np1<np3)&&(np2>np3)){MAX=np2;}
+	else if((np2>np1)&&(np1<np3)&&(np2<np3)){MAX=np3;}
+			
+	var html = "<br/><font color='red'>입력된 값은 "+n1+", "+n2+", "+n3+" 입니다."; 
+	html = html + "<br/>그 중 가장 큰 수는 "+MAX+"입니다.</font>";
+	document.getElementById("result").innerHTML=html;
+}
+</script>
+</div>
+</body>
+</html>
+
+
+
+
+

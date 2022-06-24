@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<div align="center">
+<h2>큰 수 찾 기</h2>
+<form action="" name="frm">
+첫번째 수 <input type="text" size="4" name="NUM1"/>,
+두번째 수 <input type="text" size="4" name="NUM2"/>,
+세번째 수 <input type="text" size="4" name="NUM3"/><br/>
+버튼을 누르면 가장 큰 수가 출력됩니다. (단, 서로 다른 수 입력)<br/>
+<input type="button" value="큰 수 찾 기" onClick="findMax()"/>
+<input type="reset" value="취 소"/>
+</form>
+<div id="target"><br/>이곳에 결과가 출력됩니다.</div>
+</div>
+<script type="text/javascript">
+function findMax(){
+	var su1 = parseInt(document.frm.NUM1.value);
+	var su2 = parseInt(document.frm.NUM2.value);
+	var su3 = parseInt(document.frm.NUM3.value);
+	var max = 0;
+	if((su1>su2)&&(su1>su3)){max=su1;}
+	else if((su2>su1)&&(su2>su3)){max=su2;}
+	else{ max = su3; }
+	/* if(su1 > su2){
+		if(su1 > su3){
+			max = su1;//su1이 제일 큰 값
+		}else {
+			max = su3;//su3이 제일 큰 값
+		}
+	}else {//su1 < su2
+		if(su2 > su3){
+			max = su2;//su2가 제일 큰 값
+		}else {
+			max = su3;//su3이 제일 큰 값
+		}
+	} */
+	var html = "<font color='red'>"+max+"</font>";
+	document.getElementById("target").innerHTML = html;
+}
+</script>
+</div>
+</body>
+</html>
+
+
+
+
+
