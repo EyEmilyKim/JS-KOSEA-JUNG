@@ -49,6 +49,7 @@ function doGame(){
 			var html="<h3>"
 			if(gamerInt == com){
 				html = html + "무승부!</h3>";
+			/* [refactor]2022.06.24금 논리연산자를 이용해 복잡한 if문을 간결하게 정리하기 
 			}else if(gamerInt == 1){//게이머가 가위인 경우
 				if(com == 3){
 					html = html + "게이머 승 !</h3>"
@@ -64,9 +65,12 @@ function doGame(){
 			}else if(gamerInt == 3){//게이머가 보인 경우
 				if(com == 2){
 					html = html + "게이머 승!</h3>"
-				}else {
-					html = html + "컴퓨터 승!</h3>"
-				}
+				} */
+			}else if((gamerInt == 1 && com == 3)||
+					(gamerInt == 2 && com == 1)||(gamerInt == 3 && com == 2)){
+				html = html + "게이머 승!</h3>" ;
+			}else {
+				html = html + "컴퓨터 승!</h3>"
 			}
 			document.getElementById("result").innerHTML=html;
 		}//if의 끝
