@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>tax_tr</title>
 </head>
 <body>
 
@@ -10,10 +10,11 @@
 <h2>세금 계산 APP ver1.0</h2>
 <form action="" name="board">
 소득을 입력하고 버튼을 누르면 세금이 계산됩니다.
-<input type="text" name="SALARY" size="3"/><br/>
+<input type="text" name="SALARY" size="3"/>만원<br/>
 계산된 세금 : <span id="result">이곳에 출력됩니다.</span>
 <br/><br/>
-<input type="button" value="계산하기" onClick="doTax()"/>
+<input type="button" value="계산하기(switch)" onClick="doTax()"/>
+<input type="button" value="계산하기(if)" onClick="doTaxIf()"/>
 <input type="reset" value="취 소"/>
 </form>
 </div>
@@ -25,9 +26,50 @@ function doTax(){
 		var salaryInt = parseInt(salary);
 		if(salaryInt <= 0){ alert("소득은 0보다 커야 합니다.");}
 		else{//본격적인 세금 계산을 여기서 한다.
-			
+			var tax = doTaxSwitch(salaryInt);
+			var html = "<font color='red'>" + tax + "만원</font>";
+			document.getElementById("result").innerHTML = html;
 		}
 	}
+}
+function doTaxSwitch(income){//세금 계산
+	/* 소득이 2천만원 미만이면 : 소득의 15 % 
+	소득이 4천만원 미만이면 : 소득의 20 % 
+	소득이 6천만원 미만이면 : 소득의 30 % 
+	소득이 8천만원 미만이면 : 소득의 40 % 
+	그 이상이면 : 소득의 55 % */
+	var tax = 0;
+	switch(parseInt(income/2000)){
+	case 0: tax = income * 0.15; alert("세율은 15%입니다."); break;
+	case 1: tax = income * 0.20; alert("세율은 20%입니다."); break;
+	case 2: tax = income * 0.30; alert("세율은 30%입니다."); break;
+	case 3: tax = income * 0.40; alert("세율은 40%입니다."); break;
+	default: tax = income * 0.55; alert("세율은 55%입니다."); break;
+	}
+	//var html = "<font color='red'>" + tax + "만원</font>";
+	//document.getElementById("result").innerHTML = html;
+	return tax;
+}
+function doTaxIf(){
+	var salary = document.board.SALARY.value;
+	if(isNaN(salary)){ alert("소득은 숫자로 입력해야 합니다."); }
+	else{
+		var salaryInt = parseInt(salary);
+		if(salaryInt <= 0){ alert("소득은 0보다 커야 합니다.");}
+		else{//본격적인 세금 계산을 여기서 한다.
+			calcTaxIf(salaryInt);
+		}
+	}
+}
+function calcTaxIf(salary){
+	var tax = 0;
+	if(salary < 2000){tax = income * 0.15; alert("세율은 15%입니다."); }
+	else if(salary < 4000){ tax = salary * 0.20; alert("세율은 20%입니다."); }
+	else if(salary < 6000){ tax = salary * 0.30; alert("세율은 30%입니다."); }
+	else if(salary < 8000){ tax = salary * 0.40; alert("세율은 40%입니다."); }
+	else{ tax = salary * 0.55; alert("세율은 55%입니다."); }
+	var html = "<font color='red'>"+tax+"만원</font>";
+	document.getElementById("result").innerHTML = html;
 }
 </script>
 </body>
