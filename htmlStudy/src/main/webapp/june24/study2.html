@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <title>study2</title>
 <style type="text/css">
-table { border-collapse:collapse; <!--테이블의 경계를 합치는 CSS--> }
-th, td{ border-color:red; border-style:solid; padding:20px; background-color:skyblue; border-radius:30px; }
+table { border-collapse:collapse; } <!--테이블의 경계를 합치는 CSS-->
+th, td{ border-color:red; border-style:solid; padding:20px; background-color:skyblue; border-radius:20px; }
 </style>
 </head>
 <body>
@@ -22,7 +22,7 @@ th, td{ border-color:red; border-style:solid; padding:20px; background-color:sky
 <input type="button" value="만들기" onClick="doTable()"/>
 <input type="reset" value="취 소"/>
 </form>
-<div id="target"><br/>이곳에 출력됩니다.</div>
+<br/><div id="target">이곳에 출력됩니다.</div>
 <!-- <table><tr><td></td><td></td></tr><tr><td></td><td></td></tr></table> -->
 </div>
 <script type="text/javascript">
@@ -40,10 +40,13 @@ function makeTableFor(row,col){
 	var html = "<table>"; 
 	for( var cnt=1 ; cnt <= row ; cnt++ ){
 		html = html + "<tr>";
-			//열을 반복한다.
+			for( var i=1; i <= col ; i++ ){//열을 반복한다.
+				html = html + "<td>"+cnt+","+i+"</td>";
+			}
 		html = html + "</tr>";
 	}//행을 반복한다.
 	html = html + "</table>";
+	document.getElementById("target").innerHTML = html;
 }
 function makeTableWhile(row,col){
 	
