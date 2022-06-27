@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+<style type="text/css">
+.tree { line-height:0.4em; font-size:42px; color:green; }
+</style>
+</head>
+<body>
+<div class="tree" align="center">
+	<div id="tree1"></div> 
+	<div id="tree2"></div> 
+
+	<h3>높이가 10, 잎사귀의 개수 홀수</h3>
+	<div id="tree3"></div> 
+	<h3>높이가 10, 잎사귀의 개수 짝수</h3>
+	<div id="tree4"></div> 
+</div>
+
+<script type="text/javascript">
+/* tree1 그리기 */
+var html = "";
+for(var nopi=1; nopi<=10; nopi++){//높이 반복(1~10)
+	for(var star=1; star<=nopi; star++){//잎사귀 반복 (높1:잎1, 높2:잎2 .... 높10:잎10)
+		html = html + "*";
+	}
+	html = html + "</br>";
+} 
+document.getElementById("tree1").innerHTML = html;
+
+/* tree2 그리기 */
+html = "<br/>";
+for(var nopi=10; nopi>=1; nopi--){ //높이10(1,2...10)(10,9...1)
+	for(star=1; star<=nopi; star++){
+		html = html + "*";
+	}
+	html = html + "<br/>"
+}
+document.getElementById("tree2").innerHTML = html;
+
+/* tree3 그리기: 높이가 10, 잎사귀의 개수 홀수 */
+ html = "<br/>";
+ for(var nopi=1; nopi<=10; nopi=nopi+2){
+	 for(var star=1; star<=nopi; star=star+1){
+		 html = html + "*";
+	 }
+	 html = html + "<br/>";
+ }
+ document.getElementById("tree3").innerHTML = html;
+ 
+</script>
+</body>
+</html>
