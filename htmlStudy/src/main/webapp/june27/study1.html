@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+<style type="text/css">
+table { margin:10px; }
+span { background-color: skyblue;}
+</style>
+</head>
+<body>
+<div align="center">
+	<div id="gugudan1">이곳에 출력됩니다.</div><br/>
+	<div id="gugudan2">짝수 구구단 (2,4,6,8)</div><br/>
+	<div id="gugudan3">홀수 구구단 (1,3,5,7,9)</div><br/>
+	
+	<h2><span>행에 제목이 있는 구구단</span></h2>
+	<div id="gugudan4"></div></br>
+	
+	<h2><span>열에 제목이 있는 구구단</span></h2>
+	<div id="gugudan5"></div></br>
+	<h3>열에 제목이 있는 짝수 구구단</h3>
+	<div id="gugudan6"></div></br>
+	<h3>열에 제목이 있는 홀수 구구단</h3>
+	<div id="gugudan7"></div></br>
+	
+</div>
+<script type="text/javascript">
+/* 기본 구구단 */
+var html = "<h2>구구단 1단~9단(1)</h2>";
+html = html + "<table border='1'>";
+for(var dan=1; dan<10; dan++){//단 반복(1~9)
+	html = html + "<tr>";
+	for(var su=1; su<10; su++){//수 반복(1~9)
+		html = html + "<td>" +dan +"*" +su +"=" +(dan*su) +"</td>";
+	}
+	html = html + "</tr>";
+}
+html = html + "</table>";
+document.getElementById("gugudan1").innerHTML = html;
+
+/* 짝수 구구단 */
+var html2 = "<h3>짝수 구구단 (2,4,6,8단)</h3>";
+html2 = html2 + "<table border='1'>";
+for(var dan=2; dan<10; dan=dan+2){
+	html2 = html2 + "<tr>";
+	for(var su=1; su<10; su++){
+		html2 = html2 + "<td>" +dan +"*" +su +"=" +(dan*su) +"</td>";
+	}
+	html2 = html2 + "</tr>";
+}
+html2 = html2 + "</table>";
+document.getElementById("gugudan2").innerHTML = html2;
+
+/* 홀수 구구단 */
+var html3 = "<h3>홀수 구구단 (1,3,5,7,9단)</h3>";
+html3 = html3 + "<table border='1'>";
+for(var dan=1; dan<10; dan=dan+2){
+	html3 = html3 + "<tr>";
+	for(var su=1; su<10; su++){
+		html3 = html3 + "<td>" +dan +"*" +su +"=" +(dan*su) +"</td>";
+	}
+	html3 = html3 + "</tr>";
+}
+html3 = html3 + "</table>";
+document.getElementById("gugudan3").innerHTML = html3;
+
+//// 제목이 있는 구구단 ////
+html = "<table border='1'>"; 
+for(var dan=1; dan<10; dan++){
+	html = html + "<tr><td colspan='9' align='center'>" +dan +"단</td></tr><tr>";
+	for(var su=1; su<10; su++){
+		html = html + "<td>" +dan +"*" +su +"=" +(dan*su) +"</td>";
+	}
+	html = html + "</tr>";
+}
+html = html + "</table>";
+document.getElementById("gugudan4").innerHTML = html;
+
+//// 열에 제목이 있는 구구단 ////
+html = "<table border='1'>";
+for(var dan=0; dan<10; dan++){//행 반복(10회)
+	html = html + "<tr>";
+	for(var su=1; su<10; su++){//수 반복(1~9)
+		if(dan == 0){
+			html = html + "<td>" +su +"단</td>";
+		}else{
+			html = html + "<td>" +su +"*" +dan +"=" +(dan*su) +"</td>";
+		}
+	}
+	html = html + "</tr>";
+}
+html = html + "</table>";
+document.getElementById("gugudan5").innerHTML = html;
+
+/* 열에 제목이 있는 짝수 구구단 */
+html = "<table border='1'>";
+for(var dan=0; dan<10; dan++){
+	html = html + "<tr>";
+	for(var su=2; su<10; su=su+2){
+		if(dan == 0){//첫번째 행인 경우 제목 표시
+			html = html + "<td>" +su +"단</td>";
+		}else {
+			html = html + "<td>" +su +"*" +dan +"=" +(su*dan) +"</td>"
+		}
+	}
+	html = html + "</tr>";
+}
+html = html + "</table>";
+document.getElementById("gugudan6").innerHTML = html;
+
+/* 열에 제목이 있는 홀수 구구단 */
+html = "<table border='1'>";
+for(var dan=0; dan<10; dan++){
+	html = html + "<tr>";
+	for(var su=1; su<10; su=su+2){
+		if(dan == 0){
+			html = html + "<td>" +su +"단</td>";	
+		}else {
+			html = html + "<td>" +su +"*" +dan +"=" +(dan*su) +"</td>";
+		}
+	}
+	html = html + "</tr>";
+}
+html = html + "</table>";
+document.getElementById("gugudan7").innerHTML = html;
+</script>
+</body>
+</html>
