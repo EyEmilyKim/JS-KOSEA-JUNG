@@ -40,28 +40,50 @@ for(var nopi=10; nopi>=1; nopi--){ //높이10(1,2...10)(10,9...1)
 document.getElementById("tree2").innerHTML = html;
 
 /* tree3 그리기: 높이가 10, 잎사귀의 개수 홀수(1,3,5,7,....19)  */
- html3 = "";
- for(var nopi=0; nopi<10; nopi++){
-	 if(nopi == 0){
-		 html3 = html3 + "*";
-	 }else{
-	 	for(var star=1; star<=nopi; star++){
-	 		html3 = html3 + "**";
-	 	}
-	 }
-	 html3 = html3 + "<br/>";
- }
- document.getElementById("tree3").innerHTML = html3;
+//↓ 선생님이 짠 코드
+html = "";
+for(var nopi=1; nopi<=19; nopi=nopi+2){//10회 반복(1~19)
+	for(var star=1; star<=nopi; star++){
+		html = html + "*";
+	}
+	html = html + "<br/>";
+}
+document.getElementById("tree3").innerHTML = html;
+
+// // ↓ 내가 짠 코드 (의도와 다르게 나오는 원인 이해했음!!)
+//  html3 = "";
+//  for(var nopi=0; nopi<10; nopi++){
+// 	 if(nopi == 0){
+// 		 html3 = html3 + "*";
+// 	 }else{
+// 	 	for(var star=1; star<=nopi; star++){
+// 	 		html3 = html3 + "**";
+// 	 	}
+// 	 }
+// 	 html3 = html3 + "<br/>";
+//  }
+//  document.getElementById("tree3").innerHTML = html3;
  
  /* tree4 그리기: 높이가 10, 잎사귀의 개수 짝수(2,4,6,8,.....20) */
- html4 = "";
- for(var nopi=1; nopi<=10; nopi=nopi+1){
-	 for(var star=1; star<=nopi; star=star+1){
-		 html4 = html4 + "**";
-	 }
-	 html4 = html4 + "<br/>";
- }
- document.getElementById("tree4").innerHTML = html4;
+//↓ 선생님이 짠 코드
+html = "<br/>";
+for(var nopi=2; nopi<=20; nopi=nopi+2 ){//10회 반복(2~20)
+	for(var star=1; star<=nopi; star++){
+		html = html + "*";
+	}
+	html = html+"<br/>"
+}
+document.getElementById("tree4").innerHTML = html;
+
+//↓ 내가 짠 코드
+//  html4 = "";
+//  for(var nopi=1; nopi<=10; nopi=nopi+1){
+// 	 for(var star=1; star<=nopi; star=star+1){
+// 		 html4 = html4 + "**";
+// 	 }
+// 	 html4 = html4 + "<br/>";
+//  }
+//  document.getElementById("tree4").innerHTML = html4;
 </script>
 </body>
 </html>
