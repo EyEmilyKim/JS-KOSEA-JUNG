@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<h2>반복문과 함께 사용하는 명령어 - break, continue</h2>
+<h3>break</h3>
+
+<h3></h3>
+
+<script type="text/javascript">
+for(var cnt=1; cnt<11; cnt++){//1~10까지 반복하도록 설계
+	document.write("<font size='5'>"+ cnt + "</font>");
+	if(cnt == 5) break; //5에서 break 명령(반복종료)
+	document.write("<br/>");	
+}
+document.write("<br/><br/>");
+
+for(var cnt=1; cnt<11; cnt++){//1~10까지 반복하도록 설계
+	document.write("<font size='5'>"+ cnt + "</font>");
+	if(cnt == 5) continue; 
+	//↑ 5에서 continue 명령(현재 반복 skip: 
+	//	continue 밑에 있는 명령을 실행하지 않고 다시 반복을 처음부터 실행)
+	document.write("<br/>");
+}
+</script>
+</body>
+</html>
