@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+</head>
+<body>
+<script type="text/javascript">
+for(;;){//무한반복
+	var msg = "***종합관리 시스템 ver1.0***\n";
+	msg = msg + "1. 인사관리\n2. 자재관리\n3. 급여관리\n";
+	msg = msg + "9. 종료";
+	var input = parseInt(prompt(msg));
+// 	if(input == 1) alert("인사관리 시스템 실행");
+// 	else if(input == 2) alert("자재관리 시스템 실행");
+// 	else if(input == 3) alert("급여관리 시스템 실행");
+// 	else if(input == 9) {
+// 		alert("이용해주셔서 감사합니다."); break;
+// 	}
+// 	else alert("잘못 입력했습니다.");	
+
+//위 if문으로 쓴 코드를 switch case를 사용하면 아래와 같다.
+//단 break 사용법을 주의하자.
+	var exit = false; //종료를 위한 변수 설정
+	switch(input){
+	case 1: alert("인사관리 시스템 실행"); break; //여기서의 break들은 반복문 종료 break가 아닌 case종료 break이다.
+	case 2: alert("자재관리 시스템 실행"); break;
+	case 3: alert("급여관리 시스템 실행"); break;
+	case 9: alert("이용해주셔서 감사합니다."); 
+			exit = true;
+			break;
+	default: alert("잘못 입력했습니다.");	
+	}
+	if(exit == true) break;//이 break에 의해서 무한반복 종료
+}
+</script>
+</body>
+</html>
