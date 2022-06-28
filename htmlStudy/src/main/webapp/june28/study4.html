@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study4</title>
+</head>
+<body>
+<div align="center">
+	<h3>스무고개 게임</h3>
+	<p>컴퓨터가 1부터 99까지의 수 중 하나를 가지고 있습니다.<br/>이 수를 게이머가 5회 안에 맞추면 승리, 맞추지 못하면 패배가 됩니다.</p>
+	<input type="button" value="게임시작(유한반복)" onClick="guessNum1()"/>
+	<input type="button" value="게임시작(무한반복)" onClick="guessNum2()"/>
+</div>
+<script type="text/javascript">
+/* 유한반복 버젼 */
+function guessNum1() {
+	var luckyNum = parseInt(Math.random()*99+1);
+	alert("행운의 수 : "+ luckyNum);//임시 출력
+	var winner = false;//false:실패, true:정답
+	for(var cnt=0; cnt<5; cnt++){//유한반복 : 5회
+		alert("*** "+ (cnt+1) +"회차 시도입니다. ***");
+		var input = prompt("1~99 사이의 수를 입력하세요.");
+		if(isNaN(input)){
+			alert("숫자로 입력 해야합니다. (1~99 사이의 값)"); 
+			cnt--; continue;//만약 문자를 입력한 경우 게임이 진행 되지 않도록 함(continue 이하 반복내용 skip).
+							//=> 다음 반복으로 되돌아가되, 카운트가 올라가지 않도록 해줌(cnt--).
+		}
+		//↓여기서 부터 본격 게임 시작
+		var inputInt = parseInt(input);
+		if(inputInt == luckyNum){//맞춘 경우
+			alert("브라보! 정답입니다!");
+			winner = true;//반복문 밖에서 성공여부 확인에 쓰일 변수
+			break;//반복 중지
+		}else if(inputInt > luckyNum){//넣은 값이 큰 경우
+			alert("입력한 수가 정답보다 큽니다. Down!")
+		}else {//작은 경우
+			alert("입력한 수가 정답보다 작습니다. Up!")	
+		}
+	}//5회 반복후 종료
+	//↓반복이 끝난 후 성공여부 확인하여 출력
+	if(winner) {
+// 		var win = "게임이 종료되었습니다.\n" +(cnt+1) +"회차에 성공\n 당신의 승리!!";
+// 		alert(win);	
+	alert(" '게임이 종료되었습니다.\n' +(cnt+1)+ '회차에 성공\n 당신의 승리!!' ");
+	}
+	else alert("5회 이내에 맞추지 못했습니다. 다음 기회에...ㅠㅠ");
+}
+
+/* 무한반복 버젼 */
+function guessNum2(){
+	var luckyNum = parseInt(Math.random()*99+1);
+	alert("행운의 수 : "+ luckyNum);//임시 출력
+	var count = 1;
+	var winner = false;//false:실패, true:정답
+	for(;;){
+		alert(count +"번째 시도입니다.");
+		var input = prompt("1~99 사이의 수를 입력하세요.");
+		if(isNaN(input)){
+			alert("숫자로 입력해야 합니다. (1~99 사이의 값)");
+			continue;
+		}
+		var inputInt = parseInt(input);
+		if(inputInt == luckyNum){
+			alert("브라보! 정답입니다!");
+			winner = true;//반복문 밖에서 성공여부 확인에 쓰일 변수
+			break;//반복 중지
+		}else if(inputInt > luckyNum){
+			alert("입력한 수가 정답보다 큽니다. Down!")
+		}else {//if(inputInt > luckyNum)의 경우
+			alert("입력한 수가 정답보다 작습니다. Up!")	
+		}
+		if(count == 5) break;//5회 시도 후 무한반복 종료
+		count++;
+	}//무한반복
+	if(winner)
+		alert(" 게임이 종료되었습니다. 당신의 승리!! ");
+	else
+		alert("5회 이내에 맞추지 못했습니다. 다음 기회에...ㅠㅠ");
+}
+
+</script>
+</body>
+</html>
