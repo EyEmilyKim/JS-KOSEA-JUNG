@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+<style type="text/css">
+.tree { line-height:0.4em; font-size:40px; color:lightgreen; }
+</style>
+</head>
+<body>
+<div class="tree">
+	<div id="tree1"></div>
+	<div id="tree2"></div>
+</div>
+<script type="text/javascript">
+/* 공백을 이용해 우측정렬처럼 보이는 일반 나무 */
+var html = "";
+for(var nopi=1; nopi<=10; nopi++){//높이 반복(10회: 1,2,3,....9,10)
+	for(var space=1 ; space <= (10-nopi); space++){//공백 반복(9~0개)
+		html = html + "_"; //여기서 잠깐! 그냥" "공백은 css설정이 안먹히기 때문에 대신"_"를 사용한다.
+	}
+	for(var star=1; star<=nopi; star++){//별표 반복(1~10개)
+		html = html + "*";	
+	}
+	html = html + "<br/>";
+}
+document.getElementById("tree1").innerHTML = html;
+
+/* 아래로 갈수록 잎사귀 개수가 줄어드는 나무 */
+html = "<br/>";
+//↓ 여기 nopi를 1부터 시작해서, space 반복 기준값을 절대값(높이-10)은 못주나?
+for(var nopi=10; nopi>=1; nopi--){//높이 반복(10회: 10,9,....2,1)
+	for(var space=1; space<=(10-nopi); space++){//공백 반복(0,1,2,....,9) //10-높이
+		html = html + "_";
+	}
+	for(var star=1; star<=nopi; star++){//별표 반복(1~10개)
+		html = html + "*";
+	}
+	html = html + "<br/>";
+}
+document.getElementById("tree2").innerHTML = html;
+</script>
+</body>
+</html>
