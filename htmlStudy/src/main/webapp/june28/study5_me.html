@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study5_me</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&family=Single+Day&display=swap" rel="stylesheet">
+<style type="text/css">
+#cute { font-family:'Single Day', cursive; font-size:30px;}
+#brd { font-family:'Single Day', cursive; font-size:20px;}
+</style>
+</head>
+<body>
+<div id="cute">
+<h2>입력한 문장을 테이블에 넣기</h2>
+<form action="" name="board">
+	문장을 입력하세요. <input type="text" name="MSG" id="brd"/><br/>
+	테이블의 방향을 선택하세요.<select name="DIR" id="brd">
+		<option value="R">행 우선</option>
+		<option value="C">열 우선</option>
+	</select><br/>
+	사용할 반복문을 선택하세요. <select name="LOOP" id="brd">
+		<option value="F">FOR</option>
+		<option value="W">WHILE</option>
+	</select><br/>
+	거꾸로 출력하기 <input type="checkbox" name="REVERSE" id="brd"/><br/>
+	<br/><input type="button" value="테이블 만들기" onClick="doWork()" id="brd"/><br/>
+</form>
+<br/><div id="result">이곳에 출력 됩니다.</div>
+</div>
+<script type="text/javascript">
+ /* (2-2)행 우선 테이블 */ 
+function makeRowTable(msg, loop, reverse){
+	var length = msg.length;
+	var html = "<table border='1'><tr>";
+	if(loop == "F"){//for 방식
+		if(reverse == 0){//정상 출력
+			for(var c=0; c<=(length-1); c++){
+				html = html + "<td>" +msg.substring(c,c+1) +"</td>";
+			}
+		}else{//거꾸로 출력
+			for(var c=(length-1); c>=0; c--){
+				html = html + "<td>" +msg.substring(c,c+1) +"</td>";
+			}					
+		}
+		html = html + "</tr></table>"
+		document.getElementById("result").innerHTML = html;
+	}
+	if(loop == "W"){//while 방식
+		
+	}
+}
+
+ /* (1)선택한 입력값 판단  */
+function doWork(){
+	var msg = document.board.MSG.value;
+	var dir = document.board.DIR.value;
+	var loop = document.board.LOOP.value;
+	var reverse = document.board.REVERSE.checked;
+	//↑ checked:true, unchecked:false. 요렇게 t/f 두가지 값만 있는 데이터를 boolean데이터라 함.
+	switch(dir){
+	case "R": makeRowTable(msg,loop,reverse); break;
+	case "C": makeColTable(msg,loop,reverse); break;
+	}
+}
+/* (2-1)열 우선 테이블 */
+function makeColTable(m, l, r){//열 우선 테이블
+	var length = m.length;//입력한 문장의 길이를 획득 (글자수 0부터 카운트됨)
+	var html = "<table border='1'>";
+	if(l == "F"){//FOR 방식
+		if(r == true){//거꾸로 출력
+			for(var cnt=(length-1); cnt >=0; cnt--){//끝번째 단어부터 0까지 출력
+				html = html + "<tr>";
+				html = html + "<td>" +m.substring(cnt, cnt+1) +"</td>"
+				html = html + "</tr>";
+			}
+		html = html + "</table>"
+		document.getElementById("result").innerHTML = html;
+		}else {//정상 출력
+			for(var cnt=0; cnt < length; cnt++){
+				html = html + "<tr>";
+				html = html + "<td>" +m.substring(cnt, cnt+1) +"</td>"
+				html = html + "</tr>";
+			}
+		html = html + "</table>"
+		document.getElementById("result").innerHTML = html;
+		}
+	}else if(l == "W"){//WHILE 방식
+		
+	}
+}
+</script>
+</body>
+</html>
