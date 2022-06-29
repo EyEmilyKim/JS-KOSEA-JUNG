@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<script type="text/javascript">
+var result1 = 10 / 3;
+var result2 = 10 % 3;
+var result3 = 15 % 4;
+document.write("10 / 3 = "+ result1 +"<br/>");
+document.write("10 % 3 = "+ result2 +"<br/>");
+document.write("15 % 4 = "+ result3 +"<br/>");
+
+var su = 34;
+if(su % 2 == 0){ alert(su +"는 짝수 입니다."); }
+else{ alert(su +"는 홀수 입니다."); }
+
+//아래 조건은 얼핏 '홀수 찾는 방법'으로 맞을 것 같지만 틀렸다.
+//(su % 2 == 1)는 '홀수 찾는 방법'의 충분조건이 아니다!! su가 음수인 경우 적용이 안됨.
+//따라서, 위의 if(su%2==0){짝수}else{홀수} 방법을 써야한다 !
+if(su % 2 == 1) alert(su +"는 홀수 입니다.2");
+else alert(su +"는 짝수 입니다.2");
+
+//수 358 에서 각 자리 수 3,5,8 추출하기 
+var number = 358;
+var su1 = parseInt(358 / 100);//-->3
+var remainder = number % 100; //58
+var su2 = parseInt(remainder /10);//-->5
+var su3 = number % 10;//-->8
+alert(su1 +", " +su2 +", " +su3);
+</script>
+</body>
+</html>
