@@ -31,9 +31,37 @@ function doWork(){
 	//↑ checked:true, unchecked:false. 요렇게 t/f 두가지 값만 있는 데이터를 boolean데이터라 함.
 	switch(dir){
 	case "R": makeRowTable(msg,loop,reverse); break;
-	case "C": makeColTable(msg,loop,reverse); break;
+	case "C":
+			makeColTable(msg,loop,reverse); break;
 	}
 }
+function makeColTable(msg,loop,reverse){
+	var length = msg.length;//입력한 문장의 길이를 획득
+	var html = "<table border='1'><tr>";
+	
+	switch(loop){
+	case "F":
+		switch(reverse){
+		case true: 
+			for(var cnt=(length-1); cnt>=0; cnt--){
+				html = html+"<td>" + msg.substring(cnt,cnt+1);
+				html = html+"</td>";
+			}
+			break;
+		case false: 
+			for(var cnt=0; cnt<length; cnt++){
+				html = html+"<td>" + msg.substring(cnt,cnt+1);
+				html = html+"</td>";
+			}
+		}
+		break;	
+	case "W":
+	
+	}//switch(loop)의 끝
+	html = html + "</tr></table>";
+	document.getElementById("result").innerHTML = html;
+}
+
 function makeRowTable(m, l, r){//행 우선 테이블
 	var length = m.length;//입력한 문장의 길이를 획득 (글자수 0부터 카운트됨)
 	var html = "<table border='1'>";
@@ -58,9 +86,6 @@ function makeRowTable(m, l, r){//행 우선 테이블
 	}else if(l == "W"){//WHILE 방식
 		
 	}
-}
-function makeColTable(msg, loop, reverse){
-	
 }
 </script>
 </body>
