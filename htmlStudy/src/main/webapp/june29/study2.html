@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<div align="center">
+<h2>복권 당첨 게임</h2>
+원하시는 번호를 두 자리를 입력하고 버튼을 누르세요.<br/>
+<form action="" name="lottery">
+입 력 : <input type = "text" name="INPUT" size="3"/><br/>
+<input type = "button" value="등수 확인" onClick="doIt()"/><br/>
+</form> 
+<div id="result">이곳에 출력됩니다.</div>
+</div>
+<script type="text/javascript">
+function doIt(){
+	var gamer = document.lottery.INPUT.value;
+	//var lucky = parseInt(Math.random()*99+1);
+	var lucky = parseInt(38);
+	var gamerInt = parseInt(gamer);
+	var luckyFront = parseInt(lucky/10);
+	var luckyBack = parseInt(lucky%10);
+	var gamerFront = parseInt(gamerInt/10);
+	var gamerBack = parseInt(gamerInt%10);
+	alert(lucky +" : "+luckyFront +", "+luckyBack);
+	alert(gamerInt +" : "+gamerFront +", "+gamerBack);
+	var html = "<font color='red' size='5'>";
+	if(lucky==gamerInt){ 
+		html = html + "축하합니다!! 1등입니다"; 
+	}else if( (luckyFront==gamerBack) && (luckyBack==gamerFront) ){
+		html = html + "야호~~~ 2등입니다";
+	}else if( (luckyFront==gamerBack)
+			|| (luckyBack==gamerFront)
+			|| (luckyFront==gamerFront)
+			|| (luckyBack==gamerBack) ){
+		html = html + "오올~~ 3등입니다";
+	}else{ 
+		html = html + "에구... 다음 기회에...";
+	}
+	alert(html);
+	html = html + "// 행운의 수 : " +lucky;
+	html = html + "</font>";
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
