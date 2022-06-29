@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+<style type="text/css">
+#kan { width:50px, height:100px; }
+</style>
+</head>
+<body>
+<div>
+<h2>환 전 ver1.0</h2>
+<p>원하시는 금액을 입력하고 버튼을 누르면 환전결과가 출력됩니다.</p>
+<form action="" name="board">
+금 액: <input type="text" name="MONEY" size="4"/><br/>
+환전결과: <input type="text" name="RESULT" id="kan"/><br/><br/>
+<input type="button" value="환전하기" onClick="doIt()" />
+</form>
+</div>
+<script type="text/javascript">
+function doIt(){
+	var money = document.board.MONEY.value;
+	var moneyInt = parseInt(money);
+	//5만원권의 갯수를 찾는다.
+	var oman = parseInt(moneyInt/50000);
+	var namoji = moneyInt % 50000;
+	//1만원권의 갯수를 찾는다.
+	var man = parseInt(namoji/10000);
+	namoji = moneyInt % 10000;
+	//5천원권의 갯수를 찾는다.
+	var ochun = parseInt(namoji/5000);
+	namoji = moneyInt % 5000;
+	//1천원권의 갯수를 찾는다.
+	var chun = parseInt(namoji/1000);
+	namoji = moneyInt % 1000;
+	//5백원권의 갯수를 찾는다.
+	var obaek = parseInt(namoji/500);
+	namoji = moneyInt % 500;
+	//1백원권의 갯수를 찾는다.
+	var baek = parseInt(namoji/100);
+	
+	var html = "";
+	var html = html + "5만원권 : " +oman +"개, \n"
+	var html = html + "1만원권 : " +man +"개, \n"
+	var html = html + "5천원권 : " +ochun +"개, \n"
+	var html = html + "1천원권 : " +chun +"개, \n"
+	var html = html + "5백원권 : " +obaek +"개, \n"
+	var html = html + "1백원권 : " +baek +"개. \n"
+	document.board.RESULT.value = html;
+	alert(html);
+}
+</script>
+</body>
+</html>
