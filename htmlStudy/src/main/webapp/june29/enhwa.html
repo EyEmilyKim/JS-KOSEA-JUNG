@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>enhwa</title>
+</head>
+<body>
+<div>
+<h2>((도전과제)) 엔화 환전 & 지폐 개수 찾기 App</h2>
+<form action="" name="frm">
+<div id="guide">한화 금액을 입력하세요<br/></div> 
+<input type="text" name="WON" size="5">원<br/>
+<div id="guide">적용할 환율을 입력하세요<br/></div>
+100엔 = <input type="text" name="RATE" size="5">원<br/><br/>
+<input type="button" value="환전하기" onClick="doYen()">
+ (2000엔 지폐 포함 <input type="checkbox" name="NISEN">)
+<div id="target1">이곳에 환전 결과가 출력됩니다.</div><br/>
+
+<!-- <input type="button" value="지폐 개수" onClick="doBill(yen)"> -->
+<div id="target2">이곳에 지폐 개수가 출력됩니다.</div><br/>
+ 
+</form>
+</div>
+
+<script type="text/javascript">
+function doYen(){
+	var won = document.frm.WON.value;
+	var wonInt = parseInt(won);
+	var rate = document.frm.RATE.value;
+	var rateInt = parseInt(rate);
+	// won, rate 입력값 확인 기능 필요
+	var yen = parseInt(wonInt / rateInt * 100);
+	document.getElementById("target1").innerHTML = yen + " 엔";
+	doBill(yen);	
+}
+function doBill(yen){
+// 	var yen = parseInt(yen)
+	var check = document.frm.NISEN.checked;
+	if(check){//2천엔 포함
+		var ichiman = parseInt(yen/10000);
+		var nokori = parseInt(yen%10000);
+		var gosen = parseInt(nokori/5000);
+		nokori = parseInt(yen%5000); 
+		var nisen = parseInt(nokori/2000);
+		nokori = parseInt(yen%2000);
+		var sen = parseInt(nokori/1000);
+		nokori = parseInt(yen%1000);//동전 금액
+		
+		var html = "일만 엔 : " +ichiman +" 개<br/>"
+		html = html +"오천 엔 : " +gosen +" 개<br/>"
+		html = html +"이천 엔 : " +nisen +" 개<br/>"
+		html = html +"천 엔 : " +sen +" 개<br/>"
+		html = html +"동전 : " +nokori +" 엔"
+	}else {//2천엔 미포함
+		var ichiman = parseInt(yen/10000);
+		var nokori = parseInt(yen%10000);
+		var gosen = parseInt(nokori/5000);
+		nokori = parseInt(yen%5000); 
+		var sen = parseInt(nokori/1000);
+		nokori = parseInt(yen%1000);//동전 금액
+		
+		var html = "일만 엔 : " +ichiman +" 개<br/>"
+		html = html +"오천 엔 : " +gosen +" 개<br/>"
+		html = html +"천 엔 : " +sen +" 개<br/>"
+		html = html +"동전 : " +nokori +" 엔"
+	}
+	document.getElementById("target2").innerHTML = html;
+}
+</script>
+</body>
+</html>
