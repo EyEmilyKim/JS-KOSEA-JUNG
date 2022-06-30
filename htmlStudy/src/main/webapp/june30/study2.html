@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<script type="text/javascript">
+//문제1. 1~100 중 3의 배수의 합을 계산(For)
+var sum = 0;//합이 저장될 변수 선언
+for(var cnt=3; cnt<100; cnt=cnt+3){// 3,6,9,....99
+	sum = sum + cnt;
+// 	document.write("3의 배수의 합(for) : " +sum +"<br/>");
+}
+document.write("3의 배수의 합(for)_1 : " +sum +"<br/>");
+
+sum = 0;
+for(var cnt=1; cnt<=100; cnt++){//3의 배수를 찾아서 누적
+	if(cnt%3==0) sum = sum + cnt;
+}
+document.write("3의 배수의 합(for)_2 : " +sum +"<br/>");
+
+sum = 0;
+for(var cnt=1; cnt>0; cnt++){//무한반복, 3의 배수를 찾는다. 단, 카운트가 100이면 종료한다.
+	if(cnt%3==0) sum = sum + cnt;
+	if(cnt==100) break;//반복 종료
+}
+document.write("3의 배수의 합(for)_3 : " +sum +"<br/>");
+
+//문제1. 1~100 중 3의 배수의 합을 계산(While)
+sum = 0;
+var count = 3;//3,6,9,...99
+while(count<100){
+	sum = sum + count;
+	count = count + 3;
+}
+document.write("3의 배수의 합(While)_1 : " +sum +"<br/>");
+
+sum = 0;
+count = 0;
+while(count<=96){
+	count = count + 3;
+	sum = sum + count;
+}
+document.write("3의 배수의 합(While)_2 : " +sum +"<br/>");
+
+sum = 0;
+count = 1;
+while(count<100){
+	if(count%3==0) sum = sum + count;
+	count++;
+}
+document.write("3의 배수의 합(While)_3 : " +sum +"<br/>");
+
+sum = 0;
+count = 0;
+while(count<=98){
+	count++
+	if(count%3==0) sum = sum + count;
+}
+document.write("3의 배수의 합(While)_4 : " +sum +"<br/>");
+
+sum = 0;
+count = 1;
+while(true){
+	if(count%3==0) sum = sum + count;
+	if(count == 100) break;//반복 종료
+	count++;
+}
+document.write("3의 배수의 합(While)_5 : " +sum +"<br/>");
+
+sum = 0;
+count = 0;
+while(true){
+	count++
+	if(count%3==0) sum = sum + count;
+	if(count == 100) break;
+}
+document.write("3의 배수의 합(While)_6 : " +sum +"<br/>");
+	
+</script>
+</body>
+</html>
