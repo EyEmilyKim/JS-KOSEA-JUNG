@@ -4,33 +4,65 @@
 <meta charset="UTF-8">
 <title>study3</title>
 </head>
+<h3>주사위 게임 10판 승부!</h3>
+<input type="button" value="For" onClick="doFor()">
+<input type="button" value="While" onClick="doWhile()">
 <body>
+<tr><th></th><th></th><th></th></tr>
 <script type="text/javascript">
-//주사위 게임 10회(for) (1~10)
-var comWin = 0; var gamerWin = 0; var draw = 0;
-var html = "<table border='1'>";
-html = html + "<tr><th>횟수</th><th>게이머 눈금</th><th>컴퓨터 눈금</th></tr>";
-for(var cnt=1; cnt<11; cnt++){
-	html = html + "<tr><td>"+cnt+"</td>";
-	var com = parseInt(Math.random()*6+1);
-	var gamer = parseInt(Math.random()*6+1);
-	html = html + "<td>" +gamer +"</td>";
-	html = html + "<td>" +com +"</td>";
-	if(com == gamer){
-		draw++;
-	}else if(com > gamer){
-		comWin++;
-	}else {
-		gamerWin++;
-	}
-	html = html + "</tr>";
+function doWhile() {
+	var comWin = 0; var gamerWin = 0; var draw = 0;
+	var html = "<table border='1'>";
+	html = "<tr><th> 횟 수 </th><th>컴퓨터 눈금</th><th>게이머 눈금</th></tr>"
+	var cnt = 1;
+	while(cnt<=10){
+		html = html + "<tr><td>" +cnt +"</td>"
+		var com = parseInt(Math.random()*6+1);
+		var gamer = parseInt(Math.random()*6+1);
+		html = html + "<td>" +com +"</td>"
+		html = html + "<td>" +gamer +"</td>"
+		if(com == gamer){ draw++;			
+		}else if(com > gamer){ comWin++;
+		}else{ gamerWin++;
+		}//if 끝
+		html = html + "</tr>"
+		cnt++;	
+	}//while 끝
+	html = html + "</table><br/>"
+	html = html + "게이머 승 : "+ gamerWin +", ";
+	html = html + "컴퓨터 승 : "+ comWin +", ";
+	html = html + "무승부 : "+ draw;
+	document.write(html);
 }
-html = html + "</table><br/>";
-html = html + "<font color='red' size='5'>";
-html = html + "게이머 승 : " +gamerWin;
-html = html + ", 컴퓨터 승 : " +comWin;
-html = html + ", 무승부 : " +draw +"</font>";
-document.write(html);
+
+function doFor() {
+//주사위 게임 10회(for) (1~10)	
+	var comWin = 0; var gamerWin = 0; var draw = 0;
+	var html = "<table border='1'>";
+	html = html + "<tr><th> 횟 수 </th><th>게이머 눈금</th><th>컴퓨터 눈금</th></tr>";
+	for(var cnt=1; cnt<11; cnt++){
+		html = html + "<tr><td>"+cnt+"</td>";
+		var com = parseInt(Math.random()*6+1);
+		var gamer = parseInt(Math.random()*6+1);
+		html = html + "<td>" +gamer +"</td>";
+		html = html + "<td>" +com +"</td>";
+		if(com == gamer){
+			draw++;
+		}else if(com > gamer){
+			comWin++;
+		}else {
+			gamerWin++;
+		}
+		html = html + "</tr>";
+	}
+	html = html + "</table><br/>";
+	html = html + "<font color='red' size='5'>";
+	html = html + "게이머 승 : " +gamerWin;
+	html = html + ", 컴퓨터 승 : " +comWin;
+	html = html + ", 무승부 : " +draw +"</font>";
+	document.write(html);
+}
+
 </script>
 </body>
 </html>
