@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<script type="text/javascript">
+//while을 이용한 구구단 출력
+var dan = 1;
+while(dan<10){//단 반복
+	document.write("*****"+dan+"단*****<br/>");
+	var su = 1;
+	while(su<=9){
+		document.write(dan+"*"+su+"="+(dan*su)+"<br/>");
+		su++;
+	}
+	dan++;
+}
+
+dan = 0;
+while(dan<=8){
+	dan++
+	document.write("===="+dan+"단====<br/>");
+	var su =0;
+	while(su<9){
+		su++;
+		document.write(dan+"*"+su+"="+(dan*su)+"<br/>");
+	}
+}
+</script>
+</body>
+</html>
