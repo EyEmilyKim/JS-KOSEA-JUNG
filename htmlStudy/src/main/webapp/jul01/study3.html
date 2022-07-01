@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+<style type="text/css">
+.tree { line-height:0.4em; font-size:40px; color:blue;}
+</style>
+</head>
+<body>
+<div class="tree" id="target"></div>
+<div class="tree" id="target2"></div>
+<script type="text/javascript">
+//아래로 잎사귀가 많아지는 나무 (높이 10)
+var nopi = 1;
+var html = "";
+while(nopi<=10){//높이 반복
+	var star = 1;
+	while(star<=nopi){//잎사귀 반복
+		html = html + "*";
+		star++;	
+	}
+	html = html + "<br/>";
+	nopi++;
+}
+document.getElementById("target").innerHTML = html ;
+
+//아래로 갈수록 잎사귀가 줄어드는 나무 (높이 10)
+nopi = 10;
+var html = "<br/>";
+while(nopi>=1){
+	var star = 1;
+	while(star<=nopi){
+		html = html + "*";
+		star++;
+	}
+	html = html+"<br/>";
+	nopi--
+}
+document.getElementById("target2").innerHTML = html;
+</script>
+</body>
+</html>
