@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+//1부터 100까지의 합을 do-while
+var sum = 0;//합을 저장하기 위한 변수 선언
+var count =1;
+do{
+	sum = sum + count;
+	count++;
+}while(count<=100);
+document.write("1~100까지 합: "+sum+"<br/>");
+//1부터 100까지 중 짝수의 합을 do-while
+sum = 0;
+count = 2;
+do{
+	sum = sum + count;
+	count = count + 2;
+}while(count <=100);
+document.write("1~100까지 짝수의 합: "+sum+"<br/>");
+//1부터 100까지 중 홀수의 합을 do-while
+sum = 0;
+count = 1;
+do{
+	sum = sum + count;
+	count = count + 2;
+}while(count<100);
+document.write("1~100까지 홀수의 합: "+sum+"<br/>");
+
+</script>
+</body>
+</html>

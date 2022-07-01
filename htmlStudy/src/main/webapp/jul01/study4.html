@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study4</title>
+</head>
+<body>
+<script type="text/javascript">
+//다양한 방법으로 1부터 10까지 출력
+//1)
+var html = "1) <br/><font color='red' size='5'>";
+for(var cnt=1; cnt<11; cnt++){
+	html = html + cnt;
+}
+html = html + "</font><br/>";
+document.write(html+" <br/>");
+//2)
+html = "2) <br/><font color='red' size='5'>";
+var count = 1;
+while(count<=10){
+	html = html + count;
+	count++;
+}
+html = html + "</font><br/>";
+document.write(html+" <br/>");
+//3)
+html = "3) <br/><font color='red' size='5'>";
+var count = 1;
+do{
+	html = html + count;
+	count++;
+}while(count<=10)
+html = html + "</font><br/>";
+document.write(html+" <br/>");	
+//4)
+html = "4) <br/><font color='red' size='5'>";
+count = 0;
+do{
+	html = html + count;
+	count++;
+}while(count<=10);
+html = html + "</font><br/>";
+document.write(html+" <br/>");
+
+</script>
+</body>
+</html>
