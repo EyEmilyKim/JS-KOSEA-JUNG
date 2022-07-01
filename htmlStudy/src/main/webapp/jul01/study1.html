@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<div align="center">
+<h2>원 - 엔 환전</h2>
+<form action="" name="board">
+원화를 입력하시고 버튼을 누르면 엔화로 환전됩니다.<br/>
+원 화 : <input type="text" name="WON" size="10"/><br/>
+환 율 : <input type="text" name="RATE" size="5"/><br/>
+엔 화 : <textarea rows="5" cols="40" name="YEN"></textarea>
+<br/><br/>
+<input type="button" value="환전" onClick="doIt()"/>
+</form>
+</div>
+<script type="text/javascript">
+function doIt(){
+	var won = document.board.WON.value;
+	var rate = document.board.RATE.value;
+	var wonInt = parseInt(won);//정수로 변환
+	var rateFloat = parseFloat(rate);//실수로 변환
+	var yen = parseInt(wonInt * rateFloat);
+	//만엔, 5천엔, 2천엔, 천엔, 5백엔, 백엔 
+	var man = parseInt(yen / 10000);//만엔의 갯수
+	var namoji = yen % 10000;//나머지 계산
+	var ochun = parseInt(namoji / 5000);//5천엔의 갯수
+	namoji = yen % 5000;//나머지 계산
+// 그 다음 이렇게 가고 싶겠지만, 이렇게 하면 2천에서 나눠떨어지면 1천엔이 안나와
+// 	var echun = parseInt(namoji / 2000);//2천엔의 갯수
+// 	namoji = yen % 2000;//나머지 계산
+// 	var chun = parseInt(namoji / 1000);//1천엔의 갯수
+// 따라서 1천엔의 개수를 먼저 찾고 그 몫에서 2천원 갯수를 찾을 수 있다.
+	var chun = parseInt(namoji / 1000);//천엔의 갯수
+	var echun = parseInt(chun / 2);//2천엔의 갯수
+	if(echun > 0) chun = chun -(echun * 2);
+	namoji = yen % 1000;
+	var obaek = parseInt(namoji / 500);//5백엔의 갯수
+	namoji = yen % 500;
+	var baek = parseInt(namoji / 100);//백엔의 갯수
+	var html = "만엔 : " +man +"개, " +"오천엔 : " +ochun +"개, " ;
+	var html = html + "이천엔 : " +echun +"개, " +"천엔 : " +chun +"개, ";
+	var html = html + "오백엔 : " +obaek +"개, " +"백엔 : " +baek +"개";
+	document.board.YEN.value = html;
+}
+</script>
+</body>
+</html>
