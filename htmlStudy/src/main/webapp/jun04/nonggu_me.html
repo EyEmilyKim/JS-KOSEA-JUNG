@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>nonggu_me</title>
+</head>
+<body>
+<div align="center">
+<h2>((도전과제)) 농구 모의 게임</h2>
+<form action="" name="frm">
+방문팀을 입력하세요 <input type="text" name="VISIT" size="8"/><br/>
+홈팀을 입력하세요 <input type="text" name="HOME" size="8"/><br/><br/>
+<input type="button" value="게임 시작" onClick="doGame()"/><br/><br/>
+<div id="result">이곳에 결과가 출력됩니다</div>
+</form>
+</div>
+<script type="text/javascript">
+function doGame() {
+	var visitName = document.frm.VISIT.value;
+	var homeName = document.frm.HOME.value;
+	var visitScore = [];
+	var homeScore = new Array();
+	var visitTotal = 0;
+	var homeTotal = 0;
+	var overTime = false;
+	for(var q=0; q<=4; q++){//4+1쿼터 게임 실행(0~4), 연장전 분기!!   
+		visitScore[q] = rndmScore();
+		homeScore[q] = rndmScore();
+		visitTotal = visitTotal + visitScore[q];
+		homeTotal = homeTotal + homeScore[q];
+		if(q==3){
+			if(visitTotal==homeTotal) continue; overTime=true;
+			else break;
+		}
+	}
+	
+	var html = "<table border='1'><tr><th></th>";
+	for(var q=1; q<=4; q++){//타이틀 라인 표기
+		html = html +"<th>" +q +"쿼터</th>"
+	}
+	html = html + "<th>합계</th></tr>"
+	
+	html = html + "<tr><th>" +visitName +"</th>";//visit 라인 표기 
+	for(var q=0; q<=3; q++){//index0~3까지
+		html = html + "<td>" +visitScore[q] +"</td>";
+	}
+	html = html + "<td>"+ visitTotal +"</td></tr>"
+
+	html = html + "<tr><th>" +homeName +"</th>";//home 라인 표기 
+	for(var q=0; q<=3; q++){//index0~3까지
+		html = html + "<td>" +homeScore[q] +"</td>";
+	}
+	html = html + "<td>"+ homeTotal +"</td></tr></table>"
+	document.getElementById("result").innerHTML = html;
+}
+function rndmScore(){//0~27점 사이 난수값
+	return parseInt(Math.random()*27);
+}
+</script>
+</body>
+</html>
