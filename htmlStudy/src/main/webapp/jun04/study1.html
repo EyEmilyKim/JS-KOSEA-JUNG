@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<h2>자바스크립트의 배열(Array)</h2>
+<script type="text/javascript">
+//문자열  3개를 변수에 저장, 문자열 3개를 배열에 저장
+//문자열 : "우리는", "자바 스크립트를", "공부합니다."
+//1. 개별 변수에 저장
+var str1 = "우리는" ;  var str2 = "자바 스크립트를" ;
+var str3 = "공부합니다.";
+document.write(str1+", "+str2+", "+str3+"<br/>");
+//2. 배열[]에 저장
+//(2-1.데이터가 있는 배열을 생성)
+var msg = ["우리는", "자바 스크립트를","공부합니다."];
+document.write(msg[0]+", "+ msg[1]+", " +msg[2]+"<br/>");
+//(2-2. 배열을 먼저 만들고, 나중에 데이터 넣기)
+var msgg = [];//배열만 생성
+msgg[0] = "우리는"; msgg[1]="자바 스크립트를"; msgg[2]="공부합니다.";
+document.write(msgg[0]+", "+ msgg[1]+", " +msgg[2]+"<br/>");
+//3. 배열을 생성하는 또다른 방법
+//배열은 자바스크립트에서 객체다. (객체 예: document, window, Marh, String..)
+//배열의 객체이름은 Array
+//(3-1. 처음부터 데이터 들어간 new Array() )
+var msggg = new Array("우리는", "자바 스크립트를", "공부합니다.");
+document.write(msggg[0]+", "+ msggg[1]+", " +msggg[2]+"<br/>");
+//(3-2. new Array()만들어놓고, 나중에 데이터 넣기)
+var msgggg = new Array();//배열만 생성
+msgggg[0] = "우리는"; msgggg[1] = "자바 스크립트를"; msgggg[2] = "공부합니다.";  
+document.write(msgggg[0]+", "+ msgggg[1]+", " +msgggg[2]+"<br/>");
+</script>
+</body>
+</html>
