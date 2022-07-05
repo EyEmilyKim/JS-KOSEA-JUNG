@@ -71,10 +71,8 @@ function doGame() {
 	html = html + "<td id='total'>"+ homeTotal +"</td></tr></table>"
 	
 	document.getElementById("result").innerHTML = html;
-// 	doJudge(visitTotal, homeTotal);
 	doJudge(visitTotal, homeTotal, visitName, homeName);
 }
-// function doJudge(v,h){
 function doJudge(v,h, visitName, homeName){
 	var html = "<h2><font color='red'>";
 	html = html + visitName +" " +v +" : " +homeName +" " +h +" <br/> " 
