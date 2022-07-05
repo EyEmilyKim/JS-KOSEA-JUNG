@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<div align="center">
+<h2>로또 번호 생성기</h2>
+<div id="result">이곳에 출력됩니다.</div>
+<input type="button" value="번호 생성" onClick="doLotto()"/>
+</div>
+<script type="text/javascript">
+function doLotto(){
+	var numbers = [];
+	for(var su=0; su<45; su++){//길이 45(index0~44) 배열에 숫자 1~45 넣음
+		numbers[su] = su + 1;
+	}
+	for(var cnt=0; cnt<1000; cnt++){//섞는다. (섞는 횟수는 본인이 적당히 결정..) 1000번 반복.
+		//0번째 값과 난수번째 값을 바꾼다.
+		var imsi = 0;//원래 숫자를 임시저장해둘 목적지 변수
+		imsi = numbers[0];
+		var nansu = rnd();//난수의 범위:0~44(index값이 될꺼니까)
+		numbers[0] = numbers[nansu];
+		numbers[nansu] = imsi;
+	}
+	var html = "<font color='red' size='5'>";
+	for(var index=0; index<6; index++){//무작위로 섞인 45칸 배열에서 앞 6개를 출력
+		html = html + numbers[index]+" ";
+	}
+	html = html + "</font>";
+	//임시표기↓
+	html = html + "<br/><br/>전체 배열 내용: <br/>";
+	for(var index=0; index<45; index++){
+		html = html + numbers[index]+", ";
+	}//↑임시표기
+	document.getElementById("result").innerHTML = html;
+}
+function rnd(){
+	var r = parseInt(Math.random()*45);
+	return r;
+}
+</script>
+</body>
+</html>
