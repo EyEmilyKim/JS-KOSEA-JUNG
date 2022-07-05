@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>nonggu_me</title>
+<style type="text/css">
+#team { background-color:orange; }
+#total { background-color:yellow; }
+</style>
 </head>
 <body>
 <div align="center">
@@ -12,6 +16,7 @@
 홈팀을 입력하세요 <input type="text" name="HOME" size="8"/><br/><br/>
 <input type="button" value="게임 시작" onClick="doGame()"/><br/><br/>
 <div id="result">이곳에 결과가 출력됩니다</div>
+<div id="judge"></div>
 </form>
 </div>
 <script type="text/javascript">
@@ -29,32 +34,61 @@ function doGame() {
 		visitTotal = visitTotal + visitScore[q];
 		homeTotal = homeTotal + homeScore[q];
 		if(q==3){
-			if(visitTotal==homeTotal) continue; overTime=true;
-			else break;
+			if(visitTotal==homeTotal){ overTime = true; continue; }
+			else { break; }
 		}
 	}
-	
+	//↓ 타이틀 라인 표기
 	var html = "<table border='1'><tr><th></th>";
-	for(var q=1; q<=4; q++){//타이틀 라인 표기
-		html = html +"<th>" +q +"쿼터</th>"
+	for(var q=1; q<=5; q++){
+		if(q==5 && overTime==false){
+			break;
+		}else {
+			html = html +"<th>" +q +"쿼터</th>"
+		}
 	}
 	html = html + "<th>합계</th></tr>"
+	//↓ visit 라인 표기
+	html = html + "<tr><th id='team'>" +visitName +"</th>"; 
+	for(var q=0; q<=4; q++){//index0~4까지
+		if(q==4 && overTime==false){
+			break;
+		}else {
+			html = html + "<td>" +visitScore[q] +"</td>";
+		}
+	}
+	html = html + "<td id='total'>"+ visitTotal +"</td></tr>"
+	//↓ home 라인 표기
+	html = html + "<tr><th id='team'>" +homeName +"</th>"; 
+	for(var q=0; q<=4; q++){//index0~4까지
+		if(q==4 && overTime==false){
+			break;
+		}
+		else{
+			html = html + "<td>" +homeScore[q] +"</td>";	
+		}
+	}
+	html = html + "<td id='total'>"+ homeTotal +"</td></tr></table>"
 	
-	html = html + "<tr><th>" +visitName +"</th>";//visit 라인 표기 
-	for(var q=0; q<=3; q++){//index0~3까지
-		html = html + "<td>" +visitScore[q] +"</td>";
-	}
-	html = html + "<td>"+ visitTotal +"</td></tr>"
-
-	html = html + "<tr><th>" +homeName +"</th>";//home 라인 표기 
-	for(var q=0; q<=3; q++){//index0~3까지
-		html = html + "<td>" +homeScore[q] +"</td>";
-	}
-	html = html + "<td>"+ homeTotal +"</td></tr></table>"
 	document.getElementById("result").innerHTML = html;
+// 	doJudge(visitTotal, homeTotal);
+	doJudge(visitTotal, homeTotal, visitName, homeName);
 }
-function rndmScore(){//0~27점 사이 난수값
-	return parseInt(Math.random()*27);
+// function doJudge(v,h){
+function doJudge(v,h, visitName, homeName){
+	var html = "<h2><font color='red'>";
+	html = html + visitName +" " +v +" : " +homeName +" " +h +" <br/> " 
+	if(v==h){
+		html = html + "무승부</font>"	
+	}else if(v>h){
+		html = html + visitName +" 승!!</font>"
+	}else{
+		html = html + homeName +" 승!!</font>"	
+	}
+	document.getElementById("judge").innerHTML = html;
+}
+function rndmScore(){//0~2점 사이 난수값
+	return parseInt(Math.random()*2);
 }
 </script>
 </body>
