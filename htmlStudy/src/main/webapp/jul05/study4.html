@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study4</title>
+<style type="text/css">
+table { color:blue; text-align:center;}
+th { background-color:yellow; }
+</style>
+</head>
+<body>
+<div align="center">
+<h2>여름맞이 이벤트 당첨자 추첨</h2>
+<p>여름맞이 행사에 참석한 참석자가 모두 2482명입니다.<br/>
+참석자 중에 이벤트 당첨자를 추첨합니다. 이벤트 당첨자는 모두 10명입니다.<br/>
+당첨자의 번호를 출력합니다. 단, 참석자는 1번 부터 2482번까지 번호표를 갖습니다.</p>
+<input type="button" value="당첨자 보기" onClick="doWinner()"/><br/><br/>
+<div id="winner">이곳에 출력됩니다.</div>
+</div>
+<script type="text/javascript">
+function doWinner(){
+	var numbers = new Array();
+	for(var su=0; su<2483; su++){//0~2481
+		numbers[su] = (su+1);//1~2482
+	}
+	for(var su=0; su<10000; su++){//10000번 섞음
+		var imsi = numbers[0];
+		var nansu = rnd();
+		numbers[0] = numbers[nansu];
+		numbers[nansu] = imsi;
+	}
+	var html = "<table border='1'><tr><th></th>";
+	for(var su=1; su<=10; su++){
+		html = html + "<th>" +su +"번째</th>";
+	}
+	html = html + "</tr><tr><td>당첨자 번호</td>";
+	for(var su=0; su<10; su++){
+		html = html + "<td>" +numbers[su] +"</td>";	
+	}
+	html = html + "</tr></table>";
+	document.getElementById("winner").innerHTML = html;
+}
+function rnd(){//난수의 범위: 0~2481
+	var r = parseInt(Math.random()*2482);
+	return r;
+}
+/* 내가 짠 코드 */
+// function doWinner(){
+// 	var parti = [];
+// 	for(su=0; su<2482; su++){
+// 		parti[su] = su+1;
+// 	}
+// 	for(cnt=0; cnt<50000; cnt++){
+// 		var imsi = parti[0];
+// 		var nansu = rnd();
+// 		parti[0] = parti[nansu];
+// 		parti[nansu] = imsi;
+// 	}
+// 	var html = "<font color='blue' size='4'>당첨자 : ";
+// 	for(index=0; index<10; index++){
+// 		html = html + parti[index] +", "
+// 	}
+// 	html = html + "</font>";
+// 	document.getElementById("winner").innerHTML = html;
+// }
+// function rnd() {
+// 	return parseInt(Math.random()*2482)
+// } 
+</script>
+</body>
+</html>
