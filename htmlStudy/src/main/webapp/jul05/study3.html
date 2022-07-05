@@ -7,11 +7,12 @@
 <body>
 <div align="center">
 <h2>월드컵 모의 조 추첨</h2>
-<p>16강의 팀들을 A조와 B조로 나눕니다.</p>
+<p>16강의 팀들을 조로 나눕니다.</p>
 <div id="result">이곳에 출력됩니다</div><br/>
-<input type="button" value="추첨 결과 보기" onClick="doIt()"/>
+<input type="button" value="추첨 결과 보기(A,B조)" onClick="doTwo()"/>
+<input type="button" value="추첨 결과 보기(A,B,C,D조)" onClick="doFour()"/>
 <script type="text/javascript">
-function doIt() {
+function doTwo() {
 	var teams = ["브라질","우르과이","아르헨트나","멕시코","프랑스","영국","이탈리아","스페인",
 		"포르투갈","스위스","대한민국","일본","나이지리아","콜롬비아","이란","쿠웨이트"];
 	for(var cnt=0; cnt<1000; cnt++){
@@ -26,6 +27,27 @@ function doIt() {
 		html = html + "<tr><td>&nbsp"+(row+1)+"&nbsp</td><td>"+teams[row]+
 			"</td><td>"+teams[row+8]+"</td></tr>";
 	}//0~7까지 반복
+	html = html + "</table>";
+	document.getElementById("result").innerHTML = html;
+}
+function doFour(){
+	var teams = ["브라질","우르과이","아르헨트나","멕시코","프랑스","영국","이탈리아","스페인",
+		"포르투갈","스위스","대한민국","일본","나이지리아","콜롬비아","이란","쿠웨이트"];
+	for(var cnt=0; cnt<1000; cnt++){
+		var imsi = teams[0];
+		var nansu = rnd();
+		teams[0] = teams[nansu];
+		teams[nansu] = imsi;
+	}//1000번 반복
+	var html = "<table border='1'><tr><th></th><th>A조</th>";
+	html = html + "<th>B조</th><th>C조</th><th>D조</th>";
+	for(row=0; row<4; row++){//4회 반복
+		html = html + "<tr><td>&nbsp"+(row+1)+"&nbsp</td>";
+		html = html + "<td>"+teams[row]+"</td>";//A조
+		html = html + "<td>"+teams[row+4]+"</td>";//B조
+		html = html + "<td>"+teams[row+8]+"</td>";//C조
+		html = html + "<td>"+teams[row+12]+"</td></tr>";//D조
+	}
 	html = html + "</table>";
 	document.getElementById("result").innerHTML = html;
 }
