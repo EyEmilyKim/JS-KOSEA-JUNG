@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<div align="center">
+<h2>맥 주 추 천 APP</h2>
+<p>원하시는 색을 선택하고, 버튼을 누르면 해당 색에 가장 적합한 맥주를 추천해드립니다.</p>
+<form action="" name="pub">
+색을 선택하세요. <select name="COLOR">
+	<option value="L">밝은 색</option>
+	<option value="Y">노란 색</option>
+	<option value="D">어두운 색</option>
+	<option value="B">갈 색</option>
+</select><br/><br/>
+<input type="button" value="결과 보기" onClick="findBeer()"/><br/><br/>
+<div id="target">이곳에 출력됩니다.</div>
+</form>
+</div>
+<script type="text/javascript">
+function findBeer() {
+	var color = document.pub.COLOR.value; //고객이 선택한 색을 가지고 온다.
+	var beers = beerExpert(color); //배열 - 3개의 맥주를 추천한다.
+	var html = "<table border='1'><tr><th></th><th>추천 맥주 이름</th></tr>";
+	for(var index=0; index < beers.length; index++){
+		html = html + "<tr><td>&nbsp;"+(index+1)+"&nbsp;</td>";
+		html = html + "<td>"+beers[index]+"</td></tr>";
+	}
+	html = html + "</table>";
+	document.getElementById("target").innerHTML = html;
+}
+function beerExpert(color){
+	var brands = [];//배열 생성
+	switch(color){
+	case "L": //밝은 색의 맥주
+		brands[0] = "OB 라거"; brands[1] = "크라운 라거"; brands[2] = "버드와이저";
+		break;
+	case "Y": //노란색의 맥주
+		brands[0] = "코로나"; brands[1] = "KGB"; 
+		break;
+	case "D": //어두운 색의 맥주
+		brands[0] = "스타우트"; brands[1] = "허리케인"; brands[2] = "black홉";
+		brands[3] = "블랙잭"; break;
+	case "B": //갈색의 맥주
+		brands[0] = "칭따오"; brands[1] = "OB 다크"; brands[2] = "크라운 홀스";
+		break;
+	}
+	return brands;
+}
+</script>
+</body>
+</html>
