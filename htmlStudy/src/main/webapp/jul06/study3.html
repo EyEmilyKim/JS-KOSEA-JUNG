@@ -36,10 +36,11 @@ function makeGenre(){
 	case "3": quiz = findFlower();//꽃이름 제시어로
 	}
 	alert("선택된 단어 : "+quiz);
+	doGame(quiz);
 }
 function findNation(){//나라이름 중 하나로 바뀐다
 	var nations = ["korea","japan","china","russia","brazil","america","canada","swiss","finland","mongol","india","peru","thailand"];
-	var nansu = parseInt(Math.random()*nation.length);
+	var nansu = parseInt(Math.random()*nations.length);
 	return nations[nansu];
 }
 function findFood(){//음식이름 중 하나로 바뀐다
@@ -51,6 +52,29 @@ function findFlower(){//음식이름 중 하나로 바뀐다
 	var flowers = ["sunflower","rose","bellflower","anemone","poppy","lily","tulip","hyacinth","lilac","cherryblossom","orchid"];
 	var nansu = parseInt(Math.random()*flowers.length);
 	return flowers[nansu];
+}
+function doGame(quiz){
+	var length = quiz.length;
+	var html = "<table border='1'><tr align='center' height='100px'>";
+	for(var c=0; c<length; c++){
+		html = html + "<td id='"+c+"' width='100px'><input type='button' value='CLICK'";
+		html = html + "onClick='showChar("+c+",\""+quiz+"\")'/></td>";
+	}
+	html = html + "</tr></table>";
+	document.getElementById("word").innerHTML = html;
+}
+function showChar(col, quiz){
+	document.getElementById(col).innerHTML = quiz.substring(col,col+1);
+}
+function doMatch(){
+	var input = document.board.WORD.value;
+	var html = "<font color='red' size='5'>";
+	if(quiz==input){ 
+		html = html + "정 답 !!</font>";
+	}else{
+		html = html + "오 답 ..</font>";
+	}
+	document.getElementById("result").innerHTML = html;
 }
 </script>
 </html>
