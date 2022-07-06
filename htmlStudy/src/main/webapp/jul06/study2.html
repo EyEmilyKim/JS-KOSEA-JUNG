@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+<style type="text/css">
+table { font-family:'궁서체'; font-size:50px; color:blue; }
+</style>
+</head>
+<body>
+<div align="center">
+<h2>단어 맞추기 게임 ver2.0</h2>
+<div id="word"></div>
+<form action="" name="board">
+	<p>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></p>
+	<input type="button" value="결과 보기" onClick="doMatch()"/><br/><br/>
+	<div id="result">정답 여부가 이곳에 출력됩니다.</div>
+</form>
+</div>
+<script type="text/javascript">
+var words = ["sentence","mountain","continent","friendship","foreign","nation",
+		"korea","japan","student","father","maverick","mother","day","night"];
+var rnd = parseInt(Math.random()*words.length);
+var quiz = words[rnd];//제시어가 될 단어 결정
+var target ="";
+wordStar(quiz);
+function wordStar(word){//word에 있는 단어로 테이블을 만든다
+	target = word.toUpperCase();//대문자로 바꾼다
+	var length = word.length;//단어의 길이를 찾는다
+	var html = "<table border='1'><tr height='100px'>";
+	for(var cnt=0; cnt<length; cnt++){
+		html = html + "<td width='100px' id='"+cnt+"' align='center'>";
+		html = html + "<input type='button' value='CLICK' ";
+		html = html + "onClick='doIt("+cnt+",\""+target+"\")' /></td>";
+	}
+	html = html + "</tr></table>";
+	document.getElementById("word").innerHTML = html ;
+}
+function doIt(col,msg){
+	document.getElementById(col).innerHTML = msg.substring(col, col+1);
+}
+function doMatch(){
+	var input = document.board.WORD.value;//입력된 단어를 불러온다
+	var html = "<font color='red' size='5'>";
+	if(input == quiz){
+		html = html + "정 ~ 답 ~ !";
+	}else {
+		html = html + "오...답...ㅠ";
+	}
+	html = html + "</font>";
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
