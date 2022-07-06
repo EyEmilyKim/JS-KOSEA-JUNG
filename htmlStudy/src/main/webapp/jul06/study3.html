@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+<style type="text/css">
+table { font-family:'궁서체'; font-size:50px; color:blue; }
+</style>
+</head>
+<body>
+<div align="center">
+<h2>단어 맞추기 게임 ver3.0</h2>
+<div id="word"></div>
+<form action="" name="board">
+다음 분야 중 하나를 선택하세요. <select name="GENRE">
+	<option value="1">나라이름</option>
+	<option value="2">음식이름</option>
+	<option value="3">꽃이름</option>
+</select> <input type="button" value="선택 완료" onClick="makeGenre()"/><br/>
+	<p>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></p>
+	<input type="button" value="결과 보기" onClick="doMatch()"/><br/><br/>
+	<div id="result">정답 여부가 이곳에 출력됩니다.</div>
+</form>
+</div>
+</body>
+<script type="text/javascript">
+var quiz = "";
+function makeGenre(){
+	//선택한 분야를 읽어온다
+	var genre = document.board.GENRE.value;
+	switch(genre){
+	case "1": quiz = findNation();//나라이름 제시어로
+			break;
+	case "2": quiz = findFood();//음식이름 제시어로
+			break;
+	case "3": quiz = findFlower();//꽃이름 제시어로
+	}
+	alert("선택된 단어 : "+quiz);
+}
+function findNation(){//나라이름 중 하나로 바뀐다
+	var nations = ["korea","japan","china","russia","brazil","america","canada","swiss","finland","mongol","india","peru","thailand"];
+	var nansu = parseInt(Math.random()*nation.length);
+	return nations[nansu];
+}
+function findFood(){//음식이름 중 하나로 바뀐다
+	var foods = ["ramen","chicken","spaghetti","hamburger","sushi","pizza","candy","chocolate","bibimbap","kimbap","bulgogi","porridge"];
+	var nansu = parseInt(Math.random()*foods.length);
+	return foods[nansu];
+}
+function findFlower(){//음식이름 중 하나로 바뀐다
+	var flowers = ["sunflower","rose","bellflower","anemone","poppy","lily","tulip","hyacinth","lilac","cherryblossom","orchid"];
+	var nansu = parseInt(Math.random()*flowers.length);
+	return flowers[nansu];
+}
+</script>
+</html>
