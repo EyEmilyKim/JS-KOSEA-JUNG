@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<div align="center">
+<h2>맛 집 찾 기 App</h2>
+<p>원하시는 지역을 선택하고 버튼을 누르면, 해당 지역의 맛집 이름이 출력됩니다.</p>
+<form action="" name="board">
+지역을 선택하세요. <span id="area"></span><br/>
+<input type="button" value="맛집 보기" onClick="findMatjip()"/>
+</form>
+<br/><br/><div id="result">이곳에 출력됩니다.</div>
+</div>
+<script type="text/javascript">
+var towns = ["명동","강남","잠실","정자","이대","구로","배달☆"];
+var html = "<select name='DONGNE'>";
+for(var idx=0; idx < towns.length; idx++){
+	html = html + "<option>"+towns[idx]+"</option>";
+}
+html = html + "</select>";
+document.getElementById("area").innerHTML = html;
+function findMatjip(){
+	var matjips = [
+		["치즈닭갈비","DUBU","the식당","순남시래기"],//명동 맛집
+		["유타로","토끼정","tokyo Steak","쉑쉑버거"],//강남 맛집
+		["제주올레냉면","해주냉면","아그라","SEOULISM","white spoon","잠실곰탕"],//잠실 맛집
+		["뿅뿅마제소바","캐쥬얼하와이","GOOSE ISLAND"],//정자 맛집
+		["미가","와플잇업","홍차봉봉","Mu"],//이대 맛집
+		["종로삼겹살","남원추어탕","육회한녀석들"],//구로 맛집
+		["가가마라","피자빨리","마약김밥","총알분식"],//배달☆ 맛집
+	];
+	var areaName=document.board.DONGNE.value;
+	for(var idx=0; idx < towns.length; idx++){
+		if(areaName == towns[idx]){
+			var html = "<table border='1'><tr>";			
+			for(var i=0; i < matjips[idx].length; i++){
+				html = html + "<td>" + matjips[idx][i] + "</td>";
+			}
+			html = html + "</tr></table>";
+			document.getElementById("result").innerHTML = html;
+			break;
+		}
+	}
+}
+</script>
+</body>
+</html>
