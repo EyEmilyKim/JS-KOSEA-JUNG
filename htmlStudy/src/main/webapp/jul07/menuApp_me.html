@@ -3,78 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <title>menuApp_me</title>
+<style type="text/css">
+td { width:100px; text-align:center; padding:10px; }
+.food0 { background-color: orange; color:white; }
+.food1 { background-color: green; color:white; }
+.food2 { background-color: red; color:white; }
+.food3 { background-color: blue; color:white; }
+.food4 { background-color: purple; color:white; }
+</style>
 </head>
 <body>
 <div align="center">
 <h2>((도전과제))식당 메뉴 App</h2>
 <h3>콤보박스 자동 생성 - 식당 메뉴 이름</h3>
 <form action="" name="frm">
-<p>요리의 종류를 선택하세요 : <select name="CUSINE">
+<p>요리의 종류를 선택하세요 : <select name="GENRE">
 	<option value="0">분식</option>
 	<option value="1">한식</option>
 	<option value="2">중식</option>
 	<option value="3">일식</option>
 	<option value="4">양식</option></select>
 <input type="button" value="확인" onClick="getMenu()"/></p>
-<div>이곳에 메뉴가 출력됩니다 <span id="menu"></span></div>
-<div>이곳에 가격이 출력됩니다 <span id="price"></span></div>
+<div><span id="menu">이곳에 메뉴가 출력됩니다</span></div>
+<div><span id="price">이곳에 가격이 출력됩니다</span></div>
 </form>
 </div>
 <script type="text/javascript">
-//cusine 별 메뉴 & 가격 구성
+/* genre 별 메뉴 & 가격 구성 */
 var foods = [
-	["라면","쫄면","김밥","떡볶이","튀김","순대","라볶이"],//0 분식 ->priceB
-	["제육볶음","김치볶음밥","갈치조림","육개장","설렁탕"],//1 한식 ->priceK
-	["짜장면","탕수육","깐풍기","지삼선","고추잡채밥","깐쇼새우"],//2 중식 ->priceC
-	["돈까스","냉모밀","우동","미니초밥","오야코동","카레라이스"],//3 일식 ->priceJ
-	["피자","파스타","햄버거","도넛","피쉬앤칩스"],//4 양식 ->priceW
+	["라면","쫄면","김밥","떡볶이","튀김","순대","라볶이"],//0 분식
+	["제육볶음","김치볶음밥","갈치조림","육개장","설렁탕"],//1 한식
+	["짜장면","탕수육","깐풍기","지삼선","고추잡채밥","깐쇼새우"],//2 중식
+	["돈까스","냉모밀","우동","미니초밥","오야코동","카레라이스"],//3 일식
+	["피자","파스타","햄버거","도넛","피쉬앤칩스"],//4 양식
 ]
-var priceB = ["3500","3500","2000","2500","1500","3000","4000"]; 
-var priceK = ["5000","4500","6000","5900","7000"]; 
-var priceC = ["6000","10000","15000","13000","8000","9000"]; 
-var priceJ = ["6500","5000","5800","8000","5850","7000"]; 
-var priceW = ["20000","18000","12000","7000","9000"]; 
-//원하는 cusine의 메뉴 출력해주기
+var prices = [
+	["3500","3500","2000","2500","1500","3000","4000"],
+	["5000","4500","6000","5900","7000"],
+	["6000","10000","15000","13000","8000","9000"], 
+	["6500","5000","5800","8000","5850","7000"],
+	["20000","18000","12000","7000","9000"]
+]
+/* 원하는 genre의 메뉴 출력해주기 */
 function getMenu(){
-	//1)선택한 cusine의 메뉴 추출
-	var cusine = document.frm.CUSINE.value;
-	alert("선택된 cusine : "+cusine);
+	/* 1)선택한 genre의 메뉴 추출 */
+	var genre = document.frm.GENRE.value;
+// 	alert("선택된 genre : "+genre);
 	var menus = [];
 	for(var idx=0; idx<foods.length; idx++){
-		if(cusine==idx){
-		alert("일치된 foods[idx] : "+idx);
+		if(genre==idx){
+// 		alert("일치된 foods[]의 idx : "+idx);
 			for(var i=0; i<foods[idx].length; i++){
 				menus[i] = foods[idx][i];	
 			}
-			alert("해당 cusine의 메뉴 : "+menus);
+// 			alert("해당 genre의 메뉴 : "+menus);
 			break;
 		}
 	}
-	//2)메뉴를 드롭박스로 출력
-	var html = "<select name='MENU'>";
+	/* 2)메뉴를 콤보박스로 출력 */
+	var html = "원하는 메뉴를 선택하세요 : <select name='MENU'>";
 	for(var cnt=0; cnt < menus.length; cnt++){
 		html = html + "<option>" +menus[cnt] +"</option>";
 	}
 	html = html + "</select> ";
 	html = html + "<input type='button' value='가격 확인' ";
-	html = html + "onClick='getPrice("+idx+")'/>";
+	html = html + "onClick='showPrice("+idx+")'/>";
 	document.getElementById("menu").innerHTML = html;
 
 }
-//원하는 메뉴의 가격 출력해주기
-function getPrice(idx){
-	alert("getPrice 호출성공, 인자 : "+idx);
-	var menus = foods[idx];
+/* 원하는 메뉴의 가격 출력해주기 */
+function showPrice(foodIdx){
+// 	alert("showPrice 호출성공, 인자 foodIdx : "+foodIdx);
+	var menus = foods[foodIdx];
 	var menu = document.frm.MENU.value;
-	alert("선택된 menu 는 전체메뉴 "+menus+" 중에 "+menu);
+// 	alert("선택된 menu 는 menus ["+menus+"] 중에 ["+menu+"]");
+// 	alert("해당 genre의 전체 가격 : "+prices[foodIdx]);
 	var price = 0;
 	var html = "<table border='1'><tr>";
-	for(var c=0; c<menus.length; c++){
-		if(menu==menus[c]){
-			alert("선택된 menu : "+menu+" , 해당 index : "+c);
-			price = 
+	for(var cnt=0; cnt<menus.length; cnt++){
+		if(menu == menus[cnt]){//menu 의 menus[]에 대한 index 찾기
+// 			alert("일치된 menus[]의 index : "+cnt);
+			price = prices[foodIdx][cnt];
+// 			alert("해당 menu의 가격 : "+price+" 원");
+			html = html + "<td class=food"+foodIdx+">" + menu + "</td>";
+			html = html + "<td>" + price + " 원</td>";
+			break;
 		}
 	}
+	html = html + "</tr></table>";
+	document.getElementById("price").innerHTML = html;
 }
 </script>
 </body>
