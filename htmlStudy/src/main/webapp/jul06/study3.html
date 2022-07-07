@@ -10,15 +10,14 @@ table { font-family:'궁서체'; font-size:50px; color:blue; }
 <body>
 <div align="center">
 <h2>단어 맞추기 게임 ver3.0</h2>
-
+<div id="word"></div>
 <form action="" name="board">
-<p>다음 분야 중 하나를 선택하세요. <select name="GENRE">
+다음 분야 중 하나를 선택하세요. <select name="GENRE">
 	<option value="1">나라이름</option>
 	<option value="2">음식이름</option>
 	<option value="3">꽃이름</option>
-</select> <input type="button" value="선택 완료" onClick="makeGenre()"/></p>
-<div id="word"></div>
-<p>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></p>
+</select> <input type="button" value="선택 완료" onClick="makeGenre()"/><br/>
+	<p>연상되는 단어를 입력하세요. <input type="text" name="WORD"/></p>
 	<input type="button" value="결과 보기" onClick="doMatch()"/><br/><br/>
 	<div id="result">정답 여부가 이곳에 출력됩니다.</div>
 </form>
@@ -36,7 +35,6 @@ function makeGenre(){
 			break;
 	case "3": quiz = findFlower();//꽃이름 제시어로
 	}
-	quiz = quiz.toUpperCase();
 	alert("선택된 단어 : "+quiz);
 	doGame(quiz);
 }
@@ -70,10 +68,12 @@ function showChar(col, quiz){
 }
 function doMatch(){
 	var input = document.board.WORD.value;
-	input = input.toUpperCase();
 	var html = "<font color='red' size='5'>";
-	if(quiz==input){ html = html + "정 답 !!</font>";}
-	else{ html = html + "오 답 ..</font>"; }
+	if(quiz==input){ 
+		html = html + "정 답 !!</font>";
+	}else{
+		html = html + "오 답 ..</font>";
+	}
 	document.getElementById("result").innerHTML = html;
 }
 </script>
