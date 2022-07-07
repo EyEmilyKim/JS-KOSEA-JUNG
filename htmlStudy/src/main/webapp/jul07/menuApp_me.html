@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>menuApp_me</title>
+</head>
+<body>
+<div align="center">
+<h2>((도전과제))식당 메뉴 App</h2>
+<h3>콤보박스 자동 생성 - 식당 메뉴 이름</h3>
+<form action="" name="frm">
+<p>요리의 종류를 선택하세요 : <select name="CUSINE">
+	<option value="0">분식</option>
+	<option value="1">한식</option>
+	<option value="2">중식</option>
+	<option value="3">일식</option>
+	<option value="4">양식</option></select>
+<input type="button" value="확인" onClick="getMenu()"/></p>
+<div>이곳에 메뉴가 출력됩니다 <span id="menu"></span></div>
+<div>이곳에 가격이 출력됩니다 <span id="price"></span></div>
+</form>
+</div>
+<script type="text/javascript">
+//cusine 별 메뉴 & 가격 구성
+var foods = [
+	["라면","쫄면","김밥","떡볶이","튀김","순대","라볶이"],//0 분식 ->priceB
+	["제육볶음","김치볶음밥","갈치조림","육개장","설렁탕"],//1 한식 ->priceK
+	["짜장면","탕수육","깐풍기","지삼선","고추잡채밥","깐쇼새우"],//2 중식 ->priceC
+	["돈까스","냉모밀","우동","미니초밥","오야코동","카레라이스"],//3 일식 ->priceJ
+	["피자","파스타","햄버거","도넛","피쉬앤칩스"],//4 양식 ->priceW
+]
+var priceB = ["3500","3500","2000","2500","1500","3000","4000"]; 
+var priceK = ["5000","4500","6000","5900","7000"]; 
+var priceC = ["6000","10000","15000","13000","8000","9000"]; 
+var priceJ = ["6500","5000","5800","8000","5850","7000"]; 
+var priceW = ["20000","18000","12000","7000","9000"]; 
+//원하는 cusine의 메뉴 출력해주기
+function getMenu(){
+	//1)선택한 cusine의 메뉴 추출
+	var cusine = document.frm.CUSINE.value;
+	alert("선택된 cusine : "+cusine);
+	var menus = [];
+	for(var idx=0; idx<foods.length; idx++){
+		if(cusine==idx){
+		alert("일치된 foods[idx] : "+idx);
+			for(var i=0; i<foods[idx].length; i++){
+				menus[i] = foods[idx][i];	
+			}
+			alert("해당 cusine의 메뉴 : "+menus);
+			break;
+		}
+	}
+	//2)메뉴를 드롭박스로 출력
+	var html = "<select name='MENU'>";
+	for(var cnt=0; cnt < menus.length; cnt++){
+		html = html + "<option>" +menus[cnt] +"</option>";
+	}
+	html = html + "</select> ";
+	html = html + "<input type='button' value='가격 확인' ";
+	html = html + "onClick='getPrice("+idx+")'/>";
+	document.getElementById("menu").innerHTML = html;
+
+}
+//원하는 메뉴의 가격 출력해주기
+function getPrice(idx){
+	alert("getPrice 호출성공, 인자 : "+idx);
+	var menus = foods[idx];
+	var menu = document.frm.MENU.value;
+	alert("선택된 menu 는 전체메뉴 "+menus+" 중에 "+menu);
+	var price = 0;
+	var html = "<table border='1'><tr>";
+	for(var c=0; c<menus.length; c++){
+		if(menu==menus[c]){
+			alert("선택된 menu : "+menu+" , 해당 index : "+c);
+			price = 
+		}
+	}
+}
+</script>
+</body>
+</html>
