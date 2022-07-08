@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>tourApp_me</title>
+</head>
+<body>
+<div align="center">
+<h2>((도전과제))일본 관광 안내 시스템</h2>
+<form action="" name="frm">
+지역을 선택하세요 : <span id="areas"></span>
+ <input type="button" value="확인" onClick="getAtts()"><br/>
+이곳에 명승지가 출력됩니다 <span id="atts"></span><br/>
+이곳에 안내가 출력됩니다 <span id="contents"></span><br/>
+</form>
+</div>
+<script type="text/javascript">
+/* areas 데이터 구성 & 목록 출력해주기 */
+var areas = [
+	"홋카이도","니가타","도쿄","오사카","후쿠오카","오키나와"
+];
+var html = "<select name='AREA'>";
+for(var c=0; c<areas.length; c++){
+	html = html + "<option>" +areas[c] +"</option>";
+}
+html = html + "</select>";
+document.getElementById("areas").innerHTML = html;
+/* atts, contents 데이터 구성 */
+var atts = [
+	["키타에-루","ご当地먹거리","축제"],//0 홋카이도
+	["벼의 고장","키무라상","도키메키타워"],//1 니가타
+	["도쿄타워","만다린오리엔탈호텔","스카이타워","카미나리문","志村第二小"],//2 도쿄
+	["오사카성","USJ","연경언니"],//3 오사카
+	["Yahoo돔","다자이후텐만궁","rikupa","糸島"],//4 후쿠오카
+	["츄라우미","슈리성","海の家","놀러가고싶다"]//5 오키나와
+];
+var contents = [
+	["홋카이도 체육협회입니다. 제가 여기서 통역을 했죠. \n쿠마상과 이케다상은 잘 계실까요?",
+		"스-프카레, 미소라멘, 징기스칸이 유명하죠.",
+		"눈꽃축제가 세계적으로 아주 유명합니다."],//0 홋카이도 소개
+	["다~~~~~~ 논이에요!",
+		"저의 대부님? ㅋㅋ 키무라상의 고향이지요. 기무라상은 올림픽에서 보트 심판도하십니다",
+		"도키메키타워라는 곳에 가보니 컨벤션도 하고 전망대도 있고 기념품샵도 있더라구용"],//1 니가타 소개
+	["도쿄타워 읽으셨나요?",
+			"만다린오리엔탈호텔 최상층 레스토랑에서 추억의 오사나나지미 친구에게 고급 코스를 대접받은 추억♡",
+			"스카이타워는 높다, 높은건 백두산",
+			"카미나리문에는 사람이 겁나 많지유. \n인력거꾼도 많구요.",
+			"志村第二小学校の校歌、今でも歌えるよ♪"],//2 도쿄 소개
+	["오사카성~~~~~~~","USJ~~~~~~~~","연경언니 보고싶어유~~~~~~~"],//3 오사카 소개
+	["Yahoo돔~~~~~~~~~ 이대호를 겁나게 응원햇지ㅋㅋ",
+		"다자이후텐만궁의 스타벅스는 유명하다",
+		"rikupaのみんな元気かな？",
+		"糸島ドライブまた行きたい！"],//4 후쿠오카 소개
+	["츄라우미~~~~~","슈리성~~~~~","海の家~~~~~","놀러가고싶다~~~~~~~"],//5 오키나와 소개
+];
+/* 각 area 의 atts 목록 출력해주기 */
+function getAtts() {
+	var areaIdx = document.frm.AREA.selectedIndex;
+	var html = "<select name='ATT'>";
+	for(var idx=0; idx<atts[areaIdx].length; idx++){
+		html = html + "<option>" +atts[areaIdx][idx] +"</option>";
+	}
+// 	alert("여기까지OK");
+	html = html + "</select> <input type='button' value='소개보기' ";
+	html = html + "onClick='showContents()'/>";
+	document.getElementById("atts").innerHTML = html;
+}
+function showContents(){
+	var att = document.frm.ATT.selectedIndex;
+	alert(att);
+}
+</script>
+</body>
+</html>
