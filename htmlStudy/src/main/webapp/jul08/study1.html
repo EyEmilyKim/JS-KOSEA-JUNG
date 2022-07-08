@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<div id="target"></div>
+<script type="text/javascript">
+var a = [1,2,3,4];
+var html = "<input type='button' value='OK' ";
+html = html + "onClick='doIt(\""+a+"\")'/>";
+document.getElementById("target").innerHTML = html;
+doIt(a);
+function doIt(arr){
+	for(var i=0; i<arr.length; i++){
+		alert("배열 안에 있는 데이터 : "+arr[i])
+	}
+}
+</script>
+</body>
+</html>
