@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<script type="text/javascript">
+//고객 객체(여러가지 고객 정보를 소유) 이름:customer
+//고객정보: 이름, 성별, 주소, 연락처, 나이 
+var customer = {};//객체 선언
+customer.name = "홍길동";
+customer.gender = "남자";
+customer.showArrr = function(){
+	return this.addr;//this : 현재의 객체를 가리키는 명령어
+};
+customer.addr = "서울";
+customer.phone = "010-nnnn-mmmm";
+customer.age = "35";
+customer.showName = function(){
+	alert("고객의 이름은 : "+customer.name);
+};
+document.write("<h2>고객의 이름과 주소</h2>");
+document.write(customer.name+", "+customer.addr+"<br/>");
+//관광지 객체(여러가지 관광지 정보를 소유)
+</script>
+</body>
+</html>
