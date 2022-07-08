@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>menuApp_tr</title>
+</head>
+<body>
+<div align="center">
+<h2>((풀이)) 메뉴 가격 확인 App</h2>
+<form action="" name="order">
+요리의 종류를 선택하세요. <span id="genre"></span>
+<input type="button" value="확 인" onClick="makeMenu()"/><br/>
+<div id="menu">이곳에 메뉴가 출력됩니다.</div>
+<div id="price">이곳에 가격이 출력됩니다.</div>
+</form>
+</div>
+<script type="text/javascript">
+var dish = ["한식","분식","일식","중식","양식"];
+var html = "<select name='DISH'>";
+for(var idx=0; idx<dish.length; idx++){//dish 배열의 길이 만큼 반복
+	html = html + "<option>"+dish[idx]+"</option>";
+}
+html = html + "</select>";
+document.getElementById("genre").innerHTML = html;
+function makeMenu(){
+	var menu = [
+		["순두부","백반","김치찌개","된장찌개","불고기백반"],
+		["라면","떡볶이","어묵","순대","쫄면","칼국수"],
+		["우동","스시","모듬 회","참치 회","도미 회"],
+		["자장면","짬뽕","탕수육","양장피","기스면"],
+		["햄버거","샌드위치","스테이크","파스타","피자"]
+	];
+	var pos = document.order.DISH.selectedIndex;
+	var html = "<select name='FOOD'>";
+	for(var i=0; i<menu[pos].length; i++){
+		html = html + "<option>"+menu[pos][i]+"</option>";
+	}
+	html = html + "</select> ";
+	html = html + "<input type='button' value='가격 보기' ";
+	html = html + "onClick='showPrice()'/>";
+	document.getElementById("menu").innerHTML = html;
+}
+function showPrice(){
+	var prices = [
+		[9000,8000,8000,10000],
+		[4000,5000,2000,4000,6000,8000],
+		[9000,12000,30000,25000,30000],
+		[7000,8000,12000,30000,12000],
+		[8000,6000,12000,15000,24000]
+	];
+	var pos1 = document.order.DISH.selectedIndex;//요리의 위치
+	var pos2 = document.order.FOOD.selectedIndex;//메뉴의 위치
+	var price = prices[pos1][pos2];
+	var html = "<font color='red' size='5'>";
+	html = html + price + "원</font>";
+	document.getElementById("price").innerHTML = html;
+}
+</script>
+</body>
+</html>
