@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Entry_me</title>
+</head>
+<body>
+<div align="center">
+<h2>((도전과제))2022 Baseball Entry</h2>
+2022년 프로야구 89명의 신인 선수 목록 
+<input type="button" value="조회하기" onClick="showEntry()"><br/><br/>
+<div id="result">이곳에 결과가 출력됩니다</div>
+</div>
+<script type="text/javascript">
+//랜덤 정보 풀
+var firstNames = ["Kim","Lee","Son","Park","Jung","Choi","Ha","Gil","Smith","Gordova"];
+var lastNames = ["희호","대관","명수","지훈","지성","흥민","Mickel","Jordan","치환","성민","Basco","Reon","철수","민철","희성","수만","석근","대희"];
+var teams = ["두산","롯데","기아","KT","NC","한화","삼성","LG","키움","SSG"]//10개
+var posis = ["투수","포수","1루수","2루수","유격수","3루수","좌익수","중견수","우익수"];//9개
+var addrs = ["서울","인천","경기","대전","부산","기타"];//6개
+//등번호 배열 생성
+var bnums = [];
+for(var i=0; i<100; i++){//등번호 배열에 숫자 0~99 넣기
+	bnums[i] = i;
+}
+for(var idx=0;idx<2000;idx++){//등번호 배열 섞기
+	var imsi = bnums[0];
+	var rnd = parseInt(Math.random()*100);
+	bnums[0] = bnums[rnd]; 
+	bnums[rnd] = imsi;
+}
+function showEntry(){
+	var newb = function(name,team,posi,bnum,addr){//신인 객체 newb 선언
+		this.name = name;
+		this.team = team;
+		this.posi = posi;
+		this.bnum = bnum;
+		this.addr = addr;
+	}
+	//팀별 선수 카운트를 위한 변수
+	var doosans = 0;//teams[] idx:0
+	var lottes = 0;//teams[] idx:1
+	var kias = 0;//teams[] idx:2
+	var kts = 0;//teams[] idx:3
+	var ncs = 0;//teams[] idx:4
+	var hanhwas = 0;//teams[] idx:5
+	var samsungs = 0;//teams[] idx:6
+	var lgs = 0;//teams[] idx:7
+	var kiums = 0;//teams[] idx:8
+	var ssgs = 0;//teams[] idx:9
+	
+	var newbs = [];//신인 89명을 담을 배열 생성
+	for(var i=0; i<89; i++){
+	var rndFN = parseInt(Math.random()*firstNames.length);
+	var rndLN = parseInt(Math.random()*lastNames.length);
+	var rndTm = parseInt(Math.random()*teams.length);
+	var rndPo = parseInt(Math.random()*posis.length);
+	var rndAd = parseInt(Math.random()*addrs.length);
+	var name = lastNames[rndLN]+" "+firstNames[rndFN];
+	var team = teams[rndTm];
+	var posi = posis[rndPo];
+	var addr = addrs[rndAd];
+	var bnum = bnums[i];
+	newbs[i] = new newb(name,team,posi,bnum,addr);
+	
+	switch(rndTm){//팀별 선수 누적
+		case 0: doosans = doosans +1; break;
+		case 1: lottes = lottes +1; break;
+		case 2: kias = kias +1; break;
+		case 3: kts = kts +1; break;
+		case 4: ncs = ncs +1; break;
+		case 5: hanhwas = hanhwas +1; break;
+		case 6: samsungs = samsungs +1; break;
+		case 7: lgs = lgs +1; break;
+		case 8: kiums = kiums +1; break;
+		case 9: ssgs = ssgs +1; break;
+		}
+	}
+	//출력
+	var html = "<font color='blue' size='3'> 두산 : " + doosans +"명, ";
+	html = html + "롯데 : " + lottes +"명, ";
+	html = html + "기아 : " + kias +"명, ";
+	html = html + "KT : " + kts +"명, ";
+	html = html + "NC : " + ncs +"명, <br/>";
+	html = html + "한화 : " + hanhwas +"명, ";
+	html = html + "삼성 : " + samsungs +"명, ";
+	html = html + "LG : " + lgs +"명, ";
+	html = html + "키움 : " + kiums +"명, ";
+	html = html + "SSG : " + ssgs +"명. </font><br/>";
+	html = html + "총 신입 선수 : " + newbs.length +"명<br/>";
+	html = html + "<table border='1'><tr><th>#</th><th>선수명</th><th>소속 팀</th>";
+	html = html + "<th>포지션</th><th>등 번호</th><th>주소</th></tr>";
+	for(var i=0; i<89; i++){
+		html = html + "<tr><td>"+(i+1)+"</td><td>"+newbs[i].name+"</td>";
+		html = html + "<td>"+newbs[i].team+"</td>";
+		html = html + "<td>"+newbs[i].posi+"</td>";
+		html = html + "<td>"+newbs[i].bnum+"</td>";
+		html = html + "<td>"+newbs[i].addr+"</td></tr>";
+	}
+	html = html + "</table>"
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
