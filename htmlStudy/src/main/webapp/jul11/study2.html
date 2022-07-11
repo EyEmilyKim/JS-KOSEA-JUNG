@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+</head>
+<body>
+<!-- 
+JPT 시험을 모두 100명의 수험자가 치렀습니다.
+모든 수험생의 정보와 점수, 총점, 평균을 출력합니다.
+(수험생의 정보: 수험번호, 이름, 주소, 나이, 점수)
+ 수험번호 : 중복되지 않는 난수
+ 이름(성/이름)과 점수(300~990): 난수
+ -->
+<div align="center">
+<h2>객체와 배열을 이용한 JPT 성적 처리</h2>
+성적처리 버튼을 누르면, 모든 수험생의 정보와 점수가 출력됩니다.<br/>
+<input type="button" value="JPT 성적 처리" onClick="makeResult()"/><br/>
+<div id="result">이곳에 출력됩니다.</div>
+</div>
+<script type="text/javascript">
+var firstName = ["김","이","박","최","정","하","우","조","마","길","방",
+				"천","지","추","서","원","임"];//0~16
+var lastName = ["철수","희명","은수","예원","예일","명주","길수","태균","미정","병환",
+				"영호","태건","선미","진선","은영","수영","은희","미주","정희","희정"];//0~19
+//수험번호(1~100) : 중복되지 않는 난수				
+var numbers=[];
+for(var idx=0;idx<100; idx++){//수험번호 배열에 숫자 1 부터 100을 넣는다
+	numbers[idx] = idx+1; 
+}
+for(var i=0; i<1000; i++){//수험번호를 1000번 섞는다
+	var imsi = numbers[0];
+	var rnd = parseInt(Math.random()*100);
+	numbers[0] = numbers[rnd];
+	numbers[rnd] = imsi;
+}
+var applier = function(num, name, age, score){//수험생의 정보: 수험번호, 이름, 주소, 나이, 점수
+	this.num = num;//수험번호
+	this.name = name;//이름
+	this.addr = "서울";//주소
+	this.age = age;//나이
+	this.score = score;//점수
+}
+function makeResult(){
+	var appliers = [];//수험생 100명을 위한 배열 선언
+	var total = 0;//총점을 위한 변수
+	for(var i=0; i<100; i++){//100명의 정보 생성
+		var num = numbers[i];//수험번호 생성
+		var rnd016 = parseInt(Math.random()*17);//firstName 난수(0~16)
+		var rnd019 = parseInt(Math.random()*20);//LastName 난수(0~19)
+		var name = firstName[rnd016]+lastName[rnd019];//이름 생성
+		var age = parseInt(Math.random()*11+25);//나이 생성 (25~35)
+		var score = parseInt(Math.random()*691+300)//점수 생성 (300~990)
+		appliers[i] = new applier(num,name,age,score);//위 정보들을 묶어 하나의 수험생 객체로 등록, 배열에 넣기
+		total = total + appliers[i].score;//점수 누적
+	}
+	var avg = total / appliers.length;
+	//정보 출력	
+	var html = "<font color='blue' size='3'>"
+	html = html + "총점 : "+total+", 평균 : "+avg +"</font><br/>";
+	html = html + "<table border='1'><tr><th>일련번호</th>";
+	html = html + "<th>수험번호</th><th>이름</th><th>주소</th><th>점수</th></tr>";
+	for(var idx=0; idx<100; idx++){
+		html = html + "<tr><td>"+(idx+1)+"</td>";
+		html = html + "<td>"+appliers[idx].num+"</td>";
+		html = html + "<td>"+appliers[idx].name+"</td>";
+		html = html + "<td>"+appliers[idx].addr+"</td>";
+		html = html + "<td>"+appliers[idx].score+"</td></tr>";
+	}
+	html = html + "</table>";
+	document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>
