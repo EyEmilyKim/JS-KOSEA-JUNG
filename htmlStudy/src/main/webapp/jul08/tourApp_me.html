@@ -10,8 +10,8 @@
 <form action="" name="frm">
 지역을 선택하세요 : <span id="areas"></span>
  <input type="button" value="확인" onClick="getAtts()"><br/>
-이곳에 명승지가 출력됩니다 <span id="atts"></span><br/>
-이곳에 안내가 출력됩니다 <span id="contents"></span><br/>
+<span id="atts">이곳에 명승지가 출력됩니다 </span><br/>
+<span id="contents">이곳에 안내가 출력됩니다 </span><br/>
 </form>
 </div>
 <script type="text/javascript">
@@ -60,14 +60,15 @@ function getAtts() {
 	for(var idx=0; idx<atts[areaIdx].length; idx++){
 		html = html + "<option>" +atts[areaIdx][idx] +"</option>";
 	}
-// 	alert("여기까지OK");
 	html = html + "</select> <input type='button' value='소개보기' ";
-	html = html + "onClick='showContents()'/>";
+	html = html + "onClick='showContents("+areaIdx+")'/>";
 	document.getElementById("atts").innerHTML = html;
 }
-function showContents(){
+function showContents(aIdx){
 	var att = document.frm.ATT.selectedIndex;
-	alert(att);
+	var note = contents[aIdx][att];
+	document.getElementById("contents").innerHTML = note;
+	
 }
 </script>
 </body>
