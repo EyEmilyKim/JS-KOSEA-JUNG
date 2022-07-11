@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<script type="text/javascript">
+//객체를 선언하는 두번째 방법
+var customer = function(name,addr,age,tel,gender){
+	this.name = name;
+	this.addr = addr;
+	this.gender = gender;
+	this.phone = tel;
+	this.age = age;
+	this.showAddr = function(){
+		return this.addr;
+	};
+	this.showName = function(){
+		return this.name;
+	};
+}
+
+var c1 = new customer("김길동","서울",35, "010-2342-0394","남자");
+var c2 = new customer("하길동","서울",29, "010-9381-7112","남자");
+var c3 = new customer("나길순","인천",31, "010-3211-0092","여자");
+var my_custs = [c1,c2,c3];
+alert(my_custs[0].name+", "+my_custs[1].name+", "+my_custs[2].name);
+</script>
+</body>
+</html>
