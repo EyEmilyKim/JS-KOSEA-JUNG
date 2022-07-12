@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Entry_tr</title>
+</head>
+<body>
+<div align="center">
+<h2>((풀이)) 2022 프로야구 신입 선수 목록</h2>
+<p>버튼을 누르면 신입 선수 목록이 출력됩니다. </p>
+<div id="teams">팀별 인원이 이곳에 출력됩니다.</div>
+<div id="players">이곳에 출력됩니다.</div>
+<input type="button" value="신입 선수 목록" onClick="makeList()"/> 
+</div>
+<script type="text/javascript">
+var teamsList = ["SSG","키움","LG","KT","KIA","롯데","두산","삼성","NC","한화"];//프로야구 팀 목록
+var position = ["투수","포수","1루수","2루수","유격수","3루수","우익수","중견수","좌익수"];//포지션
+var homeTown = ["서울","부산","경기","수원","창원","대전","강원","광주","인천"];//출신지역
+var firstName = ["김","이","박","최","정","하","우","조","마","길","방",
+	"천","지","추","서","원","임"];//0~16
+var lastName = ["철수","희명","은수","예원","예일","명주","길수","태균","미정","병환",
+	"영호","태건","선미","진선","은영","수영","은희","미주","정희","희정"];//0~19
+	
+var player = function(seq,name,team,pos,num,home){//야구선수 객체
+	this.seq = seq; 
+	this.name = name;
+	this.team = team;
+	this.position = pos;
+	this.b_num = num;
+	this.addr = home;
+}
+
+function makeName(){
+	var r1 = parseInt(Math.random()*firstName.length);//성을 위한 난수
+	var r2 = parseInt(Math.random()*lastName.length);//이름을 위한 난수
+	var name = firstName[r1] + lastName[r2];
+	return name;
+}
+function makeTeam(){
+	var r1 = parseInt(Math.random()*teamsList.length);
+	var teamName = teamsList[r1];
+	return teamName;
+}
+function makePos(){
+	var r1 = parseInt(Math.random()*position.length);
+	var pos = position[r1];
+	return pos;
+}
+function makeHome(){
+	var r1 = parseInt(Math.random()*homeTown.length);
+	var home = homeTown[r1];
+	return home;
+}
+function makeBnum(){
+	return parseInt(Math.random()*100);
+}
+
+function makeList(){
+	var players = [];//89명의 선수가 저장될 배열 선언
+	var counts = [0,0,0,0,0,0,0,0,0,0];//10개의 팀별 선수인원수를 저장할 배열 선언
+	//counts[0]:SSG 소속 인원수, counts[1]:키움 소속 인원수, ...
+	//SSG, 키움, LG, KT, KIA, 롯데, 두산, 삼성, NC, 한화
+	for(var cnt=0; cnt<89; cnt++){//0~88까지 89번 반복
+		players[cnt] = new player((cnt+1), makeName(), makeTeam(), 
+								makePos(), makeBnum(), makeHome());
+		switch(players[cnt].team){
+		case "SSG": counts[0]=counts[0]+1; break;
+		case "키움": counts[1]=counts[1]+1; break;
+		case "LG": counts[2]=counts[2]+1; break;
+		case "KT": counts[3]=counts[3]+1; break;
+		case "KIA": counts[4]=counts[4]+1; break;
+		case "롯데": counts[5]=counts[5]+1; break;
+		case "두산": counts[6]=counts[6]+1; break;
+		case "삼성": counts[7]=counts[7]+1; break;
+		case "NC": counts[8]=counts[8]+1; break;
+		case "한화": counts[9]=counts[9]+1; break;
+		}
+	}
+
+	var html = "<font color='blue' size='3'>";
+	for(var i=0; i<teamsList.length; i++){
+		html = html+teamsList[i]+" : "+counts[i]+"명, ";
+	}
+	html = html.substring(0, html.length-2);//맨마지막의 ", "를 잘라내는 처리
+	html = html + "</font>";
+	document.getElementById("teams").innerHTML = html;
+	
+	html = "<table border='1'><tr><th>일련번호</th><th>이름</th><th>소속팀</th><th>포지션</th>";
+	html = html + "<th>등번호</th><th>출신지역</th></tr>";
+	for(var i=0; i<players.length; i++){
+		html = html + "<tr><td>"+players[i].seq+"</td>"; 
+		html = html + "<td>"+players[i].name+"</td>"; 
+		html = html + "<td>"+players[i].team+"</td>"; 
+		html = html + "<td>"+players[i].position+"</td>"; 
+		html = html + "<td>"+players[i].b_num+"</td>"; 
+		html = html + "<td>"+players[i].addr+"</td></tr>"; 
+	}
+	html = html + "</table>";
+	document.getElementById("players").innerHTML = html;
+}
+</script>
+</body>
+</html>
