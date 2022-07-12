@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study1</title>
+</head>
+<body>
+<div align="center">
+<h2>JSON(JavaScript Object Notation)</h2>
+<h3>자바스크립트의 독특한 데이터 표현 구조이다.</h3>
+<h3>데이터의 표현을 키와 값이 쌍으로 표현한다.</h3>
+<h3>JSON 형태 ---> {키:값, 키:값, 키:값, ...}</h3>
+<br/><br/><br/>
+
+<h2 id="company"></h2>
+<p><strong>회사 설립년도 : </strong><span id="since"></span></p>
+<h2>보유 품목</h2>
+<ul id="items"></ul>
+<h2>관리자 성명</h2>
+<ul id="manager"></ul>
+<h2>회사 주소</h2>
+<ul id="address"></ul>
+<h2>월별 판매 랭킹</h2>
+<input type="button" value="결과 보기" onClick="nestedJson()"/>
+<div id="ranking"></div><br/>
+<br/><br/><br/>
+
+<input type="button" value="신작 영화 소개" onClick = "newArrival()"/>
+<div id="movieInfo"></div><br/>
+<br/><br/><br/>
+
+<input type="button" value="한글인사" onClick="myOwn.korea()"/><br/>
+<input type="button" value="영어인사" onClick="myOwn.america()"/>
+<div id="lang"></div>
+<br/><br/><br/>
+<script type="text/javascript">
+var myOwn = {
+		"blue":"#00f", "red":"#f00",
+		"korea":function(){
+			document.getElementById("lang").innerHTML = "<h2>안녕하세요</h2>";
+			document.getElementById("lang").style.color = this.blue;
+		},
+		"america":function(){
+			document.getElementById("lang").innerHTML = "<h2>Hello</h2>";
+			document.getElementById("lang").style.color = this.red;
+		},
+};//JSON 안에 함수
+
+var information = {//JSON 객체 선언
+	"company":"(주) 우리집",
+	"since":2019,
+	"manager":"홍길동",
+	"address":"서울시 송파구 ㅇㅇㅇ, ㅊㅊㅊ",
+	"items":["의류","소품","신발"]
+};
+document.getElementById("company").innerHTML = information.company;
+document.getElementById("since").innerHTML = information.since;
+var sellingItems = "";
+for(var i=0; i<information.items.length; i++){
+	sellingItems = sellingItems + "<li>" +information.items[i]+"</li>";
+}
+document.getElementById("items").innerHTML = sellingItems;
+document.getElementById("manager").innerHTML = information.manager;
+document.getElementById("address").innerHTML = information.address;
+function nestedJson(){
+	var hotSales = {
+			"J":{"sales":12345, "item":"보온장갑"},
+			"F":{"sales":15432, "item":"보온조끼"},
+	};//JSON 객체(JSON 안에 JSON)
+	var result = "1월 판매액 : "+hotSales.J.sales+", 상품명 : "+hotSales.J.item+"<br/>";
+	result = result + "2월 판매액 : "+hotSales.F.sales+", 상품명 : "+hotSales.F.item+"<br/>";
+	document.getElementById("ranking").innerHTML = result;
+}
+function newArrival() {
+	var cinema = {
+			"name":"자바 씨네마","location":"서울시 강남구","history":"2019년에 개장된 영화관으로 자바만의 "+
+			"독특한 서비스를 제공하는 새로운 개념의 영화관입니다.","seats":500,
+			"movies":[
+				{"title":"바람의 검심1","actor":"토마스 조이","director":"제임스 카메론","date":"2022/07/17"},
+				{"title":"바람의 검심2","actor":"토마스 조이","director":"제임스 카메론","date":"2022/07/17"},
+				{"title":"바람의 검심3","actor":"토마스 조이","director":"제임스 카메론","date":"2022/07/17"}
+			]
+	};//JSON안에 배열 안에 JSON
+	var html = "<h2 align='center'>"+cinema.name+"</h2>";
+	html = html + "<h3 align='center'>연혁 : "+cinema.history+"</h3>";
+	html = html + "<h3 align='center'>위치 : "+cinema.location+", 총 좌석수 : "+cinema.seats+"</h3>";
+	html = html + "<h3 align='center'>신작</h3>";
+	html = html + "<table border='1'>";
+	for(var i=0; i<cinema.movies.length; i++){
+		var movie = cinema.movies[i];
+		html = html + "<tr><td>영화제목 : "+movie.title+"/ 주연 : "+movie.actor+"/ 감독 : "+
+		movie.director+"/ 상영일 : "+movie.date+"</td></tr>";
+	}
+	html = html + "</table>";
+	document.getElementById("movieInfo").innerHTML = html;
+}
+</script>
+</div>
+</body>
+</html>
