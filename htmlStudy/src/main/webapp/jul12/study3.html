@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study3</title>
+</head>
+<body>
+<div align="center">
+<h2>일본 관광지 소개 App</h2>
+<form action="" name="frm">
+<table>
+<tr><th>지 역 선 택</th><td><select name="LOC">
+	<option value="tokyo">동경</option>
+	<option value="north">북해도</option>
+	</select></td></tr>
+<tr><th>소 개</th><td><textarea id="here" rows="6" cols="60"></textarea></td></tr>
+<tr><td colspan="2" align="center">
+	<input type="button" value="보 기" onClick="hotSpot()"/></td></tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+var tourPlace = {
+		"tokyo":{
+			"intro":"일본의 수도로 다양한 맛집과 문화를"+" 체험할 수 있다.",
+			"matjip":"동경일식 - 동경 1번가에 있으며 스시가 아주 맛있습니다."
+		},
+		"north":{
+			"intro":"일본 최북단에 있는 섬이며 눈이 많이 내린다. 눈축제와 얼음 축제가 유명하다",
+			"matjip":"삿포로 라멘 - 삿포로 1번가 라멘 골목에서 가장 오래된 식당. 육수가 일품이다."
+		}
+};
+function hotSpot(){
+	var city = document.frm.LOC.value;
+	var json = "";
+	switch(city){
+	case "tokyo": json = tourPlace.tokyo; break;
+	case "north": json = tourPlace.north; break;
+	}
+	var html = json.intro + "\n\n유명한 맛집 : "+json.matjip;
+	document.getElementById("here").innerHTML = html;
+}
+</script>
+</body>
+</html>
