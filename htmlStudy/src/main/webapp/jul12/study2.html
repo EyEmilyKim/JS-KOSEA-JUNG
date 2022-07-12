@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>study2</title>
+<style type="text/css">
+td { padding:10px; }
+</style>
+</head>
+<body>
+<div align="center">
+<h2>올림픽 메달 집계 ver1.0</h2>
+<table border="1">
+<tr><th>캐나다</th><th>중 국</th><th>대한민국</th></tr>
+<tr><td id="canada">
+	<input type="button" value="결과 보기" onClick="canada()"/></td>
+	<td id="china">
+	<input type="button" value="결과 보기" onClick="china()"/></td>
+	<td id="korea">
+	<input type="button" value="결과 보기" onClick="korea()"/></td></tr>
+</table>
+</div>
+<script type="text/javascript">
+var medals = {
+		"canada":{"gold":5, "silver":8, "bronze":10 },
+		"china":{"gold":2, "silver":4, "bronze":6 },
+		"korea":{"gold":5, "silver":8, "bronze":3 },
+}
+function canada(){
+	var html = "<table><tr><th>금메달</th><td>";
+	html = html + medals.canada.gold+"</td></tr>";
+	html = html + "<tr><th>은메달</th><td>";
+	html = html + medals.canada.silver+"</td></tr>";
+	html = html + "<tr><th>동메달</th><td>";
+	html = html + medals.canada.bronze+"</td></tr></table>";
+	document.getElementById("canada").innerHTML = html;
+}
+function china(){
+	var html = "<table><tr><th>금메달</th><td>";
+	html = html + medals.china.gold+"</td></tr>";
+	html = html + "<tr><th>은메달</th><td>";
+	html = html + medals.china.silver+"</td></tr>";
+	html = html + "<tr><th>동메달</th><td>";
+	html = html + medals.china.bronze+"</td></tr></table>";
+	document.getElementById("china").innerHTML = html;	
+}
+function korea(){
+	var html = "<table><tr><th>금메달</th><td>";
+	html = html + medals.korea.gold+"</td></tr>";
+	html = html + "<tr><th>은메달</th><td>";
+	html = html + medals.korea.silver+"</td></tr>";
+	html = html + "<tr><th>동메달</th><td>";
+	html = html + medals.korea.bronze+"</td></tr></table>";
+	document.getElementById("korea").innerHTML = html;	
+}
+</script>
+</body>
+</html>
