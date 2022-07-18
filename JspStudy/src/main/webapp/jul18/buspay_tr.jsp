@@ -15,7 +15,7 @@ String num = request.getParameter("NUM");
 String customer = request.getParameter("NAME");
 //운임(일반) = 목적지 가격 * 인원수
 //운임(우등) = 일반 * 1.1
-//목적지 가격 - 대전(20000), 강릉(28000), 광주(30000), 대구(30000), 부산(30000)
+//목적지 가격 - 대전(20000), 강릉(28000), 광주(30000), 대구(30000), 부산(40000)
 //좌석등급 - 우등 = 일반의 110%
 int price = calculate(target,num);
 double realPrice = 0;
@@ -40,7 +40,7 @@ int calculate(String target, String num){
 	case "2": total = 28000 * quantity; break; //강릉
 	case "3": total = 30000 * quantity; break; //광주
 	case "4": total = 30000 * quantity; break; //대구
-	case "5": total = 30000 * quantity; break; //부산
+	case "5": total = 40000 * quantity; break; //부산
 	}
 	return total;
 }
