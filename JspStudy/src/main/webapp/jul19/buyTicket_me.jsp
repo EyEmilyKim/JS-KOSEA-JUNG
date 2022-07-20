@@ -51,7 +51,7 @@ td { padding: 2px 10px; }
 <tr><td>영화</td><td><%=movie %></td></tr>
 <tr><td>날짜</td><td><%=date %></td></tr>
 <tr><td>시간</td><td><%=time %></td></tr>
-<tr><td>구분</td><td><%=age %></td></tr>
+<tr><td>구분</td><td><%=ageT %></td></tr>
 <tr><td>인원</td><td><%=numInt %></td></tr>
 </table>
 </div>
