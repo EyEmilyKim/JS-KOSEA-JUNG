@@ -11,9 +11,9 @@
 <h2>((도전과제))영화 예매 홈</h2>
 <%
 String movies[] = {"앨비스","미니언즈","토르","명탐정 코난","샷건"};
-String times[] = {"AM 10:00","PM 12:00","PM 14:00","PM 16:00","PM 18:00","PM 20:00"};
+String times[] = {"10:00","12:00","14:00","16:00","18:00","20:00"};
 %>
-<form action="buyTicket.jsp">
+<form action="buyTicket_me.jsp">
 <p>관람할 영화를 선택하세요. <select name="MOVIE">
 <%
 	for(int i=0; i<movies.length; i++){
