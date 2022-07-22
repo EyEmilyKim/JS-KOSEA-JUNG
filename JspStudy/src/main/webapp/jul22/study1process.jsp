@@ -19,10 +19,14 @@
 	//결과 페이지(study1result.jsp)로 전환
 	//Redirect? Forward?
 	//1.Redurect
-	response.sendRedirect("study1result.jsp?S="+sum+"&U="+sub+"&M="+mul+"&D="+div);
+// 	response.sendRedirect("study1result.jsp?S="+sum+"&U="+sub+"&M="+mul+"&D="+div);
 	//2.Forward
-// 	RequestDispatcher r = request.getRequestDispatcher("study1result.jsp?S="+sum+"&U="+sub+"&M="+mul+"&D="+div);
-// 	r.forward(request, response);
+	RequestDispatcher r = request.getRequestDispatcher("study1result_.jsp");
+	request.setAttribute("SUM", sum);
+	request.setAttribute("SUB", sub);
+	request.setAttribute("MUL", mul);
+	request.setAttribute("DIV", div);
+	r.forward(request, response);
 %>
 </body>
 </html>

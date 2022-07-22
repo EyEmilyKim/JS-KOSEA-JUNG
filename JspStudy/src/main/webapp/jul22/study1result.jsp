@@ -7,14 +7,11 @@
 <title>study1result</title>
 </head>
 <body>
-<%
- 	String s = request.getParameter("S");
-	String u = request.getParameter("U");
-	String m = request.getParameter("M"); 
-	String d = request.getParameter("D");
-%>
 <p>
-덧셈의 결과 : <%=s %>, 뺄셈의 결과 : <%=u %>, 곱셈의 결과 : <%=m %>, 나눗셈의 결과 : <%=d %>
+덧셈의 결과 : ${param.S }<br/> 
+뺄셈의 결과 : ${param.U }<br/>
+곱셈의 결과 : ${param.M }<br/> 
+나눗셈의 결과 : ${param.D }<br/>  
 </p>
 </body>
 </html>
