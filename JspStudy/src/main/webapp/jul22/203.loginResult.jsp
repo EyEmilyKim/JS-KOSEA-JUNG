@@ -13,10 +13,10 @@
 String result = request.getParameter("R");
 if(result.equals("OK")){
 // 	out.print("로그인 되었습니다~!!");
-	String id = (String)session.getAttribute("MEMBER");
+// 	String id = (String)session.getAttribute("MEMBER");
 %>
 	<form action="206.logoutIndex.jsp">
-	환영합니다~ <%=id %>님~
+	환영합니다~ ${sessionScope.MEMBER }님~
 	<input type="submit" value="로그아웃"/>
 	</form>
 <%

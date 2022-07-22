@@ -49,7 +49,7 @@
 	빛나는 그대 두 눈동자속에 푸른 바다가 있네<br/>
 	파도의 노래를 듣게 친구여 마음이 부르는 그 노래<br/>
 	<% 	}else{ 	%>		
-		<jsp:include page="<%=body %>"/>
+		<jsp:include page="${param.BODY}"/>
 	<% 	} 	%>
 	</td>
 </tr>
