@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="jul25.*" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,21 @@
 <title>402.itemList</title>
 </head>
 <body>
-${requestScope.ITEMS[0].code }, ${requestScope.ITEMS[0].name }, ${requestScope.ITEMS[0].price } 
+<div align="center">
+<h2>상 품 목 록</h2>
+<table border="1">
+	<tr><th>상품번호</th><th>상품이름</th><th>가 격</th></tr>
+	<%
+	Item[] items = (Item[])request.getAttribute("ITEMS");
+	for(int i=0; i<items.length; i++){
+	%>
+	<tr><td><%=items[i].code %></td>
+		<td><%=items[i].name %></td>
+		<td><%=items[i].price %></td>
+	<%	
+	}
+	%>
+</table>
+</div>
 </body>
 </html>
