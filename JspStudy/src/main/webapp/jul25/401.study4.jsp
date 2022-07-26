@@ -30,7 +30,7 @@
 	//items배열을 itemList.jsp로 전달한다.
 	//Redirect? Forward? 둘 다 가능?  --> 정답: Forward만 가능!
 	request.setAttribute("ITEMS", items);
-	RequestDispatcher rd = request.getRequestDispatcher("402.itemList.jsp");
+	RequestDispatcher rd = request.getRequestDispatcher("402.itemList_2.jsp");
 	rd.forward(request, response);
 %>
 </body>
