@@ -12,6 +12,12 @@
 		margin-left: 20px; margin-right: 20px;
 		background-color: #F5F5F5;
 	}
+	#login {
+		text-align: center;
+		margin: 10px; padding: 10px;
+		border: 1px dashed green;
+		background-color: yellow;
+	}
 	#menu {
 		margin-top:10px; margin-bottom: 10px; margin-left:10px; margin-right:10px;
 		padding: 20px;
@@ -45,6 +51,7 @@ function workingClock(){
 	document.getElementById("clock").innerHTML = time;
 }
 function startClock(){
+	workingClock();
 	setInterval(workingClock,1000);//(함수이름,시간간격). 시간간격 1000=1초
 }
 </script>
@@ -55,6 +62,9 @@ function startClock(){
 	<table id="body">
 		<tr>
 			<td class="main">
+				<div id="login">
+					<jsp:include page="401.login.jsp"/>
+				</div>
 				<div id="menu">
 					<a href="template.jsp?BODY=201.intro.jsp">■ 소개</a><br/>
 					<a href="template.jsp?BODY=301.gababoHome.jsp">■ 가위바위보 게임</a><br/>
