@@ -67,7 +67,7 @@ function startClock(){
 			<%-- <%
 				String man = (String)session.getAttribute("MANAGER");
 				String login_id = (String)session.getAttribute("LOGINID");
-				if( (man != null)||(login_id != null) ){//man 이나 loginid 중 하나라도 있는 경우(로그인 성공)
+				if( (man != null)||(login_id != null) ){//man 이나 login_id 중 하나라도 있는 경우(로그인 성공)
 				%>	 --%>
 			<c:set var="man" value="${sessionScope.MANAGER }"/>	
 			<c:set var="id" value="${sessionScope.LOGINID }"/>	
@@ -89,7 +89,7 @@ function startClock(){
 					<a href="template.jsp?BODY=201.intro.jsp">■ 소개</a><br/>
 					<a href="template.jsp?BODY=301.gababoHome.jsp">■ 가위바위보 게임</a><br/>
 					<a href="template.jsp?BODY=101.beerHome.jsp">■ 맥주추천</a><br/>
-					<a href="template.jsp?BODY=matjipHome.jsp">■ 맛집추천</a><br/>
+					<a href="template.jsp?BODY=500.matjipMake.jsp">■ 맛집추천</a><br/>
 					<a href="template.jsp?BODY=coffeeHome.jsp">■ 커피주문</a><br/>
 					<a href="template.jsp?BODY=BusHome.jsp">■ 버스예매</a><br/>
 					<a href="template.jsp?BODY=">■ 공지사항 보기</a><br/>
@@ -112,8 +112,8 @@ function startClock(){
 	</table>
 </section>
 <footer>
-	<h3 align="center">Copyright 2022.MyHome. 
-	<span id="clock"></span></h3>
+	<h5 align="center">Copyright 2022.MyHome. 
+	<span id="clock"></span></h5>
 </footer>
 </body>
 </html>
