@@ -9,10 +9,15 @@
 </head>
 <body>
 <div align="center">
+<c:set var="id" value="${sessionScope.LOGINID }"/>
+<c:set var="man" value="${sessionScope.MANAGER }"/>
 <c:choose>
 	<c:when test="${param.R =='OK'}">
 		로그인 되었습니다.<br/>
-		XXX님~ 환영합니다.	
+			<c:choose>
+				<c:when test="${! empty man }">환영합니다~ ${man }님~~~</c:when>
+				<c:when test="${id != null }">환영합니다~ ${id }님~~~</c:when>
+			</c:choose>	
 	</c:when>
 	<c:otherwise>
 		로그인에 실패했습니다.<br/>

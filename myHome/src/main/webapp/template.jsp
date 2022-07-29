@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,26 @@ function startClock(){
 		<tr>
 			<td class="main">
 				<div id="login">
+			<%-- <%
+				String man = (String)session.getAttribute("MANAGER");
+				String login_id = (String)session.getAttribute("LOGINID");
+				if( (man != null)||(login_id != null) ){//man 이나 loginid 중 하나라도 있는 경우(로그인 성공)
+				%>	 --%>
+			<c:set var="man" value="${sessionScope.MANAGER }"/>	
+			<c:set var="id" value="${sessionScope.LOGINID }"/>	
+			<c:choose>
+				<c:when test="${! empty man || ! empty id }">
+					<jsp:include page="404.logout.jsp"/>
+				</c:when>
+				<c:otherwise>
 					<jsp:include page="401.login.jsp"/>
+				</c:otherwise>
+			</c:choose> 
+<%-- 					<jsp:include page="404.logout.jsp"/>
+			<%	}else { %>
+					<jsp:include page="401.login.jsp"/>
+			<%	}  %> --%>
+			
 				</div>
 				<div id="menu">
 					<a href="template.jsp?BODY=201.intro.jsp">■ 소개</a><br/>
@@ -73,7 +93,16 @@ function startClock(){
 					<a href="template.jsp?BODY=coffeeHome.jsp">■ 커피주문</a><br/>
 					<a href="template.jsp?BODY=BusHome.jsp">■ 버스예매</a><br/>
 					<a href="template.jsp?BODY=">■ 공지사항 보기</a><br/>
+				<c:if test="${!empty man }">
 					<a href="template.jsp?BODY=">■ 공지사항 쓰기</a><br/>
+				</c:if>
+<%-- 			<% 
+					if(man!=null){
+				%>
+					<a href="template.jsp?BODY=">■ 공지사항 쓰기</a><br/>
+				<%		
+					}
+				%> --%>
 				</div>
 			</td >
 			<td id="content">
