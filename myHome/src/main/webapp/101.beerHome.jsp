@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,13 @@
 <title>beerHome</title>
 </head>
 <body>
+<!-- 세션 로그인 확인 -->
+<c:if test="${empty sessionScope.LOGINID }">
+	<script type="text/javascript">
+		location.href="template.jsp?BODY=401.login.jsp?M=Y";
+	</script>
+</c:if>
+<!-- 맥주추천 홈 -->
 <div align="center">
 <h2>맥주 추천 홈</h2>
 <form action="102.beerSelect.jsp">
