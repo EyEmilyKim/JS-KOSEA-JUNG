@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- 세션 로그인 확인 -->
-<c:if test="${sessionScope.LOGINID == null }">
+<c:if test="${sessionScope.LOGINID == null && sessionScope.MANAGER == null }">
 	<script type="text/javascript">
 		location.href="template.jsp?BODY=401.login.jsp?M=Y";
 	</script>
