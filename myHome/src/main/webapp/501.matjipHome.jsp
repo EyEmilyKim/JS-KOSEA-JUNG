@@ -8,7 +8,7 @@
 <title>matjipHome</title>
 </head>
 <body>
-<c:if test="${sessionScope.LOGINID == null }">
+<c:if test="${empty sessionScope.LOGINID && empty sessionScope.MANAGER }">
 	<script type="text/javascript">
 	location.href="template.jsp?BODY=401.login.jsp?M=Y";
 	</script>

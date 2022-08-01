@@ -30,6 +30,15 @@
 			{"성북나라","성복일가","성북양식","복집성북"},
 			{"서초한식","서초일식","서초보나라","꼬꼬서초","맥시서초",}
 	};
+	//선택한 동네의 위치가 index에 있다.
+	//선택한 동네의 맛집 목록은 matjips[index][0],matjips[index][1]...
+	//matjips[index]의 열 개수: matijips[index].length
+	//맛집의 결과를 출력하는 JSP(matjipResult.jsp)로 전환
+	//선택한 동네의 맛집이 들어있는 배열을 jsp로 전달 -> Forward
+	request.setAttribute("AREA", areas[index]);
+	request.setAttribute("MATJIP", matjips[index]);
+	RequestDispatcher rd = request.getRequestDispatcher("template.jsp?BODY=503.matjipResult.jsp");
+	rd.forward(request, response);
 %>
 </body>
 </html>
