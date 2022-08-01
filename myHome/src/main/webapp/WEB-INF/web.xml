@@ -3,4 +3,12 @@
 		 xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
 		 xsi:schemaLocation="http://mxlns.jcp.org/xml/ns/javaee http://mxlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
 		 id="WebApp_ID" version="3.1">
+<error-page>
+	<error-code>404</error-code>
+	<location>/template.jsp?BODY=error404.jsp</location>
+</error-page>
+<error-page>
+	<error-code>500</error-code>
+	<location>/template.jsp?BODY=error500.jsp</location>
+</error-page>
 </web-app>
