@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, java.math.*" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +21,19 @@ int priceInt = Integer.parseInt(price);//문자열->정수
 int numInt = Integer.parseInt(num);//문자열->정수
 double totalDouble = 0;//최종요금을 위한 변수 선언
 if(seat.equals("1")){//일반석
-	totalDouble = priceInt * 1 * numInt;
+	totalDouble = priceInt * 1 * numInt;//오차 발생
+// 	BigDecimal priceD = new BigDecimal(price);
+// 	BigDecimal numD = new BigDecimal(num);
+// 	BigDecimal totalD = priceD.multiply(numD);
+// 	System.out.println("총계 : "+totalD+" 원입니다.");
 }else if(seat.equals("2")){//우등석
 	totalDouble = priceInt * 1.1 * numInt;
+// 	BigDecimal priceD = new BigDecimal(price);
+// 	BigDecimal numD = new BigDecimal(num);
+// 	BigDecimal totalD = priceD.multiply(numD);
+// 	BigDecimal seatD = new BigDecimal("1.1");
+// 	BigDecimal TotalD_ = totalD.multiply(seatD);
+// 	System.out.println("총계 : "+ TotalD_ +" 원입니다.");
 }
 int total = (int)totalDouble;
 
