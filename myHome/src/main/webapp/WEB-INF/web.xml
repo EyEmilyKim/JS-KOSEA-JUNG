@@ -11,4 +11,15 @@
 	<error-code>500</error-code>
 	<location>/template.jsp?BODY=error500.jsp</location>
 </error-page>
+
+<jsp-config>
+	<taglib>
+		<taglib-uri>http://bartag.taglib5.com</taglib-uri>
+		<taglib-location>/WEB-INF/taglib5.tld</taglib-location>
+	</taglib>
+	<taglib>
+		<taglib-uri>http://random.taglib4.com</taglib-uri>
+		<taglib-location>/WEB-INF/taglib4.tld</taglib-location>
+	</taglib>
+</jsp-config>
 </web-app>
