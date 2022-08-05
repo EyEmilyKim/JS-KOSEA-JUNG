@@ -18,7 +18,7 @@
 <div align="center">
 <h2>가위,바위,보에 오신 것을 환영합니다.</h2>
 <p>가위,바위,보 중에 하나를 선택하고 버튼을 누르세요.</p>
-<form action="302.gababoProcess.jsp" onSubmit="return check(this)">
+<form action="gababoProcess.do" onSubmit="return check(this)">
 가위<input type="radio" name="CHOICE" value="1"/>,  
 바위<input type="radio" name="CHOICE" value="2"/>,  
 보<input type="radio" name="CHOICE" value="3"/><br/><br/>

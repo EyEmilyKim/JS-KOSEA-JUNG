@@ -103,7 +103,7 @@ function startClock(){
 				<%		
 					}
 				%> --%>
-					<a href="800.makeRegion.jsp">● 세계의 시간</a><br/>
+					<a href="makeRegion.do">● 세계의 시간</a><br/>
 					<a href="template.jsp?BODY=901.makeRandom.jsp">● 난수 만들기</a><br/>
 				</div>
 			</td >
