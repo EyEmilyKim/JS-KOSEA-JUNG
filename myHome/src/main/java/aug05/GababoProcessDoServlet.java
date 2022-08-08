@@ -1,30 +1,23 @@
 package aug05;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class GababoProcessDoServlet
- */
 @WebServlet("/gababoProcess.do")
 public class GababoProcessDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public GababoProcessDoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//파라미터(CHOICE)를 수신한다
 		String c = request.getParameter("CHOICE");
@@ -36,6 +29,9 @@ public class GababoProcessDoServlet extends HttpServlet {
 		//gababoResult.jsp로 결과를 전송
 		//1.Redirect 2.Forward 3.both OK ->정답:1(결과 페이지에서 난수가 바뀌면 안되기 때문에)
 		response.sendRedirect("template.jsp?BODY=303.gababoResult.jsp?R="+result+"&G="+gamer+"&C="+com);
+		//2.Forward
+//		RequestDispatcher rd = request.getRequestDispatcher("template.jsp?BODY=303.gababoResult.jsp?R="+result+"&G="+gamer+"&C="+com);
+//		rd.forward(request, response);
 	}
 
 	int winner(int g, int c){
@@ -51,9 +47,6 @@ public class GababoProcessDoServlet extends HttpServlet {
 		return result;
 	}
 		
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
