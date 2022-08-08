@@ -11,7 +11,7 @@
 <div align="center">
 <h2>지역을 선택합니다.</h2>
 <c:set var="zone" value="${requestScope.ZONE }" />
-<form action="802.makeDate.jsp">
+<form action="makeDate.do">
 원하시는 지역을 선택하고, 버튼을 누르시면 해당 지역의 날짜와 시간을 볼 수 있습니다.<br/>
 지역 선택 : <select name="AREA">
 	<c:forEach items="${zone }" var="name">
