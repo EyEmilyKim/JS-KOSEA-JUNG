@@ -17,7 +17,7 @@
 <!-- 맥주추천 홈 -->
 <div align="center">
 <h2>맥주 추천 홈</h2>
-<form action="102.beerSelect.jsp">
+<form action="beerSelect.do">
 <p>원하시는 색을 선택하세요. </p>
 <select name="COLOR">
 	<option value="L">밝은색</option>
