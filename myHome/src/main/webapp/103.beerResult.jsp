@@ -8,7 +8,7 @@
 <title>beerResult</title>
 </head>
 <body>
-<div>
+<div align="center">
 <h2>추천된 맥주 목록</h2>
 <table border="1">
 <tr><th>일련번호</th><th>추천된 맥주 이름</th></tr>
