@@ -11,7 +11,7 @@
 <%
 	String area = request.getParameter("AREA");
 	Date today = new Date();
-	//showDate.jsp로 전환 => Forward 둘 다
+	//showDate.jsp로 전환 => Forward
 	request.setAttribute("AREA", area);
 	request.setAttribute("TODAY", today);
 	RequestDispatcher r = request.getRequestDispatcher("template.jsp?BODY=803.showDate.jsp");
