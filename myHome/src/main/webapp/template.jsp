@@ -89,7 +89,7 @@ function startClock(){
 					<a href="template.jsp?BODY=201.intro.jsp">■ 소개</a><br/>
 					<a href="template.jsp?BODY=301.gababoHome.jsp">■ 가위바위보 게임</a><br/>
 					<a href="template.jsp?BODY=101.beerHome.jsp">■ 맥주추천</a><br/>
-					<a href="template.jsp?BODY=500.matjipMake.jsp">■ 맛집추천</a><br/>
+					<a href="matjipMake.do">■ 맛집추천</a><br/>
 					<a href="template.jsp?BODY=601.coffeeHome.jsp">■ 커피주문</a><br/>
 					<a href="700.busMake.jsp">■ 버스예매</a><br/>
 					<a href="template.jsp?BODY=">■ 공지사항 보기</a><br/>
