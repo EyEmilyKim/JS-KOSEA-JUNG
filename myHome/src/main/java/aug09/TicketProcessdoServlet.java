@@ -1,4 +1,4 @@
-package aug08;
+package aug09;
 
 import java.io.IOException;
 
@@ -32,8 +32,7 @@ public class TicketProcessdoServlet extends HttpServlet {
 		String num = request.getParameter("NUM");
 		int numInt = Integer.parseInt(num);
 		int total = getTotal(age, numInt); 
-		String ageS = getAge(age);
-		request.setAttribute("AGE", ageS);
+		request.setAttribute("AGE", age);
 		request.setAttribute("NUM", numInt);
 		request.setAttribute("TOTAL", total);
 		RequestDispatcher rd = request.getRequestDispatcher("template.jsp?BODY=1003.ticketResult.jsp");
@@ -42,21 +41,12 @@ public class TicketProcessdoServlet extends HttpServlet {
 	int getTotal(String a, int n){
 		int price = 0;
 		switch(a){
-		case "T": price=7000; break;
-		case "A": price=10000; break;
-		case "S": price=5000; break;
+		case "청소년": price=7000; break;
+		case "성인": price=10000; break;
+		case "노인": price=5000; break;
 		}
 		int total = price * n; 
 		return total;
-	}
-	String getAge(String a) {
-		String ageS = null;
-		switch(a){
-		case "T": ageS="청소년"; break;
-		case "A": ageS="성인"; break;
-		case "S": ageS="노인"; break;
-		}
-		return ageS;
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

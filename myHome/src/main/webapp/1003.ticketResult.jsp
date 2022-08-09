@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>1003.ticketResult.jsp</title>
 <style type="text/css">
-tr { text-align:center; }
+.center { text-align:center; }
 .red { color:red; }
 </style>
 </head>
@@ -16,7 +16,7 @@ tr { text-align:center; }
 <div align="center">
 <h2>결 제 화 면</h2>
 <p>결제 내용은 아래와 같습니다</p>
-<table>
+<table class="center">
 <tr><td>구분</td>
 	<td>${requestScope.AGE }</td></tr>
 <tr><td>매수</td>

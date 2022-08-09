@@ -19,10 +19,10 @@
 <h2>티 켓 예 매</h2>
 <p>연령대와 매수를 선택한 후 결제하기 버튼을 누르세요</p>
 <form action="ticketProcess.do">
-연령대 : <select name="AGE">
-	<option value="T">청소년: 7000원/매</option>
-	<option value="A">성인: 10000원/매</option>
-	<option value="S">노인: 5000원/매</option>
+구 분 : <select name="AGE">
+	<option value="청소년">청소년: 7000원/매</option>
+	<option value="성인">성인: 10000원/매</option>
+	<option value="노인">노인: 5000원/매</option>
 </select>
 매 수 : <select name="NUM">
 	<c:forEach begin="1" end="10" var="cnt">
