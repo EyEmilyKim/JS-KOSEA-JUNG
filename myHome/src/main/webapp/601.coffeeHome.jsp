@@ -18,7 +18,7 @@
 <div align="center">
 <h2>커피 주문 App</h2>
 <p>원하시는 커피를 선택하고 주문 버튼을 누르세요. </p>
-<form action="602.coffeeOrder.jsp">
+<form action="coffeeOrder.do">
 아메리카노 <input type="radio" name="NAME" value="A"/>, 
 카푸치노 <input type="radio" name="NAME" value="B"/>, 
 카페모카 <input type="radio" name="NAME" value="C"/>, 
