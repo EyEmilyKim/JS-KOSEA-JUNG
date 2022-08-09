@@ -16,7 +16,7 @@
 <div align="center">
 <h2>맛집 홈에 오신 것을 환영합니다</h2>
 <p>지역을 선택하고, 버튼을 누르면 맛집 목록을 볼 수 있습니다.</p>
-<form action="502.matjipProcess.jsp">
+<form action="matjipProcess.do">
 지역 선택 : <select name="AREA">
 <c:forEach items="${requestScope.AREA }" var="areas" >
 	<option>${areas }</option>
