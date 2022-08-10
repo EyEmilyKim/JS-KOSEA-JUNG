@@ -23,7 +23,7 @@
 	<tr><th>행 선 지</th><th>요 금</th>
 		<th>인 원 수</th><th>좌석 종류</th><th>선 택</th></tr>
 <c:forEach begin="0" end="${requestScope.LENGTH - 1}" var="i">
-	<form action="702.busProcess.jsp" >
+	<form action="busProcess.do" >
 	<input type="hidden" name="DESTINATION" value="${requestScope.DESTI[i] }"/>
 	<input type="hidden" name="PRICE" value="${requestScope.PRICE[i] }"/>
 	<tr><td>${requestScope.DESTI[i] }</td>
