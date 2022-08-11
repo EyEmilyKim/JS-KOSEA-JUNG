@@ -28,8 +28,10 @@ public class MatjipMakeDoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//맛집의 지역 이름을 배열에 넣는다
-		String[] areas = {"종로구","성동구","강동구","강서구","강남구","강북구","송파구","성북구","서초구"};
+		MatjipSpecialist ms = new MatjipSpecialist();
+		String[] areas = ms.makeAreas();
+//		//맛집의 지역 이름을 배열에 넣는다
+//		String[] areas = {"종로구","성동구","강동구","강서구","강남구","강북구","송파구","성북구","서초구"};
 		//배열을 matjipHome.jsp로 전달한다
 		//Forward only
 		request.setAttribute("AREA",areas);
