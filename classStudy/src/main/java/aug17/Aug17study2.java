@@ -41,6 +41,9 @@ class Suzuki {
 		}else if(k.record < t.record){ System.out.println("Tanaka 승");
 		}else { System.out.println("무승부");}
 	}
+}
+class Sato{
+	Sato(){}
 	void winnerH(double KrecH, double TrecH) {
 		if(KrecH > TrecH) { System.out.println("Kobayashi 승");
 		}else if(KrecH < TrecH) { System.out.println("Tanaka 승");
@@ -69,7 +72,8 @@ public class Aug17study2 {
 		t.jumpHigh();
 		System.out.println("뛴 후 K: "+k.recordH);
 		System.out.println("뛴 후 T: "+t.recordH);
-		s.winnerH(k.recordH, t.recordH);
+		Sato st = new Sato();
+		st.winnerH(k.recordH, t.recordH);
 	}
 
 }
