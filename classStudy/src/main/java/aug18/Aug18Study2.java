@@ -15,17 +15,21 @@ class Kiku{
 	Kiku(){ price = 10000;}
 	int price;
 }
-class javaFlower{
+class JavaFlower{
 	Rose r;
-	Kiku k;
-	javaFlower(){
+	JavaFlower(){
 		r = new Rose();
+	}
+}
+class BajaFlower{
+	Kiku k;
+	BajaFlower(){
 		k = new Kiku();
 	}
 }
 class Ito{
 	int money;
-	Ito(){ money = 50000;}
+	Ito(){ money = 50000; }
 	void buy(int price){
 		money = money - price;
 	}
@@ -34,12 +38,13 @@ class Ito{
 
 public class Aug18Study2 {
 	
-	public static void main(String[] args) {
-	javaFlower jf = new javaFlower();
+	public static void main(String[] args){
+	JavaFlower jf = new JavaFlower();
+	BajaFlower bf = new BajaFlower();
 	Ito ito = new Ito();
 	System.out.println("초기 잔고:"+ito.money);
 	ito.buy(jf.r.price);
-	ito.buy(jf.k.price);
+	ito.buy(bf.k.price);
 	System.out.println("구입 후 잔고:"+ito.money);
 	
 	}
