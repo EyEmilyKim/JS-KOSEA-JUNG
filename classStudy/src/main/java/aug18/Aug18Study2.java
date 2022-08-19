@@ -21,18 +21,25 @@ class JavaFlower{
 		r = new Rose();
 	}
 }
-class BajaFlower{
+class VajaFlower{
 	Kiku k;
-	BajaFlower(){
+	VajaFlower(){
 		k = new Kiku();
 	}
 }
 class Ito{
 	int money;
 	Ito(){ money = 50000; }
-	void buy(int price){
-		money = money - price;
+//	void buy(int price){
+//		money = money - price;
+	//↑뭔가를 사는 메서드..인데 아무 정수나 들어와도 돼버리니까 ↓처럼 설계.
+	void buyRose(Rose price) {//장미를 사는 메서드
+		money = money - price.price;
 	}
+	void buyKiku(Kiku price) {//국화를 사는 메서드
+		money = money - price.price;
+	}
+
 }
 
 
@@ -40,11 +47,13 @@ public class Aug18Study2 {
 	
 	public static void main(String[] args){
 	JavaFlower jf = new JavaFlower();
-	BajaFlower bf = new BajaFlower();
+	VajaFlower vf = new VajaFlower();
 	Ito ito = new Ito();
 	System.out.println("초기 잔고:"+ito.money);
-	ito.buy(jf.r.price);
-	ito.buy(bf.k.price);
+//	ito.buy(jf.r.price);
+//	ito.buy(bf.k.price);
+	ito.buyRose(jf.r);
+	ito.buyKiku(vf.k);
 	System.out.println("구입 후 잔고:"+ito.money);
 	
 	}
