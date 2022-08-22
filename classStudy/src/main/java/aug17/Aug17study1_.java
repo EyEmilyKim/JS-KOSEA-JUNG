@@ -55,19 +55,19 @@ public class Aug17study1_ {
 		System.out.println("히드라의 마나:"+h.mana+"\n");
 		
 		//1질럿이 2질럿을 1회 공격
-		z.attackZealot(z2);
+		z.attack(z2);
 		System.out.println("2질럿의 마나: "+z2.mana);//99
 		//3질럿이 2질럿을 1회 공격
-		z3.attackZealot(z2);
+		z3.attack(z2);
 		System.out.println("n2질럿의 마나: "+z2.mana);//98
 		//마린이 히드라를 2회 공격
-		m.attackHydra(h);
-		m.attackHydra(h);
+		m.attack(h);
+		m.attack(h);
 		System.out.println("히드라의 마나: "+h.mana);//98
 		//히드라가 1질럿을 3회 공격
-		h.attackZealot(z);
-		h.attackZealot(z);
-		h.attackZealot(z);
+		h.attack(z);
+		h.attack(z);
+		h.attack(z);
 		System.out.println("1질럿의 마나: "+z.mana);//97
 		
 	}

@@ -33,10 +33,10 @@ class Ito{
 //	void buy(int price){
 //		money = money - price;
 	//↑뭔가를 사는 메서드..인데 아무 정수나 들어와도 돼버리니까 ↓처럼 설계.
-	void buyRose(Rose price) {//장미를 사는 메서드
+	void buy(Rose price) {//장미를 사는 메서드
 		money = money - price.price;
 	}
-	void buyKiku(Kiku price) {//국화를 사는 메서드
+	void buy(Kiku price) {//국화를 사는 메서드
 		money = money - price.price;
 	}
 
@@ -52,8 +52,8 @@ public class Aug18Study2 {
 	System.out.println("초기 잔고:"+ito.money);
 //	ito.buy(jf.r.price);
 //	ito.buy(bf.k.price);
-	ito.buyRose(jf.r);
-	ito.buyKiku(vf.k);
+	ito.buy(jf.r);
+	ito.buy(vf.k);
 	System.out.println("구입 후 잔고:"+ito.money);
 	
 	}
