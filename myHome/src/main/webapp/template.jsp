@@ -93,14 +93,14 @@ function startClock(){
 					<a href="template.jsp?BODY=601.coffeeHome.jsp">■ 커피주문</a><br/>
 					<a href="template.jsp?BODY=1001.ticketHome.jsp">■ 티켓예매</a><br/>
 					<a href="busHome.do">■ 버스예매</a><br/>
-					<a href="template.jsp?BODY=">■ 공지사항 보기</a><br/>
+					<a href="getAllNotice.do">■ 공지사항 보기</a><br/>
 				<c:if test="${!empty man }">
-					<a href="template.jsp?BODY=">■ 공지사항 쓰기</a><br/>
+					<a href="template.jsp?BODY=1101.noticeInput.jsp">■ 공지사항 쓰기</a><br/>
 				</c:if>
 <%-- 			<% 
 					if(man!=null){
 				%>
-					<a href="template.jsp?BODY=">■ 공지사항 쓰기</a><br/>
+					<a href="template.jsp?BODY=1101.noticeInput.jsp">■ 공지사항 쓰기</a><br/>
 				<%		
 					}
 				%> --%>
