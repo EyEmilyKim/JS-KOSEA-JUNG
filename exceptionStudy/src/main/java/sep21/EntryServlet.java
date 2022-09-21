@@ -42,6 +42,12 @@ public class EntryServlet extends HttpServlet {
 		String writer = request.getParameter("WRITER");
 		String content = request.getParameter("CONTENT");
 		//id,title,writer,content 변수를 이용해서 삽입 수행
+		BBS bbs = new BBS();
+		bbs.setSeqno(Integer.parseInt(id));
+		bbs.setTitle(title);
+		bbs.setId(writer);
+		bbs.setContent(content);
+		
 		DBExpert dbe = new DBExpert();
 		boolean result = dbe.entryBBS(Integer.parseInt(id), writer, title, content);
 		if(result) { //삽입이 성공한 경우
