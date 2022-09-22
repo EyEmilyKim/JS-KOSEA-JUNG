@@ -8,7 +8,7 @@ public class DBExpert { //삽입, 삭제, 변경, 조회 메서드
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
-	public boolean entryBBS(int id, String w, String title, String cont ) {
+	public boolean entryBBS(BBS bbs) {
 		String insert = "insert into test_tbl values(?,?,?,sysdate,?)";
 		boolean flag = false; //작업 성공여부를 위한 변수
 		Connection con = null;
@@ -17,10 +17,10 @@ public class DBExpert { //삽입, 삭제, 변경, 조회 메서드
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, "hr", "hr");
 			pstmt = con.prepareStatement(insert);
-			pstmt.setInt(1, id); //글번호(정수) 설정
-			pstmt.setString(2, w); //작성자(문자열) 설정
-			pstmt.setString(3, title); //제목(문자열) 설정
-			pstmt.setString(4, cont); //글내용(문자열) 설정
+			pstmt.setInt(1, bbs.getSeqno()); //글번호(정수) 설정
+			pstmt.setString(2, bbs.getId()); //작성자(문자열) 설정
+			pstmt.setString(3, bbs.getTitle()); //제목(문자열) 설정
+			pstmt.setString(4, bbs.getContent()); //글내용(문자열) 설정
 			pstmt.executeUpdate();//insert 쿼리 실행
 			con.commit();
 			flag = true; //삽입 성공을 의미

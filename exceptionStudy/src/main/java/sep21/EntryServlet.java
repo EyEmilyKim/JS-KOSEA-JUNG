@@ -49,7 +49,7 @@ public class EntryServlet extends HttpServlet {
 		bbs.setContent(content);
 		
 		DBExpert dbe = new DBExpert();
-		boolean result = dbe.entryBBS(Integer.parseInt(id), writer, title, content);
+		boolean result = dbe.entryBBS(bbs);
 		if(result) { //삽입이 성공한 경우
 			//entryResult.jsp로 전환(Forward(NO), Redirect(YES))
 			//Forward를 사용하면 새로고침할 때 이전 주소창이 계속 로딩되므로 중복insert 발생할 수 있음!
