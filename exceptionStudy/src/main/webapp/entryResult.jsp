@@ -19,5 +19,10 @@
 		alert("게시글이 등록되지 않았습니다. 관리자에게 문의하세요");
 	</script>
 </c:if>
+
+<script type="text/javascript">
+	location.href="index.jsp";
+</script>
+
 </body>
 </html>
