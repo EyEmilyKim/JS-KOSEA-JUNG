@@ -35,4 +35,27 @@ public class DBExpert { //삽입, 삭제, 변경, 조회 메서드
 		return flag;
 	}//게시글 삽입 메서드
 	
+	public boolean deleteBBS(int no) {
+		String delete="delete from test_tbl where seqno=?";
+		boolean flag = false; //작업 성공여부를 위한 변수
+		Connection con = null; PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setInt(1, no); //1번째 물음표에 no 값 설정
+			pstmt.executeUpdate(); //delete 실행
+			con.commit(); //commit
+			flag = true; //작업 성공을 의미
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				con.close();
+			}catch(Exception e) {}
+		}
+		return flag;
+	}//게시글 삭제 메서드
+	
 }
