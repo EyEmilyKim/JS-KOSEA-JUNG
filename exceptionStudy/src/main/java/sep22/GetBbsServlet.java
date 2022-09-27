@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,6 +68,7 @@ public class GetBbsServlet extends HttpServlet {
 		
 		Connection con = null; PreparedStatement pstmt = null;
 		ResultSet rs = null; //조회결과를 받아주는 객체
+		ArrayList<BBS> list = new ArrayList<BBS>();
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "hr","hr");
@@ -73,20 +76,15 @@ public class GetBbsServlet extends HttpServlet {
 			rs = pstmt.executeQuery(); //select 실행(select는 executeUpdate()아님!)
 			//조회결과로 이동(next())시킨다 -> 만약 rs 검색 결과가 3건이면 3번 이동해서 가져오도록..
 			//각각의 결과 = 1:글번호(숫자)/2:작성자(문자열)/3:제목(문자열)/4:작성일(날짜)/5:내용(문자열)
-			BBS[] bbsArr = new BBS[3]; //예를 들어 3건 -> 3칸짜리 배열
 			int idx = 0;
 			while(rs.next()) { //이동 성공(true), 실패(false)
-				int seqno = rs.getInt(1);
-				String w = rs.getString(2);
-				String t = rs.getString(3);
-				String d = rs.getString(4);
-				String c = rs.getString(5);
 				BBS bbs = new BBS(); //DTO 생성
 				bbs.setSeqno(rs.getInt(1));
 				bbs.setId(rs.getString(2));
 				bbs.setTitle(rs.getString(3));
+				bbs.setReg_date(rs.getString(4));
 				bbs.setContent(rs.getString(5));
-				bbsArr[idx++] = bbs;
+				list.add(bbs);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -95,6 +93,9 @@ public class GetBbsServlet extends HttpServlet {
 				rs.close(); pstmt.close(); con.close();
 			}catch(Exception e) {}
 		}
+		request.setAttribute("LIST", list);
+		RequestDispatcher rd = request.getRequestDispatcher("bbsList.jsp");
+		rd.forward(request, response);
 	}
 	
 
