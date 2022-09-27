@@ -4,6 +4,7 @@ public class BBS {
 	private int seqno; //글번호
 	private String id; //작성자
 	private String title; //제목
+	private String Reg_date; //작성일
 	private String content; //글내용
 	//은닉된 변수의 값을 넣어주는 메서드(setter) 필요
 	//은닉된 변수의 값을 읽어내는 메서드(getter) 필요
@@ -31,5 +32,10 @@ public class BBS {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+	public String getReg_date() {
+		return Reg_date;
+	}
+	public void setReg_date(String Reg_date) {
+		this.Reg_date = Reg_date;
+	}
 }
