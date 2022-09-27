@@ -20,7 +20,7 @@
 </c:if>
 
 <script type="text/javascript">
-	location.href="index.jsp";
+	location.href="getBBS.do";
 </script>
 
 </body>

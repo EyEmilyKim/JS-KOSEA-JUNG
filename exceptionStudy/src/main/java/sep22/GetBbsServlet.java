@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sep21.BBS;
+import sep21.DBExpert;
 
 /**
  * Servlet implementation class GetBbsServlet
@@ -35,8 +36,11 @@ public class GetBbsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		DBExpert dbe = new DBExpert();
+		ArrayList<BBS> list = dbe.getAllBBS();
+		request.setAttribute("LIST", list);
+		RequestDispatcher rd = request.getRequestDispatcher("bbsList.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
