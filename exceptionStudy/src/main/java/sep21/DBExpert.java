@@ -124,7 +124,7 @@ public class DBExpert { //삽입, 삭제, 변경, 조회 메서드
 	}//게시글 삭제 메서드
 	
 	public boolean updateBBS(BBS bbs) {
-		String update = "update test_tbl set title=?, "
+		String update = "update test_tbl set title=?, id=?, "
 				+"content=? where seqno=?";
 		boolean flag = false; //작업 성공여부를 위한 변수
 		Connection con = null; PreparedStatement pstmt = null;
@@ -133,8 +133,9 @@ public class DBExpert { //삽입, 삭제, 변경, 조회 메서드
 			con = DriverManager.getConnection(url,"hr","hr");
 			pstmt = con.prepareStatement(update);
 			pstmt.setString(1, bbs.getTitle());
-			pstmt.setString(2, bbs.getContent());
-			pstmt.setInt(3, bbs.getSeqno());
+			pstmt.setString(2, bbs.getId());
+			pstmt.setString(3, bbs.getContent());
+			pstmt.setInt(4, bbs.getSeqno());
 			pstmt.executeUpdate(); //update 실행
 			con.commit();
 			flag = true; //작업 성공을 의미
