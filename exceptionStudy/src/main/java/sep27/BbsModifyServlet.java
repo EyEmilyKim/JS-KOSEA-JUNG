@@ -1,12 +1,14 @@
 package sep27;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sep21.BBS;
 import sep21.DBExpert;
 
 /**
@@ -48,7 +50,21 @@ public class BbsModifyServlet extends HttpServlet {
 				response.sendRedirect("deleteResult.jsp?R=N");
 			}
 		}else if(btn.equals("수정")) {
-			
+			String title = request.getParameter("TITLE"); //제목
+			String id = request.getParameter("ID"); //작성자
+			String content = request.getParameter("CONTENT");
+			//4개의 데이터를 DTO에 넣는다.
+			BBS bbs = new BBS(); //DTO 생성한다.
+			bbs.setSeqno(Integer.parseInt(seqno));
+			bbs.setTitle(title);
+			bbs.setId(id);
+			bbs.setContent(content);
+			boolean r = dbe.updateBBS(bbs);
+			if(r) {
+				response.sendRedirect("updateResult.jsp?R=Y");
+			}else {
+				response.sendRedirect("updateResult.jsp?R=N");
+			}
 		}
 	}
 
