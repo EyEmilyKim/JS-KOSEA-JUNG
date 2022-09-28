@@ -1,0 +1,21 @@
+@charset "UTF-8";
+header {
+	border:1px solid black; 
+	padding: 3px; 
+	background-color: #82b3c9;
+}
+nav {
+	border: 1px solid black;
+	padding: 8px;
+	background-color:#b3e5fc;
+}
+section {
+	border: 1px solid black;
+	padding: 3px; 
+	background-color:#e6ffff;
+}
+footer {
+	border: 1px solid black;
+	padding: 3px; 
+	background-color: #82b3c9;
+}
