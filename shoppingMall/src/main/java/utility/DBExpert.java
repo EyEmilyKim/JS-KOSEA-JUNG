@@ -29,7 +29,7 @@ public class DBExpert {
 			while(rs.next()) {
 				Member mem = new Member();
 				mem.setCustno(rs.getInt(1));
-				System.out.println(rs.getInt(1));
+//				System.out.println(rs.getInt(1));
 				mem.setCustname(rs.getString(2));
 				mem.setPhone(rs.getString(3));
 				mem.setAddress(rs.getString(4));
