@@ -17,7 +17,7 @@
 <section>
 	<h2 align="center">홈쇼핑 회원등록</h2>
 	<div align="center">
-	<form action="" method="Post" onSubmit="return check(this)">
+	<form action="putMember.do" method="Post" onSubmit="return check(this)">
 	<table border="1">
 		<tr><th>회원번호(자동발생)</th>
 			<td><input type="text" name="NO" value="${requestScope.MAX }" readOnly="readonly"/></td></tr>
