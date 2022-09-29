@@ -25,8 +25,12 @@
 		<th>거주지역</th></tr>
 	<c:forEach items="${requestScope.LIST }" var="m">
 	<tr>
-		<td>${m.custno }</td><td>${m.custname }</td><td>${m.phone }</td>
-		<td>${m.address }</td><td>${m.joindate }</td><td>${m.grade }</td>
+		<td><a href="getMemberDetail.do?NO=${m.custno }">${m.custno }</a></td>
+		<td>${m.custname }</td>
+		<td>${m.phone }</td>
+		<td>${m.address }</td>
+		<td>${m.joindate }</td>
+		<td>${m.grade }</td>
 		<td>${m.city }</td></tr>
 	</c:forEach>
 	</table>

@@ -12,6 +12,44 @@ public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
+	//회원번호로 고객을 검색하는 메서드(리턴)
+	public Member getMemberDetail(int custno) {
+		String select =  "select custno, custname, phone, address, "
+				+ "to_char(joindate, 'YYYY-MM-DD'), grade, city "
+				+ "from member_tbl_02 where custno = ?";
+		Member mem = null; //검색결과를 저장할 변수 선언. (생성은 있을때만 하려고.)
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, custno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {//조회 성공
+				mem = new Member();
+				mem.setCustno(rs.getInt("custno"));
+				mem.setCustname(rs.getString("custname"));
+				mem.setPhone(rs.getString("phone"));
+				mem.setAddress(rs.getString("address"));
+				mem.setJoindate(rs.getString(5));
+				mem.setGrade(rs.getString("grade"));
+				mem.setCity(rs.getString("city"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				rs.close();
+				pstmt.close();
+				con.close();
+			}
+			catch(Exception e) {}
+		}
+		return mem;
+	}
+	
 	//모든 고객정보 검색 메서드(리턴)
 	public ArrayList<Member> getAllMembers(){
 		String select = "select custno, custname, phone, address, "
