@@ -59,7 +59,9 @@
 		<tr><td colspan="2" align="center">
 			<input type="submit" value="수정" name="BTN"/>
 			<input type="submit" value="조회(s)" name="BTN"/>
-			<input type="button" value="조회(b)" onClick="doSearch()"/></td></tr>
+			<input type="button" value="조회(b)" onClick="doSearch()"/>
+			<input type="submit" value="삭제" name="BTN"/>
+			</td></tr>
 	</table>
 	</form>
 	</div>

@@ -12,6 +12,31 @@ public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
+	//회원번호로 고객정보를 삭제하는 메서드(리턴)
+	public boolean deleteMember(int no) {
+		String delete = "delete from member_tbl_02 where custno = ?";
+		boolean result = false;
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, "hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try{
+				pstmt.close();
+				con.close();
+			} catch(Exception e) {}
+		}
+		return result;
+	}
+	
 	//회원번호로 고객정보를 수정하는 메서드(리턴)
 	public boolean updateMember(Member m) {
 		String update = "update member_tbl_02 set "
