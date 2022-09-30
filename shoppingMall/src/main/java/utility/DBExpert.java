@@ -7,10 +7,46 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Member;
+import model.Money;
 
 public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
+	
+	//회원별 매출정보를 검색하는 메서드(리턴)
+	public ArrayList<Money> getTotalMoney(){
+		String select = "select t1.custno, t1.custname, t1.grade, t2.total "
+				+ "from member_tbl_02 t1, "
+				+ "(select custno, sum(price) total from money_tbl_02 group by custno) t2 "
+				+ "where t1.custno = t2.custno";
+		ArrayList<Money> list = new ArrayList<Money>();
+		Connection con = null; PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Money money = new Money();
+				money.setCustno(rs.getInt(1));
+				money.setCustname(rs.getString(2));
+				switch(rs.getString(3)) {
+				case "A": money.setGrade("VIP"); break;
+				case "B": money.setGrade("일반"); break;
+				case "C": money.setGrade("직원"); break;
+				}
+				money.setTotal(rs.getInt(4));
+				list.add(money);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close();
+			} catch (Exception e) {}
+		}
+		return list;
+	}
 	
 	//회원번호로 고객정보를 삭제하는 메서드(리턴)
 	public boolean deleteMember(int no) {
@@ -112,7 +148,8 @@ public class DBExpert {
 	public ArrayList<Member> getAllMembers(){
 		String select = "select custno, custname, phone, address, "
 				+ "to_char(joindate, 'YYYY-MM-DD'), grade, city "
-				+ "from member_tbl_02";
+				+ "from member_tbl_02 "
+				+ "order by custno desc"; //최근 가입 회원이 위로 나오도록
 		ArrayList<Member> list = new ArrayList<Member>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
