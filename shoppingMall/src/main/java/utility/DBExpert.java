@@ -12,6 +12,39 @@ public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
+	//회원번호로 고객정보를 수정하는 메서드(리턴)
+	public boolean updateMember(Member m) {
+		String update = "update member_tbl_02 set "
+				+"custname=?, phone=?, address=?, "
+				+ "joindate=to_date(?,'YYYY-MM-DD'), grade=?, city=? "
+				+ "where custno=?";
+		boolean result = false; //작업 결과 저장될 변수
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setString(1, m.getCustname());
+			pstmt.setString(2, m.getPhone());
+			pstmt.setString(3, m.getAddress());
+			pstmt.setString(4, m.getJoindate());
+			pstmt.setString(5, m.getGrade());
+			pstmt.setString(6, m.getCity());
+			pstmt.setInt(7, m.getCustno());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close(); con.close();
+			}catch(Exception e) {}
+		}
+		return result;
+	}
+	
 	//회원번호로 고객을 검색하는 메서드(리턴)
 	public Member getMemberDetail(int custno) {
 		String select =  "select custno, custname, phone, address, "
