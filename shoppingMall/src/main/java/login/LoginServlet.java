@@ -50,7 +50,11 @@ public class LoginServlet extends HttpServlet {
 			if(result.equals(pwd)) {//입력한 암호와 일치하는 경우
 				msg = "YES";
 				HttpSession session = request.getSession();
-				session.setAttribute("LOGIN_ID", id); //세션에 데이터 저장
+				if(id.equals("manager")) {//관리자인 경우
+					session.setAttribute("MANAGER", id);
+				}else {//일반사용자인 경우
+					session.setAttribute("LOGIN_ID", id); //세션에 데이터 저장
+				}
 			}else {//입력한 암호와 일치하지 않는 경우
 				msg = "NOPWD";
 			}
