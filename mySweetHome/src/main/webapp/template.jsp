@@ -64,48 +64,13 @@ function startClock(){
 		<tr>
 			<td class="main">
 				<div id="login">
-			<%-- <%
-				String man = (String)session.getAttribute("MANAGER");
-				String login_id = (String)session.getAttribute("LOGINID");
-				if( (man != null)||(login_id != null) ){//man 이나 login_id 중 하나라도 있는 경우(로그인 성공)
-				%>	 --%>
-			<c:set var="man" value="${sessionScope.MANAGER }"/>	
-			<c:set var="id" value="${sessionScope.LOGINID }"/>	
-			<c:choose>
-				<c:when test="${! empty man || ! empty id }">
-					<jsp:include page="404.logout.jsp"/>
-				</c:when>
-				<c:otherwise>
-					<jsp:include page="401.login.jsp"/>
-				</c:otherwise>
-			</c:choose> 
-<%-- 					<jsp:include page="404.logout.jsp"/>
-			<%	}else { %>
-					<jsp:include page="401.login.jsp"/>
-			<%	}  %> --%>
-			
+					<c:if test="${sessionScope.LOGIN_ID == null && sessionScope.MANAGER == null}">
+						<jsp:include page="login.jsp"/>
+					</c:if>
 				</div>
 				<div id="menu">
-					<a href="template.jsp?BODY=201.intro.jsp">■ 소개</a><br/>
-					<a href="template.jsp?BODY=301.gababoHome.jsp">■ 가위바위보 게임</a><br/>
-					<a href="template.jsp?BODY=101.beerHome.jsp">■ 맥주추천</a><br/>
-					<a href="matjipMake.do">■ 맛집추천</a><br/>
-					<a href="template.jsp?BODY=601.coffeeHome.jsp">■ 커피주문</a><br/>
-					<a href="template.jsp?BODY=1001.ticketHome.jsp">■ 티켓예매</a><br/>
-					<a href="busHome.do">■ 버스예매</a><br/>
-					<a href="getAllNotice.do">■ 공지사항 보기</a><br/>
-				<c:if test="${!empty man }">
-					<a href="template.jsp?BODY=1101.noticeInput.jsp">■ 공지사항 쓰기</a><br/>
-				</c:if>
-<%-- 			<% 
-					if(man!=null){
-				%>
-					<a href="template.jsp?BODY=1101.noticeInput.jsp">■ 공지사항 쓰기</a><br/>
-				<%		
-					}
-				%> --%>
-					<a href="makeRegion.do">● 세계의 시간</a><br/>
-					<a href="template.jsp?BODY=901.makeRandom.jsp">● 난수 만들기</a><br/>
+					<a href="template.jsp?BODY=intro.jsp">■ 소개</a><br/>
+					<a href="getAllNotice.do">■ 공지사항 목록</a><br/>
 				</div>
 			</td >
 			<td id="content">
