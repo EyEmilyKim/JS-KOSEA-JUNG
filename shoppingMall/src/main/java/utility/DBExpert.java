@@ -13,6 +13,34 @@ public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
 	private String url = "jdbc:oracle:thin:@//localhost:1521/xe";
 	
+	//입력한 계정으로 암호를 검색하는 메서드(리턴)
+	public String getPassword(String id) {
+		String select = "select pwd from shopping_users_tbl where id = ?";
+		System.out.println(select);
+		String pwd = null; //조회 결과(암호)를 저장할 변수
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {//검색결과가 존재하는 경우
+				pwd = rs.getString(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close(); pstmt.close(); con.close();
+			}catch(Exception e) {}
+		}
+		return pwd;
+	}
+	
+	
 	//회원별 매출정보를 검색하는 메서드(리턴)
 	public ArrayList<Money> getTotalMoney(){
 		String select = "select t1.custno, t1.custname, t1.grade, t2.total "
