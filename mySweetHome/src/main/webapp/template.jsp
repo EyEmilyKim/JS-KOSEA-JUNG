@@ -75,7 +75,19 @@ function startClock(){
 				</div>
 				<div id="menu">
 					<a href="template.jsp?BODY=intro.jsp">■ 소개</a><br/>
+				<c:if test="${sessionScope.USERID != null }">
+					<a href="template.jsp?BODY=bbsInput.jsp">■ 게시글 작성</a><br/>
+				</c:if>
+					<a href="">■ 게시글 목록</a><br/>
+				<c:if test="${sessionScope.MANAGER != null }">
+					<a href="">■ 공지사항 작성</a><br/>
+				</c:if>
 					<a href="getAllNotice.do">■ 공지사항 목록</a><br/>
+					<a href="">■ 상품 등록</a><br/>
+					<a href="">■ 상품 목록</a><br/>
+					<a href="">■ 장바구니 보기</a><br/>
+					<a href="">■ 이미지 게시글 작성</a><br/>
+					<a href="">■ 이미지 게시글 목록</a><br/>
 				</div>
 			</td >
 			<td id="content">
