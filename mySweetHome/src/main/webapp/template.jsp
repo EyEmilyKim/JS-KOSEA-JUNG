@@ -64,9 +64,14 @@ function startClock(){
 		<tr>
 			<td class="main">
 				<div id="login">
-					<c:if test="${sessionScope.LOGIN_ID == null && sessionScope.MANAGER == null}">
+					<c:choose>
+					<c:when test="${sessionScope.USERID == null && sessionScope.MANAGER == null}">
 						<jsp:include page="login.jsp"/>
-					</c:if>
+					</c:when>
+					<c:otherwise>
+						<jsp:include page="logout.jsp"/>
+					</c:otherwise>
+					</c:choose>
 				</div>
 				<div id="menu">
 					<a href="template.jsp?BODY=intro.jsp">■ 소개</a><br/>
