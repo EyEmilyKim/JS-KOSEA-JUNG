@@ -5,6 +5,7 @@ public class Bbs {
 	private String title;
 	private String writer;
 	private String content;
+	private String reg_date;
 	
 	public Integer getSeqno() {
 		return seqno;
@@ -29,6 +30,12 @@ public class Bbs {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
 	
 }
