@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import model.Bbs;
 
@@ -13,6 +14,59 @@ public class DAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	//전체 게시글의 갯수 찾는 메서드
+	public Integer getTotalCount() {
+		String select = "select count(*) from mysweet_bbs";
+		Integer totalCount = 0;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //조회결과가 존재하는 경우
+				totalCount = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return totalCount;
+	}
+	
+	//게시글 조회 메서드(페이지 당 5개의 글만 검색)
+	public ArrayList<Bbs> getPageBbs(int start, int end){
+		String select = "select seqno, title, writer, r_date "
+				+ "from ( select rownum rn, seqno, title, writer, r_date from "
+				+ "(select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') r_date "
+				+ "from mysweet_bbs order by seqno desc ) ) "
+				+ "where rn > ? and rn < ? ";
+		ArrayList<Bbs> list = new ArrayList<Bbs>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setSeqno(rs.getInt(1)); //글번호
+				bbs.setTitle(rs.getString(2)); //제목
+				bbs.setWriter(rs.getString(3)); //작성자
+				bbs.setReg_date(rs.getString(4)); //작성일
+				list.add(bbs);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return list;
+	}
 	
 	//게시글 삽입 메서드
 	public boolean putBbs(Bbs bbs) {

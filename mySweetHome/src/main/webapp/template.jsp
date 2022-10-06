@@ -78,7 +78,7 @@ function startClock(){
 				<c:if test="${sessionScope.USERID != null }">
 					<a href="template.jsp?BODY=bbsInput.jsp">■ 게시글 작성</a><br/>
 				</c:if>
-					<a href="">■ 게시글 목록</a><br/>
+					<a href="bbsList.do">■ 게시글 목록</a><br/>
 				<c:if test="${sessionScope.MANAGER != null }">
 					<a href="">■ 공지사항 작성</a><br/>
 				</c:if>
