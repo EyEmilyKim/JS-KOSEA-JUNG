@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Bbs;
+import model.Notice;
 
 public class DAO {
 	private String driver = "oracle.jdbc.OracleDriver";
@@ -14,6 +15,49 @@ public class DAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	//가장 큰 공지글 번호 검색하는 메서드
+	public Integer getMaxNotice() {
+		String select = "select max(seqno) from mysweet_notice";
+		Integer max = 0;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			if(rs.next()) max = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return max;
+	}
+	
+	//공지사항 삽입 메서드
+	public boolean putNotice(Notice n) {
+		String insert = "insert into mysweet_notice values(?, ?, ?, to_date(sysdate, 'YYYY-MM-DD', ?)";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(insert);
+			pstmt.setInt(1, n.getSeqno());
+			pstmt.setString(2, n.getTitle());
+			pstmt.setString(3, n.getWriter());
+			pstmt.setString(5, n.getContent());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
 	
 	//글번호로 게시글을 조회하는 메서드
 	public Bbs getBbsDetail(int seqno) {
