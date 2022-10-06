@@ -15,6 +15,36 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//글번호로 게시글을 조회하는 메서드
+	public Bbs getBbsDetail(int seqno) {
+		String select = "select seqno, title, writer, "
+				+ "to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS'), content "
+				+ "from mysweet_bbs where seqno = ?";
+		Bbs bbs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, seqno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //조회결과가 존재하는 경우
+				bbs = new Bbs();
+				bbs.setSeqno(rs.getInt(1));
+				bbs.setTitle(rs.getString(2));
+				bbs.setWriter(rs.getString(3));
+				bbs.setReg_date(rs.getString(4));
+				bbs.setContent(rs.getString(5));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close(); pstmt.close(); con.close();
+			}catch(Exception e) {}
+		}
+		return bbs;
+	}
+	
 	//전체 게시글의 갯수 찾는 메서드
 	public Integer getTotalCount() {
 		String select = "select count(*) from mysweet_bbs";

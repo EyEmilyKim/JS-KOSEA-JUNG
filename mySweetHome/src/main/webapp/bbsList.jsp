@@ -13,7 +13,8 @@
 <table width="100%" align="center">
 	<tr><th>글번호</th><th>제 목</th><th>작성자</th><th>작성일</th></tr>
 	<c:forEach items="${LIST }" var="bbs">
-	<tr><td>${bbs.seqno }</td><td>${bbs.title }</td>
+	<tr><td>${bbs.seqno }</td>
+		<td><a href="bbsDetail.do?NO=${bbs.seqno }">${bbs.title }</a></td>
 		<td>${bbs.writer }</td><td>${bbs.reg_date }</td></tr>
 	</c:forEach>
 </table>
