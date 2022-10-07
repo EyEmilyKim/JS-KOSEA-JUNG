@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Bbs;
+import model.Member;
 import model.Notice;
 
 public class DAO {
@@ -15,6 +16,34 @@ public class DAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	//회원정보 삽입 메서드
+	public boolean putMember(Member mem) {
+		String insert = "insert into mysweet_users values(?,?,?,?,?,?,?,?)";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(insert);
+			pstmt.setString(1, mem.getId());
+			pstmt.setString(2, mem.getPwd());
+			pstmt.setString(3, mem.getName());
+			pstmt.setString(4, mem.getAddr());
+			pstmt.setString(5, mem.getTel());
+			pstmt.setString(6, mem.getGender());
+			pstmt.setString(7, mem.getEmail());
+			pstmt.setString(8, mem.getJob());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
 	
 	//입력된 계정으로 계정 검색 메서드(계정 중복검사용)
 	public String getId(String id) {

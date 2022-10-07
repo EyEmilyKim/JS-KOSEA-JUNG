@@ -9,7 +9,7 @@
 <body>
 <div align="center">
 <h2>회원정보 입력</h2>
-<form action="" method="post" onSubmit="return check(this)" name="form">
+<form action="entryMember.do" method="post" onSubmit="return check(this)" name="form">
 <input type="hidden" name="idChecked"/>
 이 름 : <input type="text" name="NAME" /><br/>
 아이디 : <input type="text" name="ID" id="ID"/>
