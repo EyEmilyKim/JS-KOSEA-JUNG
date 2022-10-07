@@ -25,6 +25,8 @@ function check(){
 	}
 }
 </script>
-<div align="right"><a href="">가입하기</a></div>
+<div align="right">
+<a href="template.jsp?BODY=userEntry.jsp">가입하기</a>
+</div>
 </body>
 </html>

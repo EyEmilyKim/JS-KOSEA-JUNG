@@ -16,6 +16,26 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//입력된 계정으로 계정 검색 메서드(계정 중복검사용)
+	public String getId(String id) {
+		String select = "select id from mysweet_users where id = ?";
+		String selectedId = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) selectedId = rs.getString(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return selectedId;
+	}
+	
 	//공지글 번호로 공지사항 수정 메서드
 	public boolean modifyNotice(Notice n) {
 		String update = "update mysweet_notice set title=?, content=? where seqno = ?";
