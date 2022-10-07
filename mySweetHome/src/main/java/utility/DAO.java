@@ -16,6 +16,36 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//공지글 번호로 공지사항 검색 메서드
+	public Notice getNoticeDetail(int seqno) {
+		String select = "select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI;SS'), content "
+				+ "from mysweet_notice where seqno = ?";
+		Notice notice = null;
+		try {
+//			System.out.println(seqno);
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, seqno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				notice = new Notice();
+				notice.setSeqno(rs.getInt(1));
+				notice.setTitle(rs.getString(2));
+				notice.setWriter(rs.getString(3));
+				notice.setReg_date(rs.getString(4));
+				notice.setContent(rs.getString(5));
+//				System.out.println(rs.getString(2));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return notice;
+	}
+	
 	//전체 공지사항 건수 검색 메서드
 	public Integer getNoticeCount() {
 		String select = "select count(*) from mysweet_notice";
@@ -88,7 +118,7 @@ public class DAO {
 	
 	//공지사항 삽입 메서드
 	public boolean putNotice(Notice n) {
-		String insert = "insert into mysweet_notice values(?, ?, ?, to_date(sysdate, 'YYYY-MM-DD'), ?)";
+		String insert = "insert into mysweet_notice values(?, ?, ?, sysdate, ?)";
 		boolean result = false;
 		try {
 			Class.forName(driver);
