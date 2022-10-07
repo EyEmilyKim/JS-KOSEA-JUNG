@@ -37,7 +37,7 @@ public class DAO {
 	
 	//공지사항 삽입 메서드
 	public boolean putNotice(Notice n) {
-		String insert = "insert into mysweet_notice values(?, ?, ?, to_date(sysdate, 'YYYY-MM-DD', ?)";
+		String insert = "insert into mysweet_notice values(?, ?, ?, to_date(sysdate, 'YYYY-MM-DD'), ?)";
 		boolean result = false;
 		try {
 			Class.forName(driver);
@@ -46,7 +46,7 @@ public class DAO {
 			pstmt.setInt(1, n.getSeqno());
 			pstmt.setString(2, n.getTitle());
 			pstmt.setString(3, n.getWriter());
-			pstmt.setString(5, n.getContent());
+			pstmt.setString(4, n.getContent());
 			pstmt.executeUpdate();
 			con.commit();
 			result = true;

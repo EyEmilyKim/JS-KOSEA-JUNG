@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Notice;
+import utility.DAO;
+
 /**
  * Servlet implementation class NoticePostServlet
  */
@@ -39,11 +42,23 @@ public class NoticePostServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("TITLE");
 		String content = request.getParameter("CONTENT");
-		//글번호 : 최대 글번호 +1
-		
 		//작성자 : 세션 정보
 		HttpSession session = request.getSession();
 		String writer = (String)session.getAttribute("MANAGER");
+		//글번호 : 최대 글번호 +1
+		DAO dao = new DAO();
+		int seqno = dao.getMaxNotice()+1;
+		Notice notice = new Notice(); //공지사항 객체
+		notice.setSeqno(seqno);
+		notice.setTitle(title);
+		notice.setWriter(writer);
+		notice.setContent(content);
+		boolean result = dao.putNotice(notice);//insert 실행
+		String url = "template.jsp?BODY=noticeResult.jsp?R=";
+		if(result) { //공지사항 등록 성공
+			response.sendRedirect(url+"Y");
+		}else { //공지사항 등록 실패
+			response.sendRedirect(url+"N");
+		}
 	}
-
 }
