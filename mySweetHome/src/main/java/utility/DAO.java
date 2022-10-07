@@ -16,6 +16,50 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//공지글 번호로 공지사항 수정 메서드
+	public boolean modifyNotice(Notice n) {
+		String update = "update mysweet_notice set title=?, content=? where seqno = ?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setString(1, n.getTitle());
+			pstmt.setString(2, n.getContent());
+			pstmt.setInt(3, n.getSeqno());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//공지글 번호로 공지사항 삭제 메서드
+	public boolean deleteNotice(int seqno) {
+		String delete = "delete from mysweet_notice where seqno = ?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setInt(1, seqno);
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
 	//공지글 번호로 공지사항 검색 메서드
 	public Notice getNoticeDetail(int seqno) {
 		String select = "select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI;SS'), content "

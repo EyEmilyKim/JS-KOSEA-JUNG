@@ -14,6 +14,7 @@
 </c:if>
 <c:if test="${ ! empty N }">
 	<h3>공지글 상세보기</h3>
+	<form action="modifyNotice.do" method="post" onSubmit="return check(this)">
 	<table width="100%">
 		<tr><th>글번호</th>
 			<td><input type="text" name="SEQ" value="${N.seqno }" readOnly="readonly"/></td></tr>
@@ -32,7 +33,15 @@
 			<input type="reset" value="취소" name="BTN"/>	</td></tr>
 		</c:if>
 	</table>
+	</form>
 </c:if>
 </div>
 </body>
+<script type="text/javascript">
+function check(fm){
+	if(fm.TITLE.value == ''){ alert("제목을 입력하세요"); return false;}
+	if(fm.CONTENT.value == ''){ alert("내용을 입력하세요"); return false;}
+	if( ! confirm("작업을 진행하시겠습니까?")) return false;
+}
+</script>
 </html>
