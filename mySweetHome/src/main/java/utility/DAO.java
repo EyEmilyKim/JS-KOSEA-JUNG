@@ -16,7 +16,58 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
-	//가장 큰 공지글 번호 검색하는 메서드
+	//전체 공지사항 건수 검색 메서드
+	public Integer getNoticeCount() {
+		String select = "select count(*) from mysweet_notice";
+		Integer count = 0;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			if(rs.next()) count = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return count;
+	}
+	
+	//해당 페이지에 출력될 공지사항 검색 메서드
+	public ArrayList<Notice> getAllNotice(int start, int end){
+		String select = "select seqno, title, writer, r_date "
+				+ "from ( select rownum rn, seqno, title, writer, r_date from "
+				+ "(select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') r_date "
+				+ "from mysweet_notice order by seqno desc ) ) "
+				+ "where rn > ? and rn < ? ";
+		ArrayList<Notice> list = new ArrayList<Notice>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, start); 
+			pstmt.setInt(2, end); 
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Notice notice = new Notice();
+				notice.setSeqno(rs.getInt(1));
+				notice.setTitle(rs.getString(2));
+				notice.setWriter(rs.getString(3));
+				notice.setReg_date(rs.getString(4));
+				list.add(notice);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return list;
+	}
+	
+	//가장 큰 공지사항 번호 검색하는 메서드
 	public Integer getMaxNotice() {
 		String select = "select max(seqno) from mysweet_notice";
 		Integer max = 0;
