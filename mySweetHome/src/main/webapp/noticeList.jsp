@@ -13,12 +13,12 @@
 	<table width="100%">
 		<tr><td align="right">${STARTR} ~ ${ENDR} / ${TOTAL }</td>
 	</table>
-	<table witdh="100%">
+	<table width="100%">
 		<tr><th>번 호</th><th>제 목</th><th>작성자</th>
 			<th>작성일</th></tr>
 	<c:forEach items="${LIST }" var = "n">
 		<tr><td>${n.seqno }</td>
-			<td>${n.title }</td>
+			<td><a href="noticeDetail.do?SEQ=${n.seqno }">${n.title }</a></td>
 			<td>${n.writer }</td><td>${n.reg_date }</td></tr>
 	</c:forEach>	
 	</table>
