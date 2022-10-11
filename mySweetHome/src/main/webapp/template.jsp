@@ -83,7 +83,9 @@ function startClock(){
 					<a href="template.jsp?BODY=noticeInput.jsp">■ 공지사항 작성</a><br/>
 				</c:if>
 					<a href="noticeList.do">■ 공지사항 목록</a><br/>
-					<a href="">■ 상품 등록</a><br/>
+				<c:if test="${sessionScope.MANAGER != null }">
+					<a href="template.jsp?BODY=itemInput.jsp">■ 상품 등록</a><br/>
+				</c:if>	
 					<a href="">■ 상품 목록</a><br/>
 					<a href="">■ 장바구니 보기</a><br/>
 					<a href="">■ 이미지 게시글 작성</a><br/>

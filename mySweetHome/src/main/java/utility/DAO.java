@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Bbs;
+import model.Item;
 import model.Member;
 import model.Notice;
 
@@ -17,6 +18,50 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//상품정보 삽입 메서드
+	public boolean putItem(Item i) {
+		String input = "insert into mysweet_items values(?, ?, ?, ?, sysdate)";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(input);
+			pstmt.setString(1, i.getCode());
+			pstmt.setString(2, i.getName());
+			pstmt.setInt(3, i.getPrice());
+			pstmt.setString(4, i.getInfo());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//입력된 상품번호으로 상품번호 검색 메서드(상품번호 중복검사용)
+	public String getCode(String code) {
+		String select = "select code from mysweet_items where code = ?";
+		String selectedCode = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			if(rs.next()) selectedCode = rs.getString(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return selectedCode;
+	}
+		
 	//회원정보 삽입 메서드
 	public boolean putMember(Member mem) {
 		String insert = "insert into mysweet_users values(?,?,?,?,?,?,?,?)";
