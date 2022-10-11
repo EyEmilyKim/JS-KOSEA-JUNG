@@ -18,6 +18,38 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//페이지에 해당하는 상품정보 조회 메서드
+	public ArrayList<Item> getAllItems(int start, int end){
+		String select = "select code, name, price, r_date "
+				+ "from (select rownum rn, code, name, price, r_date "
+				+ "from (select code, name, price, to_char(reg_date, 'YYYY/MM/DD') r_date "
+				+ "from mysweet_items) ) "
+				+ "where rn > ? and rn < ? ";
+		ArrayList<Item> list = new ArrayList<Item>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, start); 
+			pstmt.setInt(2, end); 
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Item item = new Item();
+				item.setCode(rs.getString(1));
+				item.setName(rs.getString(2));
+				item.setPrice(rs.getInt(3));
+				item.setInfo(rs.getString(4));
+				list.add(item);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return list;
+	}
+	
 	//상품정보 삽입 메서드
 	public boolean putItem(Item i) {
 		String input = "insert into mysweet_items values(?, ?, ?, ?, sysdate)";
