@@ -18,6 +18,106 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//상품번호로 상품정보를 수정하는 메서드
+	public boolean updateItem(Item i) {
+		String update = "update mysweet_items set name=?, price=?, info=? "
+				+ "where code=?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setString(1, i.getName());
+			pstmt.setInt(2, i.getPrice());
+			pstmt.setString(3, i.getInfo());
+			pstmt.setString(4, i.getCode());
+			System.out.println("--상품 수정--");
+			System.out.println("name: "+i.getName());
+			System.out.println("price: "+i.getPrice());
+			System.out.println("info: "+i.getInfo());
+			System.out.println("code: "+i.getCode());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//상품번호로 상품정보를 삭제하는 메서드
+	public boolean deleteItem(String code) {
+		String delete = "delete from mysweet_items where code = ?";
+		boolean result = false;
+		try{
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setString(1, code);
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return result;
+	}
+
+	
+	//상품번호로 상품정보를 검색하는 메서드
+	public Item getItemDetail(String code) {
+		String select = "select code, name, price, info, "
+				+ "to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS' ) "
+				+ "from mysweet_items where code = ?";
+		Item item = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				item = new Item();
+				item.setCode(rs.getString(1));
+				item.setName(rs.getString(2));
+				item.setPrice(rs.getInt(3));
+				item.setInfo(rs.getString(4));
+				item.setReg_date(rs.getString(5));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return item;
+	}
+	
+	//전체 상품의 갯수를 검색하는 메서드
+	public Integer getTotalItemCount() {
+		String select = "select count(*) from mysweet_items";
+		Integer total = 0;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			if(rs.next()) total = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return total;
+	}
+	
 	//페이지에 해당하는 상품정보 조회 메서드
 	public ArrayList<Item> getAllItems(int start, int end){
 		String select = "select code, name, price, r_date "
