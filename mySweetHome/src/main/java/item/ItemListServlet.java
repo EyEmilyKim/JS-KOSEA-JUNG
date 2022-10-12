@@ -32,14 +32,20 @@ public class ItemListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String page = request.getParameter("PAGE");
 		DAO dao = new DAO();
 		int pageNum = 1;
+		if(page != null) pageNum = Integer.parseInt(page);
 		int start = (pageNum -1)* 5;
 		int end = ((pageNum -1)* 5)+ 6;
 		//예) 1페이지: 0, 6 
 		//예) 2페이지: 5, 11
 		ArrayList<Item> list = dao.getAllItems(start, end);
+		int total = dao.getTotalItemCount(); //전체 상품의 갯수
+		int pageCount = total / 5;
+		if(total % 5 != 0) pageCount++;
 		request.setAttribute("ITEMS", list);
+		request.setAttribute("PAGES", pageCount);
 		RequestDispatcher rd = request.getRequestDispatcher("template.jsp?BODY=itemList.jsp");
 		rd.forward(request, response);
 	}
