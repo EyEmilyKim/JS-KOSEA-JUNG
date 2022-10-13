@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 		<td><a href="itemDetail.do?CODE=${item.code }">${item.name }</a></td>
 		<td><fmt:formatNumber groupingUsed="true">${item.price }</fmt:formatNumber></td>
 		<td>${item.reg_date }</td>
-		<td><a href="">장바구니 담기</a><td>
+		<td id="cart"><a href="#" onClick="window.open('addCart.do?CODE=${item.code}','my_cart','width=600,height=300,top=200,left=200')">장바구니 담기</a><td>
 	</c:forEach>
 	</table>
 	<c:forEach begin="1" end="${PAGES }" var="page">

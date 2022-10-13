@@ -138,7 +138,7 @@ public class DAO {
 				item.setCode(rs.getString(1));
 				item.setName(rs.getString(2));
 				item.setPrice(rs.getInt(3));
-				item.setInfo(rs.getString(4));
+				item.setReg_date(rs.getString(4));
 				list.add(item);
 			}
 		}catch(Exception e) {

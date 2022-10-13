@@ -1,10 +1,27 @@
 package model;
 
 public class Item {
-	private String code;
-	private String name;
+	private String code;  
+	private String name; 
 	private Integer price;
 	private String info;
+	private String reg_date;
+	
+	private Integer num; //장바구니 수량
+	private Integer sum; //장바구니 합계
+	
+	public Integer getNum() {
+		return num;
+	}
+	public void setNum(Integer num) {
+		this.num = num;
+	}
+	public Integer getSum() {
+		return sum;
+	}
+	public void setSum(Integer sum) {
+		this.sum = sum;
+	}
 	
 	public String getCode() {
 		return code;
@@ -36,6 +53,5 @@ public class Item {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	private String reg_date;
 	
 }
