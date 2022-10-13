@@ -19,6 +19,12 @@
 	<c:otherwise>
 		<h3>로그인 되었습니다.</h3>
 		<h3>환영합니다~ ${param.ID }님~</h3>
+		<c:if test="${ ! empty param.CART }">
+			<script type="text/javascript">
+				opener.window.location.reload();
+				self.close();
+			</script>
+		</c:if>
 	</c:otherwise>
 </c:choose>
 

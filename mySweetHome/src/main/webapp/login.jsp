@@ -8,8 +8,16 @@
 <title>login</title>
 </head>
 <body>
+<c:if test="${param.CART == 'Y' }">
+	<div align="center">
+	<font color="red">해당서비스를 이용하시려면 로그인을 해야합니다.</font>	
+	</div>
+</c:if>
 <!-- 기본 로그인 페이지 -->
 <form action="login.do" method="post" onSubmit="return check()" name="frm">
+<c:if test="${param.CART == 'Y' }">
+	<input type="hidden" name="CART" value="OK"/>
+</c:if>
 계 정 : <input type="text" name="ID" size="15" placeHolder="계정을 입력하세요"/><br/>
 암 호 : <input type="password" name="PWD" size="15"/><br/>
 <input type="submit" value="로그인"/>
