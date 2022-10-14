@@ -18,6 +18,123 @@ public class DAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//로그인 계정으로 장바구니 테이블 검색 메서드
+	public ArrayList<Item> getCartById(String id){
+		String select = "select code, num from mysweet_cart where id=?";
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setString(1, id); 
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Item item = new Item();
+				item.setCode(rs.getString(1));
+				item.setNum(rs.getInt(2));
+				itemList.add(item);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return itemList;
+	}
+	
+	//장바구니 테이블에서 상품 삭제 메서드
+	public boolean deleteCart(String code, String id) {
+		String delete = "delete from mysweet_cart where code=? and id=?";
+		boolean result = false;
+		try{
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setString(1, code);
+			pstmt.setString(2, id);
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return result;
+	}
+	
+	//장바구니 테이블에 수량 변경 메서드
+	public boolean updateCart(Item i) {
+		String update = "update mysweet_cart set num=? where id=? and code=?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setInt(1, i.getNum());
+			pstmt.setString(2, i.getId());
+			pstmt.setString(3, i.getCode());
+			System.out.println("--장바구니의 상품 수량 수정--");
+			System.out.println("num: "+i.getNum());
+			System.out.println("id: "+i.getId());
+			System.out.println("code: "+i.getCode());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//장바구니 테이블에 삽입하는 메서드
+	public boolean putCart(Item i) {
+		String input = "insert into mysweet_cart values(?,?,?,?)";
+		boolean result = false; //삽입결과를 위한 변수 선언
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(input);
+			pstmt.setInt(1, i.getSeqno());
+			pstmt.setString(2, i.getId());
+			pstmt.setString(3, i.getCode());
+			pstmt.setInt(4, i.getNum());
+			pstmt.executeUpdate();
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//장바구니 테이블에서 가장 큰 일련번호 검색 메서드
+	public Integer getMaxCartSeqno() {
+		String select = "select max(seqno) from mysweet_cart";
+		Integer max = 0; 
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			if(rs.next()) max = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return max;
+	}
+	
 	//상품번호로 상품정보를 수정하는 메서드
 	public boolean updateItem(Item i) {
 		String update = "update mysweet_items set name=?, price=?, info=? "
@@ -517,7 +634,7 @@ public class DAO {
 		return result;
 	}
 	
-	//가장 큰 글번호를 찾는 메서드
+	//게시글 테이블에서 가장 큰 글번호를 찾는 메서드
 	public Integer getMaxSeqno() {
 		String select = "select max(seqno) from mysweet_bbs";
 		Integer max = null;

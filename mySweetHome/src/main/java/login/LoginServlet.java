@@ -1,6 +1,7 @@
 package login;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Cart;
+import model.Item;
 import utility.DAO;
 
 /**
@@ -58,7 +61,22 @@ public class LoginServlet extends HttpServlet {
 					session.setAttribute("MANAGER", id);
 				}else {
 					session.setAttribute("USERID", id);
-				}		
+					
+				}
+				//////DB연동
+				//로그인한 계정으로 장바구니 테이블 검색
+				ArrayList<Item> itemList = dao.getCartById(id);
+				//검색결과 있으면, 검색정보를 Cart 객체에 저장
+				Cart cartItem = new Cart(id);
+				if(itemList.size() > 0) { //검색결과가 있는 경우
+					for(int i=0; i < itemList.size(); i++) {
+						Item it = itemList.get(i);
+						cartItem.getCodeList().add(it.getCode());
+						cartItem.getNumList().add(it.getNum());
+					}
+				}
+				//Cart를 세션에 저장
+				session.setAttribute("CART", cartItem);
 			}else { //암호가 일치하지 않는 경우.
 				result = "NOPWD";
 				

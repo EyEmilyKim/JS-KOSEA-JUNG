@@ -10,6 +10,9 @@ public class Item {
 	private Integer num; //장바구니 수량
 	private Integer sum; //장바구니 합계
 	
+	private Integer seqno; //DB장바구니 일련번호
+	private String id;	//DB장바구니 계정
+	
 	public Integer getNum() {
 		return num;
 	}
@@ -21,6 +24,19 @@ public class Item {
 	}
 	public void setSum(Integer sum) {
 		this.sum = sum;
+	}
+	
+	public Integer getSeqno() {
+		return seqno;
+	}
+	public void setSeqno(Integer seqno) {
+		this.seqno = seqno;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getCode() {
