@@ -39,6 +39,7 @@ public class CartListServlet extends HttpServlet {
 		if(cart == null) { //장바구니가 없는 경우
 			request.setAttribute("CARTLIST", null);
 		}else { //장바구니가 있는 경우
+			int total = 0; //총계 계산을 위한 변수 선언
 			ArrayList<String> codeList = cart.getCodeList();
 			ArrayList<Integer> numList = cart.getNumList();
 			DAO dao = new DAO();
@@ -53,12 +54,15 @@ public class CartListServlet extends HttpServlet {
 				Integer num = numList.get(i);
 				item.setNum(num);
 				//장바구니 수량* 상품가격 계산결과를 상품의 소계에 넣어줌
-				item.setSum(num * item.getPrice());
+				int sum = num * item.getPrice();
+				item.setSum(sum);
 				//아이템을 리스트에 담아줌
 				itemList.add(item);
+				//총합에 소계를 누적해줌.
+				total = total + sum;
 			}
 			request.setAttribute("CARTLIST", itemList);
-			
+			request.setAttribute("TOTAL", total);
 		}
 		RequestDispatcher rd = 
 				request.getRequestDispatcher("template.jsp?BODY=cartList.jsp");

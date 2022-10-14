@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>cartList.jsp</title>
 	<style type="text/css">
-		.why {color: skyblue; }
+		.total { font-size:20px; margin:10px; }
 	</style>
 </head>
 <body>
@@ -22,12 +22,20 @@
 			<tr><th>상품번호</th><th>상품이름</th><th>가 격</th>
 				<th>수 량</th><th>합 계</th><th>수정/삭제</th></tr>
 			<c:forEach items="${CARTLIST }" var="item">
-			<tr><td>${item.code }</td><td>${item.name }</td><td>${item.price }</td>
-				<td>수 량</td><td> 합 계</td>
-				<td><input type="submit" value="수정"/>
-					<input type="submit" value="삭제"/></td></tr>
+			<form action="cartModify.do" method="post">
+			<input type="hidden" name="CODE" value="${item.code }"/>
+			<tr><td>${item.code }</td><td>${item.name }</td>
+			<td><fmt:formatNumber groupingUsed="true">${item.price }</fmt:formatNumber></td>
+				<td><input type="number" name="NUM" value="${item.num }" min="0" maxlength="3"/></td>
+				<td><fmt:formatNumber groupingUsed="true">${item.sum }</fmt:formatNumber></td>
+				<td><input type="submit" value="수정" name="BTN"/>
+					<input type="submit" value="삭제" name="BTN"/></td></tr>
+			</form>
 			</c:forEach>	
 		</table>
+		<form class="total">
+		총계 : <fmt:formatNumber groupingUsed="true">${TOTAL }</fmt:formatNumber>원 <input type="submit" value="결제하기">
+		</form>
 	</c:if>
 </div>
 </body>
