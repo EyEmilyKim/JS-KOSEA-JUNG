@@ -25,9 +25,9 @@
 			<form action="cartModify.do" method="post">
 			<input type="hidden" name="CODE" value="${item.code }"/>
 			<tr><td>${item.code }</td><td>${item.name }</td>
-			<td><fmt:formatNumber groupingUsed="true">${item.price }</fmt:formatNumber></td>
-				<td><input type="number" name="NUM" value="${item.num }" min="0" maxlength="3"/></td>
-				<td><fmt:formatNumber groupingUsed="true">${item.sum }</fmt:formatNumber></td>
+			<td><fmt:formatNumber groupingUsed="true">${item.price }</fmt:formatNumber>원</td>
+				<td><input type="number" name="NUM" value="${item.num }" min="0" style="width: 3em"/></td>
+				<td><fmt:formatNumber groupingUsed="true">${item.sum }</fmt:formatNumber>원</td>
 				<td><input type="submit" value="수정" name="BTN"/>
 					<input type="submit" value="삭제" name="BTN"/></td></tr>
 			</form>

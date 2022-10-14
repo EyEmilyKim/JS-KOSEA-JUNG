@@ -41,10 +41,11 @@ public class CartModifyServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String btn = request.getParameter("BTN");
 		String code = request.getParameter("CODE");
+		String num = request.getParameter("NUM");
 		HttpSession session = request.getSession();
 		Cart cart = (Cart)session.getAttribute("CART");
 		if(btn.equals("수정")) {
-			
+			cart.modifyItem(code, Integer.parseInt(num));
 		}else if(btn.equals("삭제")) {
 			cart.deleteItem(code);
 		}

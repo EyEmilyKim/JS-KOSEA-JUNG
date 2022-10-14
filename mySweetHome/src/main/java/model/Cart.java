@@ -26,6 +26,16 @@ public class Cart { //장바구니 객체
 	//장바구니 객체 생성자
 	public Cart(String id) { this.id = id; }
 
+	//상품code로 장바구니 수량 수정
+	public void modifyItem(String code, Integer num) {
+		for(int i=0; i<codeList.size(); i++) {
+			if(codeList.get(i).equals(code)) {
+				numList.set(i, num); //i번째 상품갯수를 num으로 변경 
+				return; //메서드 종료
+			}
+		}
+	}
+	
 	//상품code로 장바구니에서 상품 삭제
 	public void deleteItem(String code) {
 		for(int i=0; i < codeList.size(); i++) { //담긴 상품 수만큼
