@@ -89,9 +89,9 @@ function startClock(){
 					<a href="itemList.do">■ 상품 목록</a><br/>
 				<c:if test="${sessionScope.USERID != null }">	
 					<a href="cartList.do">■ 장바구니 보기</a><br/>
+					<a href="template.jsp?BODY=imageForm.jsp">■ 이미지 게시글 작성</a><br/>
+					<a href="imageList.do">■ 이미지 게시글 목록</a><br/>
 				</c:if>
-					<a href="">■ 이미지 게시글 작성</a><br/>
-					<a href="">■ 이미지 게시글 목록</a><br/>
 				</div>
 			</td >
 			<td id="content">
