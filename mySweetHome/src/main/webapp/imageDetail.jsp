@@ -36,5 +36,9 @@ function goDelete(){
 	document.move.action="imageDelete.do";
 	document.move.submit();
 }
+function goModify(){
+	document.move.action="imageUpdate.do";
+	document.move.submit();
+}
 </script>
 </html>
