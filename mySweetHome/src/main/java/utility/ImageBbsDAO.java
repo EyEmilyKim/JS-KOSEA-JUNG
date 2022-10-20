@@ -15,6 +15,62 @@ public class ImageBbsDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//seqno(글번호)로 이미지 게시글 삭제 메서드
+	public boolean deleteImage(Integer seqno) {
+		String delete = "delete from mysweet_imagebbs where seqno = ?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(delete);
+			pstmt.setInt(1, seqno);
+			pstmt.executeUpdate(); //delete 실행
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();			
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
+	//seqno(글번호)로 이미지 게시글 검색 메서드
+	public ImageBbs getImageDetail(Integer seqno) {
+		String select = "select "
+				+ "seqno, group_id, parent_id, order_no, title, id, "
+				+ "to_char(reg_date, 'YYYY-MM-DD'), image_name, content, password "
+				+ "from mysweet_imagebbs where seqno = ?";
+		ImageBbs bbs = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, seqno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //조회결과 존재하는 경우
+				bbs = new ImageBbs(); 
+				bbs.setSeqno(rs.getInt(1)); //글번호 설정
+				bbs.setGroup_id(rs.getInt(2)); //그룹번호
+				bbs.setParent_id(rs.getInt(3)); //부모글번호
+				bbs.setOrder_no(rs.getInt(4)); //순서번호
+				bbs.setTitle(rs.getString(5)); //제목
+				bbs.setId(rs.getString(6)); //작성자(계정)
+				bbs.setReg_date(rs.getString(7)); //작성일
+				bbs.setImage_name(rs.getString(8)); //파일이름
+				bbs.setContent(rs.getString(9)); //글내용
+				bbs.setPassword(rs.getString(10)); //글내용
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return bbs;
+	}
+		
 	//전체 이미지게시글의 건수 검색 메서드
 	public Integer getImageCount() {
 		String select = "select count(*) from mysweet_imagebbs";

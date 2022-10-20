@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Bbs;
+import model.ImageBbs;
 import model.Item;
 import model.Member;
 import model.Notice;
@@ -17,6 +18,7 @@ public class DAO {
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
 	
 	//로그인 계정으로 장바구니 테이블 검색 메서드
 	public ArrayList<Item> getCartById(String id){

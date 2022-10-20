@@ -21,7 +21,7 @@
 			<th>작성일</th></tr>
 	<c:forEach items="${IMGLIST }" var="bbs">
 		<tr><td><img alt="" src="upload/${bbs.image_name }" width="50" height="50"></td>	
-			<td><a href="">${bbs.title }</a></td>
+			<td><a href="javascript:goDetail(${bbs.seqno })">${bbs.title }</a></td>
 			<td>${bbs.id}</td><td>${bbs.reg_date}</td>
 	</c:forEach>	
 	</table>
@@ -30,5 +30,15 @@
 </c:forEach>	
 </c:if>
 </div>
+<form name="move" method="post">
+<input type="hidden" name="pid"/>
+</form>
 </body>
+<script type="text/javascript">
+function goDetail(id){
+	document.move.action = "imageRead.do";
+	document.move.pid.value = id;
+	document.move.submit();
+}
+</script>
 </html>
