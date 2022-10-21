@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Bbs;
-import model.ImageBbs;
 import model.Item;
 import model.Member;
 import model.Notice;

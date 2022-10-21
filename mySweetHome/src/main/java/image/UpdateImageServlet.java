@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import model.ImageBbs;
 import utility.ImageBbsDAO;
 
 /**
  * Servlet implementation class UpdateImageServlet
  */
-@WebServlet("/UpdateImageServlet")
+@WebServlet("/updateImage.do")
 public class UpdateImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,8 +57,24 @@ public class UpdateImageServlet extends HttpServlet {
 			String pwd = multipart.getParameter("pwd");
 			String content = multipart.getParameter("content");
 			String id = multipart.getParameter("id");
+			ImageBbs bbs = dao.getImageDetail(Integer.parseInt(id)); //글번호로 검색
+			if(bbs.getPassword().equals(pwd)) { //암호가 일치
+				bbs.setTitle(title); //제목을 설정
+				bbs.setContent(content); //글내용을 설정
+				fileName = multipart.getFilesystemName("image_name"); //업로드를 실행
+				if(! fileName.equals("")) { //파일네임이 비어있지 않음->이미지 업로드->이미지변경
+					bbs.setImage_name(fileName); //이미지 이름 변경
+				}
+				//DB에서 update를 실행한다.
+				dao.updateImage(bbs);
+				url = "template.jsp?BODY=imageUpdateResult.jsp";
+				url = url+"?seqno="+id;
+			}else { //암호가 불일치
+				url = "template.jsp?BODY=imageUpdateResult.jsp";
+				url = url+"?id="+id;
+			}
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		response.sendRedirect(url); //화면 전환
 	}

@@ -15,6 +15,31 @@ public class ImageBbsDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//seqno(글번호)로 이미지 게시글 변경 메서드
+	public boolean updateImage(ImageBbs bbs) {
+		String update = "update mysweet_imagebbs set title=?, content=?, image_name=? "
+				+ "where seqno=?";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setString(1, bbs.getTitle()); //제목 설정
+			pstmt.setString(2, bbs.getContent()); //내용 설정
+			pstmt.setString(3, bbs.getImage_name()); //파일명
+			pstmt.setInt(4, bbs.getSeqno()); //글번호 설정 
+			pstmt.executeUpdate(); //update 실행
+			con.commit();
+			result = true;
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e){}
+		}
+		return result;
+	}
+	
 	//seqno(글번호)로 이미지 게시글 삭제 메서드
 	public boolean deleteImage(Integer seqno) {
 		String delete = "delete from mysweet_imagebbs where seqno = ?";
