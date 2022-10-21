@@ -29,9 +29,15 @@
 </div>
 <form name="move" method="post">
 	<input type="hidden" name="id" value="${DETAIL.seqno }"/>
+	<input type="hidden" name="parentid" value="${DETAIL.seqno }"/>
+	<input type="hidden" name="groupid" value="${DETAIL.group_id }"/>
 </form>
 </body>
 <script type="text/javascript">
+function goReply(){
+	document.move.action="imageReply.do";
+	document.move.submit();
+}
 function goDelete(){
 	document.move.action="imageDelete.do";
 	document.move.submit();

@@ -15,6 +15,29 @@ public class ImageBbsDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//이미지 게시글의 답글의 순서를 update하는 메서드
+	public boolean updateOrderNo(ImageBbs bbs) {
+		String update = "update mysweet_imagebbs set order_no = order_no + 1 "
+				+ "where group_id = ? and order_no >= ? ";
+		boolean result = false;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(update);
+			pstmt.setInt(1, bbs.getGroup_id());
+			pstmt.setInt(2, bbs.getOrder_no());
+			pstmt.executeUpdate(); //update 실행
+			con.commit();
+			result = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return result;
+	}
+	
 	//seqno(글번호)로 이미지 게시글 변경 메서드
 	public boolean updateImage(ImageBbs bbs) {
 		String update = "update mysweet_imagebbs set title=?, content=?, image_name=? "

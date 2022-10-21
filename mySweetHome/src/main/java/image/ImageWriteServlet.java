@@ -61,6 +61,9 @@ public class ImageWriteServlet extends HttpServlet {
 			if(fileName.equals("")) { //업로드 실패
 				result = "N";
 			}else { //업로드 성공
+				String parentId = multipart.getParameter("parentid");
+				String groupId = multipart.getParameter("groupid");
+				String orderNo = multipart.getParameter("orderno");
 				result = "Y";
 				ImageBbsDAO dao = new ImageBbsDAO();
 				ImageBbs bbs = new ImageBbs();
@@ -69,9 +72,19 @@ public class ImageWriteServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				String id = (String)session.getAttribute("USERID");
 				bbs.setId(id); //작성자 설정
-				bbs.setGroup_id(seqno); //그룹번호 설정
-				bbs.setParent_id(0);
-				bbs.setOrder_no(0);
+				//////답글여부 검사 시작////////////
+				if(parentId == null || parentId.equals("")) { //원글인 경우
+					bbs.setGroup_id(seqno); //그룹번호 설정
+					bbs.setParent_id(0);
+					bbs.setOrder_no(0);
+				}else { //답글인 경우
+					bbs.setParent_id(Integer.parseInt(parentId));
+					bbs.setGroup_id(Integer.parseInt(groupId));
+					bbs.setOrder_no(Integer.parseInt(orderNo));
+					//답답글인 경우 순서번호(order_no)를 바꾼다.(오라클 쿼리)
+					dao.updateOrderNo(bbs);
+				}
+				//////답글여부 검사 끝////////////////
 				bbs.setTitle(multipart.getParameter("TITLE"));
 				bbs.setPassword(multipart.getParameter("PWD"));
 				bbs.setContent(multipart.getParameter("CONTENT"));

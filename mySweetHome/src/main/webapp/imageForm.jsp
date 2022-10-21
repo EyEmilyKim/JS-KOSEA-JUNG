@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,16 @@
 	<form action="imageWrite.do" method="post" encType="multipart/form-data"
 	onSubmit="return check(this)">
 	
+		<input type="hidden" name="orderno" value="${IMG.order_no +1}"/>
+	<c:if test="${! empty IMG.group_id }">
+		<input type="hidden" name="groupid" value="${IMG.group_id }"/>
+	</c:if>
+	<c:if test="${! empty IMG.parent_id }">
+		<input type="hidden" name="parentid" value="${IMG.parent_id }"/>
+	</c:if>
+	
 	<table>
-		<tr><th>제 목</th><td><input type="text" name="TITLE"/></td></tr>
+		<tr><th>제 목</th><td><input type="text" name="TITLE" value ="${title }"/></td></tr>
 		<tr><th>암 호</th><td><input type="password" name="PWD"/></td></tr>
 		<tr><th>이미지</th><td><input type="file" name="IMAGENAME"/></td></tr>
 		<tr><th>글내용</th><td><textarea rows="8" cols="40" name="CONTENT"></textarea></td></tr>
