@@ -25,16 +25,40 @@
 			<td>${bbs.id}</td><td>${bbs.reg_date}</td>
 	</c:forEach>	
 	</table>
-<c:forEach begin="1" end="${PAGES }" var="page">
-	<a href="imageList.do?PAGE=${page }">${page }</a>
-</c:forEach>	
+	
+	<c:set var="startPage" value="${currentPage-(currentPage%10==0 ? 10 : (currentPage%10))+1 }"/>
+	<c:set var="endPage" value="${startPage+9 }"/>
+	<c:if test="${endPage > PAGES }">
+		<c:set var="endPage" value="${PAGES }"/>
+	</c:if>
+	<c:if test="${startPage > 10 }">
+		<a href="javascript:goPage(${startPage -1 })">[이전]</a>
+	</c:if>
+	<c:forEach begin="${startPage }" end="${endPage }" var="page">
+		<c:if test="${currentPage == page }">
+			<font size="6">
+		</c:if>
+		<a href="imageList.do?PAGE=${page }">${page }</a>
+		<c:if test="${currentPage == page }">
+			</font>
+		</c:if>
+	</c:forEach>	
+	<c:if test="${endPage < PAGES }">
+		<a href="javascript:goPage(${endPage +1 })">[다음]</a>
+	</c:if>
 </c:if>
 </div>
 <form name="move" method="post">
 <input type="hidden" name="pid"/>
+<input type="hidden" name="PAGE"/>
 </form>
 </body>
 <script type="text/javascript">
+function goPage(page){
+	document.move.action = "imageList.do?PAGE="+page;
+	document.move.PAGE.value = page;
+	document.move.submit();
+}
 function goDetail(id){
 	document.move.action = "imageRead.do";
 	document.move.pid.value = id;

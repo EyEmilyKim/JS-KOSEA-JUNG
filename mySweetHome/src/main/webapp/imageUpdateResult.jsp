@@ -17,7 +17,7 @@
 <c:if test="${! empty param.seqno }">
 	<script type="text/javascript">
 		alert("수정되었습니다.");
-		location.href="imageList.do"; //목록으로 돌아간다.
+		location.href="imageList.do?seqno="+${param.seqno}; //목록으로 돌아간다.
 	</script>
 </c:if>
 </body>

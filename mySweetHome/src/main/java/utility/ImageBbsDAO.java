@@ -15,6 +15,33 @@ public class ImageBbsDAO {
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 	
+	//글번호로 일련번호를 찾는 메서드
+	public Integer getRownumBySeqno(Integer seqno) {
+		String select = "select rn "
+				+ "from "
+				+ "( select seqno, rownum rn "
+				+ "from "
+				+ "( select seqno, group_id, order_no from mysweet_imagebbs "
+				+ "order by group_id desc, order_no asc ) "
+				+ ") "
+				+ "where seqno = ? ";
+		Integer rownum = 0;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,"hr","hr");
+			pstmt = con.prepareStatement(select);
+			pstmt.setInt(1, seqno);
+			rs = pstmt.executeQuery();
+			if(rs.next()) rownum = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); con.close(); }
+			catch(Exception e) {}
+		}
+		return rownum;
+	}
+	
 	//이미지 게시글의 답글의 순서를 update하는 메서드
 	public boolean updateOrderNo(ImageBbs bbs) {
 		String update = "update mysweet_imagebbs set order_no = order_no + 1 "
@@ -146,7 +173,8 @@ public class ImageBbsDAO {
 				+ "( "
 				+ "select img.* , rownum rn "
 				+ "from "
-				+ "( select * from mysweet_imagebbs order by seqno desc ) img "
+				+ "( select * from mysweet_imagebbs order by group_id desc"
+				+ ", order_no asc ) img "
 				+ ") "
 				+ "where rn between ? and ? ";
 		ArrayList<ImageBbs> list = new ArrayList<ImageBbs>();
