@@ -62,7 +62,7 @@ public class UpdateImageServlet extends HttpServlet {
 				bbs.setTitle(title); //제목을 설정
 				bbs.setContent(content); //글내용을 설정
 				fileName = multipart.getFilesystemName("image_name"); //업로드를 실행
-				if(! fileName.equals("")) { //파일네임이 비어있지 않음->이미지 업로드->이미지변경
+				if(fileName != null) { //파일네임이 비어있지 않음->이미지 업로드->이미지변경
 					bbs.setImage_name(fileName); //이미지 이름 변경
 				}
 				//DB에서 update를 실행한다.
