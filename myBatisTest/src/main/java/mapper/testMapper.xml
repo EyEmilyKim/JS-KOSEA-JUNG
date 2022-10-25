@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.test">
+<insert id="putDate" parameterType="model.Test">
+	insert into mybatis_test values(
+	#{no},#{name},#{addr},to_date(#{reg_date},'YYYY-MM-DD'))
+</insert>
+<delete id="deleteData" parameterType="Integer">
+	delete from mybatis_test where no = #{id} 
+</delete>
+<update id="updateData" parameterType="model.Test">
+	update mybatis_test set name = #{name}, addr = #{addr}, 
+	reg_date = to_date(#{reg_date},'YYYY-MM-DD') 
+	where no = #{no}
+</update>
+</mapper>
