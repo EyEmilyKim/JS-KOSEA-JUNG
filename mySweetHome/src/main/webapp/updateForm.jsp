@@ -26,7 +26,7 @@ onSubmit="return check(this)">
 		<td><textarea rows="8" cols="40" name="content">${IMG.content }</textarea></td></tr>
 	<tr><td colspan="2" align="center">
 		<input type="submit" value="수정" />	
-		<input type="submit" value="수정" /></td></tr>	
+		<input type="reset" value="취소" /></td></tr>	
 </table>
 </form>
 </body>
