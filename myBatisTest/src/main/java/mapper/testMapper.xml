@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.test">
+
+<select id="getAll" resultType="model.Test">
+   select no, name, addr, to_char(reg_date, 'YYYY/MM/DD') as "reg_date" 
+   from mybatis_test 
+   order by no 
+</select>
+
+<select id="getAllByNoName" parameterType="model.Test" resultType="model.Test">
+	select no, name, addr, to_char(reg_date, 'YYYY-MM-DD') "reg_date" 
+	from mybatis_test where no = #{no} and name = #{name}
+</select>
+<select id="getNameAddrDate" parameterType="Integer" resultType="model.Test">
+	select name, addr, to_char(reg_date, 'YYYY-MM-DD') "reg_date"  
+	from mybatis_test where no = #{id}
+</select>
+<select id="getDate" parameterType="Integer" resultType="String">
+	select to_char(reg_date, 'YYYY-MM-DD') 
+	from mybatis_test where no = #{no}
+</select>
+<select id="getName" parameterType="Integer" resultType="String">
+	select name from mybatis_test where no = #{no}
+</select>
 <insert id="putDate" parameterType="model.Test">
 	insert into mybatis_test values(
 	#{no},#{name},#{addr},to_date(#{reg_date},'YYYY-MM-DD'))
