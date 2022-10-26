@@ -1,16 +1,33 @@
 package utility;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.tomcat.util.modeler.modules.ModelerSource;
 
 import model.BBS;
+import model.FromTo;
 
 public class Crud {
 	private final String name = "mapper.home";
+	
+	//게시글 5개를 검색하는 메서드
+	public ArrayList<BBS> getPageBBS(FromTo ft) {
+		SqlSession ss = this.getSession();
+		ArrayList<BBS> list = null;
+		try {
+			String sql = name+".getPageBBS";
+			list = (ArrayList)ss.selectList(sql,ft);
+		}finally {
+			ss.close();
+		}
+		return list;
+	}
+	
 	//게시글을 삽입하는 메서드
 	public Integer putBBS(BBS bbs) {
 		SqlSession ss = this.getSession();

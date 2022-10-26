@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.BBS;
+import model.FromTo;
+import utility.Crud;
 import utility.DAO;
 
 /**
@@ -32,24 +34,28 @@ public class BBSListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pageNo = 1;//ÆäÀÌÁö ¹øÈ£
+		int pageNo = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 		String page = request.getParameter("PAGE");
 		if(page != null) {
-			//PAGEÆÄ¶ó¹ÌÅÍ°¡ Á¸ÀçÇÏ´Â °æ¿ì, Áï,
-			//ÆäÀÌÁö ¹øÈ£¸¦ ´©¸¥ °æ¿ì
+			//PAGEï¿½Ä¶ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½,
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			pageNo = Integer.parseInt(page);
 		}
 		int start = (pageNo - 1) * 5;
 		int end = ((pageNo - 1) * 5) + 6;
-		//ÆäÀÌÁö¹øÈ£:1  start=0, end=6
-		//ÆäÀÌÁö¹øÈ£:2  start=5, end=11
-		//ÆäÀÌÁö¹øÈ£:3  start=10, end=16
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£:1  start=0, end=6
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£:2  start=5, end=11
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£:3  start=10, end=16
 		DAO dao = new DAO();
-		ArrayList<BBS> list = dao.getPageBBS(start, end);
-		int totalCount = dao.getTotalCount();//ÀüÃ¼ ±ÛÀÇ °¹¼ö
+		Crud crud = new Crud();
+		FromTo ft = new FromTo();
+		ft.setStart(start);
+		ft.setEnd(end);
+		ArrayList<BBS> list = crud.getPageBBS(ft);
+		int totalCount = dao.getTotalCount();//ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		int pageCount = totalCount / 5;
 		if(totalCount % 5 != 0) pageCount++;
-		//°Ô½Ã±Û ¸ñ·ÏÀ» Ãâ·ÂÇÏ´Â JSP(bbsList.jsp)·Î ÀüÈ¯
+		//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ JSP(bbsList.jsp)ï¿½ï¿½ ï¿½ï¿½È¯
 		//Forward
 		request.setAttribute("LIST", list);
 		request.setAttribute("PAGES", pageCount);
@@ -57,8 +63,8 @@ public class BBSListServlet extends HttpServlet {
 			"template.jsp?BODY=bbsList.jsp");
 		rd.forward(request, response);
 	}
-	//ÀÚµ¿È£ÃâµÇ´Â ¸Þ¼­µå : ÄÝ ¹é ¸Þ¼­µå(class-back method)
-	//¼­ºí¸´ÀÌ °¡Áö°í ÀÖ´Â ¸ðµç ¸Þ¼­µå´Â ÄÝ ¹é ¸Þ¼­µå
+	//ï¿½Úµï¿½È£ï¿½ï¿½Ç´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ : ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½(class-back method)
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
