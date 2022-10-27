@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utility.DAO;
+import utility.Crud;
 
 /**
  * Servlet implementation class CodeCheckServlet
@@ -31,9 +31,9 @@ public class CodeCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String code = request.getParameter("CODE");
-		//code¿¡ ÀúÀåµÈ »óÇ°¹øÈ£·Î DB¿¡¼­ »óÇ°¹øÈ£¸¦ °Ë»öÇÑ´Ù.
-		DAO dao = new DAO();
-		String selectedCode = dao.getCode(code);
+		//codeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ñ´ï¿½.
+		Crud crud = new Crud();
+		String selectedCode = crud.getCode(code);
 		request.setAttribute("CODE", code);
 		request.setAttribute("DUP", selectedCode);
 		RequestDispatcher rd = 

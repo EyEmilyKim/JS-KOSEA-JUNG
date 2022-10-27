@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Item;
-import utility.DAO;
+import utility.Crud;
 
 /**
  * Servlet implementation class PutItemServlet
@@ -47,12 +47,12 @@ public class PutItemServlet extends HttpServlet {
 		item.setCode(code); item.setName(name);
 		item.setPrice(Integer.parseInt(price));
 		item.setInfo(info);
-		DAO dao = new DAO();
-		boolean r = dao.putItem(item);//»óÇ°Á¤º¸ »ðÀÔ
+		Crud crud = new Crud();
+		Integer r = crud.putItem(item);//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		String url="template.jsp?BODY=putItemResult.jsp?R=";
-		if(r) {//»ðÀÔÀÌ ¼º°øÇÑ °æ¿ì
+		if(r > 0) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			response.sendRedirect(url+"Y");
-		}else {//»ðÀÔÀÌ ½ÇÆÐÇÑ °æ¿ì
+		}else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			response.sendRedirect(url+"N");
 		}
 	}
