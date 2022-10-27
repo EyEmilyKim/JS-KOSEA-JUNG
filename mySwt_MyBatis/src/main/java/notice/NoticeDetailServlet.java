@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Notice;
-import utility.DAO;
+import utility.Crud;
 
 /**
  * Servlet implementation class NoticeDetailServlet
@@ -32,9 +32,9 @@ public class NoticeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String seqno = request.getParameter("SEQ");
-		//seqno¿¡ ÀÖ´Â ±Û¹øÈ£·Î °Ô½Ã±ÛÀ» Á¶È¸ÇÑ´Ù.
-		DAO dao = new DAO();
-		Notice notice = dao.getNoticeDetail(
+		//seqnoï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½Ñ´ï¿½.
+		Crud crud = new Crud();
+		Notice notice = crud.getNoticeDetail(
 				Integer.parseInt(seqno));
 		request.setAttribute("NOTICE", notice);
 		RequestDispatcher rd = 

@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.home">
-
+<select id="getNoticeDetail" parameterType="Integer" resultType="model.Notice">
+select seqno, title, writer, 
+to_char(reg_date,'YYYY/MM/DD HH24:MI:SS') "reg_date", 
+content from mysweet_notice where seqno = #{id}
+</select>
 <select id="getAllNotice" parameterType="model.FromTo" resultType="model.Notice">
 select seqno, title, writer, reg_date 
 from (select rownum rn, seqno,title,writer, reg_date from 

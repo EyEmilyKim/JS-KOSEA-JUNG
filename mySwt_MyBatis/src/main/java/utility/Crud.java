@@ -15,6 +15,20 @@ import model.Notice;
 public class Crud {
 	private final String name = "mapper.home";
 	
+	//공지글 번호로 공지글을 검색하는 메서드
+	public Notice getNoticeDetail(Integer no) {
+		SqlSession ss = this.getSession();
+		Notice result = null; //조회결과를 저장할 변수 선언
+		try {
+			String sql = name+".getNoticeDetail";
+			result = ss.selectOne(sql, no);
+		}finally {
+			ss.close();
+		}
+		return result;
+
+	}
+	
 	//전체 공지글을 검색하는 메서드
 	public ArrayList<Notice> getAllNotice(FromTo ft) {
 		SqlSession ss = this.getSession();
