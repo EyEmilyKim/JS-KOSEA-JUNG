@@ -14,11 +14,11 @@ import model.Notice;
 public class DAO {
 	private String driver="oracle.jdbc.OracleDriver";
 	private String url=
-		"jdbc:oracle:thin:@//localhost:1521/orcl";
+		"jdbc:oracle:thin:@//localhost:1521/XE";
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	//·Î±×ÀÎÇÑ °èÁ¤À¸·Î Àå¹Ù±¸´Ï Å×ÀÌºíÀ» °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public ArrayList<Item> getCartById(String id){
 		String select="select code,num from mysweet_cart "
 				+ "where id = ?";
@@ -45,7 +45,7 @@ public class DAO {
 		return itemList;
 	}
 	
-	//Àå¹Ù±¸´Ï Å×ÀÌºí¿¡¼­ »óÇ°À» »èÁ¦ÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean deleteCart(String code,String id) {
 		String delete="delete from mysweet_cart "
 				+ "where code = ? and id = ?";
@@ -56,7 +56,7 @@ public class DAO {
 			pstmt=con.prepareStatement(delete);
 			pstmt.setString(1, code);
 			pstmt.setString(2, id);
-			pstmt.executeUpdate();//delete ½ÇÇà
+			pstmt.executeUpdate();//delete ï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -67,7 +67,7 @@ public class DAO {
 		}
 		return result;
 	}
-	//Àå¹Ù±¸´Ï Å×ÀÌºíÀÇ °¹¼ö¸¦ º¯°æÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean updateCart(Item item) {
 		String update="update mysweet_cart set num = ? "
 				+ "where id=? and code=?";
@@ -79,7 +79,7 @@ public class DAO {
 			pstmt.setInt(1, item.getNum());
 			pstmt.setString(2, item.getId());
 			pstmt.setString(3, item.getCode());
-			pstmt.executeUpdate();//update ½ÇÇà
+			pstmt.executeUpdate();//update ï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -90,11 +90,11 @@ public class DAO {
 		}
 		return result;
 	}
-	//Àå¹Ù±¸´Ï Å×ÀÌºí¿¡ »ðÀÔÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean putCart(Item item) {
 		String input="insert into mysweet_cart "
 				+ "values(?,?,?,?)";
-		boolean result = false;//»ðÀÔ°á°ú¸¦ À§ÇÑ º¯¼ö ¼±¾ð
+		boolean result = false;//ï¿½ï¿½ï¿½Ô°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -103,7 +103,7 @@ public class DAO {
 			pstmt.setString(2, item.getId());
 			pstmt.setString(3, item.getCode());
 			pstmt.setInt(4, item.getNum());
-			pstmt.executeUpdate();//insert ½ÇÇà
+			pstmt.executeUpdate();//insert ï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -115,15 +115,15 @@ public class DAO {
 		}
 		return result;
 	}
-	//Àå¹Ù±¸´Ï Å×ÀÌºí¿¡¼­ °¡Àå Å« ÀÏ·Ã¹øÈ£ °Ë»ö ¸Þ¼­µå
+	//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å« ï¿½Ï·Ã¹ï¿½È£ ï¿½Ë»ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getMaxCartSeqno() {
 		String select="select max(seqno) from mysweet_cart";
-		Integer max = 0;//°á°ú¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ð
+		Integer max = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
-			rs = pstmt.executeQuery();//select ½ÇÇà
+			rs = pstmt.executeQuery();//select ï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) max = rs.getInt(1);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -135,7 +135,7 @@ public class DAO {
 		return max;
 	}
 	
-	//»óÇ°Á¤º¸ ¼öÁ¤(ÀÌ¸§,°¡°Ý,¼³¸í) ¸Þ¼­µå
+	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½Ì¸ï¿½,ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½) ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean updateItem(Item item) {
 		String update="update mysweet_items "
 			+ "set name=?,price=?,info=? where code=?";
@@ -148,7 +148,7 @@ public class DAO {
 			pstmt.setInt(2, item.getPrice());
 			pstmt.setString(3, item.getInfo());
 			pstmt.setString(4, item.getCode());
-			pstmt.executeUpdate();//update ½ÇÇà
+			pstmt.executeUpdate();//update ï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -160,19 +160,19 @@ public class DAO {
 		}
 		return result;
 	}
-	//»óÇ°¹øÈ£·Î »óÇ°Á¤º¸¸¦ »èÁ¦ÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean deleteItem(String code) {
 		String delete="delete from mysweet_items "
 				+ "where code = ?";
-		boolean result = false;//ÀÛ¾÷°á°ú¸¦ À§ÇÑ º¯¼ö ¼±¾ð
+		boolean result = false;//ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(delete);
 			pstmt.setString(1, code);
-			pstmt.executeUpdate();//delete ½ÇÇà
+			pstmt.executeUpdate();//delete ï¿½ï¿½ï¿½ï¿½
 			con.commit();
-			result = true;//ÀÛ¾÷ ¼º°øÀ» ÀÇ¹Ì
+			result = true;//ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -183,25 +183,25 @@ public class DAO {
 		return result;
 	}
 	
-	//»óÇ°¹øÈ£·Î »óÇ°Á¤º¸¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Item getItemDetail(String code) {
 		String select="select code,name,price,info,"
 			+ "to_char(reg_date,'YYYY/MM/DD HH24:MI:SS')"
 			+ " from mysweet_items where code = ?";
-		Item item = null;//Á¶È¸°á°ú¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ð
+		Item item = null;//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			pstmt.setString(1, code);
-			rs = pstmt.executeQuery();//select ½ÇÇà
+			rs = pstmt.executeQuery();//select ï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) {
 				item = new Item();
-				item.setCode(rs.getString(1));//»óÇ°¹øÈ£
-				item.setName(rs.getString(2));//»óÇ°ÀÌ¸§
-				item.setPrice(rs.getInt(3));//»óÇ°°¡°Ý
-				item.setInfo(rs.getString(4));//»óÇ°Á¤º¸
-				item.setReg_date(rs.getString(5));//µî·ÏÀÏ
+				item.setCode(rs.getString(1));//ï¿½ï¿½Ç°ï¿½ï¿½È£
+				item.setName(rs.getString(2));//ï¿½ï¿½Ç°ï¿½Ì¸ï¿½
+				item.setPrice(rs.getInt(3));//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+				item.setInfo(rs.getString(4));//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+				item.setReg_date(rs.getString(5));//ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -213,7 +213,7 @@ public class DAO {
 		return item;
 	}
 	
-	//ÀüÃ¼ »óÇ°ÀÇ °¹¼ö¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ã¼ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getTotalItemCount() {
 		String select="select count(*) from mysweet_items";
 		Integer total = null;
@@ -221,7 +221,7 @@ public class DAO {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
-			rs=pstmt.executeQuery();//select ½ÇÇà
+			rs=pstmt.executeQuery();//select ï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) total = rs.getInt(1);
 			else total = 0;
 		}catch(Exception e) {
@@ -233,7 +233,7 @@ public class DAO {
 		return total;
 	}
 	
-	//ÆäÀÌÁö¿¡ ÇØ´çÇÏ´Â »óÇ°Á¤º¸¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public ArrayList<Item> getAllItems(int start,int end){
 		String select="select code, name, price, r_date "
 			+ "from	(select rownum rn, code, name, price, r_date"
@@ -251,11 +251,11 @@ public class DAO {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Item item = new Item();
-				item.setCode(rs.getString(1));//»óÇ°¹øÈ£
-				item.setName(rs.getString(2));//»óÇ°ÀÌ¸§
-				item.setPrice(rs.getInt(3));//»óÇ°°¡°Ý
-				item.setReg_date(rs.getString(4));//µî·ÏÀÏ
-				list.add(item);//ArrayList¿¡ Á¶È¸°á°úÀúÀå
+				item.setCode(rs.getString(1));//ï¿½ï¿½Ç°ï¿½ï¿½È£
+				item.setName(rs.getString(2));//ï¿½ï¿½Ç°ï¿½Ì¸ï¿½
+				item.setPrice(rs.getInt(3));//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+				item.setReg_date(rs.getString(4));//ï¿½ï¿½ï¿½ï¿½ï¿½
+				list.add(item);//ArrayListï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -267,11 +267,11 @@ public class DAO {
 		return list;
 	}
 	
-	//»óÇ°Á¤º¸¸¦ »ðÀÔÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean putItem(Item item) {
 		String input="insert into mysweet_items "
 				+ "values(?,?,?,?,sysdate)";
-		boolean result = false;//»ðÀÔ °á°ú¸¦ À§ÇÑ º¯¼ö ¼±¾ð
+		boolean result = false;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -280,9 +280,9 @@ public class DAO {
 			pstmt.setString(2, item.getName());
 			pstmt.setInt(3, item.getPrice());
 			pstmt.setString(4, item.getInfo());
-			pstmt.executeUpdate();//insert ½ÇÇà
+			pstmt.executeUpdate();//insert ï¿½ï¿½ï¿½ï¿½
 			con.commit();
-			result = true;//»ðÀÔ ¼º°øÀ» ÀÇ¹Ì
+			result = true;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
 		}catch(Exception e) {	e.printStackTrace();
 		}finally {
 			try {pstmt.close(); con.close();}
@@ -291,17 +291,17 @@ public class DAO {
 		return result;
 	}
 	
-	//»óÇ°¹øÈ£·Î »óÇ°¹øÈ£¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public String getCode(String id) {
 		String select="select code from mysweet_items "
 				+ "where code = ?";
-		String selectedId = null;//Á¶È¸°á°ú¸¦ ÀúÀåÇÒ º¯¼ö
+		String selectedId = null;//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();//select½ÇÇà
+			rs = pstmt.executeQuery();//selectï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) 
 				selectedId = rs.getString(1);
 		}catch(Exception e) {
@@ -314,11 +314,11 @@ public class DAO {
 		return selectedId;
 	}
 	
-	//°í°´Á¤º¸¸¦ »ðÀÔÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean putMember(Member mem) {
 		String insert="insert into mysweet_users "
 				+ "values(?,?,?,?,?,?,?,?)";
-		boolean result = false;//»ðÀÔ °á°ú¸¦ À§ÇÑ º¯¼ö ¼±¾ð
+		boolean result = false;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -331,7 +331,7 @@ public class DAO {
 			pstmt.setString(6, mem.getGender());
 			pstmt.setString(7, mem.getEmail());
 			pstmt.setString(8, mem.getJob());
-			pstmt.executeUpdate();//insert ½ÇÇà
+			pstmt.executeUpdate();//insert ï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -344,17 +344,17 @@ public class DAO {
 		return result;
 	}
 	
-	//ÀÔ·ÂµÈ °èÁ¤À¸·Î °èÁ¤À» °Ë»öÇÏ´Â ¸Þ¼­µå(°èÁ¤ Áßº¹°Ë»ç¿ë)
+	//ï¿½Ô·Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½Ë»ï¿½ï¿½)
 	public String getId(String id) {
 		String select="select id from mysweet_users "
 				+ "where id = ?";
-		String selectedId = null;//Á¶È¸°á°ú¸¦ ÀúÀåÇÒ º¯¼ö
+		String selectedId = null;//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();//select½ÇÇà
+			rs = pstmt.executeQuery();//selectï¿½ï¿½ï¿½ï¿½
 			if(rs.next()) 
 				selectedId = rs.getString(1);
 		}catch(Exception e) {
@@ -367,21 +367,21 @@ public class DAO {
 		return selectedId;
 	}
 	
-	//°øÁö±Û ¹øÈ£·Î °øÁö±ÛÀ» ¼öÁ¤ÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean modifyNotice(Notice n) {
 		String update="update mysweet_notice set content=?,"
 				+ " title=? where seqno = ?";
-		boolean result = false;//ÀÛ¾÷ÀÇ °á°ú¸¦ À§ÇÑ º¯¼ö ¼±¾ð
+		boolean result = false;//ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(update);
-			pstmt.setString(1, n.getContent());//±Û³»¿ë¼³Á¤
-			pstmt.setString(2, n.getTitle());//Á¦¸ñ ¼³Á¤
-			pstmt.setInt(3, n.getSeqno());//±Û¹øÈ£ ¼³Á¤
-			pstmt.executeUpdate();//update½ÇÇà
+			pstmt.setString(1, n.getContent());//ï¿½Û³ï¿½ï¿½ë¼³ï¿½ï¿½
+			pstmt.setString(2, n.getTitle());//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			pstmt.setInt(3, n.getSeqno());//ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+			pstmt.executeUpdate();//updateï¿½ï¿½ï¿½ï¿½
 			con.commit();
-			result = true;//update ½ÇÇà ¼º°øÀ» ÀÇ¹Ì
+			result = true;//update ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -391,7 +391,7 @@ public class DAO {
 		}
 		return result;
 	}
-	//°øÁö±Û ¹øÈ£·Î °øÁö±ÛÀ» »èÁ¦ÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean deleteNotice(int seqno) {
 		String delete="delete from mysweet_notice "
 				+ "where seqno = ?";
@@ -401,9 +401,9 @@ public class DAO {
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(delete);
 			pstmt.setInt(1, seqno);
-			pstmt.executeUpdate();//delete½ÇÇà
+			pstmt.executeUpdate();//deleteï¿½ï¿½ï¿½ï¿½
 			con.commit();
-			result = true;//»èÁ¦ ½ÇÇà ¼º°ø
+			result = true;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -413,12 +413,12 @@ public class DAO {
 		return result;
 	}
 	
-	//°øÁö±Û ¹øÈ£·Î °øÁö±ÛÀ» °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Notice getNoticeDetail(int seqno) {
 		String select="select seqno,title,writer,"
 			+ "to_char(reg_date,'YYYY/MM/DD HH24:MI:SS'),"
 			+ "content from mysweet_notice where seqno = ?";
-		Notice notice = null;//Á¶È¸°á°ú¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ð
+		Notice notice = null;//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -427,11 +427,11 @@ public class DAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				notice = new Notice();
-				notice.setSeqno(rs.getInt(1));//±Û¹øÈ£
-				notice.setTitle(rs.getString(2));//Á¦¸ñ
-				notice.setWriter(rs.getString(3));//ÀÛ¼ºÀÚ
-				notice.setReg_date(rs.getString(4));//ÀÛ¼ºÀÏ
-				notice.setContent(rs.getString(5));//±Û³»¿ë
+				notice.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£
+				notice.setTitle(rs.getString(2));//ï¿½ï¿½ï¿½ï¿½
+				notice.setWriter(rs.getString(3));//ï¿½Û¼ï¿½ï¿½ï¿½
+				notice.setReg_date(rs.getString(4));//ï¿½Û¼ï¿½ï¿½ï¿½
+				notice.setContent(rs.getString(5));//ï¿½Û³ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -442,7 +442,7 @@ public class DAO {
 		}
 		return notice;
 	}
-	//ÀüÃ¼ °øÁö±ÛÀÇ °¹¼ö¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getNoticeCount() {
 		String select="select count(*) from mysweet_notice";
 		Integer count = 0;
@@ -461,7 +461,7 @@ public class DAO {
 		}
 		return count;
 	}
-	//ÇØ´ç ÆäÀÌÁö¿¡ Ãâ·ÂµÈ °øÁö±Û °Ë»ö ¸Þ¼­µå
+	//ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public ArrayList<Notice> getAllNotice(int start,int end){
 		String select="select seqno, title, writer, r_date "
 			+ "	from (select rownum rn, seqno,title,writer, r_date from "
@@ -481,10 +481,10 @@ public class DAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Notice notice = new Notice();
-				notice.setSeqno(rs.getInt(1));//±Û¹øÈ£
-				notice.setTitle(rs.getString(2));//Á¦¸ñ
-				notice.setWriter(rs.getString(3));//ÀÛ¼ºÀÚ
-				notice.setReg_date(rs.getString(4));//ÀÛ¼ºÀÏ
+				notice.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£
+				notice.setTitle(rs.getString(2));//ï¿½ï¿½ï¿½ï¿½
+				notice.setWriter(rs.getString(3));//ï¿½Û¼ï¿½ï¿½ï¿½
+				notice.setReg_date(rs.getString(4));//ï¿½Û¼ï¿½ï¿½ï¿½
 				list.add(notice);
 			}
 		}catch(Exception e) {
@@ -497,7 +497,7 @@ public class DAO {
 		return list;
 	}
 	
-	//°¡Àå Å« °øÁö±Û ¹øÈ£¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ Å« ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getMaxNotice() {
 		String select="select max(seqno) from mysweet_notice";
 		Integer max = 0;
@@ -517,7 +517,7 @@ public class DAO {
 		return max;
 	}
 	
-	//°øÁö±Û »ðÀÔ ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean putNotice(Notice n) {
 		String insert="insert into mysweet_notice "
 			+ "values(?,?,?,sysdate,?)";
@@ -530,7 +530,7 @@ public class DAO {
 			pstmt.setString(2, n.getTitle());
 			pstmt.setString(3, n.getWriter());
 			pstmt.setString(4, n.getContent());
-			pstmt.executeUpdate();//insert½ÇÇà
+			pstmt.executeUpdate();//insertï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -543,26 +543,26 @@ public class DAO {
 		return result;
 	}
 	
-	//±Û¹øÈ£·Î °Ô½Ã±ÛÀ» °Ë»öÇÏ´Â ¸Þ¼­µå
+	//ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public BBS getBBSDetail(int seqno) {
 		String select = "select seqno,title,writer,"
 			+ "to_char(reg_date,'YYYY-MM-DD HH24:MI:SS'),"
 			+ "content from mysweet_bbs"
 			+ " where seqno = ?";
-		BBS bbs = null;//Á¶È¸ °á°ú¸¦ ÀúÀåÇÒ º¯¼ö ¼±¾ð
+		BBS bbs = null;//ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			pstmt.setInt(1, seqno);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {//Á¶È¸ °á°ú°¡ Á¸ÀçÇÏ´Â °æ¿ì
+			if(rs.next()) {//ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 				bbs = new BBS();
-				bbs.setSeqno(rs.getInt(1));//±Û¹øÈ£ ÀúÀå
-				bbs.setTitle(rs.getString(2));//±ÛÁ¦¸ñ ÀúÀå
-				bbs.setWriter(rs.getString(3));//ÀÛ¼ºÀÚ ÀúÀå
-				bbs.setReg_date(rs.getString(4));//ÀÛ¼ºÀÏ
-				bbs.setContent(rs.getString(5));//±Û³»¿ë ÀúÀå
+				bbs.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+				bbs.setTitle(rs.getString(2));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				bbs.setWriter(rs.getString(3));//ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				bbs.setReg_date(rs.getString(4));//ï¿½Û¼ï¿½ï¿½ï¿½
+				bbs.setContent(rs.getString(5));//ï¿½Û³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -574,7 +574,7 @@ public class DAO {
 		return bbs;
 	}
 	
-	//ÀüÃ¼ °Ô½Ã±ÛÀÇ °¹¼ö¸¦ Ã£´Â ¸Þ¼­µå
+	//ï¿½ï¿½Ã¼ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getTotalCount() {
 		String select="select count(*) from mysweet_bbs";
 		Integer totalCount = 0;
@@ -583,7 +583,7 @@ public class DAO {
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {//Á¶È¸°á°ú°¡ Á¸ÀçÇÏ´Â °æ¿ì
+			if(rs.next()) {//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 				totalCount = rs.getInt(1);
 			}
 		}catch(Exception e) {
@@ -596,7 +596,7 @@ public class DAO {
 		return totalCount;
 	}
 	
-	//°Ô½Ã±Û Á¶È¸ ¸Þ¼­µå(ÆäÀÌÁö ´ç 5°³ÀÇ ±Û¸¸ °Ë»ö)
+	//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È¸ ï¿½Þ¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Û¸ï¿½ ï¿½Ë»ï¿½)
 	public ArrayList<BBS> getPageBBS(int start, int end){
 		String select="select seqno, title, writer, r_date "
 		+ "from (select rownum rn, seqno,title,writer, r_date from "
@@ -617,10 +617,10 @@ public class DAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BBS bbs = new BBS();
-				bbs.setSeqno(rs.getInt(1));//±Û¹øÈ£
-				bbs.setTitle(rs.getString(2));//Á¦¸ñ
-				bbs.setWriter(rs.getString(3));//ÀÛ¼ºÀÚ
-				bbs.setReg_date(rs.getString(4));//ÀÛ¼ºÀÏ
+				bbs.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£
+				bbs.setTitle(rs.getString(2));//ï¿½ï¿½ï¿½ï¿½
+				bbs.setWriter(rs.getString(3));//ï¿½Û¼ï¿½ï¿½ï¿½
+				bbs.setReg_date(rs.getString(4));//ï¿½Û¼ï¿½ï¿½ï¿½
 				list.add(bbs);
 			}
 		}catch(Exception e) {
@@ -632,22 +632,22 @@ public class DAO {
 		}
 		return list;
 	}
-	//°Ô½Ã±Û »ðÀÔ ¸Þ¼­µå
+	//ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public boolean putBBS(BBS bbs) {
 		String insert="insert into mysweet_bbs "
 			+ "values(?,?,?,sysdate,?)";
-		boolean result = false;//»ðÀÔ ¼º°øÀ¯¹«¸¦ À§ÇÑ º¯¼ö
+		boolean result = false;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(insert);
-			pstmt.setInt(1, bbs.getSeqno());//±Û¹øÈ£
-			pstmt.setString(2, bbs.getTitle());//Á¦¸ñ
-			pstmt.setString(3, bbs.getWriter());//ÀÛ¼ºÀÚ
-			pstmt.setString(4, bbs.getContent());//±Û³»¿ë
-			pstmt.executeUpdate();//insert½ÇÇà
+			pstmt.setInt(1, bbs.getSeqno());//ï¿½Û¹ï¿½È£
+			pstmt.setString(2, bbs.getTitle());//ï¿½ï¿½ï¿½ï¿½
+			pstmt.setString(3, bbs.getWriter());//ï¿½Û¼ï¿½ï¿½ï¿½
+			pstmt.setString(4, bbs.getContent());//ï¿½Û³ï¿½ï¿½ï¿½
+			pstmt.executeUpdate();//insertï¿½ï¿½ï¿½ï¿½
 			con.commit();
-			result = true;//»ðÀÔ ¼º°øÀ» ÀÇ¹Ì
+			result = true;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -657,7 +657,7 @@ public class DAO {
 		}
 		return result;
 	}
-	//°¡Àå Å« ±Û¹øÈ£¸¦ Ã£´Â ¸Þ¼­µå
+	//ï¿½ï¿½ï¿½ï¿½ Å« ï¿½Û¹ï¿½È£ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	public Integer getMaxSeqno() {
 		String select=
 			"select max(seqno) from mysweet_bbs";
@@ -667,9 +667,9 @@ public class DAO {
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(select);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {//Á¶È¸°á°ú°¡ Á¸ÀçÇÏ´Â °æ¿ì
+			if(rs.next()) {//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 				max = rs.getInt(1);
-			}else {//Á¶È¸°á°ú°¡ Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì
+			}else {//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½
 				max = 0;
 			}
 		}catch(Exception e) {
@@ -685,7 +685,7 @@ public class DAO {
 	public String getPwd(String id) {
 		String select="select pwd from mysweet_users "
 				+ "where id = ?";
-		String pwd=null;//°Ë»öµÈ ¾ÏÈ£¸¦ ÀúÀåÇÒ º¯¼ö¼±¾ð
+		String pwd=null;//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -703,7 +703,7 @@ public class DAO {
 			}catch(Exception e) {}
 		}
 		return pwd;
-	}//°èÁ¤À¸·Î ¾ÏÈ£¸¦ °Ë»öÇÏ´Â ¸Þ¼­µå
+	}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 }
 
 
