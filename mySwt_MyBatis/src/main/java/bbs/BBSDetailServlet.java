@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.BBS;
+import utility.Crud;
 import utility.DAO;
 
 /**
@@ -32,9 +33,9 @@ public class BBSDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String seqno=request.getParameter("NO");
-		//seqno¿¡ µé¾îÀÖ´Â ±Û¹øÈ£·Î °Ô½Ã±ÛÀ» Á¶È¸ÇÑ´Ù.
-		DAO dao = new DAO();
-		BBS bbs = dao.getBBSDetail(Integer.parseInt(seqno));
+		//seqnoì— ë“¤ì–´ìˆëŠ” ê¸€ë²ˆí˜¸ë¡œ ê²Œì‹œê¸€ì„ ì¡°íšŒí•œë‹¤.
+		Crud crud = new Crud(); //myBatisìš©
+		BBS bbs = crud.getBBSDetail(Integer.parseInt(seqno));
 		request.setAttribute("BBS", bbs);
 		RequestDispatcher rd = request.getRequestDispatcher(
 			"template.jsp?BODY=bbsDetail.jsp");
