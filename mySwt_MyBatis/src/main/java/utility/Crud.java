@@ -15,6 +15,33 @@ import model.Notice;
 public class Crud {
 	private final String name = "mapper.home";
 	
+	//전체 공지글을 검색하는 메서드
+	public ArrayList<Notice> getAllNotice(FromTo ft) {
+		SqlSession ss = this.getSession();
+		ArrayList<Notice> list = null;
+		try {
+			String sql = name+".getAllNotice";
+			list = (ArrayList)ss.selectList(sql, ft);
+		}finally {
+			ss.close();
+		}
+		return list;
+	}
+	
+	//전체 공지글 갯수를 검색하는 메서드
+	public Integer getNoticeCount() {
+		SqlSession ss = this.getSession();
+		Integer count = 0;
+		try {
+			String sql = name+".getNoticeCount";
+			count = ss.selectOne(sql);
+			if(count == null) count = 0;
+		}finally {
+			ss.close();
+		}
+		return count;
+	}
+	
 	//공지글을 등록하는 메서드
 	public Integer putNotice(Notice notice) {
 		SqlSession ss = this.getSession();

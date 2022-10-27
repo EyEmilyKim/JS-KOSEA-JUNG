@@ -3,6 +3,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.home">
 
+<select id="getAllNotice" parameterType="model.FromTo" resultType="model.Notice">
+select seqno, title, writer, reg_date 
+from (select rownum rn, seqno,title,writer, reg_date from 
+(select seqno, title, writer, 
+to_char(reg_date,'YYYY-MM-DD HH24:MI:SS') reg_date 
+from mysweet_notice 
+order by seqno desc) 
+) 
+where rn > #{start} and rn <![CDATA[<]]> #{end}
+</select>
+<select id="getNoticeCount" resultType="Integer">
+select count(*) from mysweet_notice
+</select>
 <select id="getMaxNotice" resultType="Integer">
 select max(seqno) from mysweet_notice
 </select>

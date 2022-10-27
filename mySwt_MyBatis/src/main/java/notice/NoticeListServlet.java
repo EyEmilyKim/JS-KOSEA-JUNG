@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.FromTo;
 import model.Notice;
-import utility.DAO;
+import utility.Crud;
 
 /**
  * Servlet implementation class NoticeListServlet
@@ -32,19 +33,22 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//°øÁöÅ×ÀÌºí¿¡ ÀÖ´Â ÃÖ±Ù 5°³ÀÇ °øÁö±ÛÀ» °Ë»öÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìºï¿½ ï¿½Ö´ï¿½ ï¿½Ö±ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ñ´ï¿½.
 		String page = request.getParameter("PAGE");
-		DAO dao = new DAO();
+		Crud crud = new Crud(); //myBatisìš©
 		int pageNo = 1;
 		if(page != null) pageNo = Integer.parseInt(page);
 		int start = (pageNo - 1) * 5;
 		int end = ((pageNo - 1)* 5) + 6;
-		ArrayList<Notice> list = dao.getAllNotice(start, end);
-		int totalCount = dao.getNoticeCount();
+		FromTo ft = new FromTo();
+		ft.setStart(start);
+		ft.setEnd(end);
+		ArrayList<Notice> list = crud.getAllNotice(ft);
+		int totalCount = crud.getNoticeCount();
 		int pageCount = totalCount / 5;
 		if(totalCount % 5 != 0) pageCount++;
-		int startRow = (pageNo - 1) * 5 + 1;//Çö ÆäÀÌÁöÀÇ Ã¹ÁÙ
-		int endRow = pageNo * 5;//Çö ÆäÀÌÁöÀÇ ¸¶Áö¸· ÁÙ
+		int startRow = (pageNo - 1) * 5 + 1;//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½
+		int endRow = pageNo * 5;//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		if(endRow > totalCount) endRow = totalCount;
 		request.setAttribute("startRow", startRow);
 		request.setAttribute("endRow", endRow);
