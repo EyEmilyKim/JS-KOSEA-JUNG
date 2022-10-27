@@ -3,6 +3,31 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.home">
 
+<insert id="putMember" parameterType="model.Member">
+insert into mysweet_users values(#{id},#{pwd},#{name},
+#{addr},#{tel},#{gender},#{email},#{job})
+</insert>
+<select id="getId" parameterType="String">
+select id from mysweet_users where id = #{id}
+</select>
+
+<select id="getMaxCartSeqno" resultType="Integer">
+select max(seqno) from mysweet_cart
+</select>
+<insert id="putCart" parameterType="model.Item">
+insert into mysweet_cart values(#{seqno},#{id},#{code},#{num})
+</insert>
+<update id="updateCart" parameterType="model.Item">
+update mysweet_cart set num = #{num} where id=#{id} and code=#{code}
+</update>
+<delete id="deleteCart" parameterType="model.Item">
+delete from mysweet_cart where code = #{code} and id = #{id}
+</delete>
+
+<!-- /////////////////////////// -->
+<!-- //상품 목록 , 수정, 삭제  self 로 MyBatis 적용해보기 -->
+<!-- /////////////////////////// -->
+
 <insert id="putItem" parameterType="model.Item">
 insert into mysweet_items values(#{code},#{name},#{price},#{info},sysdate)
 </insert>

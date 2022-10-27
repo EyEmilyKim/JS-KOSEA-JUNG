@@ -11,10 +11,102 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import model.BBS;
 import model.FromTo;
 import model.Item;
+import model.Member;
 import model.Notice;
 
 public class Crud {
 	private final String name = "mapper.home";
+	
+	//가입자 등록 메서드
+	public Integer putMember(Member m) {
+		SqlSession ss = this.getSession();
+		Integer result = -1;
+		try {
+			String sql = name+".putMember";
+			result = ss.delete(sql, m);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//계정으로 계정을 검색하는 메서드(중복검사용)
+	public String getId(String id) {
+		SqlSession ss = this.getSession();
+		String result = null; //조회결과를 저장할 변수 선언
+		try {
+			String sql = name+".getId";
+			result = ss.selectOne(sql, id);
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//장바구니 정보를 삭제하는 메서드
+	public Integer deleteCart(Item item) {
+		SqlSession ss = this.getSession();
+		Integer result = -1; //삽입결과를 저장할 변수 선언
+		try {
+			String sql = name+".deleteCart";
+			result = ss.delete(sql, item);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//장바구니 정보를 수정하는 메서드
+	public Integer updateCart(Item item) {
+		SqlSession ss = this.getSession();
+		Integer result = -1; //삽입결과를 저장할 변수
+		try {
+			String sql = name+".updateCart";
+			result = ss.update(sql, item);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//장바구니 정보를 삽입하는 메서드
+	public Integer putCart(Item item) {
+		SqlSession ss = this.getSession();
+		Integer result = -1; //검색결과를 저장할 변수 선언
+		try {
+			String sql = name+".putCart";
+			result = ss.selectOne(sql);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//가장 큰 장바구니 번호를 검색하는 메서드
+	public Integer getMaxCartSeqno() {
+		SqlSession ss = this.getSession();
+		Integer max = 0; //검색결과를 저장할 변수 선언
+		try {
+			String sql = name+".getMaxCartSeqno";
+			max = ss.selectOne(sql);
+			if(max == null) max = 0;
+		}finally {
+			ss.close();
+		}
+		return max;
+	}
+	
+	///////////////////////////
+	//상품 목록 , 수정, 삭제  self 로 MyBatis 적용해보기
+	///////////////////////////
 	
 	//상품 등록하는 메서드
 	public Integer putItem(Item item) {

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import utility.Crud;
 import utility.DAO;
 
 public class Cart {
@@ -22,64 +23,67 @@ public class Cart {
 	public void modifyItem(String code, Integer num) {
 		for(int i=0; i < codeList.size(); i++) {
 			if(codeList.get(i).equals(code)) {
-				numList.set(i, num);//i¹øÂ° »óÇ°°¹¼ö¸¦ numÀ¸·Î º¯°æ
-				////DB¿¬µ¿ ½ÃÀÛ
+				numList.set(i, num);//iï¿½ï¿½Â° ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ numï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				DAO dao = new DAO();
 				Item item = new Item();
 				item.setId(id); item.setCode(code);
 				item.setNum(num);
 				dao.updateCart(item);
-				////DB¿¬µ¿ ³¡
-				return;//¸Þ¼­µå Á¾·á
+				////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				return;//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
 		}
-	}//Àå¹Ù±¸´Ï¿¡¼­ »óÇ°ÀÇ °¹¼ö¸¦ º¯°æÇÏ´Â ¸Þ¼­µå
+	}//ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	
 	public void deleteItem(String code) {
 		for(int i=0; i < codeList.size(); i++) {
 			if(codeList.get(i).equals(code)) {
-				//codeList¿¡¼­ ÇØ´ç »óÇ°À» »èÁ¦
+				//codeListï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				codeList.remove(i);
-				//numList¿¡¼­ ÇØ»ó »óÇ°ÀÇ °¹¼ö¸¦ »èÁ¦
+				//numListï¿½ï¿½ï¿½ï¿½ ï¿½Ø»ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				numList.remove(i);
-				////DB¿¬µ¿ ½ÃÀÛ
-				DAO dao = new DAO();
-				dao.deleteCart(code, id);
-				////DB¿¬µ¿ ³¡
+				////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				Crud crud = new Crud();
+				Item item = new Item();
+				item.setCode(code);
+				item.setId(id);
+				crud.deleteCart(item);
+				////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 				return;
 			}
 		}
-	}//Àå¹Ù±¸´Ï¿¡¼­ »óÇ°À» »èÁ¦ÇÏ´Â ¸Þ¼­µå
+	}//ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	
 	public void addCart(String code, Integer num) {
 		for(int i=0; i < codeList.size(); i++) {
 			if(codeList.get(i).equals(code)) {
-				Integer n = numList.get(i);//i¹øÂ° »óÇ°ÀÇ °¹¼ö
+				Integer n = numList.get(i);//iï¿½ï¿½Â° ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				int sum = n + num;
 				numList.set(i, sum);
-				/////DB¿¬µ¿ ½ÃÀÛ
+				/////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				Item item = new Item();
-				DAO dao = new DAO();
+				Crud crud = new Crud();
 				item.setId(id); item.setCode(code);
 				item.setNum(sum);
-				dao.updateCart(item);
-				/////DB¿¬µ¿ ³¡
-				return;//¸Þ¼­µå Á¾·á
-			}//i¹øÂ° »óÇ°¹øÈ£¿Í code¿¡ ÀÖ´Â »óÇ°¹øÈ£°¡ °°Àº °æ¿ì
+				crud.updateCart(item);
+				/////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				return;//ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			}//iï¿½ï¿½Â° ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ codeï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		}
 		codeList.add(code); numList.add(num);
-		////////DB¿¬µ¿ ½ÃÀÛ
+		////////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Item item = new Item();
-		DAO dao = new DAO();
-		int max = dao.getMaxCartSeqno() + 1;
-		item.setSeqno(max);//ÀÏ·Ã¹øÈ£ ¼³Á¤
-		item.setId(id);//°èÁ¤ ¼³Á¤
-		item.setCode(code);//»óÇ°¹øÈ£ ¼³Á¤
-		item.setNum(num);//»óÇ° °¹¼ö ¼³Á¤
-		dao.putCart(item);//DBÅ×ÀÌºí¿¡ »ðÀÔ
-		////////DB¿¬µ¿ ³¡
+		Crud crud = new Crud();
+		int max = crud.getMaxCartSeqno() + 1;
+		item.setSeqno(max);//ï¿½Ï·Ã¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+		item.setId(id);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		item.setCode(code);//ï¿½ï¿½Ç°ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+		item.setNum(num);//ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		crud.putCart(item);//DBï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
+		////////DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 	}
-}//Àå¹Ù±¸´Ï °´Ã¼
+}//ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
 
 
 
