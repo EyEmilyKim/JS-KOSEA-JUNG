@@ -65,7 +65,7 @@ public class Crud {
 		Integer result = -1;
 		try {
 			String sql = name+".deleteNotice";
-			ss.delete(sql, no);
+			result = ss.delete(sql, no);
 			if(result > 0) ss.commit();
 			else ss.rollback();
 		}finally{

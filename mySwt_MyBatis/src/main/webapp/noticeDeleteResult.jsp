@@ -10,7 +10,7 @@
 </head>
 <body>
 <c:choose>
-	<c:when test="${param.R == 'true' }">
+	<c:when test="${param.R > 0 }">
 		<script type="text/javascript">
 			alert("공지글이 삭제되었습니다.");
 		</script>
