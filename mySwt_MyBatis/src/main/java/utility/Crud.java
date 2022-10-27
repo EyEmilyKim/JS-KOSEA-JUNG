@@ -7,13 +7,68 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.tomcat.util.modeler.modules.ModelerSource;
 
 import model.BBS;
 import model.FromTo;
+import model.Notice;
 
 public class Crud {
 	private final String name = "mapper.home";
+	
+	//공지글을 등록하는 메서드
+	public Integer putNotice(Notice notice) {
+		SqlSession ss = this.getSession();
+		Integer result = -1;
+		try {
+			String sql = name+".putNotice";
+			result = ss.insert(sql, notice);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	//최대 공지글 번호를 검색하는 메서드
+	public Integer getMaxNotice() {
+		SqlSession ss = this.getSession();
+		Integer result = 0;
+		try {
+			String sql = name+".getMaxNotice";
+			result = ss.selectOne(sql);
+			if(result == null) result = 0;
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//글번호로 글정보를 검색하는 메서드
+	public BBS getBBSDetail(Integer id) {
+		SqlSession ss = this.getSession();
+		BBS bbs = null;
+		try {
+			String sql = name+".getBBSDetail";
+			bbs = ss.selectOne(sql, id);
+		}finally {
+			ss.close();
+		}
+		return bbs;
+	}
+	
+	//전체 게시글의 갯수를 검색하는 메서드
+	public Integer getBBSCount() {
+		SqlSession ss = this.getSession();
+		Integer count = 0;
+		try {
+			String sql = name+".getBBSCount";
+			count = ss.selectOne(sql);
+			if(count == null) count = 0;
+		}finally {
+			ss.close();
+		}
+		return count;
+	}
 	
 	//게시글 5개를 검색하는 메서드
 	public ArrayList<BBS> getPageBBS(FromTo ft) {

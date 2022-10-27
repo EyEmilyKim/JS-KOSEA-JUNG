@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.home">
+
+<select id="getMaxNotice" resultType="Integer">
+select max(seqno) from mysweet_notice
+</select>
+<select id="putNotice" parameterType="model.Notice">
+insert into mysweet_notice values(#{seqno},#{title},#{writer},sysdate,#{content})
+</select>
+<select id="getBBSDetail" parameterType="Integer" resultType="model.BBS">
+select seqno,title,writer, 
+to_char(reg_date,'YYYY-MM-DD HH24:MI:SS') "reg_date", content 
+from mysweet_bbs 
+where seqno = #{id}
+</select>
+<select id="getBBSCount" resultType="Integer">
+select count(*) from mysweet_bbs
+</select>
+
 <select id="getPageBBS" parameterType="model.FromTo" resultType="model.BBS">
-select seqno, title, writer, r_date 
-from ( select rownum rn, seqno, title, writer, r_date from 
-(select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') r_date 
+select seqno, title, writer, "reg_date" 
+from ( select rownum rn, seqno, title, writer, "reg_date" from 
+(select seqno, title, writer, to_char(reg_date, 'YYYY-MM-DD HH24:MI:SS') "reg_date" 
 from mysweet_bbs order by seqno desc ) ) 
 where rn > #{start} and rn <![CDATA[<]]> #{end} 
 </select>
