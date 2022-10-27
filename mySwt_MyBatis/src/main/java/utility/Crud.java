@@ -10,10 +10,69 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import model.BBS;
 import model.FromTo;
+import model.Item;
 import model.Notice;
 
 public class Crud {
 	private final String name = "mapper.home";
+	
+	//상품 등록하는 메서드
+	public Integer putItem(Item item) {
+		SqlSession ss = this.getSession();
+		Integer result = -1;
+		try {
+			String sql = name+".putItem";
+			result = ss.insert(sql, item);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//상품번호로 상품번호를 검색하는 메서드(중복검사용)
+	public String getCode(String no) {
+		SqlSession ss = this.getSession();
+		String code = null; //조회결과를 저장할 변수 선언
+		try {
+			String sql = name+".getCode";
+			code = ss.selectOne(sql, no);
+		}finally {
+			ss.close();
+		}
+		return code;
+	}
+	
+	//공지글 번호로 공지글 수정하는 메서드
+	public Integer updateNotice(Notice notice) {
+		SqlSession ss = this.getSession();
+		Integer result = -1;
+		try {
+			String sql = name+".updateNotice";
+			result = ss.update(sql, notice);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally {
+			ss.close();
+		}
+		return result;
+	}
+	
+	//공지글 번호로 공지글 삭제하는 메서드
+	public Integer deleteNotice(Integer no) {
+		SqlSession ss = this.getSession();
+		Integer result = -1;
+		try {
+			String sql = name+".deleteNotice";
+			ss.delete(sql, no);
+			if(result > 0) ss.commit();
+			else ss.rollback();
+		}finally{
+			ss.close();
+		}
+		return result;
+	}
 	
 	//공지글 번호로 공지글을 검색하는 메서드
 	public Notice getNoticeDetail(Integer no) {
