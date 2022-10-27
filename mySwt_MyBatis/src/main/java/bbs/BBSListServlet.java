@@ -46,16 +46,15 @@ public class BBSListServlet extends HttpServlet {
 		//��������ȣ:1  start=0, end=6
 		//��������ȣ:2  start=5, end=11
 		//��������ȣ:3  start=10, end=16
-		DAO dao = new DAO();
 		Crud crud = new Crud();
 		FromTo ft = new FromTo();
 		ft.setStart(start);
 		ft.setEnd(end);
 		ArrayList<BBS> list = crud.getPageBBS(ft);
-		int totalCount = dao.getTotalCount();//��ü ���� ����
+		int totalCount = crud.getBBSCount();//전체 글의 갯수
 		int pageCount = totalCount / 5;
 		if(totalCount % 5 != 0) pageCount++;
-		//�Խñ� ����� ����ϴ� JSP(bbsList.jsp)�� ��ȯ
+		//게시글 목록을 출력하는 JSP(bbsList.jsp)로 전환
 		//Forward
 		request.setAttribute("LIST", list);
 		request.setAttribute("PAGES", pageCount);
