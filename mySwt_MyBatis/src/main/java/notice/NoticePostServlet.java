@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Notice;
-import utility.DAO;
+import utility.Crud;
 
 /**
  * Servlet implementation class NoticePostServlet
@@ -43,21 +43,21 @@ public class NoticePostServlet extends HttpServlet {
 		String title=request.getParameter("TITLE");
 		String content=request.getParameter("CONTENT");
 		HttpSession session = request.getSession();
-		//ÀÛ¼ºÀÚ:¼¼¼Ç¿¡¼­ MANAGERÃ£´Â´Ù.
+		//ï¿½Û¼ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ MANAGERÃ£ï¿½Â´ï¿½.
 		String id = (String)session.getAttribute("MANAGER");
-		//±Û¹øÈ£:ÃÖ´ë ±Û¹øÈ£ + 1
-		DAO dao = new DAO();
-		int seqno = dao.getMaxNotice() + 1;
+		//ï¿½Û¹ï¿½È£:ï¿½Ö´ï¿½ ï¿½Û¹ï¿½È£ + 1
+		Crud crud = new Crud();
+		int seqno = crud.getMaxNotice() + 1;
 		Notice notice = new Notice();
-		notice.setSeqno(seqno);//±Û¹øÈ£ ¼³Á¤
-		notice.setTitle(title);//±ÛÁ¦¸ñ ¼³Á¤
-		notice.setWriter(id);//ÀÛ¼ºÀÚ ¼³Á¤
-		notice.setContent(content);//±Û³»¿ë ¼³Á¤
-		boolean result = dao.putNotice(notice);//insert½ÇÇà
+		notice.setSeqno(seqno);//ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+		notice.setTitle(title);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		notice.setWriter(id);//ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		notice.setContent(content);//ï¿½Û³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		Integer result = crud.putNotice(notice);//insertï¿½ï¿½ï¿½ï¿½
 		String url="template.jsp?BODY=noticeResult.jsp?R=";
-		if(result) {//°øÁö±Û µî·Ï ¼º°øÀÎ °æ¿ì
+		if(result > 0) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			response.sendRedirect(url+"Y");
-		}else {//°øÁö±Û µî·Ï ½ÇÆÐÀÎ °æ¿ì
+		}else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			response.sendRedirect(url+"N");
 		}
 	}
