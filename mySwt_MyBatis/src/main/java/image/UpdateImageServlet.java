@@ -13,7 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.ImageBBS;
-import utility.ImageDAO;
+import utility.ImageCrud;
 
 /**
  * Servlet implementation class UpdateImageServlet
@@ -43,44 +43,46 @@ public class UpdateImageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("euc-kr");
-		String savePath="/upload";//¾÷·Îµå ÆÄÀÏ ÀúÀå Æú´õ
-		int maxLimit= 5 * 1024 * 1024;//ÃÖ´ë ¾÷·Îµå Å©±â
-		String encType="euc-kr";//¾ð¾î ÄÚµå
-		String fileName="";//¾÷·Îµå ¼º°ø½Ã ÆÄÀÏÀÌ¸§ÀÌ ÀúÀåµÉ º¯¼ö
+		String savePath="/upload";//ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		int maxLimit= 5 * 1024 * 1024;//ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Îµï¿½ Å©ï¿½ï¿½
+		String encType="euc-kr";//ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+		String fileName="";//ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		ServletContext ctx = this.getServletContext();
-		String realPath=ctx.getRealPath(savePath);//Àý´ë°æ·Î
-		String url="";//ÀüÈ¯µÉ URL
-		ImageDAO dao = new ImageDAO();
+		String realPath=ctx.getRealPath(savePath);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		String url="";//ï¿½ï¿½È¯ï¿½ï¿½ URL
+//		ImageDAO dao = new ImageDAO();
+		ImageCrud crud = new ImageCrud();
 		try {
 			MultipartRequest multipart = new MultipartRequest(
 				request, realPath, maxLimit, encType,
-				new DefaultFileRenamePolicy());//¾÷·Îµå°´Ã¼»ý¼º
+				new DefaultFileRenamePolicy());//ï¿½ï¿½ï¿½Îµå°´Ã¼ï¿½ï¿½ï¿½ï¿½
 			String title=multipart.getParameter("title");
 			String pwd=multipart.getParameter("pwd");
 			String content=multipart.getParameter("content");
 			String id=multipart.getParameter("id");
-			ImageBBS bbs=dao.getImageDetail(
-					Integer.parseInt(id));//±Û¹øÈ£·Î °Ë»ö
-			if(bbs.getPassword().equals(pwd)) {//¾ÏÈ£°¡ ÀÏÄ¡
-				bbs.setTitle(title);//Á¦¸ñÀ» ¼³Á¤
-				bbs.setContent(content);//±Û³»¿ëÀ» ¼³Á¤
+//			ImageBBS bbs=dao.getImageDetail(Integer.parseInt(id));//ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½
+			ImageBBS bbs=crud.getImageDetail(Integer.parseInt(id));//ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ë»ï¿½
+			if(bbs.getPassword().equals(pwd)) {//ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ä¡
+				bbs.setTitle(title);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				bbs.setContent(content);//ï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				fileName=multipart.getFilesystemName(
-						"image_name");//¾÷·Îµå¸¦ ½ÇÇàÇÑ´Ù.
-				if(fileName !=null || ! fileName.equals("")) {//ÀÌ¹ÌÁöº¯°æ
-					bbs.setImage_name(fileName);//ÀÌ¹ÌÁöÀÌ¸§º¯°æ
+						"image_name");//ï¿½ï¿½ï¿½Îµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+				if(fileName !=null || ! fileName.equals("")) {//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					bbs.setImage_name(fileName);//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½
 				}
-				//DB¿¡¼­ update¸¦ ½ÇÇàÇÑ´Ù.
-				dao.updateImage(bbs);
+				//DBï¿½ï¿½ï¿½ï¿½ updateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+//				dao.updateImage(bbs);
+				crud.updateImage(bbs);
 				url="template.jsp?BODY=imageUpdateResult.jsp";
 				url=url+"?seqno="+id;
-			}else {//¾ÏÈ£°¡ ºÒÀÏÄ¡
+			}else {//ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡
 				url="template.jsp?BODY=imageUpdateResult.jsp";
 				url=url+"?id="+id;
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(url);//È­¸é ÀüÈ¯
+		response.sendRedirect(url);//È­ï¿½ï¿½ ï¿½ï¿½È¯
 	}
 
 }

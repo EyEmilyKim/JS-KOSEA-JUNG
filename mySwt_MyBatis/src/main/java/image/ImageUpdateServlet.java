@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ImageBBS;
-import utility.ImageDAO;
+import utility.ImageCrud;
 
 /**
  * Servlet implementation class ImageUpdateServlet
@@ -40,9 +40,10 @@ public class ImageUpdateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
-		ImageDAO dao = new ImageDAO();
-		ImageBBS bbs = dao.getImageDetail(
-				Integer.parseInt(id));
+//		ImageDAO dao = new ImageDAO();
+		ImageCrud crud = new ImageCrud();
+//		ImageBBS bbs = dao.getImageDetail(Integer.parseInt(id));
+		ImageBBS bbs = crud.getImageDetail(Integer.parseInt(id));
 		request.setAttribute("IMG", bbs);
 		RequestDispatcher rd = 
 			request.getRequestDispatcher(

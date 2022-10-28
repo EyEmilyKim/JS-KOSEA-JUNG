@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ImageBBS;
+import utility.ImageCrud;
 import utility.ImageDAO;
 
 /**
@@ -42,22 +43,26 @@ public class DeleteImageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		ImageDAO dao = new ImageDAO();
-		ImageBBS bbs = dao.getImageDetail(
+//		ImageDAO dao = new ImageDAO();
+		ImageCrud crud = new ImageCrud();
+//		ImageBBS bbs = dao.getImageDetail(
+//				Integer.parseInt(id));
+		ImageBBS bbs = crud.getImageDetail(
 				Integer.parseInt(id));
 		String url="template.jsp?BODY=imageDeleteResult.jsp";
-		if(bbs.getPassword().equals(pwd)) {//¾ÏÈ£°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì
-			dao.deleteImage(Integer.parseInt(id));
-			//ÀÌ¹ÌÁö°¡ »èÁ¦µÇ´Â °æ¿ì ¾÷·Îµå ÆÄÀÏµµ »èÁ¦ÇÑ´Ù.½ÃÀÛ
+		if(bbs.getPassword().equals(pwd)) {//ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+//			dao.deleteImage(Integer.parseInt(id));
+			crud.deleteImage(Integer.parseInt(id));
+			//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.ï¿½ï¿½ï¿½ï¿½
 			String file="/upload/"+bbs.getImage_name();
 			ServletContext ctx=this.getServletContext();
 			String realPath=ctx.getRealPath(file);
 			File imageFile = new File(realPath);
-			if(imageFile.exists()) {//ÆÄÀÏÀÌ Á¸ÀçÇÏ´Â °æ¿ì
-				imageFile.delete();//ÆÄÀÏ »èÁ¦
+			if(imageFile.exists()) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+				imageFile.delete();//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			}
-			//ÆÄÀÏ»èÁ¦ ³¡
-		}else {//¾ÏÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
+			//ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ ï¿½ï¿½
+		}else {//ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½
 			url=url+"?id="+id;
 		}
 		response.sendRedirect(url);

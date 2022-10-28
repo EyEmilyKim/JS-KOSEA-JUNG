@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.ImageBBS;
+import utility.ImageCrud;
 import utility.ImageDAO;
 
 /**
@@ -38,10 +39,12 @@ public class ImageReadServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String seqno=request.getParameter("pid");//�۹�ȣ
+		String seqno=request.getParameter("pid");//�۹�ȣ
 		ImageDAO dao = new ImageDAO();
-		ImageBBS bbs = 
-			dao.getImageDetail(Integer.parseInt(seqno));
+		ImageCrud crud = new ImageCrud();
+//		ImageBBS bbs = 
+//			dao.getImageDetail(Integer.parseInt(seqno));
+		ImageBBS bbs = crud.getImageDetail(Integer.parseInt(seqno));
 		request.setAttribute("DETAIL", bbs);
 		RequestDispatcher rd = 
 			request.getRequestDispatcher(

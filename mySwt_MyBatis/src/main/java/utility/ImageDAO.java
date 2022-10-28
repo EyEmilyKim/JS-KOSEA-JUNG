@@ -11,11 +11,11 @@ import model.ImageBBS;
 public class ImageDAO {
 	private String driver="oracle.jdbc.OracleDriver";
 	private String url=
-		"jdbc:oracle:thin:@//localhost:1521/orcl";
+		"jdbc:oracle:thin:@//localhost:1521/XE";
 	private Connection con = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
-	//±Û¹øÈ£·Î ÀÏ·Ã¹øÈ£¸¦ Ã£´Â ¸Ş¼­µå 
+	//ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ï·Ã¹ï¿½È£ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½ 
 	public Integer getRownumBySeqno(Integer page) {
 		String select="select rn "
 				+ "from  (select seqno, rownum rn "
@@ -41,7 +41,7 @@ public class ImageDAO {
 		return rownum;
 	}
 	
-	//ÀÌ¹ÌÁö °Ô½Ã±ÛÀÇ ´ä±ÛÀÇ ¼ø¼­¸¦ updateÇÏ´Â ¸Ş¼­µå
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ updateï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public boolean updateOrderNo(ImageBBS bbs) {
 		String update="update mysweet_imagebbs "
 				+ "set order_no = order_no + 1 "
@@ -54,7 +54,7 @@ public class ImageDAO {
 			pstmt=con.prepareStatement(update);
 			pstmt.setInt(1, bbs.getGroup_id());
 			pstmt.setInt(2, bbs.getOrder_no());
-			pstmt.executeUpdate();//update½ÇÇà
+			pstmt.executeUpdate();//updateï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {e.printStackTrace();
@@ -65,7 +65,7 @@ public class ImageDAO {
 		return result;
 	}
 	
-	//ÀÌ¹ÌÁö °Ô½Ã±Û º¯°æ(Á¦¸ñ,³»¿ë,ÆÄÀÏÀÌ¸§) ¸Ş¼­µå
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½) ï¿½Ş¼ï¿½ï¿½ï¿½
 	public boolean updateImage(ImageBBS bbs) {
 		String update="update mysweet_imagebbs set title=?,"
 			+ "content=?,image_name=? where seqno = ?";
@@ -74,11 +74,11 @@ public class ImageDAO {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(update);
-			pstmt.setString(1, bbs.getTitle());//Á¦¸ñ¼³Á¤
-			pstmt.setString(2, bbs.getContent());//³»¿ë¼³Á¤
-			pstmt.setString(3, bbs.getImage_name());//ÆÄÀÏ¸í
-			pstmt.setInt(4, bbs.getSeqno());//±Û¹øÈ£ ¼³Á¤
-			pstmt.executeUpdate();//update½ÇÇà
+			pstmt.setString(1, bbs.getTitle());//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			pstmt.setString(2, bbs.getContent());//ï¿½ï¿½ï¿½ë¼³ï¿½ï¿½
+			pstmt.setString(3, bbs.getImage_name());//ï¿½ï¿½ï¿½Ï¸ï¿½
+			pstmt.setInt(4, bbs.getSeqno());//ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+			pstmt.executeUpdate();//updateï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -90,7 +90,7 @@ public class ImageDAO {
 		}
 		return result;
 	}
-	//±Û¹øÈ£·Î ÀÌ¹ÌÁö °Ô½Ã±ÛÀ» »èÁ¦ÇÏ´Â ¸Ş¼­µå
+	//ï¿½Û¹ï¿½È£ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public boolean deleteImage(Integer seqno) {
 		String delete="delete from mysweet_imagebbs where seqno = ?";
 		boolean result = false;
@@ -99,7 +99,7 @@ public class ImageDAO {
 			con=DriverManager.getConnection(url,"hr","hr");
 			pstmt=con.prepareStatement(delete);
 			pstmt.setInt(1, seqno);
-			pstmt.executeUpdate();//delete½ÇÇà
+			pstmt.executeUpdate();//deleteï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -111,7 +111,7 @@ public class ImageDAO {
 		}
 		return result;
 	}
-	//±Û¹øÈ£·Î ÀÌ¹ÌÁö °Ô½Ã±ÛÀ» Á¶È¸ÇÏ´Â ¸Ş¼­µå
+	//ë²ˆí˜¸ë¡œ ì´ë¯¸ì§€ ê²Œì‹œê¸€ì„ ì¡°íšŒí•˜ëŠ” ë©”ì„œë“œ
 	public ImageBBS getImageDetail(Integer seqno) {
 		String select="select seqno,group_id,parent_id,order_no,"
 			+ "   title,id,to_char(reg_date,'YYYY/MM/DD HH24:MI:SS'),"
@@ -124,18 +124,18 @@ public class ImageDAO {
 			pstmt=con.prepareStatement(select);
 			pstmt.setInt(1, seqno);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {//Á¶È¸°á°ú°¡ Á¸ÀçÇÏ´Â °æ¿ì
+			if(rs.next()) {//ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
 				bbs = new ImageBBS();
-				bbs.setSeqno(rs.getInt(1));//±Û¹øÈ£¼³Á¤
-				bbs.setGroup_id(rs.getInt(2));//±×·ì¹øÈ£
-				bbs.setParent_id(rs.getInt(3));//ºÎ¸ğ±Û¹øÈ£
-				bbs.setOrder_no(rs.getInt(4));//¼ø¼­¹øÈ£
-				bbs.setTitle(rs.getString(5));//Á¦¸ñ
-				bbs.setId(rs.getString(6));//ÀÛ¼ºÀÚ(°èÁ¤)
-				bbs.setReg_date(rs.getString(7));//ÀÛ¼ºÀÏ
-				bbs.setImage_name(rs.getString(8));//ÆÄÀÏÀÌ¸§
-				bbs.setContent(rs.getString(9));//±Û³»¿ë
-				bbs.setPassword(rs.getString(10));//¾ÏÈ£¼³Á¤
+				bbs.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£ï¿½ï¿½ï¿½ï¿½
+				bbs.setGroup_id(rs.getInt(2));//ï¿½×·ï¿½ï¿½È£
+				bbs.setParent_id(rs.getInt(3));//ï¿½Î¸ï¿½Û¹ï¿½È£
+				bbs.setOrder_no(rs.getInt(4));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+				bbs.setTitle(rs.getString(5));//ï¿½ï¿½ï¿½ï¿½
+				bbs.setId(rs.getString(6));//ï¿½Û¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)
+				bbs.setReg_date(rs.getString(7));//ï¿½Û¼ï¿½ï¿½ï¿½
+				bbs.setImage_name(rs.getString(8));//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+				bbs.setContent(rs.getString(9));//ï¿½Û³ï¿½ï¿½ï¿½
+				bbs.setPassword(rs.getString(10));//ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -147,7 +147,7 @@ public class ImageDAO {
 		return bbs;
 	}
 	
-	//ÀÌ¹ÌÁö °Ô½Ã±ÛÀÇ °¹¼ö¸¦ selectÇÏ´Â ¸Ş¼­µå
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ selectï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public Integer getImageCount() {
 		String select="select count(*) from mysweet_imagebbs";
 		Integer count = 0;
@@ -165,7 +165,7 @@ public class ImageDAO {
 		}
 		return count;
 	}
-	//ÀÌ¹ÌÁö °Ô½Ã±Û ¸ñ·ÏÀ» selectÇÏ´Â ¸Ş¼­µå
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ selectï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public ArrayList<ImageBBS> getAllImages(
 			int start, int end){
 		String select = "select seqno, group_id, parent_id, order_no, title, id,"
@@ -183,17 +183,17 @@ public class ImageDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ImageBBS bbs = new ImageBBS();
-				bbs.setSeqno(rs.getInt(1));//±Û¹øÈ£ ¼³Á¤
-				bbs.setGroup_id(rs.getInt(2));//±×·ì¹øÈ£ ¼³Á¤
-				bbs.setParent_id(rs.getInt(3));//ºÎ¸ğ±Û¹øÈ£ ¼³Á¤
-				bbs.setOrder_no(rs.getInt(4));//¼ø¼­¹øÈ£ ¼³Á¤
-				bbs.setTitle(rs.getString(5));//Á¦¸ñ ¼³Á¤
-				bbs.setId(rs.getString(6));//ÀÛ¼ºÀÚ(°èÁ¤)¼³Á¤
-				bbs.setReg_date(rs.getString(7));//ÀÛ¼ºÀÏ¼³Á¤
-				bbs.setImage_name(rs.getString(8));//ÀÌ¹ÌÁö¸í
-				bbs.setContent(rs.getString(9));//±Û³»¿ë¼³Á¤
-				bbs.setPassword(rs.getString(10));//¾ÏÈ£¼³Á¤
-				list.add(bbs);//ArrayList¿¡ DTO ÀúÀå
+				bbs.setSeqno(rs.getInt(1));//ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+				bbs.setGroup_id(rs.getInt(2));//ï¿½×·ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+				bbs.setParent_id(rs.getInt(3));//ï¿½Î¸ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+				bbs.setOrder_no(rs.getInt(4));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+				bbs.setTitle(rs.getString(5));//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+				bbs.setId(rs.getString(6));//ï¿½Û¼ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½
+				bbs.setReg_date(rs.getString(7));//ï¿½Û¼ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
+				bbs.setImage_name(rs.getString(8));//ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
+				bbs.setContent(rs.getString(9));//ï¿½Û³ï¿½ï¿½ë¼³ï¿½ï¿½
+				bbs.setPassword(rs.getString(10));//ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½
+				list.add(bbs);//ArrayListï¿½ï¿½ DTO ï¿½ï¿½ï¿½ï¿½
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -205,11 +205,11 @@ public class ImageDAO {
 		return list;
 	}
 	
-	//ÀÌ¹ÌÁö °Ô½Ã±ÛÀ» insertÇÏ´Â ¸Ş¼­µå
+	//ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ï¿½ï¿½ insertï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public boolean putImageBBS(ImageBBS bbs) {
 		String insert="insert into mysweet_imagebbs "
 			+ "values(?,?,?,?,?,?,sysdate,?,?,?)";
-		boolean result = false;//»ğÀÔÀÇ °á°ú¸¦ À§ÇÑ º¯¼ö
+		boolean result = false;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		try {
 			Class.forName(driver);
 			con=DriverManager.getConnection(url,"hr","hr");
@@ -223,7 +223,7 @@ public class ImageDAO {
 			pstmt.setString(7, bbs.getImage_name());
 			pstmt.setString(8, bbs.getContent());
 			pstmt.setString(9, bbs.getPassword());
-			pstmt.executeUpdate();//insert½ÇÇà
+			pstmt.executeUpdate();//insertï¿½ï¿½ï¿½ï¿½
 			con.commit();
 			result = true;
 		}catch(Exception e) {
@@ -235,7 +235,7 @@ public class ImageDAO {
 		return result;
 	}
 	
-	//ÃÖ´ë ±Û¹øÈ£¸¦ selectÇÏ´Â ¸Ş¼­µå
+	//ï¿½Ö´ï¿½ ï¿½Û¹ï¿½È£ï¿½ï¿½ selectï¿½Ï´ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½
 	public Integer getMaxSeqno() {
 		String select="select max(seqno) from mysweet_imagebbs";
 		Integer max = 0;
