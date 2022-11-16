@@ -1,0 +1,57 @@
+1. 회원정보 명세서 (member_tbl_02)
+2. 회원매출정보 명세서 (money_tbl_02)
+======================================
+
+1. 회원정보 명세서 (member_tbl_02)
+
+* table 생성
+desc member_tbl_02
+
+create table member_tbl_02( 
+custno number(6) constraint member_no_pk primary key, 
+custname varchar2(20), phone varchar2(13), 
+address varchar2(60), joindate date, grade char(1), city char(2) );
+
+desc member_tbl_02
+
+
+* 샘플 데이터
+
+insert into member_tbl_02 values( 
+100001, '김행복', '010-1111-2222', '서울 동대문구 휘경1동', to_date('20151202', 'YYYY/MM/DD'), 'B', '01');
+
+insert into member_tbl_02 values( 
+100002, '이축복', '010-1111-3333', '서울 동대문구 휘경2동', to_date('20151206', 'YYYY/MM/DD'), 'B', '01');
+
+insert into member_tbl_02 values( 
+100003, '장믿음', '010-1111-4444', '울릉군 울릉읍 독도1리', to_date('20151001', 'YYYY/MM/DD'), 'B', '30');
+
+insert into member_tbl_02 values( 
+100004, '최사랑', '010-1111-5555', '울릉군 울릉읍 독도2리', to_date('20151113', 'YYYY/MM/DD'), 'A', '30');
+
+insert into member_tbl_02 values( 
+100005, '진평화', '010-1111-6666', '제주도 제주시 외나무골', to_date('20151225', 'YYYY/MM/DD'), 'B', '60');
+
+insert into member_tbl_02 values( 
+100006, '차공단', '010-1111-7777', '제주도 제주시 감나무골', to_date('20151211', 'YYYY/MM/DD'), 'C', '60');
+
+commit;
+
+--------------------------------------
+
+2. 회원매출정보 명세서 (money_tbl_02)
+
+* table 생성
+
+desc money_tbl_02 
+
+create table money_tbl_02( 
+custno number(6), salenol number(8), 
+constraint money_no_pk primary key (custno, salenol), 
+pcost number(8), amount number(4), price number(8), pcode varchar2(4), sdate date);
+
+desc money_tbl_02
+
+
+* 샘플 데이터
+
