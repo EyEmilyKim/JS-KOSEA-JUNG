@@ -4,3 +4,91 @@
 /myHome_tr
 /myHome_sm
 /sangsok_tr1018
+
+# Created by https://www.toptal.com/developers/gitignore/api/eclipse
+# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+target/
+
+
+## (개발자 추가) target folder at the top level of the project structue and paths and contents underneath it
+target/
+#target/*
+
+## (개발자 추가) target folder at any level of the project structue
+#**/target/
+#*/target/
+#/target/
+
+
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+#.apt_generated/
+#.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+# (개발자 해제) Uncomment this line if you wish to ignore the project description file.
+# Typically, this file would be tracked if it contains build/dependency configurations:
+.project
+
+# (개발자 추가) and this, as well
+.classpath
+/Servers/
+
+### Eclipse Patch ###
+# Spring Boot Tooling
+#.sts4-cache/
+
+# End of https://www.toptal.com/developers/gitignore/api/eclipse
