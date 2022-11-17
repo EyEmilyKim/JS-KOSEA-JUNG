@@ -18,6 +18,72 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//회원번호로 회원정보 수정
+	public Boolean updateMember(Member mem) {
+		String update = "update member_tbl_02 set custname=?, phone=?, address=?, "
+				+ "joindate = to_date(?, 'yyyy/mm/dd'), grade=?, city=? "
+				+ "where custno = ? ";
+		Boolean flag = false;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,this.id,pw);
+			pstmt = conn.prepareStatement(update);
+			pstmt.setString(1,mem.getName());
+			pstmt.setString(2,mem.getTel());
+			pstmt.setString(3,mem.getAddr());
+			pstmt.setString(4,mem.getDate());
+			pstmt.setString(5,mem.getGrade());
+			pstmt.setString(6,mem.getCity());
+			pstmt.setInt(7,mem.getId());
+			pstmt.executeUpdate();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		return flag;
+	}
+	
+	//회원번호로 회원정보 검색
+	public Member getMember(Integer id) {
+		String select = "select custno, custname, phone, address, "
+				+ "to_char(joindate, 'yyyy/mm/dd'), grade, city "
+				+ "from member_tbl_02 "
+				+ "where custno = ? ";
+		Member mem = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,this.id,pw);
+			pstmt = conn.prepareStatement(select);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				mem = new Member();
+				mem.setId(rs.getInt(1));
+				mem.setName(rs.getString(2));
+				mem.setTel(rs.getString(3));
+				mem.setAddr(rs.getString(4));
+				mem.setDate(rs.getString(5));
+				mem.setGrade(rs.getString(6));
+//				String grade = rs.getString(6);
+//				switch(grade) {
+//				case "A" : mem.setGrade("VIP"); break; 
+//				case "B" : mem.setGrade("일반"); break; 
+//				case "C" : mem.setGrade("직원"); break; 
+//				}
+				mem.setCity(rs.getString(7));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		return mem;
+	}
+	
 	//전체 회원 검색
 	public ArrayList<Member> getMembers() {
 		String select = "select custno, custname, phone, address, "

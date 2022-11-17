@@ -23,14 +23,14 @@
 <div>
 <form action="memberRegister.do" method="post" onsubmit="return check(this)">
 <br/>
-<table>
+<table border="1">
 <tr><th>회원번호(자동발생)</th>
 	<td><input type="text" name="ID" value="${maxId}" readonly="readonly"/></td></tr>
 <tr><th>회원성명</th><td><input type="text" name="NAME"/></td></tr>
 <tr><th>회원전화</th><td><input type="text" name="TEL"/></td></tr>
 <tr><th>회원주소</th><td><input type="text" name="ADDR"/></td></tr>
 <tr><th>가입일자</th><td><input type="text" name="DATE"/></td></tr>
-<tr><th>고객등급 [A:VIP, B:일반, C:일반]</th>
+<tr><th>고객등급 [A:VIP, B:일반, C:직원]</th>
 	<td><input type="text" name="GRADE"/></td></tr>
 <tr><th>도시코드</th><td><input type="text" name="CITY"/></td></tr>
 <tr><td colspan="2" class="td_btn">

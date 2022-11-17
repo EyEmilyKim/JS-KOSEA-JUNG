@@ -27,7 +27,7 @@
 	ArrayList<Member> list = (ArrayList) request.getAttribute("LIST");
 	for(Member mem : list){
 %>
-<tr><td><%= mem.getId() %></td>
+<tr><td><a href="memberDetail.do?ID=<%=mem.getId()%>"><%= mem.getId() %></a></td>
 	<td><%= mem.getName() %></td>
 	<td><%= mem.getTel() %></td>
 	<td><%= mem.getAddr() %></td>
