@@ -1,0 +1,109 @@
+1) 도서 정보 테이블(books_tbl)
+2) 저자 정보 테이블(writers_tbl)
+3) 도서-저자 정보 테이블(bw_tbl)
+======================================
+desc books_tbl
+desc writers_tbl
+desc bw_tbl
+
+
+1) 도서 정보 테이블(books_tbl)
+
+
+* table 생성
+
+create table books_tbl(
+id varchar2(6) constraint books_tbl_id_pk primary key,
+name varchar2(30), publisher varchar2(20), price number(8), p_date date);
+
+desc books_tbl
+
+
+* 샘플 데이터
+
+insert into books_tbl values( 
+'100001', '세계사 이야기', '가나다 출판사', 30000, to_date('2022/10/03', 'yyyy/mm/dd') );
+
+insert into books_tbl values( 
+'100002', '한국사 이야기', '행운 출판사', 25000, to_date('2022/12/23', 'yyyy/mm/dd') );
+
+insert into books_tbl values( 
+'200001', '데이터 모델링', '세종 출판사', 20000, to_date('2021/03/08', 'yyyy/mm/dd') );
+
+insert into books_tbl values( 
+'200002', '객체 모델링', '한울 출판사', 25000, to_date('2021/02/05', 'yyyy/mm/dd') );
+
+insert into books_tbl values( 
+'300001', '음악의 역사', '월광 출판사', 40000, to_date('2021/05/21', 'yyyy/mm/dd') );
+
+commit;
+
+--------------------------------------
+
+2) 저자 정보 테이블(writers_tbl)
+
+
+* table 생성
+
+create table writers_tbl(
+no varchar2(5) constraint writers_tbl_no_pk primary key,
+name varchar2(30), address varchar2(50), phone varchar2(20) );  
+
+desc writers_tbl
+
+
+* 샘플 데이터
+
+insert into writers_tbl values( 
+'1', '홍길동', '서울시 종로구', '010-0000-0000');
+
+insert into writers_tbl values( 
+'2', '이길동', '서울시 강동구', '010-0000-0000');
+
+insert into writers_tbl values( 
+'3', '김길동', '서울시 송파구', '010-0000-0000');
+
+insert into writers_tbl values( 
+'4', '박길동', '인천시 연수구', '010-0000-0000');
+
+insert into writers_tbl values( 
+'5', '최길동', '인천시 부평구', '010-0000-0000');
+
+commit;
+
+
+--------------------------------------
+
+3) 도서-저자 정보 테이블(bw_tbl)
+
+
+* table 생성
+
+create table bw_tbl(
+b_id varchar2(6), 
+w_no varchar2(5) );
+
+alter table bw_tbl add constraint bw_tbl_bid_fk foreign key(b_id) references books_tbl(id);
+alter table bw_tbl add constraint bw_tbl_wno_fk foreign key(w_no) references writers_tbl(no);
+
+desc bw_tbl
+
+
+* 샘플 데이터
+
+insert into bw_tbl values(
+'100001', '1');
+
+insert into bw_tbl values(
+'100002', '2');
+
+insert into bw_tbl values(
+'200001', '3');
+
+insert into bw_tbl values(
+'200002', '4');
+
+insert into bw_tbl values(
+'300001', '5');
+
+commit;
