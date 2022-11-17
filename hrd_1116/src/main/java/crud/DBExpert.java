@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Member;
+import model.UserSales;
 
 public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
@@ -17,6 +18,42 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	//전체 회원별 매출 검색
+	public ArrayList<UserSales> listUserSales(){
+		String select = "select m.custno, custname, grade, price "
+				+ "from member_tbl_02 m, "
+				+ "( select custno, sum(price) price from money_tbl_02 group by custno ) s "
+				+ "where m.custno = s.custno "
+				+ "order by price desc ";
+		ArrayList<UserSales> list = new ArrayList<UserSales>();
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,id,pw);
+			pstmt = conn.prepareStatement(select);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UserSales us = new UserSales();
+				us.setId(rs.getInt(1));
+				us.setName(rs.getString(2));
+				String grade = rs.getString(3);
+				switch(grade) {
+				case "A" : us.setGrade("VIP"); break; 
+				case "B" : us.setGrade("일반"); break; 
+				case "C" : us.setGrade("직원"); break; 
+				}
+				us.setAmount(rs.getInt(4));
+				list.add(us);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		return list;
+	}
+
 	
 	//회원번호로 회원정보 수정
 	public Boolean updateMember(Member mem) {
