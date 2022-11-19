@@ -7,6 +7,14 @@ public class Book {
 	private Integer price; //가격
 	private String p_date; //출판일
 	
+	private String writer; //저자명 or 저자번호
+	
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	public String getId() {
 		return id;
 	}

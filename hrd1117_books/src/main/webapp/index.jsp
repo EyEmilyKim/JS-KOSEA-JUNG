@@ -8,7 +8,7 @@
 </head>
 <body>
 <script type="text/javascript">
-location.href="booksList.do";
+location.href="bookList.do";
 </script>
 </body>
 </html>
