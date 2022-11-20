@@ -30,7 +30,8 @@
 		<td><%= bk.getPublisher() %></td>
 		<td><%= bk.getPrice() %></td>
 		<td><%= bk.getP_date() %></td>
-		<td>변경/삭제</td></tr>
+		<td><a href="modifyBook.do?ID=<%=bk.getId()%>">변경</a>
+			<a href="deleteBook.do?ID=<%=bk.getId()%>" onClick="return check(this);">삭제</a></td></tr>
 <%		
 	}
 %>		
@@ -42,4 +43,13 @@
 </footer>
 </div>
 </body>
+<script type="text/javascript">
+function check(arg){
+	let href = arg.href;
+	let index = href.indexOf("="); //52
+	let id = href.substr(53); //111113
+	let str = "\n도서번호 : "+id;
+	if(! confirm("정말 삭제하시겠습니까?"+str))	return false;
+}
+</script>
 </html>
