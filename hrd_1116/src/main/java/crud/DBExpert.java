@@ -160,12 +160,15 @@ public class DBExpert {
 	
 	//회원 삽입
 	public boolean putMember(Member mem) {
+		System.out.println("putMember() called");
 		String insert = "insert into member_tbl_02 values( "
 				+ "?,?,?,?,to_date(?, 'yyyy-mm-dd'),?,?)";
 		boolean result = false;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,id,pw);
+			conn.setAutoCommit(false);
+			System.out.println("conn.setAutoCommit(false);");
 			pstmt = conn.prepareStatement(insert);
 			pstmt.setInt(1, mem.getId());
 			pstmt.setString(2, mem.getName());
@@ -175,7 +178,9 @@ public class DBExpert {
 			pstmt.setString(6, mem.getGrade());
 			pstmt.setString(7, mem.getCity());
 			pstmt.executeUpdate(); //삽입
-			conn.commit();
+			//conn.commit();
+			//conn.rollback();
+			//System.out.println("conn.rollback();");
 			result = true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -183,6 +188,7 @@ public class DBExpert {
 			try{ pstmt.close(); conn.close();}
 			catch(Exception e) {}
 		}
+		System.out.println("putMember() end");
 		return result;
 	}
 	
