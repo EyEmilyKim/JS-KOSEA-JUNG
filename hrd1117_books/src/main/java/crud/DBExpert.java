@@ -19,43 +19,25 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	//도서저자정보 등록
-	public boolean insertBW(String b_id, String w_no ) {
-		String insert = "insert into bw_tbl values (?,?)";
-		boolean flag = false;
-		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url,id,pw);
-			pstmt = conn.prepareStatement(insert);
-			pstmt.setString(1, b_id);
-			pstmt.setString(2, w_no);
-			conn.commit();
-			flag = true;
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try { pstmt.close(); conn.close(); }
-			catch(Exception e) {}
-		}
-		return flag;
-	}
-	
 	//도서정보 등록
 	public boolean insertBook(Book bk) {
-		String insert = "insert into books_tbl values (?,?,?,?,to_date(?, 'yyyy/mm/dd')";
+		String insertAll = "insert all "
+				+ "into books_tbl values ( ?, ?, ?, ?, to_date(?, 'yyyy/mm/dd') ) "
+				+ "into bw_tbl values ( ?, ? ) "
+				+ "select * from dual";
 		boolean flag = false;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,id,pw);
-			pstmt = conn.prepareStatement(insert);
+			pstmt = conn.prepareStatement(insertAll);
 			pstmt.setString(1, bk.getId());
 			pstmt.setString(2, bk.getName());
 			pstmt.setString(3, bk.getPublisher());
 			pstmt.setInt(4, bk.getPrice());
 			pstmt.setString(5, bk.getP_date());
+			pstmt.setString(6, bk.getId());
+			pstmt.setNString(7, bk.getWriter());
 			pstmt.executeUpdate();
-			boolean flag1 = this.insertBW(bk.getId(), bk.getWriter());
-			if()
 			conn.commit();
 			flag = true;
 		}catch(Exception e) {

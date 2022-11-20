@@ -83,7 +83,7 @@ create table bw_tbl(
 b_id varchar2(6), 
 w_no varchar2(5) );
 
-alter table bw_tbl add constraint bw_tbl_bid_fk foreign key(b_id) references books_tbl(id);
+alter table bw_tbl add constraint bw_tbl_bid_fk foreign key(b_id) references books_tbl(id) ON DELETE CASCADE;
 alter table bw_tbl add constraint bw_tbl_wno_fk foreign key(w_no) references writers_tbl(no);
 
 desc bw_tbl

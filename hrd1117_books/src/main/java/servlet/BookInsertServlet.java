@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,23 +41,25 @@ public class BookInsertServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String id = (String) request.getAttribute("ID");
-		String name = (String) request.getAttribute("NAME");
-		String writer = (String) request.getAttribute("WRITER");
-		String publisher= (String) request.getAttribute("PUB");
-		Integer price = (Integer) request.getAttribute("PRICE");
-		String p_date = (String) request.getAttribute("P_DATE");
+		String id = request.getParameter("ID");
+		String name = request.getParameter("NAME");
+		String writer = request.getParameter("WRITER");
+		String publisher = request.getParameter("PUB");
+		String price = request.getParameter("PRICE");
+		String p_date = request.getParameter("P_DATE");
 		Book bk = new Book();
 		bk.setId(id);
 		bk.setName(name);
 		bk.setPublisher(publisher);
-		bk.setPrice(price);
+		bk.setPrice(Integer.parseInt(price));
 		bk.setP_date(p_date);
 		bk.setWriter(writer);
 		DBExpert crud = new crud.DBExpert();
-		boolean flag1 = crud.insertBook(bk);
-		boolean flag2 = crud.insertBW(id, writer);
-		
+		boolean flag = crud.insertBook(bk);
+		String rslt = "";
+		if(flag == true) rslt = "OK"; 
+		else rslt = "NOK";
+		response.sendRedirect("bookAddResult.jsp?R="+rslt);
 	}
 
 }

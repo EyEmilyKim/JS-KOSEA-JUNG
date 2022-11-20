@@ -17,7 +17,7 @@
 </menu>
 <section>
 <h4>도서 등록 화면</h4>
-<form action="bookInsert.do" method="post">
+<form action="bookInsert.do" method="post" onSubmit="return check(this);">
 <table border="1">
 	<tr><th>도서번호</th>
 		<td><input type="text" name="ID" placeholder="000000"></td></tr>
@@ -49,4 +49,10 @@
 </footer>
 </div>
 </body>
+<script type="text/javascript">
+function check(fm){
+	let str = "\n\nprice : "+fm.PRICE.value;
+	if(! confirm("등록하시겠습니까?"+str) ) return false;
+}
+</script>
 </html>
