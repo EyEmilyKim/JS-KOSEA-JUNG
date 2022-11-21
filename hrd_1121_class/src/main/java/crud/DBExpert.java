@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Course;
+import model.Lecturer;
 
 public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
@@ -17,23 +18,62 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	
+	//교과목 id 로 교과목 정보 검색
+	public Course getCourse(String id) {
+		String sql = "select id, c.name, credit, l.idx, week, "
+				+ "to_char(start_hour, '0999') start_hour, "
+				+ "to_char(end_hour, '0999') end_hour "
+				+ "from course_tbl c, lecturer_tbl l "
+				+ "where c.lecturer = l.idx "
+				+ "and id = ?";
+		Course crs = null;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				crs = new Course();
+				crs.setId(rs.getString(1));
+				crs.setName(rs.getString(2));
+				crs.setCredit(rs.getInt(3));
+				crs.setLecturer_idx(rs.getString(4));
+				crs.setWeek_n(rs.getInt(5));
+				crs.setStart_hour(rs.getString(6));
+				crs.setEnd_hour(rs.getString(7));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		return crs;
+	}
+	
 	//교과목 등록
 	public boolean insertCourse(Course crs) {
+		System.out.println("insertCourse() called");
 		String sql = "insert into course_tbl values ( ?,?,?,?,?,?,? )";
 		boolean flag = false;
 		try {
+			System.out.println("insertCourse() tried");
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,uid,upw);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, crs.getId());
 			pstmt.setString(2, crs.getName());
 			pstmt.setInt(3, crs.getCredit());
-			pstmt.setString(4, crs.getLecturer());
+			pstmt.setString(4, crs.getLecturer_idx());
+//			System.out.println("crs.getLecturer_idx() : "+crs.getLecturer_idx());
 			pstmt.setInt(5, crs.getWeek_n());
 			pstmt.setString(6, crs.getStart_hour());
 			pstmt.setString(7, crs.getEnd_hour());
 			pstmt.executeUpdate();
 			conn.commit();
+			System.out.println("insert true");
 			flag = true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -41,20 +81,23 @@ public class DBExpert {
 			try { pstmt.close(); conn.close(); }
 			catch(Exception e) {}
 		}
+		System.out.println("insertCourse() end");
 		return flag;
 	}
 	
 	//전체 강사 이름 검색
-	public ArrayList<String> listLecturers(){
-		String sql = "select name from lecturer_tbl ";
-		ArrayList<String> list = new ArrayList<String>();
+	public ArrayList<Lecturer> listLecturers(){
+		String sql = "select idx, name from lecturer_tbl ";
+		ArrayList<Lecturer> list = new ArrayList<Lecturer>();
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,uid,upw);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				String tr = rs.getString(1); 
+				Lecturer tr = new Lecturer();
+				tr.setIdx(rs.getInt(1)); 
+				tr.setName(rs.getString(2));
 				list.add(tr);
 			}
 		}catch(Exception e) {
@@ -72,7 +115,8 @@ public class DBExpert {
 				+ "to_char(start_hour, '0999') start_hour, "
 				+ "to_char(end_hour, '0999') end_hour "
 				+ "from course_tbl c, lecturer_tbl l "
-				+ "where c.lecturer = l.idx ";
+				+ "where c.lecturer = l.idx "
+				+ "order by id";
 		ArrayList<Course> list = new ArrayList<Course>();
 		try {
 			Class.forName(driver);
@@ -84,7 +128,7 @@ public class DBExpert {
 				crs.setId(rs.getString(1));
 				crs.setName(rs.getString(2));
 				crs.setCredit(rs.getInt(3));
-				crs.setLecturer(rs.getString(4));
+				crs.setLecturer_name(rs.getString(4));
 				crs.setWeek_n(rs.getInt(5));
 				switch(rs.getInt(5)) {
 				case 1: crs.setWeek("월"); break; 

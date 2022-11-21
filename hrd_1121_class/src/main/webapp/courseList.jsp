@@ -32,7 +32,7 @@
 	<tr><td><%=crs.getId() %></td>
 		<td><%=crs.getName() %></td>
 		<td><%=crs.getCredit() %></td>
-		<td><%=crs.getLecturer() %></td>
+		<td><%=crs.getLecturer_name() %></td>
 		<td><%=crs.getWeek() %></td>
 		<td><%=crs.getStart_hour() %></td>
 		<td><%=crs.getEnd_hour() %></td>

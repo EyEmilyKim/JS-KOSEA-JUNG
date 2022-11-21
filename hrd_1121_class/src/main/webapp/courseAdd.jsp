@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*, model.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,13 +30,13 @@
 	<tr><th>과목명</th>
 		<td><input type="text" name="NAME" size="60"></td>
 	<tr><th>담당강사</th>
-		<td><select name="LECTURER">
-			<option value="">--담당강사 선택--</option>
+		<td><select name="TR_IDX">
+			<option value="NoId">--담당강사 선택--</option>
 <%
-	ArrayList<String> list = (ArrayList) request.getAttribute("LIST");
-	for(String tr : list){
+	ArrayList<Lecturer> list = (ArrayList) request.getAttribute("LIST");
+	for(Lecturer tr : list){
 %>	
-			<option><%=tr %></option>
+			<option value="<%=tr.getIdx()%>"><%=tr.getName()%></option>
 <% 
 	}
 %>

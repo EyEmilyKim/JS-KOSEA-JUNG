@@ -11,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crud.DBExpert;
+import model.Course;
 import model.Lecturer;
 
 /**
- * Servlet implementation class CourseAddServlet
+ * Servlet implementation class CourseDetailServlet
  */
-@WebServlet("/courseAdd.do")
-public class CourseAddServlet extends HttpServlet {
+@WebServlet("/courseModify.do")
+public class CourseModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CourseAddServlet() {
+    public CourseModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +33,13 @@ public class CourseAddServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("ID");
 		DBExpert dao = new DBExpert();
+		Course crs = dao.getCourse(id);
 		ArrayList<Lecturer> list = dao.listLecturers();
+		request.setAttribute("COURSE", crs);
 		request.setAttribute("LIST", list);
-		RequestDispatcher rd = request.getRequestDispatcher("courseAdd.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("courseUpdate.jsp");
 		rd.forward(request, response);
 	}
 

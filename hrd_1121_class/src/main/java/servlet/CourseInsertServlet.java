@@ -42,7 +42,8 @@ public class CourseInsertServlet extends HttpServlet {
 		String id = request.getParameter("ID").trim();
 		String name = request.getParameter("NAME");
 		String credit = request.getParameter("CREDIT");
-		String lecturer = request.getParameter("LECTURER");
+		String lecturer_idx = request.getParameter("TR_IDX");
+//		System.out.println("servlet getParameter(\"TR_IDX\") : "+lecturer_idx);
 		String week = request.getParameter("WEEK");
 		String start = request.getParameter("START");
 		String end = request.getParameter("END");
@@ -50,7 +51,7 @@ public class CourseInsertServlet extends HttpServlet {
 		crs.setId(id);
 		crs.setName(name);
 		crs.setCredit(Integer.parseInt(credit));
-		crs.setLecturer(lecturer);
+		crs.setLecturer_idx(lecturer_idx);
 		crs.setWeek_n(Integer.parseInt(week));
 		crs.setStart_hour(start);
 		crs.setEnd_hour(end);

@@ -4,11 +4,19 @@ public class Course {
 	private String id; //과목코드
 	private String name; //과목명
 	private Integer credit; //학점
-	private String lecturer; //담당강사
+	private String lecturer_name; //담당강사(이름)
 	private String week; //요일(문자)
 	private Integer week_n; //요일(숫자)
 	private String start_hour; //시작시간
 	private String end_hour; //종료시간
+	
+	private String lecturer_idx; //담당강사(번호)
+	public String getLecturer_idx() {
+		return lecturer_idx;
+	}
+	public void setLecturer_idx(String lecturer_idx) {
+		this.lecturer_idx = lecturer_idx;
+	}
 	
 	public String getId() {
 		return id;
@@ -28,11 +36,11 @@ public class Course {
 	public void setCredit(Integer credit) {
 		this.credit = credit;
 	}
-	public String getLecturer() {
-		return lecturer;
+	public String getLecturer_name() {
+		return lecturer_name;
 	}
-	public void setLecturer(String lecturer) {
-		this.lecturer = lecturer;
+	public void setLecturer_name(String lecturer) {
+		this.lecturer_name = lecturer;
 	}
 	public String getWeek() {
 		return week;
