@@ -1,0 +1,153 @@
+﻿1. 야구선수 정보 테이블(baseball_player_tbl)
+2. 팀 정보 테이블(baseball_team_tbl)
+3. 구단주 정보 테이블(team_owner_tbl)
+4. 선수 소속 정보 테이블(player_team_tbl)
+
+desc baseball_player_tbl
+desc baseball_team_tbl
+desc team_owner_tbl
+desc player_team_tbl
+=========================================
+
+1. 야구선수 정보 테이블(baseball_player_tbl)
+
+* 테이블 생성
+
+create table baseball_player_tbl ( 
+seqno number(5) constraint bball_player_seqno_pk primary key, 
+name varchar2(30) constraint bball_player_name_nn not null, 
+addr varchar2(30) constraint bball_player_addr_nn not null, 
+birth date );
+
+desc baseball_player_tbl
+
+* 샘플 데이터
+
+insert into baseball_player_tbl values (
+1, '홍길동', '서울', to_date('1995-10-05', 'yyyy-mm-dd') );
+
+insert into baseball_player_tbl values (
+2, '마길동', '인천', to_date('1998-09-25', 'yyyy-mm-dd') );
+
+insert into baseball_player_tbl values (
+3, '구길동', '서울', to_date('2000-03-10', 'yyyy-mm-dd') );
+
+insert into baseball_player_tbl values (
+4, '하길동', '강원', to_date('2001-05-28', 'yyyy-mm-dd') );
+
+insert into baseball_player_tbl values (
+5, '정길동', '서울', to_date('2002-06-11', 'yyyy-mm-dd') );
+
+select seqno, name from baseball_player_tbl;
+> 5
+
+commit;
+
+-----------------------------------------
+
+2. 팀 정보 테이블(baseball_team_tbl)
+
+* 테이블 생성
+
+create table baseball_team_tbl ( 
+t_id number(5) constraint bball_team_tid_pk primary key, 
+title varchar2(30) constraint bball_team_title_nn not null, 
+town varchar2(30) constraint bball_team_town_nn not null, 
+founding date );
+
+desc baseball_team_tbl
+
+* 샘플 데이터
+
+insert into baseball_team_tbl values (
+1, '라이언즈', '인천', to_date('1985-12-01', 'yyyy-mm-dd') );
+
+insert into baseball_team_tbl values (
+2, '타이거즈', '서울', to_date('1984-10-21', 'yyyy-mm-dd') );
+
+insert into baseball_team_tbl values (
+3, '이글즈', '부산', to_date('1990-02-10', 'yyyy-mm-dd') );
+
+insert into baseball_team_tbl values (
+4, '자이언츠', '대전', to_date('1991-05-15', 'yyyy-mm-dd') );
+
+insert into baseball_team_tbl values (
+5, '베어즈', '서울', to_date('1988-08-20', 'yyyy-mm-dd') );
+
+select t_id, title from baseball_team_tbl;
+
+commit;
+
+-----------------------------------------
+
+3. 구단주 정보 테이블(team_owner_tbl)
+
+* 테이블 생성
+
+create table team_owner_tbl ( 
+t_id number(5) constraint bball_owner_tid_nn not null, 
+name varchar2(30) constraint bball_owner_name_nn not null, 
+reg_date date constraint bball_owner_town_regdate not null );
+
+alter table team_owner_tbl add constraint bball_owner_tid_fk foreign key(t_id) references baseball_team_tbl(t_id) ON DELETE CASCADE;
+
+desc team_owner_tbl
+
+* 샘플 데이터
+
+insert into team_owner_tbl values (
+1, '나구단', to_date('2018-05-15', 'yyyy-mm-dd') );
+
+insert into team_owner_tbl values (
+2, '정구단', to_date('2019-11-22', 'yyyy-mm-dd') );
+
+insert into team_owner_tbl values (
+3, '김구단', to_date('2020-04-21', 'yyyy-mm-dd') );
+
+insert into team_owner_tbl values (
+4, '이구단', to_date('2015-10-05', 'yyyy-mm-dd') );
+
+insert into team_owner_tbl values (
+5, '조구단', to_date('2016-08-23', 'yyyy-mm-dd') );
+
+select t_id, name from team_owner_tbl;
+
+commit;
+
+-----------------------------------------
+
+4. 선수 소속 정보 테이블(player_team_tbl)
+
+* 테이블 생성
+
+create table player_team_tbl ( 
+seqno number(5) constraint bball_pteam_seqno_nn not null, 
+t_id number(5) constraint bball_pteam_tid_nn not null, 
+ann_sal number(10), year date, b_num number(3) );
+
+alter table player_team_tbl add constraint bball_pteam_seqno_fk foreign key(seqno) references baseball_player_tbl(seqno) ON DELETE CASCADE;
+alter table player_team_tbl add constraint bball_pteam_tid_fk foreign key(t_id) references baseball_team_tbl(t_id) ON DELETE CASCADE;
+
+desc player_team_tbl
+
+* 샘플 데이터
+
+insert into player_team_tbl values ( 
+1, 1, 5000000, to_date('2021-02-10', 'yyyy-mm-dd'), 12 );
+
+insert into player_team_tbl values ( 
+2, 1, 10000000, to_date('2020-03-11', 'yyyy-mm-dd'), 34 );
+
+insert into player_team_tbl values ( 
+3, 2, 15000000, to_date('2019-04-14', 'yyyy-mm-dd'), 56 );
+
+insert into player_team_tbl values ( 
+4, 3, 20000000, to_date('2020-05-15', 'yyyy-mm-dd'), 78 );
+
+insert into player_team_tbl values ( 
+5, 4, 25000000, to_date('2021-06-16', 'yyyy-mm-dd'), 90 );
+
+select seqno, t_id, ann_sal from player_team_tbl;
+
+commit;
+
