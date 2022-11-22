@@ -36,8 +36,8 @@
 		<td><%=crs.getWeek() %></td>
 		<td><%=crs.getStart_hour() %></td>
 		<td><%=crs.getEnd_hour() %></td>
-		<td><a href="courseModify.do?ID=<%=crs.getId() %>">수정</a>
-			<a href="courseDelete.do?ID=<%=crs.getId() %>">삭제</a></td>
+		<td><a href="courseModify.do?ID=<%=crs.getId()%>">수정</a>
+			<a href="courseDelete.do?ID=<%=crs.getId()%>" onClick="return confDel(<%=crs.getId()%>);">삭제</a></td>
 	</tr>		
 <%		
 	}
@@ -53,6 +53,10 @@
 <script type="text/javascript">
 function toAdd() {
 	location.href = "courseAdd.do";
+}
+function confDel(arg){
+	let str = "\n\n arg: "+arg;
+	if(! confirm("삭제하시겠습니까?"+str)) return false;
 }
 </script>
 </html>

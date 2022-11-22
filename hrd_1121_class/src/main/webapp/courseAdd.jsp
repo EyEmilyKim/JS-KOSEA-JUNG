@@ -73,5 +73,8 @@ function check(fm){
 	let str = "\n\n과목명 : "+name;
 	if(! confirm("등록하시겠습니까?"+str)) return false;
 }
+function toList(){
+	location.href = "courseList.do";
+}
 </script>
 </html>

@@ -19,6 +19,66 @@ public class DBExpert {
 	private ResultSet rs;
 	
 	
+	//교과목 id 로 교과목 정보 삭제
+	public boolean deleteCourse(String id) {
+		System.out.println("deleteCourse() called");
+		String sql = "delete from course_tbl where id = ?";
+		boolean flag = false;
+		try {
+			System.out.println("deleteCourse() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			conn.commit();
+			System.out.println("delete true");
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("deleteCourse() end");
+		return flag;
+	}
+	
+	//교과목 id 로 교과목 정보 수정
+	public boolean updateCourse(Course crs) {
+		System.out.println("updateCourse() called");
+		String sql = "update course_tbl set "
+				+ "name=?, credit=?, lecturer=?, "
+				+ "week=?, start_hour=?, end_hour=? "
+				+ "where id=? ";
+		boolean flag = false;
+		try {
+			System.out.println("updateCourse() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(7, crs.getId());
+			pstmt.setString(1, crs.getName());
+			pstmt.setInt(2, crs.getCredit());
+			pstmt.setString(3, crs.getLecturer_idx());
+//			System.out.println("crs.getLecturer_idx() : "+crs.getLecturer_idx());
+			pstmt.setInt(4, crs.getWeek_n());
+			pstmt.setInt(5, Integer.parseInt(crs.getStart_hour()));
+			pstmt.setInt(6, Integer.parseInt(crs.getEnd_hour()));
+			pstmt.executeUpdate();
+			conn.commit();
+			System.out.println("update true");
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("updateCourse() end");
+		return flag;
+	}
+	
 	//교과목 id 로 교과목 정보 검색
 	public Course getCourse(String id) {
 		String sql = "select id, c.name, credit, l.idx, week, "
@@ -115,7 +175,7 @@ public class DBExpert {
 				+ "to_char(start_hour, '0999') start_hour, "
 				+ "to_char(end_hour, '0999') end_hour "
 				+ "from course_tbl c, lecturer_tbl l "
-				+ "where c.lecturer = l.idx "
+				+ "where c.lecturer = to_char(l.idx) "
 				+ "order by id";
 		ArrayList<Course> list = new ArrayList<Course>();
 		try {

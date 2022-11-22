@@ -62,11 +62,11 @@
 	for(int i=1; i<7; i++){
 		if(i == week_n){
 %>	
-			<input type="radio" name="WEEK" value="i" checked="checked"><%=weeks[i-1]%>   
+			<input type="radio" name="WEEK" value="<%=i%>" checked="checked"><%=weeks[i-1]%>   
 <%		
 		}else{
 %>
-			<input type="radio" name="WEEK" value="i"><%=weeks[i-1]%> 
+			<input type="radio" name="WEEK" value="<%=i%>"><%=weeks[i-1]%> 
 <%		
 		}
 	}

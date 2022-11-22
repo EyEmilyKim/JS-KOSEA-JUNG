@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import crud.DBExpert;
 import model.Course;
 
 /**
- * Servlet implementation class CourseInsertServlet
+ * Servlet implementation class CourseUpdateServlet
  */
-@WebServlet("/courseInsert.do")
-public class CourseInsertServlet extends HttpServlet {
+@WebServlet("/courseUpdate.do")
+public class CourseUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CourseInsertServlet() {
+    public CourseUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -56,8 +55,8 @@ public class CourseInsertServlet extends HttpServlet {
 		crs.setStart_hour(start);
 		crs.setEnd_hour(end);
 		DBExpert dao = new DBExpert();
-		boolean flag = dao.insertCourse(crs);
-		String target = "courseAddResult.jsp?R=";
+		boolean flag = dao.updateCourse(crs);
+		String target = "courseUpdateResult.jsp?R=";
 		if(flag) target += "OK";
 		else target += "NOK";
 		response.sendRedirect(target);
