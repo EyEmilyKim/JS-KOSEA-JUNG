@@ -87,7 +87,7 @@ commit;
 create table team_owner_tbl ( 
 t_id number(5) constraint bball_owner_tid_nn not null, 
 name varchar2(30) constraint bball_owner_name_nn not null, 
-reg_date date constraint bball_owner_town_regdate not null );
+reg_date date constraint bball_owner_regdate_nn not null );
 
 alter table team_owner_tbl add constraint bball_owner_tid_fk foreign key(t_id) references baseball_team_tbl(t_id) ON DELETE CASCADE;
 
