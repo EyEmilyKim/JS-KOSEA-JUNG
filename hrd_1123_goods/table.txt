@@ -1,0 +1,117 @@
+﻿1. 상품 정보 테이블(goods_info)
+2. 고객 정보 테이블(guests_info)
+3. 상품-고객 정보 테이블(goods_guests)
+
+desc goods_info
+desc guests_info
+desc goods_guests
+
+=========================================
+
+1. 상품 정보 테이블(goods_info)
+
+* 테이블 생성
+
+create table goods_info ( 
+id varchar2(6) constraint goods_info_id_pk primary key, 
+name varchar2(30) , 
+price number(8) ,
+made varchar2(10) );
+
+desc goods_info
+
+* 샘플 데이터
+
+insert into goods_info values (
+'100001', '프린터', 200000, 'KOREA' );
+
+insert into goods_info values (
+'100002', '모니터', 300000, 'CHINA' );
+
+insert into goods_info values (
+'200001', '키보드', 10000, 'JAPAN' );
+
+insert into goods_info values (
+'200002', '마우스', 5000, 'KOREA' );
+
+insert into goods_info values (
+'300001', '스캐너', 400000, 'JAPAN' );
+
+select id, name from goods_info;
+> 5
+
+commit;
+
+-----------------------------------------
+
+2. 고객 정보 테이블(guests_info)
+
+* 테이블 생성
+
+create table guests_info ( 
+no number(5) constraint guests_info_no_pk primary key, 
+name varchar2(30) ,
+address varchar2(50) ,
+phone varchar2(20) );
+
+desc guests_info
+
+* 샘플 데이터
+
+insert into guests_info values (
+501, '홍길동', '서울시 종로구', '010-6747-9275' );
+
+insert into guests_info values (
+502, '이길동', '서울시 강동구', '010-2347-0981' );
+
+insert into guests_info values (
+503, '김길동', '서울시 송파구', '010-7364-1280' );
+
+insert into guests_info values (
+504, '박길동', '인천시 연수구', '010-3456-8823' );
+
+insert into guests_info values (
+505, '최길동', '인천시 부평구', '010-2347-8773' );
+
+select no, name from guests_info;
+>5
+
+commit;
+
+-----------------------------------------
+
+3. 상품-고객 정보 테이블(goods_guests)
+
+* 테이블 생성
+
+create table goods_guests ( 
+id varchar2(6) , 
+no number(5) , 
+o_date varchar2(8) constraint goods_guests_odate_nn not null );
+
+alter table goods_guests add constraint goods_guests_id_fk foreign key (id) references goods_info(id) ON DELETE SET NULL;
+
+alter table goods_guests add constraint goods_guests_no_fk foreign key (no) references guests_info(no) ON DELETE SET NULL;
+
+
+desc goods_guests
+
+* 샘플 데이터
+
+insert into goods_guests values (
+'100001', 501, to_date('20201021', 'yyyymmdd' ) );
+
+'100001', 502, to_date('20201105', 'yyyymmdd' ) );
+
+'100002', 503, to_date('20201115', 'yyyymmdd' ) );
+
+'300001', 503, to_date('20201115', 'yyyymmdd' ) );
+
+'100002', 505, to_date('20210309', 'yyyymmdd' ) );
+
+select id, no, o_date from goods_guests;
+> 5
+
+commit;
+
+-----------------------------------------
