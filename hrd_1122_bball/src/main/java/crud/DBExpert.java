@@ -19,6 +19,61 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+
+	//선수 번호로 야구선수 정보 변경
+	public boolean updatePlayer(Player pl) {
+		System.out.println("updatePlayer() called");
+		String sql1 = "update baseball_player_tbl set "
+				+ "name=?, addr=?, birth=to_date(?, 'yyyy-mm-dd') "
+				+ "where seqno=? ";
+		String sql2 = "update player_team_tbl set "
+				+ "t_id=?, ann_sal=?, b_num=? "
+				+ "where seqno=? ";
+		int flag1 = -1;
+		int flag2 = -1;
+		boolean flag = false;
+		try {
+			System.out.println("updatePlayer() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(4, pl.getSeqno());
+			pstmt.setString(1, pl.getName());
+			pstmt.setString(2, pl.getAddr());
+			pstmt.setString(3, pl.getBirth());
+			flag1 = pstmt.executeUpdate();
+			System.out.println("flag1 :"+flag1);
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(4, pl.getSeqno());
+			pstmt.setInt(1, pl.getT_id());
+			pstmt.setInt(2, pl.getAnn_sal());
+			pstmt.setInt(3, pl.getB_num());
+			flag2 = pstmt.executeUpdate();
+			System.out.println("flag2 :"+flag2);
+			if(flag1 > 0 && flag2 > 0) {
+				conn.commit();
+				System.out.println("commit() done");
+				flag = true;
+			}else {
+				conn.rollback();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("rollback() done");
+		}finally {
+			try { pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("updatePlayer() end");
+		return flag;
+	}
 	
 	//선수 번호로 야구선수 정보 검색
 	public Player getPlayer(Integer seqno) {
