@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Player;
@@ -18,6 +19,97 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	//선수 번호로 야구선수 정보 검색
+	public Player getPlayer(Integer seqno) {
+		System.out.println("getPlayer() called");
+		String sql = "select p.seqno, p.name, addr, to_char(birth, 'yyyy-mm-dd'), "
+				+ "t_id, b_num, ann_sal "
+				+ "from baseball_player_tbl p, player_team_tbl pt "
+				+ "where p.seqno = ? "
+				+ "and p.seqno = pt.seqno ";
+		Player pl = null;
+		try {
+			System.out.println("getPlayer() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, seqno);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("getPlayer() true");
+				pl = new Player();
+				pl.setSeqno(rs.getInt(1));
+				pl.setName(rs.getString(2));
+				pl.setAddr(rs.getString(3));
+				pl.setBirth(rs.getString(4));
+				pl.setT_id(rs.getInt(5));
+				pl.setB_num(rs.getInt(6));
+				pl.setAnn_sal(rs.getInt(7));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("getPlayer() end");
+		return pl;
+	}
+	
+	//야구선수 정보 삽입
+	public boolean insertPlayer(Player pl) {
+		System.out.println("insertPlayer() called");
+		String sql1 = "insert into baseball_player_tbl values ("
+				+ "?, ?, ?, to_date(?, 'yyyy-mm-dd') ) ";
+		String sql2 = "insert into player_team_tbl values ("
+				+ "?, ?, ?, to_date(sysdate, 'yyyy-mm-dd'), ? )";
+		boolean flag1 = false;
+		int flag2 = -1;
+		boolean flag = false;
+		try {
+			System.out.println("insertPlayer() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, pl.getSeqno());
+			pstmt.setString(2, pl.getName());
+			pstmt.setString(3, pl.getAddr());
+			pstmt.setString(4, pl.getBirth());
+			pstmt.executeQuery();
+			flag1 = true;
+			System.out.println("flag1 :"+flag1);
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, pl.getSeqno());
+			pstmt.setInt(2, pl.getT_id());
+			pstmt.setInt(3, pl.getAnn_sal());
+			pstmt.setInt(4, pl.getB_num());
+			flag2 = pstmt.executeUpdate();
+			System.out.println("flag2 :"+flag2);
+			if(flag1 == true && flag2 > 0) {
+				conn.commit();
+				System.out.println("commit() done");
+				flag = true;
+			}else {
+				conn.rollback();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("rollback() done");
+		}finally {
+			try { ; pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("insertPlayer() end");
+		return flag;
+	}
 	
 	//최대 야구선수 번호 검색
 	public Integer getMaxSeqno() {

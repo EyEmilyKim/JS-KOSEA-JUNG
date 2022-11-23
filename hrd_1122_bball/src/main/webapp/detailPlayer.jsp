@@ -23,38 +23,46 @@
 <section>
 <div class="container">
 	<h2>야구 선수 등록</h2>
-	<form action="insertPlayer.do" method="post" onsubmit="return check(this);">
+	<form action="updatePlayer.do" method="post" onsubmit="return check(this);">
 <%
-	Integer seqno = (Integer) request.getAttribute("MaxSeqno") + 1;
+	Player pl = (Player) request.getAttribute("PLAYER");
 %>	
-	<input type="hidden" name="SEQNO" value="<%=seqno%>">
+	<input type="hidden" name="SEQNO" value="<%=pl.getSeqno()%>">
 	<table border="1" align="center">
 
 	<tr><th>이름</th>
-		<td><input type="text" name="NAME"/></td></tr>
+		<td><input type="text" value="<%=pl.getName()%>" name="NAME"/></td></tr>
 	<tr><th>주소</th>
-		<td><input type="text" name="ADDR"/></td></tr>
+		<td><input type="text" value="<%=pl.getAddr()%>" name="ADDR"/></td></tr>
 	<tr><th>생년월일</th>
-		<td><input type="text" name="BIRTH"/></td></tr>
+		<td><input type="text" value="<%=pl.getBirth()%>" name="BIRTH"/></td></tr>
 	<tr><th>소속팀</th>
 		<td><select name="T_ID">
 <%
 	ArrayList<Team> list = (ArrayList) request.getAttribute("LIST");
+	Integer t_id = pl.getT_id();
 	for(Team tm : list){
+		if(tm.getT_id() == t_id){
 %>
-			<option value="<%=tm.getT_id()%>"><%=tm.getTitle()%></option>	
+			<option value="<%=tm.getT_id()%>" selected="selected"><%=tm.getTitle()%></option>	
 <% 		
+		}else {
+%>
+			<option value="<%=tm.getT_id()%>"><%=tm.getTitle()%></option>
+<%			
+		}
 	}
 %>	
 			</select></td></tr>
 	<tr><th>등번호</th>
-		<td><input type="text" name="B_NUM"/></td></tr>
+		<td><input type="text" value="<%=pl.getB_num()%>" name="B_NUM"/></td></tr>
 	<tr><th>연봉</th>
-		<td><input type="number" name="ANN_SAL"/></td></tr>
+		<td><input type="number" value="<%=pl.getAnn_sal()%>" name="ANN_SAL"/></td></tr>
 	
 	</table><br/>
-	<input type="submit" value="등 록">
-	<input type="reset" value="취 소">
+	<input type="submit" value="수 정"/>
+	<input type="reset" value="취 소"/>
+	<input type="button" value="삭 제" onclick="toDelete(<%=pl.getSeqno()%>)"/>
 	</form>
 </div>	
 </section>
@@ -68,6 +76,11 @@ function check(fm) {
 	let name = fm.NAME.value;
 	let str = "\n\n일련번호: "+seqno+", 이름: "+name;
 	if(! confirm("등록하시겠습니까?"+str)) return false;
+}
+function toDelete(seqno){
+	let String = "\n\n일련번호: "+seqno; 
+	if(! confirm("삭제하시겠습니까?"+str)) return false;
+	location.href = "deletePlayer.do"	
 }
 </script>
 </html>
