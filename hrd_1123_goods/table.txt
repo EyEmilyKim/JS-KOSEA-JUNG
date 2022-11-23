@@ -99,15 +99,19 @@ desc goods_guests
 * 샘플 데이터
 
 insert into goods_guests values (
-'100001', 501, to_date('20201021', 'yyyymmdd' ) );
+'100001', 501, '20201021' );
 
-'100001', 502, to_date('20201105', 'yyyymmdd' ) );
+insert into goods_guests values (
+'100001', 502, '20201105' );
 
-'100002', 503, to_date('20201115', 'yyyymmdd' ) );
+insert into goods_guests values (
+'100002', 503, '20201115' );
 
-'300001', 503, to_date('20201115', 'yyyymmdd' ) );
+insert into goods_guests values (
+'300001', 503, '20201115' );
 
-'100002', 505, to_date('20210309', 'yyyymmdd' ) );
+insert into goods_guests values (
+'100002', 505, '20210309' );
 
 select id, no, o_date from goods_guests;
 > 5
