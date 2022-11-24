@@ -52,7 +52,7 @@
 </body>
 <script type="text/javascript">
 function addOrder() {
-	location.href = "addOrder.do";
+	location.href = "addOrder.jsp";
 }
 </script>
 </html>

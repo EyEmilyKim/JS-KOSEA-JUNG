@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Order;
@@ -18,14 +19,40 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//주문개요정보 삽입
+	public boolean insertOrder(Order odr) {
+		System.out.println("insertOrder() called");
+		String sql = "insert into goods_guests values ( ?,?,? )";
+		boolean flag = false;
+		try {
+			System.out.println("insertOrder() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, odr.getId());
+			pstmt.setInt(2, odr.getG_no());
+			pstmt.setString(3, odr.getO_date());
+			pstmt.executeUpdate();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("insertOrder() end");
+		return flag;
+	}
+		
 	//주문상세정보 목록 검색
 	public ArrayList<Order> listOrders(){
 		System.out.println("listOrders() called");
 		String sql = "select g.id, g.name, c.name, g.price, c.address, "
 				+ "c.phone, o.o_date, c.no "
-				+ "from goods_info g, guests_info c, goods_guests o "
-				+ "where g.id = o.id "
-				+ "and o.no = c.no  ";
+				+ "from goods_guests o, goods_info g, guests_info c "
+				+ "where o.id = g.id "
+				+ "and o.no = c.no ";
 		ArrayList<Order> list = new ArrayList<Order>();
 		try {
 			System.out.println("listOrders() tried");
