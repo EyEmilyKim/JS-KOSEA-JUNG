@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Goods;
 import model.Order;
 
 public class DBExpert {
@@ -18,6 +18,36 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	//상품 목록 조회
+	public ArrayList<Goods> listGoods(){
+		System.out.println("listGoods() called");
+		String sql = "select id, name, price, made from goods_info ";
+		ArrayList<Goods> list = new ArrayList<Goods>();
+		try {
+			System.out.println("listGoods() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("listGoods() true");
+				Goods gds = new Goods();
+				gds.setId(rs.getString(1));
+				gds.setName(rs.getString(2));
+				gds.setPrice(rs.getInt(3));
+				gds.setMade(rs.getString(4));
+				list.add(gds);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("listGoods() end");
+		return list;
+	} 
 	
 	//주문개요정보 삽입
 	public boolean insertOrder(Order odr) {
