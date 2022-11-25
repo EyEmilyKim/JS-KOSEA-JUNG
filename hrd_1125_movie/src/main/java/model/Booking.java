@@ -4,7 +4,7 @@ public class Booking {
 	String m_id; //영화번호
 	String w_no; //고객번호
 	Integer tickets; //예매 수
-	String r_date; //예매 일
+	String r_date; //예매일
 	
 	String w_name; //예매자
 	String w_phone; //연락처

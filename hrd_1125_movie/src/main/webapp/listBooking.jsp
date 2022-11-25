@@ -9,6 +9,7 @@
 <style type="text/css">
 	header, section, footer {border: 1px solid gray; text-align:center; }
 	th, td {text-align:center; padding:0 5px;}
+	.bttns {margin: 10px 0px;}
 	.left {text-align:left; margin:10px 60px;}
 	.right {text-align:right; margin:10px 60px;}
 </style>
@@ -26,7 +27,7 @@
 	<div class="left">총 <%= list.size() %>건의 예매정보가 있습니다.</div>
 	<table border="1" >
 	<tr><th>예매자</th><th>연락처</th><th>영화제목</th><th>시작시간</th>
-		<th>종료시간</th><th>예약매수</th><th>예매일</th><th>관리</th></tr>
+		<th>종료시간</th><th>예약 매수</th><th>예매일</th><th>관리</th></tr>
 <%
 	for(Booking bk : list){
 %>
@@ -43,7 +44,11 @@
 	}
 %>	
 	</table>
-	<div class="right"><input type="button" value="작성" onclick="toAdd()"></div>
+	<div class="bttns">
+		<input type="button" value="영화등록" onclick="addMovie()">
+		<input type="button" value="고객등록" onclick="addWatcher()">
+		<input type="button" value="예매하기" onclick="makeBooking()">
+	</div>
 	</div>
 </section>
 <footer>
@@ -51,8 +56,14 @@
 </footer>
 </body>
 <script type="text/javascript">
-function toAdd() {
-	location.href = "courseAdd.do";
+function addMovie() {
+	location.href = "addMovie.do";
+}
+function addWatcher() {
+	location.href = "addWatcher.do";
+}
+function makeBooking() {
+	location.href = "makeBooking.do";
 }
 function confDel(arg){
 	let str = "\n\n arg: "+arg;
