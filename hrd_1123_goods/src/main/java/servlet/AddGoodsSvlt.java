@@ -14,16 +14,16 @@ import crud.DBExpert;
 import model.Goods;
 
 /**
- * Servlet implementation class AddGoodsServlet
+ * Servlet implementation class AddGoodsSvlet
  */
-@WebServlet("/listGoods.do")
-public class ListGoodsServlet extends HttpServlet {
+@WebServlet("/addGoods.do")
+public class AddGoodsSvlt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListGoodsServlet() {
+    public AddGoodsSvlt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +33,10 @@ public class ListGoodsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBExpert dao = new DBExpert();
-		ArrayList<Goods> list = dao.listGoods();
+		ArrayList<Goods> list = dao.getGoods();
 		request.setAttribute("LIST", list);
-		RequestDispatcher rd = request.getRequestDispatcher("listGoods.jsp");
-		rd.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("addGoods.jsp");
+		rd.forward(request, response);		
 	}
 
 	/**

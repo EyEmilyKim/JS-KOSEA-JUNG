@@ -19,6 +19,60 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//상품 정보 삽입
+	public boolean insertGoods(Goods gds) {
+		System.out.println("insertGoods() called");
+		String sql = "insert into goods_info values ( ?,?,?,? )";
+		boolean flag = false;
+		try {
+			System.out.println("insertGoods() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, gds.getId());
+			pstmt.setString(2, gds.getName());
+			pstmt.setInt(3, gds.getPrice());
+			pstmt.setString(4, gds.getMade());
+			pstmt.executeUpdate();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("insertGoods() end");
+		return flag;
+	}
+	
+	//전체 상품 id, name 검색 (for 상품등록 중복검사)
+	public ArrayList<Goods> getGoods(){
+		System.out.println("getGoods() called");
+		String sql = "select id, name from goods_info ";
+		ArrayList<Goods> list = new ArrayList<Goods>();
+		try {
+			System.out.println("getGoods() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("getGoods() true");
+				Goods gds = new Goods();
+				gds.setId(rs.getString(1));
+				gds.setName(rs.getString(2));
+				list.add(gds);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close();}
+			catch(Exception e) {}
+		}
+		System.out.println("getGoods() end");
+		return list;
+	}
+	
 	//상품 목록 조회
 	public ArrayList<Goods> listGoods(){
 		System.out.println("listGoods() called");
