@@ -20,6 +20,60 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//영화 정보 삽입
+	public boolean insertMovie(Movie mv) {
+		System.out.println("insertMovie() called");
+		String sql = "insert into movies_info values( "
+				+ "?,?,to_date(?, 'yyyymmdd'),?,? ) ";
+		boolean flag = false;
+		try {
+			System.out.println("insertMovie() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mv.getId());
+			pstmt.setString(2, mv.getTitle());
+			pstmt.setString(3, mv.getOpen_date());
+			pstmt.setInt(4, Integer.parseInt(mv.getStartHr()));
+			pstmt.setInt(5, Integer.parseInt(mv.getEndHr()));
+			pstmt.executeQuery();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("insertMovie() end");
+		return flag;
+	}
+	
+	//전체 영화id 검색
+	public ArrayList<String> listMovieId(){
+		System.out.println("listMovieId() called");
+		String sql = "select id from movies_info order by id";
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			System.out.println("listMovieId() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("listMovieId() true");
+				String m_id = rs.getString(1);
+				list.add(m_id);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("listMovieId() end");
+		return list;
+	}
+	
 	//예매 정보 삽입
 	public boolean insertBooking(Booking bk) {
 		System.out.println("insertBooking() called");

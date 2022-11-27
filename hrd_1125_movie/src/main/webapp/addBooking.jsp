@@ -16,7 +16,7 @@
 </head>
 <body>
 <header>
-	<h2>영화 예매 정보</h2>
+	<h2>예매 정보 등록</h2>
 </header>
 <section>
 	
@@ -77,11 +77,13 @@
 function checkBooking() {
 	alert("checkBooking() called");
 	//기존 예매와 동일 고객번호 && 동일 영화번호 시 alert 기능 필요 [TBU]
+	if(! confirm("등록하시겠습니까?")) return;
 	document.getElementById("fm").submit();
 }
+/* 
 function check(){
-	let str = "\n\n arg: "+arg;
+	let str = "\n\n arg: ";
 	if(! confirm("등록하시겠습니까?"+str)) return false;
-}
+} */
 </script>
 </html>

@@ -19,17 +19,23 @@ public class Movie {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getOpen_date() {
+		return open_date;
+	}
+	public void setOpen_date(String open_date) {
+		this.open_date = open_date;
+	}
 	public String getStartHr() {
 		return startHr;
 	}
-	public void setStartHr(String start_hour) {
-		this.startHr = start_hour;
+	public void setStartHr(String startHr) {
+		this.startHr = startHr;
 	}
 	public String getEndHr() {
 		return endHr;
 	}
-	public void setEndHr(String end_hour) {
-		this.endHr = end_hour;
+	public void setEndHr(String endHr) {
+		this.endHr = endHr;
 	}
-	
+		
 }
