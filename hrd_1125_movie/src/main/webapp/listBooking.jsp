@@ -30,6 +30,9 @@
 		<th>종료시간</th><th>예약 매수</th><th>예매일</th><th>관리</th></tr>
 <%
 	for(Booking bk : list){
+		String m_id = bk.getM_id();
+		String w_no = bk.getW_no();
+		String r_date = bk.getR_date();
 %>
 	<tr><td><%=bk.getW_name() %></td>
 		<td><%=bk.getW_phone() %></td>
@@ -37,16 +40,16 @@
 		<td><%=bk.getStartHr() %></td>
 		<td><%=bk.getEndHr() %></td>
 		<td><%=bk.getTickets() %></td>
-		<td><%=bk.getR_date() %></td>
-		<td><a href="">삭제</a></td>
-	</tr>		
+		<td><%=r_date %></td>
+		<td><a href="deleteBooking.do?MID=<%=m_id%>&WNO=<%=w_no%>&RDATE=<%=r_date%>" onclick="return confDel()">삭제</a></td>
+	</tr>
 <%		
 	}
 %>	
 	</table>
 	<div class="bttns">
 		<input type="button" value="영화등록" onclick="addMovie()">
-		<input type="button" value="고객등록" onclick="addWatcher()">
+		<input type="button" value="고객등록(구현생략)" onclick="addWatcher()">
 		<input type="button" value="예매하기" onclick="makeBooking()">
 	</div>
 	</div>
@@ -65,8 +68,8 @@ function addWatcher() {
 function makeBooking() {
 	location.href = "makeBooking.do";
 }
-function confDel(arg){
-	let str = "\n\n arg: "+arg;
+function confDel(){
+	let str = "\n\n arg: ";
 	if(! confirm("삭제하시겠습니까?"+str)) return false;
 }
 </script>

@@ -20,6 +20,33 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//영화번호와 고객번호로 예약정보 삭제
+	public boolean deleteBooking(Booking bk) {
+		System.out.println("deleteBooking() called");
+		String sql = "delete from booking_info "
+				+ "where id = ? and no = ? "
+				+ "and r_date = to_date(?, 'yyyymmdd') ";
+		boolean flag = false;
+		try {
+			System.out.println("deleteBooking() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bk.getM_id());
+			pstmt.setString(2, bk.getW_no());
+			pstmt.setString(3, bk.getR_date());
+			pstmt.executeUpdate();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("deleteBooking() end");
+		return flag;
+	}
+	
 	//영화 정보 삽입
 	public boolean insertMovie(Movie mv) {
 		System.out.println("insertMovie() called");
@@ -36,7 +63,7 @@ public class DBExpert {
 			pstmt.setString(3, mv.getOpen_date());
 			pstmt.setInt(4, Integer.parseInt(mv.getStartHr()));
 			pstmt.setInt(5, Integer.parseInt(mv.getEndHr()));
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			flag = true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -89,7 +116,7 @@ public class DBExpert {
 			pstmt.setString(2, bk.getW_no());
 			pstmt.setInt(3, bk.getTickets());
 			pstmt.setString(4, bk.getR_date());
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			flag = true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -190,10 +217,12 @@ public class DBExpert {
 		System.out.println("listBookings() called");
 		String sql = "select w.name, w.phone, m.title, "
 				+ "to_char(m.start_hour, '0999'), to_char(m.end_hour, '0999'), "
-				+ "b.tickets, to_char( b.r_date, 'yyyymmdd') "
+				+ "b.tickets, to_char( b.r_date, 'yyyymmdd'), "
+				+ "m.id, w.no "
 				+ "from booking_info b, movies_info m, watcher_info w "
 				+ "where b.id = m.id "
-				+ "and b.no = w.no ";
+				+ "and b.no = w.no "
+				+ "order by b.no, r_date ";
 		ArrayList<Booking> list = new ArrayList<Booking>();
 		try {
 			System.out.println("listBookings() tried");
@@ -211,6 +240,8 @@ public class DBExpert {
 				bk.setEndHr(rs.getString(5));
 				bk.setTickets(rs.getInt(6));
 				bk.setR_date(rs.getString(7));
+				bk.setM_id(rs.getString(8));
+				bk.setW_no(rs.getString(9));
 				list.add(bk);
 			}
 		}catch(Exception e) {
