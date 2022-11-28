@@ -142,8 +142,8 @@ public class DBExpert {
 			while(rs.next()) {
 				System.out.println("getBookings() true");
 				Booking bk = new Booking();
-				bk.setW_name(rs.getString(1));
-				bk.setM_title(rs.getString(2));
+				bk.setM_id(rs.getString(1));
+				bk.setW_no(rs.getString(2));
 				list.add(bk);
 			}
 		}catch(Exception e) {

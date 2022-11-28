@@ -9,9 +9,10 @@
 <style type="text/css">
 	header, section, footer {border: 1px solid gray; text-align:center; }
 	th, td {text-align:left; padding:0 5px;}
-	.bttns {margin: 10px 0px;}
+	.bttns {display:auto; margin: 10px 0px;}
 	.left {text-align:left; margin:10px 60px;}
 	.right {text-align:right; margin:10px 60px;}
+	#submitBtn, #resetBtn {display:none; }
 </style>
 </head>
 <body>
@@ -23,13 +24,13 @@
 <%
 	ArrayList<Watcher> listW = (ArrayList) request.getAttribute("ListW");
 	ArrayList<Movie> listM = (ArrayList) request.getAttribute("ListM");
-	ArrayList<Booking> listB = (ArrayList) request.getAttribute("ListB");
 %>
 	<div align="center">
-	<form action="insertBooking.do" id="fm" method="post" >
+	<form action="insertBooking.do" id="fm" method="post" onSubmit="return check(this)">
+	<input type="text" value="nok" name="DUPBK" id="dupBk">
 	<table border="1" >
 	<tr><th>고객번호</th>
-		<td><select name="W_NO">
+		<td><select name="W_NO" id="w_no">
 <%
 	for(Watcher wr : listW){
 %>
@@ -39,7 +40,7 @@
 %>
 			</select></td></tr>
 	<tr><th>영화번호</th>
-		<td><select name="M_ID">
+		<td><select name="M_ID" id="m_id">
 <%
 	for(Movie mv : listM){
 %>
@@ -52,19 +53,11 @@
 		<td><input type="number" name="TCKT"></td></tr>
 	<tr><th>예매일</th>
 		<td><input type="text" name="R_DATE" placeholder="yyyymmdd"></td></tr>
-		
-<%-- <%
-	for(Booking bk : list){
-%>
-	<tr><td><%=bk.getW_no() %></td>
-		<td><%=bk.getM_id() %></td>
-	</tr>		
-<%		
-	}
-%>	 --%>
 	</table>
 	<div class="bttns">
-		<input type="button" value="예매등록" onclick="checkBooking()">
+		<input type="button" value="예매 중복확인" onClick="check()">
+		<input type="button" value="예매 등록" onClick="check()" id="submitBtn">
+		<input type="reset" value="취 소" id="resetBtn">
 	</div>
 	</form>
 	</div>
@@ -74,16 +67,31 @@
 </footer>
 </body>
 <script type="text/javascript">
-function checkBooking() {
-	alert("checkBooking() called");
-	//기존 예매와 동일 고객번호 && 동일 영화번호 시 alert 기능 필요 [TBU]
-	if(! confirm("등록하시겠습니까?")) return;
-	document.getElementById("fm").submit();
+function check() {
+	alert("check() called");
+	//중복체크 : 기존 예매와 동일 고객번호 && 동일 영화번호 시 alert 기능 필요
+	const w_no = document.getElementById("w_no").value;
+	const m_id = document.getElementById("m_id").value;
+	alert("w_no : "+w_no+" , m_id : "+m_id);
+	checkDupBk(w_no,m_id);
+	//중복체크 끝.
+	confSub();
 }
-/* 
-function check(){
-	let str = "\n\n arg: ";
-	if(! confirm("등록하시겠습니까?"+str)) return false;
-} */
+function checkDupBk(w_no,m_id){
+	alert("checkDupBk(w_no,m_id) called");
+	const url = "dupCheckBooking.do?WNO="+w_no+"&MID="+m_id;
+	window.open(url, "중복확인", "width=450 height=200")
+}
+function confSub(){
+	alert("confSub() called");
+	const dupBk = document.getElementById("dupBk").value;
+	alert("\n\ndupBk : "+dupBk);
+	if(dupBk == "OK"){
+		alert("dupBk : "+dupBk);
+// 		if(confirm("등록하시겠습니까?")){
+// 			document.getElementById("fm").submit();
+// 		} 
+	}	
+}
 </script>
 </html>

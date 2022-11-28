@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,20 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import crud.DBExpert;
 import model.Booking;
-import model.Movie;
-import model.Watcher;
 
 /**
- * Servlet implementation class MakeBookingSvlet
+ * Servlet implementation class DupCheckMovieSvlt
  */
-@WebServlet("/makeBooking.do")
-public class MakeBookingSvlt extends HttpServlet {
+@WebServlet("/dupCheckBooking.do")
+public class DupCheckBookingSvlt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MakeBookingSvlt() {
+    public DupCheckBookingSvlt() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,13 +31,21 @@ public class MakeBookingSvlt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String w_no = request.getParameter("WNO");
+		String m_id = request.getParameter("MID");
 		DBExpert dao = new DBExpert();
-		ArrayList<Watcher> listW = (ArrayList) dao.getWatchers();
-		ArrayList<Movie> listM = (ArrayList) dao.getMovies();
-		request.setAttribute("ListW", listW);
-		request.setAttribute("ListM", listM);
-		RequestDispatcher rd = request.getRequestDispatcher("addBooking.jsp");
-		rd.forward(request, response);
+		ArrayList<Booking> list = (ArrayList) dao.getBookings();
+		String flag = "OK";
+		for(Booking bk : list) {
+			if(bk.getW_no().equals(w_no)) {
+				if(bk.getM_id().equals(m_id)) {
+					flag = "NOK"; 
+				}
+			}
+		}
+		System.out.println("flag : "+flag);
+		String target = "dupCheckBookingResult.jsp?R="+flag;
+		response.sendRedirect(target);
 	}
 
 	/**
