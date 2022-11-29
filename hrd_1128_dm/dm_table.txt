@@ -45,6 +45,7 @@ insert into dm_tbl values (
 
 select dmno, custid, maildate from dm_tbl;
 > 6 
+> 10
 
 commit;
 

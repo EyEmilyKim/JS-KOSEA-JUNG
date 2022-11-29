@@ -1,0 +1,127 @@
+■ DM 예제 - 지역별 DM 발송 건수 조회하는 쿼리 구하기 (찾는데 30분 걸림)
+( last update : 2022.11.29화 2215 )
+
+-- 6:02 --
+
+■ 0. sample date 추가
+
+insert into dm_tbl values (
+7, 'aaa', to_date('20171201', 'yyyymmdd'), '추가샘플', '10', '1', 'S0' );
+
+insert into dm_tbl values (
+8, 'bbb', to_date('20171201', 'yyyymmdd'), '추가샘플', '10', '2', 'S0' );
+
+insert into dm_tbl values (
+9, 'ccc', to_date('20171201', 'yyyymmdd'), '추가샘플', '10', '3', 'S0' );
+
+insert into dm_tbl values (
+10, 'ddd', to_date('20171224', 'yyyymmdd'), '추가샘플', '20', 'V', 'S0' );
+
+commit; 
+
+select dmno, custid, contents from dm_tbl;
+
+      DMNO CUSTID               CONTENTS
+---------- -------------------- ----------------------------------------
+         1 aaa                  안녕하세요?
+         2 bbb                  안녕하세요?
+         3 ccc                  안녕하세요?
+         4 ddd                  안녕하세요?
+         5 eee                  안녕하세요?
+         6 fff                  안녕하세요?
+         7 aaa                  추가샘플
+         8 bbb                  추가샘플
+         9 ccc                  추가샘플
+        10 ddd                  추가샘플
+
+10 rows selected.
+
+-- 6:11 --
+-------------------------------------------------------
+■ 쿼리 찾는 과정... -- 9:20 --
+
+
+--- Try1.
+1. 지역 & 회원 : t1
+
+select area, custid 
+from cust_tbl 
+
+
+2. 지역 & 회원 + DM번호 : t2
+
+select t1.area, t1.custid, d.dmno 
+from 
+(
+select area, custid 
+from cust_tbl 
+) t1, dm_tbl d 
+where t1.custid = d.custid 
+
+3. 지역 & 회원 + DM번호 -> DM건수 카운트 
+ >> 결론 : 이 접근은 여기서 실패. 이어서 다음 시도~(4번)
+
+select area, custid, count(dmno) 
+from 
+(
+select t1.area, t1.custid, d.dmno 
+from 
+(
+select area, custid 
+from cust_tbl 
+) t1, dm_tbl d 
+where t1.custid = d.custid 
+) t2 
+group by custid 
+
+> 실패.
+
+select area, custid, count(dmno)
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+--- Try2
+4. 회원별 DM발송 건수 : t4
+
+select custid, count(dmno) 
+from dm_tbl 
+group by custid 
+
+
+5. 회원별 DB발송 건수 + 그 회원의 지역 : t5
+
+select t4.custid, t4.count, c.area 
+from 
+(
+select custid, count(dmno) count
+from dm_tbl 
+group by custid 
+) t4, cust_tbl c 
+where t4.custid = c.custid 
+
+
+6. 테이블 t5에서 지역별로 건수 합산
+
+select area, sum(count) dm_area
+from 
+(
+select t4.custid, t4.count, c.area 
+from 
+(
+select custid, count(dmno) count
+from dm_tbl 
+group by custid 
+) t4, cust_tbl c 
+where t4.custid = c.custid 
+) t5 
+group by area 
+
+> 성공 ! -- 9:50 --
+
+AREA                                        DM_AREA
+---------------------------------------- ----------
+서울                                              4
+울산                                              1
+대전                                              3
+경기                                              2
