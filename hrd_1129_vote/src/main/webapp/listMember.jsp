@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	header, nav, section, footer {text-align:center; border: 1px solid gray; padding: 10px;}
+	th, td {padding:0 10px; text-align:center;}
 </style>
 </head>
 <body>

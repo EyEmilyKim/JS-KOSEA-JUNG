@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import model.Member;
+import model.Vote;
 
 public class DBExpert {
 	private String driver = "oracle.jdbc.OracleDriver";
@@ -17,6 +18,64 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	//투표 정보 삽입
+	public boolean insertVote(Vote vt){
+		System.out.println("insertVote() called");
+		String sql = "insert into tbl_vote_202005 values("
+				+ " ?,?,?,?,?,? )";
+		boolean flag = false;
+		try {
+			System.out.println("insertVote() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vt.getV_jumin_11());
+			pstmt.setString(2, vt.getV_name());
+			pstmt.setString(3, vt.getM_no());
+			pstmt.setString(4, vt.getV_time());
+			pstmt.setString(5, vt.getV_area());
+			pstmt.setString(6, vt.getV_confirm());
+			pstmt.executeQuery();
+			flag = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("insertVote() end");
+		return flag;
+	}
+	
+	//전체 후보자 번호, 이름 검색
+	public ArrayList<Member> getMembers(){
+		System.out.println("getMembers() called");
+		String sql = "select m_no, m_name "
+				+ "from tbl_member_202005 ";
+		ArrayList<Member> list = new ArrayList<Member>();
+		try {
+			System.out.println("getMembers() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("getMembers() true");
+				Member mem = new Member();
+				mem.setM_no(rs.getString(1));
+				mem.setM_name(rs.getString(2));
+				list.add(mem);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("getMembers() end");
+		return list;
+	}
 	
 	//전체 후보자 검색 
 	public ArrayList<Member> listMembers(){
@@ -76,7 +135,7 @@ public class DBExpert {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			try { }
+			try { rs.close(); pstmt.close(); conn.close(); }
 			catch(Exception e) {}
 		}
 		System.out.println("listMembers() end");

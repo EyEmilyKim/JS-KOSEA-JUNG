@@ -1,4 +1,4 @@
-package member;
+package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import crud.DBExpert;
 import model.Member;
 
 /**
- * Servlet implementation class ListMembersServlet
+ * Servlet implementation class MakeVoteServlet
  */
-@WebServlet("/listMembers.do")
-public class ListMembersServlet extends HttpServlet {
+@WebServlet("/addVote.do")
+public class AddVoteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListMembersServlet() {
+    public AddVoteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +33,9 @@ public class ListMembersServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBExpert dao = new DBExpert();
-		ArrayList<Member> list = dao.listMembers();
+		ArrayList<Member> list = dao.getMembers();
 		request.setAttribute("LIST", list);
-		RequestDispatcher rd = request.getRequestDispatcher("listMember.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("addVote.jsp");
 		rd.forward(request, response);
 	}
 
