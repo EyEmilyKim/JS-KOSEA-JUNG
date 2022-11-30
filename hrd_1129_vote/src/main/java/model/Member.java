@@ -17,6 +17,14 @@ public class Member {
 	private String p_tel3; //소속당 대표번호3
 	private String p_tel_full; //소속당 대표번호(전체)
 	
+	private Integer m_votedAmnt; //총 득표수
+	
+	public Integer getM_votedAmnt() {
+		return m_votedAmnt;
+	}
+	public void setM_votedAmnt(Integer m_votedAmnt) {
+		this.m_votedAmnt = m_votedAmnt;
+	}
 	public String getM_no() {
 		return m_no;
 	}

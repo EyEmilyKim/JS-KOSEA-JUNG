@@ -19,6 +19,43 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//후보자 번호,성명,총특표수 검색 (for후보자등수)
+	public ArrayList<Member> rankMembers(){
+		System.out.println("listVotes() called");
+		String sql = "select t1.m_no no, m.m_name name, t1.count count "
+				+ "from ("
+				+ "select m_no, count(m_no) count "
+				+ "from tbl_vote_202005 "
+				+ "where v_confirm = 'Y' "
+				+ "group by m_no "
+				+ ") t1 , tbl_member_202005 m "
+				+ "where t1.m_no = m.m_no "
+				+ "order by count desc ";
+		ArrayList<Member> list = new ArrayList<Member>();
+		try {
+			System.out.println("listVotes() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("listVotes() true");
+				Member mem = new Member();
+				mem.setM_no(rs.getString(1));
+				mem.setM_name(rs.getString(2));
+				mem.setM_votedAmnt(rs.getInt(3));
+				list.add(mem);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("listVotes() end");
+		return list;
+	}
+	
 	//현재 연도 검색 (for 투표검수 생년월일 가공)
 	public String getCurrentYear(){
 		System.out.println("getCurrentYear() called");
