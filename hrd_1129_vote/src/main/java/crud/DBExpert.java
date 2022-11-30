@@ -19,6 +19,79 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//현재 연도 검색 (for 투표검수 생년월일 가공)
+	public String getCurrentYear(){
+		System.out.println("getCurrentYear() called");
+		String sql = "select substr( to_char(sysdate, 'yyyy') ,3,2 ) "
+				+ "from dual ";
+		String curYear = "";
+		try {
+			System.out.println("getCurrentYear() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				curYear = rs.getString(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("getCurrentYear() end");
+		return curYear;
+	}
+	
+	//전체 투표검수정보 검색
+	public ArrayList<Vote> listVotes(){
+		System.out.println("listVotes() called");
+		String sql = "select "
+				+ "v_name, yy,mm,dd, "
+				+ "round(months_between(v_birth, sysdate)/12) age , "
+				+ "gen_num , m_no , v_time_str, v_confirm , v_area "
+				+ "from ( "
+				+ "select v_name, "
+				+ "substr(v_jumin,1,2) yy , substr(v_jumin,3,2) mm , substr(v_jumin,5,2) dd , "
+				+ "to_date(substr(v_jumin, 1, 6), 'yymmdd') v_birth , sysdate , "
+				+ "substr(v_jumin,7,1) gen_num , m_no , "
+				+ "substr(v_time, 1, 2) || ':' || substr(v_time, 3, 2) v_time_str , v_confirm , v_area "
+				+ "from tbl_vote_202005 , dual "
+				+ "where v_area = '제1투표장' "
+				+ ") "
+				+ "order by v_confirm, v_time_str , v_name ";
+		ArrayList<Vote> list = new ArrayList<Vote>();
+		try {
+			System.out.println("listVotes() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("listVotes() true");
+				Vote vt = new Vote();
+				vt.setV_name(rs.getString(1));
+				vt.setYy(rs.getString(2));
+				vt.setMm(rs.getString(3));
+				vt.setDd(rs.getString(4));
+				vt.setV_age(rs.getInt(5));
+				vt.setV_gender(rs.getString(6));
+				vt.setM_no(rs.getString(7));
+				vt.setV_time_str(rs.getString(8));
+				vt.setV_confirm(rs.getString(9));
+				list.add(vt);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("listVotes() end");
+		return list;
+	}
+	
 	//투표 정보 삽입
 	public boolean insertVote(Vote vt){
 		System.out.println("insertVote() called");
@@ -102,24 +175,24 @@ public class DBExpert {
 				///////////switch 가 안먹어서 if 로 짬;;
 				String school_num = rs.getString(4).trim();
 				if(school_num.equals("1")) {
-					System.out.println("school_num:"+school_num);
+//					System.out.println("school_num:"+school_num);
 					mem.setP_school_str("고졸");
-					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
+//					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
 				}
 				if(school_num.equals("2")) {
-					System.out.println("school_num:"+school_num);
+//					System.out.println("school_num:"+school_num);
 					mem.setP_school_str("학사");
-					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
+//					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
 				}
 				if(school_num.equals("3")) {
-					System.out.println("school_num:"+school_num);
+//					System.out.println("school_num:"+school_num);
 					mem.setP_school_str("석사");
-					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
+//					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
 				}
 				if(school_num.equals("4")) {
-					System.out.println("school_num:"+school_num);
+//					System.out.println("school_num:"+school_num);
 					mem.setP_school_str("박사");
-					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
+//					System.out.println("mem.getP_school_str():"+mem.getP_school_str());
 				}
 				///////////
 				mem.setM_jumin_first(rs.getString(5));
