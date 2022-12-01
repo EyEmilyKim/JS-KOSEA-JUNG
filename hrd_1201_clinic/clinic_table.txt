@@ -1,0 +1,204 @@
+1. 진료 과목 정보 테이블(course_info)
+2. 진료 과목 위치 정보 테이블(loc_info)
+3. 의사 정보 테이블(doctor_info)
+4. 환자 정보 테이블(patient_info)
+5. 환자 진료 정보 테이블(patient_course_info)
+6. 환자 의사 정보 테이블(patient_doctor_info)
+
+desc course_info
+desc loc_info
+desc doctor_info
+desc patient_info
+desc patient_course_info
+desc patient_doctor_info
+
+=========================================
+
+1. 진료 과목 정보 테이블(course_info)
+
+
+* 테이블 생성
+
+create table course_info ( 
+m_code varchar2(5) constraint clinic_course_mcode_pk primary key, 
+title varchar2(30) ,
+loc_code varchar2(5) );
+
+alter table course_info add constraint 
+clinic_doctor_loccode_fk foreign key(loc_code) references loc_info(loc) ;
+
+desc course_info
+
+
+* 샘플 데이터
+
+insert into course_info values (
+'A', '내과', 'A01' );
+insert into course_info values (
+'B', '외과', 'B01' );
+insert into course_info values (
+'C', '치과', 'C01' );
+insert into course_info values (
+'D', '안과', 'D01' );
+
+select m_code, title, loc_code from course_info;
+> 4
+
+commit;
+
+-----------------------------------------
+
+2. 진료 과목 위치 정보 테이블(loc_info)
+
+
+* 테이블 생성
+
+create table loc_info ( 
+loc varchar2(5) constraint clinic_loc_loc_pk primary key, 
+name varchar2(30) );
+
+desc loc_info
+
+
+
+* 샘플 데이터
+
+insert into loc_info values (
+'A01', '본관1호' );
+insert into loc_info values (
+'B01', '본관2호' );
+insert into loc_info values (
+'C01', '별관1호' );
+insert into loc_info values (
+'D01', '별관2호' );
+
+select loc, name from loc_info;
+>4
+
+commit;
+
+-----------------------------------------
+
+3. 의사 정보 테이블(doctor_info)
+
+
+
+* 테이블 생성
+
+create table doctor_info ( 
+d_code varchar2(5) constraint clinic_doctor_dcode_pk primary key, 
+name varchar2(30) constraint clinic_doctor_name_nn not null ,
+m_code varchar2(5) constraint clinic_doctor_mcode_nn not null ,
+addr varchar2(50) constraint clinic_doctor_addr_nn not null ,  
+tel varchar2(20) );  
+
+alter table doctor_info add constraint 
+clinic_doctor_mcode_fk foreign key(m_code) references course_info(m_code) ;
+
+desc doctor_info
+
+
+* 샘플 데이터
+
+insert into doctor_info values (
+'DA01', '홍의사', 'A', '서울', '010-1212-3434' );
+insert into doctor_info values (
+'DA02', '나의사', 'A', '서울', '010-2323-4545' );
+insert into doctor_info values (
+'DB01', '박의사', 'B', '서울', '010-5656-7878' );
+insert into doctor_info values (
+'DB02', '이의사', 'B', '서울', '010-8989-6767' );
+
+
+select d_code, name, m_code from doctor_info;
+> 4
+
+commit;
+
+-----------------------------------------
+
+4. 환자 정보 테이블(patient_info)
+
+* 테이블 생성
+
+create table patient_info ( 
+p_code varchar2(5) constraint clinic_patient_pcode_pk primary key, 
+name varchar2(30) constraint clinic_patient_name_nn not null ,
+addr varchar2(50) constraint clinic_patient_addr_nn not null ,  
+tel varchar2(20) );  
+
+desc patient_info
+
+* 샘플 데이터
+
+insert into patient_info values(
+'P001','홍길동','서울','010-1111-2222');
+insert into patient_info values(
+'P002','하길동','서울','010-1111-3333');
+insert into patient_info values(
+'P003','오길동','서울','010-1111-4444');
+insert into patient_info values(
+'P004','주길동','서울','010-1111-5555');
+
+select p_code, name, tel from patient_info;
+>4
+
+commit;
+
+-----------------------------------------
+
+5. 환자 진료 정보 테이블(patient_course_info)
+
+* 테이블 생성
+
+create table patient_course_info ( 
+p_code varchar2(5) ,  
+m_code varchar2(5) ,  
+room varchar2(5) ,  
+reg_date date );  
+
+alter table patient_course_info add constraint 
+clinic_patcou_pcode_fk foreign key (p_code) references patient_info(p_code) ;
+alter table patient_course_info add constraint 
+clinic_patcou_mcode_fk foreign key (m_code) references course_info (m_code) ;
+
+desc patient_course_info
+
+* 샘플 데이터
+
+insert into patient_course_info values(
+'P001', 'A', 'H001', '2022-08-11' );
+insert into patient_course_info values(
+'P001', 'B', 'H001', '2022-08-13' );
+insert into patient_course_info values(
+'P002', 'B', 'H002', '2022-06-22' );
+insert into patient_course_info values(
+'P003', 'B', 'H003', '2022-06-10' );
+
+select p_code, m_code, reg_date from patient_course_info ;
+>4
+
+commit;
+
+-----------------------------------------
+
+6. 환자 의사 정보 테이블(patient_doctor_info)
+
+* 테이블 생성
+
+create table patient_doctor_info ( 
+p_code varchar2(5) ,  
+d_code varchar2(5) );  
+
+alter table patient_doctor_info add constraint 
+clinic_patdoc_pcode_fk foreign key (p_code) references patient_info(p_code) ;
+alter table patient_doctor_info add constraint 
+clinic_patdoc_dcode_fk foreign key (d_code) references doctor_info (d_code) ;
+
+
+desc patient_doctor_info
+
+* 샘플 데이터
+
+
+
