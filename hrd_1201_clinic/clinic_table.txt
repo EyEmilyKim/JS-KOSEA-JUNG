@@ -158,9 +158,12 @@ room varchar2(5) ,
 reg_date date );  
 
 alter table patient_course_info add constraint 
-clinic_patcou_pcode_fk foreign key (p_code) references patient_info(p_code) ;
+clinic_patcou_pcode_fk foreign key (p_code) references patient_info(p_code) 
+on delete cascade ;
 alter table patient_course_info add constraint 
 clinic_patcou_mcode_fk foreign key (m_code) references course_info (m_code) ;
+
+alter table patient_course_info drop constraint clinic_patcou_pcode_fk ;
 
 desc patient_course_info
 
@@ -192,10 +195,12 @@ d_code varchar2(5) ,
 reg_date date );  
 
 alter table patient_doctor_info add constraint 
-clinic_patdoc_pcode_fk foreign key (p_code) references patient_info(p_code) ;
+clinic_patdoc_pcode_fk foreign key (p_code) references patient_info(p_code) 
+on delete cascade ;
 alter table patient_doctor_info add constraint 
 clinic_patdoc_dcode_fk foreign key (d_code) references doctor_info (d_code) ;
 
+alter table patient_doctor_info drop constraint clinic_patdoc_pcode_fk ;
 
 desc patient_doctor_info
 

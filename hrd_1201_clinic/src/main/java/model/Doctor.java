@@ -1,13 +1,13 @@
 package model;
 
 public class Doctor {
-	String d_code; //의사코드
-	String d_name; //의사이름
-	String m_code; //진료과목(코드)
-	String addr; //주소
-	String tel; //연락처
+	private String d_code; //의사코드
+	private String d_name; //의사이름
+	private String m_code; //진료과목(코드)
+	private String addr; //주소
+	private String tel; //연락처
 	
-	String m_title; //진료과목(이름)
+	private String m_title; //진료과목(이름)
 
 	public String getD_code() {
 		return d_code;

@@ -16,14 +16,14 @@ import model.Patient;
 /**
  * Servlet implementation class ListPartientServlet
  */
-@WebServlet("/listPartient.do")
-public class ListPartientServlet extends HttpServlet {
+@WebServlet("/listPatient.do")
+public class ListPatientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListPartientServlet() {
+    public ListPatientServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

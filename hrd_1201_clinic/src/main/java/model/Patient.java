@@ -13,6 +13,14 @@ public class Patient {
 	private String room; //병실번호
 	private String reg_date; //등록일
 	
+	private boolean isNew; //신규환자 구분
+	
+	public boolean getIsNew() {
+		return isNew;
+	}
+	public void setIsNew(boolean isNew) {
+		this.isNew = isNew;
+	}
 	public String getP_code() {
 		return p_code;
 	}
