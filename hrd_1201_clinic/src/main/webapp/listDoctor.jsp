@@ -20,24 +20,21 @@
 </nav>
 <section>
 <div class="container">
-<h3>환자 진료 목록</h3>
+<h3>의사 목록</h3>
 <%
-	ArrayList<Patient> list = (ArrayList)request.getAttribute("LIST");
+	ArrayList<Doctor> list = (ArrayList)request.getAttribute("LIST");
 %>
 <table align="center" border="1">
-	<tr><th>환자코드</th><th>환자명</th><th>주소</th><th>진료과목</th>
-		<th>담당의사</th><th>병실번호</th><th>등록일</th><th>삭제</th></tr>
+	<tr><th>의사코드</th><th>의사명</th><th>진료과목</th>
+		<th>주소</th><th>연락처</th></tr>
 <%
-	for(Patient pt : list){
+	for(Doctor dr : list){
 %>
-	<tr><td><%=pt.getP_code()%></td>
-		<td><%=pt.getP_name()%></td>
-		<td><%=pt.getAddr()%></td>
-		<td><%=pt.getM_title()%></td>
-		<td><%=pt.getD_name()%></td>
-		<td><%=pt.getRoom()%></td>
-		<td><%=pt.getReg_date()%></td>
-		<td>삭제</td></tr>
+	<tr><td><%=dr.getD_code()%></td>
+		<td><%=dr.getD_name()%></td>
+		<td><%=dr.getM_title()%></td>
+		<td><%=dr.getAddr()%></td>
+		<td><%=dr.getTel()%></td></tr>
 <%		
 	}
 %>	

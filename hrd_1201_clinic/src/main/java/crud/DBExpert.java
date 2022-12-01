@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import model.Doctor;
 import model.Patient;
 
 public class DBExpert {
@@ -17,6 +18,39 @@ public class DBExpert {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
+	
+	//전체 의사 정보 검색
+	public ArrayList<Doctor> listDoctors(){
+		System.out.println("listDoctors() called");
+		String sql = "select d.d_code, d.name, c.title, d.addr, d.tel \r\n"
+				+ "from doctor_info d, course_info c \r\n"
+				+ "where d.m_code = c.m_code \r\n";
+		ArrayList<Doctor> list = new ArrayList<Doctor>();
+		try {
+			System.out.println("listDoctors() called");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				System.out.println("listDoctors() called");
+				Doctor dr = new Doctor();
+				dr.setD_code(rs.getString(1));
+				dr.setD_name(rs.getString(2));
+				dr.setM_title(rs.getString(3));
+				dr.setAddr(rs.getString(4));
+				dr.setTel(rs.getString(5));
+				list.add(dr);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("listDoctors() called");
+		return list;
+	}
 	
 	//전체 환자진료 정보 검색
 	public ArrayList<Patient> listPatiCourses(){
