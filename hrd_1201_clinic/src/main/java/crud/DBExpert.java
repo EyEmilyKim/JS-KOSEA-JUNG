@@ -19,6 +19,38 @@ public class DBExpert {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+	//전체 환자 정보 검색
+	public ArrayList<Patient> listPatients(){
+		System.out.println("listPatients() called");
+		String sql = "select p_code, name, addr, tel \r\n"
+				+ "from patient_info \r\n"
+				+ "order by  p_code ";
+		ArrayList<Patient> list = new ArrayList<Patient>();
+		try {
+			System.out.println("listPatients() tried");
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				System.out.println("listPatients() true");
+				Patient pt = new Patient();
+				pt.setP_code(rs.getString(1));
+				pt.setP_name(rs.getString(2));
+				pt.setAddr(rs.getString(3));
+				pt.setTel(rs.getString(4));
+				list.add(pt);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { rs.close(); pstmt.close(); conn.close(); }
+			catch(Exception e) {}
+		}
+		System.out.println("listPatients() end");
+		return list;
+	}
+	
 	//전체 의사 정보 검색
 	public ArrayList<Doctor> listDoctors(){
 		System.out.println("listDoctors() called");
@@ -27,13 +59,13 @@ public class DBExpert {
 				+ "where d.m_code = c.m_code \r\n";
 		ArrayList<Doctor> list = new ArrayList<Doctor>();
 		try {
-			System.out.println("listDoctors() called");
+			System.out.println("listDoctors() tried");
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,uid,upw);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				System.out.println("listDoctors() called");
+				System.out.println("listDoctors() true");
 				Doctor dr = new Doctor();
 				dr.setD_code(rs.getString(1));
 				dr.setD_name(rs.getString(2));
@@ -48,7 +80,7 @@ public class DBExpert {
 			try { rs.close(); pstmt.close(); conn.close(); }
 			catch(Exception e) {}
 		}
-		System.out.println("listDoctors() called");
+		System.out.println("listDoctors() end");
 		return list;
 	}
 	
@@ -65,13 +97,13 @@ public class DBExpert {
 				+ "order by pc.p_code , pc.reg_date ";
 		ArrayList<Patient> list = new ArrayList<Patient>();
 		try {
-			System.out.println("listPatiCourses() called");
+			System.out.println("listPatiCourses() tried");
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,uid,upw);
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				System.out.println("listPatiCourses() called");
+				System.out.println("listPatiCourses() true");
 				Patient pt = new Patient();
 				pt.setP_code(rs.getString(1));
 				pt.setP_name(rs.getString(2));
@@ -88,7 +120,7 @@ public class DBExpert {
 			try { rs.close(); pstmt.close(); conn.close(); }
 			catch(Exception e) {}
 		}
-		System.out.println("listPatiCourses() called");
+		System.out.println("listPatiCourses() end");
 		return list;
 	}
 }
