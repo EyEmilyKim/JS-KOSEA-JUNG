@@ -188,7 +188,8 @@ commit;
 
 create table patient_doctor_info ( 
 p_code varchar2(5) ,  
-d_code varchar2(5) );  
+d_code varchar2(5) ,
+reg_date date );  
 
 alter table patient_doctor_info add constraint 
 clinic_patdoc_pcode_fk foreign key (p_code) references patient_info(p_code) ;
@@ -200,5 +201,16 @@ desc patient_doctor_info
 
 * 샘플 데이터
 
+insert into patient_doctor_info values(
+'P001', 'DA01', '2022-08-11' );
+insert into patient_doctor_info values(
+'P001', 'DB01', '2022-08-13' );
+insert into patient_doctor_info values(
+'P002', 'DB01', '2022-06-22' );
+insert into patient_doctor_info values(
+'P003', 'DB02', '2022-06-10' );
 
+select p_code, d_code, reg_date from patient_doctor_info ;
+> 4
 
+commit;
