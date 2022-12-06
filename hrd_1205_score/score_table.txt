@@ -2,10 +2,6 @@
 2. 교과목 테이블 TBL_SUBJECT_202210
 3. 성적 테이블 TBL_SCORE_202210
 
-drop table TBL_STUDENT_202210 ;
-drop table TBL_SUBJECT_202210 ;
-drop table TBL_SCORE_202210 ;
-
 desc TBL_STUDENT_202210
 desc TBL_SUBJECT_202210
 desc TBL_SCORE_202210
@@ -25,17 +21,17 @@ email char(30) );
 desc TBL_STUDENT_202210
 
 insert into TBL_STUDENT_202210 values(
-'20220011', '김한국', '3010131111111', '사회복지과', '010-1111-1111', 'hankuk@naver.com' );
+'20220011', '김한국', '0301013111111', '사회복지과', '010-1111-1111', 'hankuk@naver.com' );
 insert into TBL_STUDENT_202210 values(
-'20220012', '홍길동', '2020132222222', '관광과', '010-2222-2222', 'hongkil@naver.com' );
+'20220012', '홍길동', '0202013222222', '관광과', '010-2222-2222', 'hongkil@naver.com' );
 insert into TBL_STUDENT_202210 values(
-'20220013', '김미자', '2030143333333', '패션디자인과', '010-3333-3333', 'kimja@naver.com' );
+'20220013', '김미자', '0203014333333', '패션디자인과', '010-3333-3333', 'kimja@naver.com' );
 insert into TBL_STUDENT_202210 values(
-'20220014', '윤한얼', '2040144444444', '물리치료과', '010-4444-4444', 'yoon@naver.com' );
+'20220014', '윤한얼', '0204014444444', '물리치료과', '010-4444-4444', 'yoon@naver.com' );
 insert into TBL_STUDENT_202210 values(
-'20220015', '김성진', '2050135555555', '모던음악과', '010-5555-5555', 'kimsj@naver.com' );
+'20220015', '김성진', '0205013555555', '모던음악과', '010-5555-5555', 'kimsj@naver.com' );
 insert into TBL_STUDENT_202210 values(
-'20220016', '조민지', '2060146666666', '건축가', '010-6666-6666', 'jmg@naver.com' );
+'20220016', '조민지', '0206014666666', '건축가', '010-6666-6666', 'jmg@naver.com' );
 
 select sid, sname, jumin from TBL_STUDENT_202210;
 > 6

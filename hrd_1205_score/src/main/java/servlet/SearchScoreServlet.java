@@ -1,0 +1,57 @@
+package servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import crud.DBExpert;
+import model.Score;
+import model.Subject;
+
+/**
+ * Servlet implementation class SearchScoreServlet
+ */
+@WebServlet("/searchScore.do")
+public class SearchScoreServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SearchScoreServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DBExpert dao = new DBExpert();
+		ArrayList<Subject> list = dao.listSubject();
+		request.setAttribute("LIST", list);
+		RequestDispatcher rd = request.getRequestDispatcher("searchScore.jsp");
+		rd.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String subcode = request.getParameter("SUBCODE");
+		DBExpert dao = new DBExpert();
+		ArrayList<Subject> listSB = dao.listSubject();
+		ArrayList<Score> listSC = dao.listScoreSub(subcode);
+		request.setAttribute("LISTSB", listSB);
+		request.setAttribute("LISTSC", listSC);
+		RequestDispatcher rd = request.getRequestDispatcher("searchScoreResult.jsp");
+		rd.forward(request, response);
+	}
+
+}
